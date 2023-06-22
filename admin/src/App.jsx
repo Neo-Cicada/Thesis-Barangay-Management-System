@@ -20,6 +20,7 @@ function App() {
         </nav>
         <div className="hero">
           <div className='hero-box'>
+            <div className="hero-line">
             <Routes>
             <Route path='/' element={<Equipment/>}/>
             <Route path='certificate' element={<Certificate/>}/>
@@ -28,8 +29,10 @@ function App() {
             <Route path='facilities' element={<Facilities/>}/>
             <Route path='medicine'element={<Medicine/>}/>
           </Routes>
+            </div>
           </div>
         </div>
+        
       </main>
 
     </>
