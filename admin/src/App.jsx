@@ -1,5 +1,5 @@
 import './styles/app.css'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate  } from 'react-router-dom'
 import Certificate from './components/Certificate'
 import Announcement from './components/Announcement'
 import Enrollment from './components/Enrollment'
@@ -11,8 +11,11 @@ import SideBar from './components/SideBar'
 import EquipManage from './pages/EquipManage'
 import EquipmentRequestList from './pages/EquipmentRequestList'
 import EquipmentStatus from './pages/EquipmentStatus'
-function App() {
 
+import EquipmentOngoing from './pages/EquipmentOngoing'
+import EquipmentCompleted from './pages/EquipmentCompleted'
+import EquipmentRejected from './pages/EquipmentRejected'
+function App() {
   return (
     <>
       <header>
@@ -35,10 +38,27 @@ function App() {
                     path='request'
                     element={<EquipmentRequestList />}
                   />
+
                   <Route
                     path='status'
                     element={<EquipmentStatus />}
-                  />
+                  >
+                    <Route
+                      path='ongoing'
+                      element={<EquipmentOngoing/>}
+                    />
+                    <Route
+                      path='completed'
+                      element={<EquipmentCompleted/>}
+                    />
+                    <Route
+                      path='rejected'
+                      element={<EquipmentRejected/>}
+                    />
+                    <Route index element={<Navigate to='ongoing' replace />} />
+
+
+                  </Route>
                 </Route>
                 <Route path='certificate' element={<Certificate />} />
                 <Route path='announcement' element={<Announcement />} />

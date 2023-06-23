@@ -1,0 +1,12 @@
+.eqStatus{
+
+    display: flex;
+    border: 1px solid red;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+.eqStatus-outlet{
+    border: 1px solid red;
+    height: 93%;
+}
