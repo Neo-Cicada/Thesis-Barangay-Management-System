@@ -9,7 +9,7 @@ main{
     background-color: #DFE3EE;
     display: flex;
 }
-nav{
+.app-nav{
     height: 100%;
     width: 20%;
 }
