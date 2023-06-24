@@ -15,7 +15,21 @@ import EquipmentStatus from './pages/EquipmentStatus'
 import EquipmentOngoing from './pages/EquipmentOngoing'
 import EquipmentCompleted from './pages/EquipmentCompleted'
 import EquipmentRejected from './pages/EquipmentRejected'
+import { useEffect, useState } from "react";
+import Login from './components/Login'
+
 function App() {
+  const [authenticated, setauthenticated] = useState(null);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("authenticated");
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+  }, []);
+  if (!authenticated) {
+    return <Navigate replace to='login'/>
+    }
+  else{
   return (
     <>
       <header>
@@ -73,6 +87,7 @@ function App() {
 
     </>
   )
+  }
 }
 
 export default App

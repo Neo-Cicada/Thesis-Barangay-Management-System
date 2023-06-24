@@ -18,3 +18,12 @@
     justify-content: center;
     gap: 1em;
 }
+.e-barangay{
+    color: #3B5998;
+    font-size: 2rem;
+}
+
+#forgot-password{
+    color: blue;
+    cursor: pointer;
+}
