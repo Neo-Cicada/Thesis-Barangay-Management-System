@@ -1,6 +1,6 @@
 .equipManage-container{
 height: 100%;
-border: 1px solid red;
+/* border: 1px solid red; */
 display: flex;
 flex-direction: column;
 gap: 10%;
@@ -8,5 +8,15 @@ gap: 10%;
 .add-item,.update-item,.remove-item{
     display: flex;
     justify-content: space-around;
-    border: 1px solid red;
+    align-items: center;
+}
+.add-item{
+    margin-top: 1em;
+}
+.sameq > div{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }

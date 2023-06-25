@@ -1,51 +1,66 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button, TextField } from '@mui/material'
 import '../styles/equipManage.css'
 export default function EquipManage() {
     return (
         <>
             <div className='equipManage-container'>
-                <div className='add-item'>
+                <div className='add-item sameq'>
                     <div className='item-label'>
                         Add Item
                     </div>
                     <div>
-                        <input type="text" placeholder='Equipment name' />
+                        <TextField
+                            label='Equipment name'
+                        />
                     </div>
                     <div>
-                        <input type="number" placeholder='Quantity' />
+                        <TextField
+                            label='Quantity'
+                            type='number'
+                        />
                     </div>
                     <div>
-                        <button>Done</button>
+                        <Button variant='contained'>Done</Button>
                     </div>
                 </div>
 
-                <div className='remove-item'>
+                <div className='remove-item sameq'>
                     <div className='item-label'>
-                       Remove Item
+                        Remove Item
                     </div>
                     <div>
-                        <input type="text" placeholder='Equipment name' />
+                        <TextField
+                            label='Equipment name'
+                        />
                     </div>
                     <div>
-                        <input type="number" placeholder='Quantity' />
+                        <TextField
+                            label='Quantity'
+                            type='number'
+                        />
                     </div>
                     <div>
-                        <button>Done</button>
+                        <Button variant='contained'>Done</Button>
                     </div>
                 </div>
-                <div className='update-item'>
-                <div className='item-label'>
+                <div className='update-item sameq'>
+                    <div className='item-label'>
                         Update Item
                     </div>
                     <div>
-                        <input type="text" placeholder='Equipment name'/>
+                        <TextField
+                            label='Equipment name'
+                        />
                     </div>
                     <div>
-                        <input type="number" placeholder='Quantity'/>
-                    </div>
+                        <TextField
+                            label='Quantity'
+                            type='number'
+                        />                    </div>
                     <div>
-                        <button>Done</button>
+                        <Button variant='contained' size='big'>Done</Button>
                     </div>
                 </div>
             </div>
