@@ -7,6 +7,7 @@ import Equipment from './components/Equipment'
 import Facilities from './components/Facilities'
 import Medicine from './components/Medicine'
 import SideBar from './components/SideBar'
+import Login from './components/Login.jsx'
 
 import EquipManage from './pages/EquipManage'
 import EquipmentRequestList from './pages/EquipmentRequestList'
@@ -16,20 +17,11 @@ import EquipmentOngoing from './pages/EquipmentOngoing'
 import EquipmentCompleted from './pages/EquipmentCompleted'
 import EquipmentRejected from './pages/EquipmentRejected'
 import { useEffect, useState } from "react";
-import Login from './components/Login'
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  const [authenticated, setauthenticated] = useState(null);
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("authenticated");
-    if (loggedInUser) {
-      setauthenticated(loggedInUser);
-    }
-  }, []);
-  if (!authenticated) {
-    return <Navigate replace to='login'/>
-    }
-  else{
+
   return (
     <>
       <header>
@@ -87,7 +79,8 @@ function App() {
 
     </>
   )
-  }
 }
+
+
 
 export default App
