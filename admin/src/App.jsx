@@ -16,9 +16,6 @@ import EquipmentStatus from './pages/EquipmentStatus'
 import EquipmentOngoing from './pages/EquipmentOngoing'
 import EquipmentCompleted from './pages/EquipmentCompleted'
 import EquipmentRejected from './pages/EquipmentRejected'
-import { useEffect, useState } from "react";
-
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
 

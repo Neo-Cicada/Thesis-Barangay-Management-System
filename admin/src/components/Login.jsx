@@ -18,8 +18,10 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
-        console.log('welcome')
-        navigate('/')
+        console.log('welcome');
+        navigate('/');
+        setLogin(true)
+
       }
       )
       .catch((error) => {
@@ -29,8 +31,10 @@ export default function Login() {
       })
   }
 
-
-
+  if(login){
+   return <App/>
+  }
+  else{
 
   return (
     <>
@@ -65,4 +69,5 @@ export default function Login() {
       </div>
     </>
   )
+}
 }
