@@ -1,16 +1,46 @@
 import React from 'react'
 import { Form, Link } from 'react-router-dom'
-import { Button, TextField, Divider } from '@mui/material'
+import { Button, TextField, Divider, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material'
 import '../styles/equipManage.css'
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { useState } from 'react';
+import { collection, doc, setDoc, addDoc } from "firebase/firestore";
+import { db } from '../firebase'
+
 export default function EquipManage() {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const [addItem, setAddItem] = useState('');
+    const [quantity, setQuantity] = useState('');
+    const [equipment, setEquipment] = useState({})
+    const itemCollection = collection(db, "Equipments");
+    const handleDialogClose = () => {
+        setIsDialogOpen(false); // Close the dialog
+    };
+    const onSubmit = (e) => {
+        e.preventDefault();
+        setEquipment({
+            ...equipment,
+            Equipment: addItem,
+            Quantity: quantity
+        })
+        addDoc(itemCollection, equipment).
+            then(() => {
+                setIsDialogOpen(true);
+                setAddItem('')
+                setQuantity('')
+            }).catch((err) => {
+                alert(err.message)
+            })
+    }
+
     return (
         <>
             <div className='equipManage-container'>
-                <div className='add-item sameq'>
+                <form className='add-item sameq' onSubmit={onSubmit}>
                     <div className='item-label'>
                         Add Item
                     </div>
@@ -18,6 +48,9 @@ export default function EquipManage() {
                         <TextField
                             sx={{ width: '100%', maxWidth: '75%' }}
                             label='Equipment name'
+                            value={addItem}
+                            onChange={(e) => setAddItem(e.target.value)}
+                            required
                         />
                     </div>
                     <div>
@@ -25,12 +58,15 @@ export default function EquipManage() {
                             sx={{ width: '100%', maxWidth: '75%' }}
                             label='Quantity'
                             type='number'
+                            value={quantity}
+                            required
+                            onChange={(e) => { setQuantity(e.target.value) }}
                         />
                     </div>
                     <div>
-                        <Button variant='contained'>Done</Button>
+                        <Button variant='contained' type='submit'>Done</Button>
                     </div>
-                </div>
+                </form>
                 <Divider />
                 <div className='remove-item sameq'>
                     <div className='item-label'>
@@ -87,6 +123,18 @@ export default function EquipManage() {
                     </div>
                 </div>
             </div>
+            <Dialog open={isDialogOpen} onClose={handleDialogClose}>
+                <DialogTitle>Equipment Successfuly Added</DialogTitle>
+                <DialogContent>
+                    <p>The item has been successfully added.</p>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose} color="primary" autoFocus>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
         </>
     )
 }
