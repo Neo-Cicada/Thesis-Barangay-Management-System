@@ -6,36 +6,66 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { useState } from 'react';
-import { collection, doc, setDoc, addDoc } from "firebase/firestore";
+import { useState, useEffect } from 'react';
+import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs } from "firebase/firestore";
 import { db } from '../firebase'
 
 export default function EquipManage() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-
     const [addItem, setAddItem] = useState('');
     const [quantity, setQuantity] = useState('');
     const [equipment, setEquipment] = useState({})
     const itemCollection = collection(db, "Equipments");
+    const [listedItems, setListedItems] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const fetchData = async () => {
+        try {
+          const collectionRef = collection(db, 'Equipments'); // Select the path to the equipment
+          const querySnapshot = await getDocs(collectionRef); // get all the data inside the path
+          const newData = querySnapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id
+          }));
+          setListedItems(newData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+    useEffect(() => {
+        fetchData();
+      }, []);
+
+
     const handleDialogClose = () => {
         setIsDialogOpen(false); // Close the dialog
     };
-    const onSubmit = (e) => {
+
+    const handleSelectItem = (event) => {
+        setSelectedItem(event.target.value);
+      };
+    
+      const renderedItems = listedItems.map((item) => (
+        <MenuItem key={item.id} value={item.Equipment}>
+          {item.Equipment}
+        </MenuItem>
+      ));
+    const onSubmit = async (e) => {
         e.preventDefault();
-        setEquipment({
-            ...equipment,
+
+        const newEquipment = {
             Equipment: addItem,
             Quantity: quantity
-        })
-        addDoc(itemCollection, equipment).
-            then(() => {
-                setIsDialogOpen(true);
-                setAddItem('')
-                setQuantity('')
-            }).catch((err) => {
-                alert(err.message)
-            })
-    }
+        };
+
+        try {
+            await addDoc(itemCollection, newEquipment);
+            setIsDialogOpen(true);
+            setAddItem('');
+            setQuantity('');
+        } catch (err) {
+            alert(err.message);
+        }
+    };
 
     return (
         <>
@@ -77,10 +107,10 @@ export default function EquipManage() {
                             <InputLabel id="demo-simple-select-helper-label">Select Item</InputLabel>
                             <Select
                                 label='Select Item'
+                                
+
                             >
-                                <MenuItem value={10}>Chair</MenuItem>
-                                <MenuItem value={20}>Tent</MenuItem>
-                                <MenuItem value={30}>Table</MenuItem>
+                            {renderedItems}
                             </Select>
                         </FormControl>
                     </div>
