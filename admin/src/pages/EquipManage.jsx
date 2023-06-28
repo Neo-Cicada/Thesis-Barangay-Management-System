@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useState, useEffect } from 'react';
-import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc } from "firebase/firestore";
+import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase'
 
 export default function EquipManage() {
@@ -17,6 +17,7 @@ export default function EquipManage() {
     const itemCollection = collection(db, "Equipments");
     const [listedItems, setListedItems] = useState([]);
     const [id, setId] = useState();
+    const [newQuantity, setNewQuantity] = useState()
 
 
     const fetchData = async () => { // fetch data function
@@ -51,6 +52,19 @@ export default function EquipManage() {
 
     }
 
+    const onUpdate = async (e) =>{
+        e.preventDefault();
+        const path = doc(db,"Equipments", id)
+        console.log(id)
+        try{
+            await updateDoc(path,{
+                Quantity: newQuantity
+            }).then(alert('Item Updated!'))
+        }catch(error){
+            console.log("Cant Update", error)
+        }
+
+    }
 
     const handleDialogClose = () => {
         setIsDialogOpen(false); // Close the dialog
@@ -143,7 +157,7 @@ export default function EquipManage() {
                     </div>
                 </form>
                 <Divider />
-                <div className='update-item sameq'>
+                <form className='update-item sameq' onSubmit={onUpdate}>
                     <div className='item-label'>
                         Update Item
                     </div>
@@ -152,10 +166,13 @@ export default function EquipManage() {
                             <InputLabel id="demo-simple-select-helper-label">Select Item</InputLabel>
                             <Select
                                 label='Select Item'
+                                value={id}
+                                required
+                                onChange={(e)=>{
+                                    setId(e.target.value)
+                                }}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                {renderedItems}
                             </Select>
                         </FormControl>
                     </div>
@@ -164,11 +181,16 @@ export default function EquipManage() {
                             sx={{ width: '100%', maxWidth: '75%' }}
                             label='Quantity'
                             type='number'
+                            value={newQuantity}
+                            required
+                            onChange={(e)=>{
+                                setNewQuantity(e.target.value)
+                            }}
                         />                    </div>
                     <div>
-                        <Button variant='contained' size='big'>Done</Button>
+                        <Button variant='contained' size='big' type='submit'>Done</Button>
                     </div>
-                </div>
+                </form>
             </div>
 
 
