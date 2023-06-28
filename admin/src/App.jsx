@@ -17,6 +17,9 @@ import EquipmentOngoing from './pages/EquipmentOngoing'
 import EquipmentCompleted from './pages/EquipmentCompleted'
 import EquipmentRejected from './pages/EquipmentRejected'
 
+import CertificateManagement from './pages/CertificateManagement'
+import CertificateRequest from './pages/CertificateRequest'
+import CertificateStatus from './pages/CertificateStatus'
 function App() {
 
   return (
@@ -63,7 +66,14 @@ function App() {
 
                   </Route>
                 </Route>
-                <Route path='certificate' element={<Certificate />} />
+                <Route path='certificate' element={<Certificate />} >
+                      <Route path='manage-certificate' element={<CertificateManagement/>}/>
+                      <Route index element={<Navigate to='manage-certificate' replace/>}/>
+                      <Route path ='request-list-certificate' element={<CertificateRequest/>}/>
+                      <Route path='certificate-status' element={<CertificateStatus/>}/>
+
+                </Route>
+
                 <Route path='announcement' element={<Announcement />} />
                 <Route path='enrollment' element={<Enrollment />} />
                 <Route path='facilities' element={<Facilities />} />

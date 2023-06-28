@@ -11,14 +11,16 @@ import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc, upd
 import { db } from '../firebase'
 
 export default function EquipManage() {
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
+    const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
+
     const [addItem, setAddItem] = useState('');
     const [quantity, setQuantity] = useState('');
     const itemCollection = collection(db, "Equipments");
     const [listedItems, setListedItems] = useState([]);
-    const [id, setId] = useState();
+    const [id, setId] = useState('');
     const [newQuantity, setNewQuantity] = useState()
-
 
     const fetchData = async () => { // fetch data function
         try {
@@ -44,39 +46,35 @@ export default function EquipManage() {
         e.preventDefault();
         try {
             console.log(id)
-            await deleteDoc(doc (db,"Equipments",id))
-                .then(alert('Item deleted'));
+            await deleteDoc(doc(db, "Equipments", id))
+                .then(
+                    setIsRemoveDialogOpen(true),
+                    setId('')
+                    );
         } catch (error) {
             console.log("cant removed", error)
         }
 
     }
 
-    const onUpdate = async (e) =>{
+    const onUpdate = async (e) => {
         e.preventDefault();
-        const path = doc(db,"Equipments", id)
+        const path = doc(db, "Equipments", id)
         console.log(id)
-        try{
-            await updateDoc(path,{
+        try {
+            await updateDoc(path, {
                 Quantity: newQuantity
-            }).then(alert('Item Updated!'))
-        }catch(error){
+            }).then(
+                setIsUpdateDialogOpen(true),
+                setNewQuantity(''),
+                setId('')
+
+                )
+        } catch (error) {
             console.log("Cant Update", error)
         }
 
     }
-
-    const handleDialogClose = () => {
-        setIsDialogOpen(false); // Close the dialog
-    };
-
-
-
-    const renderedItems = listedItems.map((item) => ( // a component for MenuItem
-        <MenuItem key={item.id} id={item.Equipment} value={item.id}>
-            {item.Equipment}
-        </MenuItem>
-    ));
 
     const onSubmit = async (e) => { //Event on submit
         e.preventDefault();
@@ -88,13 +86,70 @@ export default function EquipManage() {
 
         try {
             await addDoc(itemCollection, newEquipment);
-            setIsDialogOpen(true);
+            setIsAddDialogOpen(true);
             setAddItem('');
             setQuantity('');
         } catch (err) {
             alert(err.message);
         }
     };
+
+    const handleDialogClose = () => {
+        setIsAddDialogOpen(false); // Close the dialog
+        setIsRemoveDialogOpen(false);
+        setIsUpdateDialogOpen(false);
+    };
+
+    const renderedItems = listedItems.map((item) => ( // a component for MenuItem
+        <MenuItem key={item.id} id={item.Equipment} value={item.id}>
+            {item.Equipment}
+        </MenuItem>
+    ));
+
+    const AddFormDialog = () => {
+        return (<Dialog open={isAddDialogOpen} onClose={handleDialogClose}>
+            <DialogTitle>Equipment Successfuly Added</DialogTitle>
+            <DialogContent>
+                <p>The item has been successfully added.</p>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleDialogClose} color="primary" autoFocus>
+                    OK
+                </Button>
+            </DialogActions>
+        </Dialog>)
+    }
+    const RemoveFormDialog = () =>{
+        return(
+            <Dialog open={isRemoveDialogOpen} onClose={handleDialogClose}>
+                <DialogTitle>Equipment Successfuly Removed</DialogTitle>
+                <DialogContent>
+                    <p>The item has been successfully removed</p>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose}>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
+
+    const UpdateFormDialog = () =>{
+        return(
+            <Dialog open={isUpdateDialogOpen} onClose={handleDialogClose}>
+                <DialogTitle>Equipment Successfuly Updated</DialogTitle>
+                <DialogContent>
+                    <p>The item has been successfully updated</p>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose}>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
 
     return (
         <>
@@ -138,7 +193,7 @@ export default function EquipManage() {
                                 label='Select Item'
                                 value={id}
                                 onChange={(e) => {
-                                  setId(e.target.value)
+                                    setId(e.target.value)
                                 }}
                             >
                                 {renderedItems}
@@ -146,11 +201,11 @@ export default function EquipManage() {
                         </FormControl>
                     </div>
                     <div>
-                        <TextField
+                        {/* <TextField
                             sx={{ width: '100%', maxWidth: '75%' }}
                             label='Quantity'
                             type='number'
-                        />
+                        /> */}
                     </div>
                     <div>
                         <Button variant='contained' type='submit'>Done</Button>
@@ -168,7 +223,7 @@ export default function EquipManage() {
                                 label='Select Item'
                                 value={id}
                                 required
-                                onChange={(e)=>{
+                                onChange={(e) => {
                                     setId(e.target.value)
                                 }}
                             >
@@ -183,7 +238,7 @@ export default function EquipManage() {
                             type='number'
                             value={newQuantity}
                             required
-                            onChange={(e)=>{
+                            onChange={(e) => {
                                 setNewQuantity(e.target.value)
                             }}
                         />                    </div>
@@ -193,19 +248,9 @@ export default function EquipManage() {
                 </form>
             </div>
 
-
-            <Dialog open={isDialogOpen} onClose={handleDialogClose}>
-                <DialogTitle>Equipment Successfuly Added</DialogTitle>
-                <DialogContent>
-                    <p>The item has been successfully added.</p>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleDialogClose} color="primary" autoFocus>
-                        OK
-                    </Button>
-                </DialogActions>
-            </Dialog>
-
+            <AddFormDialog/>
+            <RemoveFormDialog/>
+            <UpdateFormDialog/>
         </>
     )
 }
