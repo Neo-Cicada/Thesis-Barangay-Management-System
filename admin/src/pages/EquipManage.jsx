@@ -7,49 +7,64 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useState, useEffect } from 'react';
-import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs } from "firebase/firestore";
+import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 
 export default function EquipManage() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [addItem, setAddItem] = useState('');
     const [quantity, setQuantity] = useState('');
-    const [equipment, setEquipment] = useState({})
     const itemCollection = collection(db, "Equipments");
     const [listedItems, setListedItems] = useState([]);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const fetchData = async () => {
+    const [id, setId] = useState();
+
+
+    const fetchData = async () => { // fetch data function
         try {
-          const collectionRef = collection(db, 'Equipments'); // Select the path to the equipment
-          const querySnapshot = await getDocs(collectionRef); // get all the data inside the path
-          const newData = querySnapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id
-          }));
-          setListedItems(newData);
+            const collectionRef = collection(db, 'Equipments'); // Select the path to the equipment
+            const querySnapshot = await getDocs(collectionRef); // get all the data inside the path
+            const newData = querySnapshot.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id
+            }));
+            setListedItems(newData);
         } catch (error) {
-          console.error('Error fetching data:', error);
+            console.error('Error fetching data:', error);
         }
-      };
-    useEffect(() => {
+    };
+
+    useEffect(() => { // calls fetchData function
         fetchData();
-      }, []);
+    }, []);
+
+
+
+    const onDelete = async (e) => { // Delete selected Equipment
+        e.preventDefault();
+        try {
+            console.log(id)
+            await deleteDoc(doc (db,"Equipments",id))
+                .then(alert('Item deleted'));
+        } catch (error) {
+            console.log("cant removed", error)
+        }
+
+    }
 
 
     const handleDialogClose = () => {
         setIsDialogOpen(false); // Close the dialog
     };
 
-    const handleSelectItem = (event) => {
-        setSelectedItem(event.target.value);
-      };
-    
-      const renderedItems = listedItems.map((item) => (
-        <MenuItem key={item.id} value={item.Equipment}>
-          {item.Equipment}
+
+
+    const renderedItems = listedItems.map((item) => ( // a component for MenuItem
+        <MenuItem key={item.id} id={item.Equipment} value={item.id}>
+            {item.Equipment}
         </MenuItem>
-      ));
-    const onSubmit = async (e) => {
+    ));
+
+    const onSubmit = async (e) => { //Event on submit
         e.preventDefault();
 
         const newEquipment = {
@@ -98,7 +113,7 @@ export default function EquipManage() {
                     </div>
                 </form>
                 <Divider />
-                <div className='remove-item sameq'>
+                <form className='remove-item sameq' onSubmit={onDelete}>
                     <div className='item-label'>
                         Remove Item
                     </div>
@@ -107,10 +122,12 @@ export default function EquipManage() {
                             <InputLabel id="demo-simple-select-helper-label">Select Item</InputLabel>
                             <Select
                                 label='Select Item'
-                                
-
+                                value={id}
+                                onChange={(e) => {
+                                  setId(e.target.value)
+                                }}
                             >
-                            {renderedItems}
+                                {renderedItems}
                             </Select>
                         </FormControl>
                     </div>
@@ -122,9 +139,9 @@ export default function EquipManage() {
                         />
                     </div>
                     <div>
-                        <Button variant='contained'>Done</Button>
+                        <Button variant='contained' type='submit'>Done</Button>
                     </div>
-                </div>
+                </form>
                 <Divider />
                 <div className='update-item sameq'>
                     <div className='item-label'>
@@ -153,6 +170,8 @@ export default function EquipManage() {
                     </div>
                 </div>
             </div>
+
+
             <Dialog open={isDialogOpen} onClose={handleDialogClose}>
                 <DialogTitle>Equipment Successfuly Added</DialogTitle>
                 <DialogContent>
