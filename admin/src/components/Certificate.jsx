@@ -12,7 +12,7 @@ const Nav = () => {
   )
 }
 
-const Hero = ({children}) => {
+const HeroSection = ({children}) => {
   return(
     <div className="certificate-hero">
        {children}
@@ -26,9 +26,9 @@ export default function Certificate() {
       <div className="certificate-container">
         <Nav/>
 
-        <Hero>
+        <HeroSection>
           <Outlet/>
-        </Hero>
+        </HeroSection>
 
       </div>
     </>
