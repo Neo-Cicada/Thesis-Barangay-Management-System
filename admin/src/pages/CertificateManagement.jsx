@@ -3,72 +3,12 @@ import { Button, TextField, Divider } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase'
-
-export const Container = ({ children }) => {
-  return (
-    <div className='equipManage-container'>
-      {children}
-    </div>
-  )
-}
-
-const Form = ({formTitle, onSubmit, onTextChange, onQuantityChange, name,number}) => {
-
-
-  const formStyle = {
-    marginTop: '1em',
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    gap: '1em'
-  }
-  const childStyle = {
-    width: '25%',
-    display: 'flex',
-    justifyContent:'center',
-    alignItems: 'center',
-  }
-
-  return (
-    <>
-    <form onSubmit={onSubmit} style={formStyle}>
-        <div style={childStyle}>{formTitle}</div>
-        <div style={childStyle}>
-          <TextField
-            type='text'
-            label="Certificate name"
-            required
-            value={name}
-            onChange={(e)=>{
-              onTextChange(e.target.value)
-            }}
-          />
-        </div>
-        <div style={childStyle}>
-          <TextField
-            type='number'
-            required
-            label="Quantity"
-            value={number}
-            onChange={(e)=>{
-              onQuantityChange(e.target.value)
-            }}
-          />
-        </div>
-        <div style={childStyle}>
-        <Button variant='contained' type='submit'>DONE</Button>
-
-        </div>
-    </form>
-
-    </>
-
-  )
-}
+import FormManagement from '../form-components/FormManagement';
 
 export default function CertificateManagement() {
   const [formName, setFormName] = useState('');
   const [formNumber, setFormNumber] = useState('')
+  const [idValue, setIdValue] = useState('')
   const onAdd = async(e) =>{
     e.preventDefault();
     try{
@@ -86,8 +26,8 @@ export default function CertificateManagement() {
   }
   return (
     <>
-      <Container>
-        <Form
+    <div className='equipManage-container'>
+        <FormManagement
           formTitle='Add Certificate'
           onSubmit={onAdd}
           onTextChange={setFormName}
@@ -96,10 +36,10 @@ export default function CertificateManagement() {
           number={formNumber}
           />
         <Divider />
-        <Form formTitle='Remove Certificate' />
+        <FormManagement formTitle='Remove Certificate' />
         <Divider />
-        <Form formTitle='Update Certificate'/>
-      </Container>
+        <FormManagement formTitle='Update Certificate'/>
+      </div>
     </>
   )
 }
