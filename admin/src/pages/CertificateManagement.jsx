@@ -1,29 +1,32 @@
 import React from 'react'
-import { Button, TextField, Divider } from '@mui/material';
+import { Button, TextField, Divider, MenuItem } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import FormManagement from '../form-components/FormManagement';
-import useUpload from '../hooks/useUpload';
+import useUpload from '../crud/useUpload';
+import useRead from '../crud/useRead';
 export default function CertificateManagement() {
   const [formName, setFormName] = useState('');
   const [formNumber, setFormNumber] = useState('')
   const [idValue, setIdValue] = useState('')
+  const [data, setData] = useState([])
   const onAdd = async(e) =>{
     e.preventDefault();
-    try{
-      await addDoc(collection(db, 'Certificates'),{
-        type: formName,
-        quantity: formNumber
-      }).then(
-        setFormName(''),
-        setFormNumber('')
-      )
-      console.log("Certificate Uploaded!")
-    }catch(error){
-      console.log(error)
-    }
+    await useUpload(formName, formNumber, 'Certificates').then(
+      setFormName(''),
+      setFormNumber('')
+    )
   }
+  useRead('Certificates', setData)
+  // console.log(data)
+  console.log(data.map((item)=>item.id))
+
+  const menuItems = data.map((item) => ( //TODO fix the bug, not rendering
+    <MenuItem key={item.id} value={item.id}>
+      {item.id}
+    </MenuItem>
+  ));
   return (
     <>
     <div className='equipManage-container'>
@@ -36,7 +39,9 @@ export default function CertificateManagement() {
           number={formNumber}
           />
         <Divider />
-        <FormManagement formTitle='Remove Certificate' />
+        <FormManagement formTitle='Remove Certificate'
+          menuitems={menuItems}
+        />
         <Divider />
         <FormManagement formTitle='Update Certificate'/>
       </div>

@@ -16,7 +16,7 @@ const childStyle = {
   alignItems: 'center',
 }
 
-const InputField = ({ title, name, onTextChange }) => {
+const InputField = ({ title, name, onTextChange, menuItems }) => {
   if (title == 'Add Certificate') {
     return (
       <TextField
@@ -36,7 +36,7 @@ const InputField = ({ title, name, onTextChange }) => {
         <Select
           label='Select Certificate'
         >
-          <MenuItem>test</MenuItem>
+         {menuItems}
         </Select>
       </FormControl>
     )
