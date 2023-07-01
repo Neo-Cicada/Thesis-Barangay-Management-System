@@ -20,13 +20,9 @@ export default function CertificateManagement() {
   }
   useRead('Certificates', setData)
   // console.log(data)
-  console.log(data.map((item)=>item.id))
+  // console.log(data.map((item)=>item.id))
 
-  const menuItems = data.map((item) => ( //TODO fix the bug, not rendering
-    <MenuItem key={item.id} value={item.id}>
-      {item.id}
-    </MenuItem>
-  ));
+  const items = data.map((item) => <MenuItem key={item.id} value={item.id}>{item.type}</MenuItem>)
   return (
     <>
     <div className='equipManage-container'>
@@ -40,10 +36,12 @@ export default function CertificateManagement() {
           />
         <Divider />
         <FormManagement formTitle='Remove Certificate'
-          menuitems={menuItems}
+          data={items}
         />
         <Divider />
-        <FormManagement formTitle='Update Certificate'/>
+        <FormManagement formTitle='Update Certificate'
+          data={items}
+        />
       </div>
     </>
   )

@@ -16,7 +16,8 @@ const childStyle = {
   alignItems: 'center',
 }
 
-const InputField = ({ title, name, onTextChange, menuItems }) => {
+const InputField = ({ title, name, onTextChange, data, data2 }) => {
+
   if (title == 'Add Certificate') {
     return (
       <TextField
@@ -36,7 +37,7 @@ const InputField = ({ title, name, onTextChange, menuItems }) => {
         <Select
           label='Select Certificate'
         >
-         {menuItems}
+          {data}
         </Select>
       </FormControl>
     )
@@ -44,18 +45,18 @@ const InputField = ({ title, name, onTextChange, menuItems }) => {
   else if (title == 'Update Certificate') {
     return (
       <FormControl sx={{width: '80%'}}>
-        <InputLabel>Select Certificate</InputLabel>
+        <InputLabel>Select Certificatesss</InputLabel>
         <Select
           label='Select Certificate'
         >
-          <MenuItem>test</MenuItem>
+          {data}
         </Select>
       </FormControl>
     )
   }
 }
 
-export default function FormManagement({ formTitle, onSubmit, onTextChange, onQuantityChange, name, number }) {
+export default function FormManagement({ formTitle, onSubmit, onTextChange, onQuantityChange, name, number, data}) {
 
   return (
     <>
@@ -67,6 +68,8 @@ export default function FormManagement({ formTitle, onSubmit, onTextChange, onQu
             title={formTitle}
             onTextChange={onTextChange}
             name={name}
+            data={data}
+
           />
         </div>
         <div style={childStyle}>
