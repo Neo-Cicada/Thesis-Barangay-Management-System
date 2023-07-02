@@ -6,7 +6,8 @@ import { db } from '../firebase'
 import FormManagement from '../form-components/FormManagement';
 import useUpload from '../crud/useUpload';
 import useRead from '../crud/useRead';
-import useDelete from '../crud/useDelete'
+import useDelete from '../crud/useDelete';
+import useUpdate from '../crud/useUpdate';
 export default function CertificateManagement() {
   const [formName, setFormName] = useState('');
   const [formNumber, setFormNumber] = useState('')
@@ -25,10 +26,17 @@ export default function CertificateManagement() {
 
   const onDelete = async (e) => {
     e.preventDefault();
-    await useDelete('Certificates', idValue).then(
-    setIdValue(''))
+    await useDelete('Certificates', idValue)
 
   };
+
+  const onUpdate = async (e) => {
+    e.preventDefault();
+    useUpdate('Certificates', idValue)
+
+}
+
+
   console.log(idValue)
   const items = data.map((item) => <MenuItem key={item.id} value={item.id}>{item.type}</MenuItem>)
   return (
@@ -54,6 +62,7 @@ export default function CertificateManagement() {
           data={items}
           idValue= {idValue}
           getId={setIdValue}
+          onSubmit={onUpdate}
         />
       </div>
     </>
