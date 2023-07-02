@@ -6,11 +6,15 @@ import { db } from '../firebase'
 import FormManagement from '../form-components/FormManagement';
 import useUpload from '../crud/useUpload';
 import useRead from '../crud/useRead';
+import useDelete from '../crud/useDelete'
 export default function CertificateManagement() {
   const [formName, setFormName] = useState('');
   const [formNumber, setFormNumber] = useState('')
-  const [idValue, setIdValue] = useState('')
+  const [idValue, setIdValue] = useState()
   const [data, setData] = useState([])
+
+  useRead('Certificates', setData) // read all the data in Certificates
+
   const onAdd = async(e) =>{
     e.preventDefault();
     await useUpload(formName, formNumber, 'Certificates').then(
@@ -18,10 +22,14 @@ export default function CertificateManagement() {
       setFormNumber('')
     )
   }
-  useRead('Certificates', setData)
-  // console.log(data)
-  // console.log(data.map((item)=>item.id))
 
+  const onDelete = async (e) => {
+    e.preventDefault();
+    await useDelete('Certificates', idValue).then(
+    setIdValue(''))
+
+  };
+  console.log(idValue)
   const items = data.map((item) => <MenuItem key={item.id} value={item.id}>{item.type}</MenuItem>)
   return (
     <>
@@ -37,10 +45,15 @@ export default function CertificateManagement() {
         <Divider />
         <FormManagement formTitle='Remove Certificate'
           data={items}
+          getId={setIdValue}
+          idValue= {idValue}
+          onSubmit={onDelete}
         />
         <Divider />
         <FormManagement formTitle='Update Certificate'
           data={items}
+          idValue= {idValue}
+          getId={setIdValue}
         />
       </div>
     </>

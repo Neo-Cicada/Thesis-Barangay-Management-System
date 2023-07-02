@@ -16,7 +16,7 @@ const childStyle = {
   alignItems: 'center',
 }
 
-const InputField = ({ title, name, onTextChange, data, data2 }) => {
+const InputField = ({ title, name, onTextChange, data, getId, idValue }) => {
 
   if (title == 'Add Certificate') {
     return (
@@ -36,6 +36,10 @@ const InputField = ({ title, name, onTextChange, data, data2 }) => {
         <InputLabel>Select Certificate</InputLabel>
         <Select
           label='Select Certificate'
+          value={idValue}
+          onChange={(e)=>{
+            getId(e.target.value)
+          }}
         >
           {data}
         </Select>
@@ -48,6 +52,10 @@ const InputField = ({ title, name, onTextChange, data, data2 }) => {
         <InputLabel>Select Certificatesss</InputLabel>
         <Select
           label='Select Certificate'
+          value={idValue}
+          onChange={(e)=>{
+            getId(e.target.value)
+          }}
         >
           {data}
         </Select>
@@ -56,7 +64,7 @@ const InputField = ({ title, name, onTextChange, data, data2 }) => {
   }
 }
 
-export default function FormManagement({ formTitle, onSubmit, onTextChange, onQuantityChange, name, number, data}) {
+export default function FormManagement({ formTitle, onSubmit, onTextChange, onQuantityChange, name, number, data, getId, idValue}) {
 
   return (
     <>
@@ -69,13 +77,13 @@ export default function FormManagement({ formTitle, onSubmit, onTextChange, onQu
             onTextChange={onTextChange}
             name={name}
             data={data}
-
+            getId={getId}
+            idValue={idValue}
           />
         </div>
         <div style={childStyle}>
           <TextField
             type='number'
-            required
             label="Quantity"
             value={number}
             onChange={(e) => {
