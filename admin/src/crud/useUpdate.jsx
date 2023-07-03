@@ -10,7 +10,6 @@ const useUpdate = async (path,id) => {
                 quantity: 'updated!'
             }).then(
                 console.log('Updated!!!')
-                
                 )
         } catch (error) {
             console.log("Cant Update", error)

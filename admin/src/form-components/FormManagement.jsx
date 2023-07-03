@@ -7,7 +7,8 @@ const formStyle = {
   display: 'flex',
   justifyContent: 'space-around',
   alignItems: 'center',
-  gap: '1em'
+  gap: '1em',
+  border: '1px solid red'
 }
 const childStyle = {
   width: '25%',
