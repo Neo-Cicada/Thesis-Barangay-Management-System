@@ -6,12 +6,12 @@ export default function SideBar() {
     <>
       <div className='nav-container'>
         <ul>
-          <li><Link to='/'>Equipment Management</Link></li>
-          <li><Link to='certificate'>Certification Management</Link></li>
+          <li><Link to='/'>Equipment</Link></li>
+          <li><Link to='certificate'>Certification</Link></li>
           <li><Link to='announcement'>Announcement</Link></li>
-          <li><Link to='enrollment'>Enrollment Management</Link></li>
-          <li><Link to='facilities'>Facilities Management</Link></li>
-          <li><Link to='medicine'>Medicine Management</Link></li>
+          <li><Link to='enrollment'>Enrollment</Link></li>
+          <li><Link to='facilities'>Facilities</Link></li>
+          <li><Link to='medicine'>Medicine</Link></li>
         </ul>
       </div>
     </>
