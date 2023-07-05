@@ -1,30 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
-
+import { Link, Outlet } from 'react-router-dom'
+import HeroSection from '../structure/HeroSection'
+import FormManagement from '../form-components/FormManagement'
+import { Divider } from '@mui/material'
 const Navigation = () =>{
   return(
     <nav className='nav-certificate'>
-      <Link className='nav-list' >Manage Medicine</Link>
-      <Link className='nav-list' >Request List</Link>
-      <Link className='nav-list' >Status</Link>
+      <Link className='nav-list' to='manage-medicine' >Manage Medicine</Link>
+      <Link className='nav-list' to='request-list-medicine'>Request List</Link>
+      <Link className='nav-list' to='medicine-status'>Status</Link>
     </nav>
     )
 }
-const HeroSection = ({children}) => {
-  return(
-    <div className="certificate-hero">
-       {children}
-  </div>
-  )
-}
+
 
 
 export default function Medicine() {
   return (
     <>
     <Navigation/>
-    
+    <HeroSection>
+      <Outlet/>
+    </HeroSection>
     </>
   )
 }

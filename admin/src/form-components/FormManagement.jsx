@@ -8,7 +8,6 @@ const formStyle = {
   justifyContent: 'space-around',
   alignItems: 'center',
   gap: '1em',
-  border: '1px solid red'
 }
 const childStyle = {
   width: '25%',

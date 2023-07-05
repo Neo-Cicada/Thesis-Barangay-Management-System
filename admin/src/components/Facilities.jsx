@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import HeroSection from '../structure/HeroSection'
 const Navigation = () => {
   return(
     <nav className='nav-certificate'>
@@ -11,9 +11,6 @@ const Navigation = () => {
     )
 }
 
-const HeroSection = () => {
-
-}
 
 
 
@@ -21,6 +18,9 @@ export default function Facilities() {
   return (
     <>
     <Navigation/>
+    <HeroSection>
+      <h1>Hello world</h1>
+    </HeroSection>
     </>
   )
 }

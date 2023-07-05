@@ -20,6 +20,11 @@ import EquipmentRejected from './pages/EquipmentRejected'
 import CertificateManagement from './pages/CertificateManagement'
 import CertificateRequest from './pages/CertificateRequest'
 import CertificateStatus from './pages/CertificateStatus'
+
+import MedicineManagement from './pages/MedicineManagement'
+import MedicineRequestList from './pages/MedicineRequestList'
+import MedicineStatus from './pages/MedicineStatus'
+
 function App() {
 
   return (
@@ -77,7 +82,17 @@ function App() {
                 <Route path='announcement' element={<Announcement />} />
                 <Route path='enrollment' element={<Enrollment />} />
                 <Route path='facilities' element={<Facilities />} />
-                <Route path='medicine' element={<Medicine />} />
+
+                <Route path='medicine' element={<Medicine />} >
+                  <Route path='manage-medicine' element={<MedicineManagement/>} />
+                  <Route index element={<Navigate to='manage-medicine' replace/>} />
+
+                  <Route path='request-list-medicine' element={<MedicineRequestList/>} />
+                  <Route path='medicine-status' element={<MedicineStatus/>} />
+
+                </Route>
+
+
               </Routes>
             </div>
           </div>
