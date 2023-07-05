@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import FormManagement from '../form-components/FormManagement';
-import useUpload from '../crud/useUpload';
-import useRead from '../crud/useRead';
-import useDelete from '../crud/useDelete';
-import useUpdate from '../crud/useUpdate';
+import useUpload from '../hooks/useUpload';
+import useRead from '../hooks/useRead';
+import useDelete from '../hooks/useDelete';
+import useUpdate from '../hooks/useUpdate';
 export default function CertificateManagement() {
   const [formName, setFormName] = useState('');
   const [formNumber, setFormNumber] = useState('')
