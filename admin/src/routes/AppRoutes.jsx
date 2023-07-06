@@ -23,7 +23,10 @@ import CertificateStatus from '../pages/CertificateStatus'
 import MedicineManagement from '../pages/MedicineManagement'
 import MedicineRequestList from '../pages/MedicineRequestList'
 import MedicineStatus from '../pages/MedicineStatus'
-    
+
+import FacilityManagement from '../pages/FacilityManagement'
+import FacilityRequest from '../pages/FacilityRequest'
+import FacilityStatus from '../pages/FacilityStatus'
 const AppRoutes = () =>{
     return(
         <Routes>
@@ -68,7 +71,13 @@ const AppRoutes = () =>{
 
                 <Route path='announcement' element={<Announcement />} />
                 <Route path='enrollment' element={<Enrollment />} />
-                <Route path='facilities' element={<Facilities />} />
+
+                <Route path='facilities' element={<Facilities />}>
+                    <Route path="facility-management" element={<FacilityManagement/>} />
+                    <Route index element={<Navigate to='facility-management' replace/>}/>
+                    <Route path="facility-request-list" element={<FacilityRequest/>}/>
+                    <Route path="facility-status" element={<FacilityStatus/>}/>
+                </Route>
 
                 <Route path='medicine' element={<Medicine />} >
                   <Route path='manage-medicine' element={<MedicineManagement/>} />
