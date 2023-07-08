@@ -22,11 +22,11 @@ export default function FacilityManagement() {
   return (
     <>
       <Container>
-      <FormManagement formTitle='Add Certificate'/>
-      <Divider/>
-      <FormManagement formTitle='Add Certificate'/>
-      <Divider/>
-      <FormManagement formTitle='Add Certificate'/>
+        <FormManagement formTitle='Add Certificate'/>
+        <Divider/>
+        <FormManagement formTitle='Add Certificate'/>
+        <Divider/>
+        <FormManagement formTitle='Add Certificate'/>
       </Container>
     </>
   )
