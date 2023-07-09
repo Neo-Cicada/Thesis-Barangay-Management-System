@@ -1,6 +1,6 @@
 import React from 'react'
 import FormManagement from '../form-components/FormManagement'
-import { Divider } from '@mui/material'
+import { Divider, TextField, Button, Select, MenuItem } from '@mui/material'
 
 const Container = ({children}) =>{
   const style = {
@@ -22,11 +22,7 @@ export default function MedicineManagement() {
   return (
     <>
      <Container>
-        <FormManagement formTitle='Add Certificate'/>
-        <Divider/>
-        <FormManagement formTitle='Add Certificate'/>
-        <Divider/>
-        <FormManagement formTitle='Add Certificate'/>
+        <FormManagement formTitle='Add Certificates'/>
      </Container>
     </>
   )
