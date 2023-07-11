@@ -27,6 +27,9 @@ import MedicineStatus from '../pages/MedicineStatus'
 import FacilityManagement from '../pages/FacilityManagement'
 import FacilityRequest from '../pages/FacilityRequest'
 import FacilityStatus from '../pages/FacilityStatus'
+
+import AnnouncementManagement from '../pages/AnnouncementManagement'
+import AnnouncementHistory from '../pages/AnnouncementHistory'
 const AppRoutes = () =>{
     return(
         <Routes>
@@ -69,7 +72,16 @@ const AppRoutes = () =>{
 
                 </Route>
 
-                <Route path='announcement' element={<Announcement />} />
+                <Route path='announcement' element={<Announcement />}>
+                    <Route path="announcement-management" element={<AnnouncementManagement/>}/>
+                    <Route path="announcement-history" element={<AnnouncementHistory/>} />
+                    <Route index element={<Navigate to="announcement-management"/>} />
+                </Route>
+
+
+
+
+
                 <Route path='enrollment' element={<Enrollment />} />
 
                 <Route path='facilities' element={<Facilities />}>
