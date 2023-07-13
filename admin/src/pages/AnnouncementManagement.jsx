@@ -14,8 +14,13 @@ export default function AnnouncementManagement() {
     <>
         <div style={boxStyle}>
           <div style={{width: '100%', height: '10%'}}>Create Post</div>
-          <Divider/>
-          <TextField sx={{height: '75%'}}/>
+          <TextField
+          label="Create Post"
+          multiline
+          rows={10}
+          sx={{ width: '100%' }}
+          defaultValue="Default Value"
+        />
           <Divider/>
           <Button sx={{width:'100%'}}>Post</Button>
         </div>
