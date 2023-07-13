@@ -1,6 +1,6 @@
 import './App.css'
 import NavBar from './components/NavBar'
-
+import AppRouter from './components/AppRouter'
 function App() {
 
 
@@ -8,13 +8,13 @@ function App() {
     <>
       <header>
         <div className='header-container'>
-          <a href="">Logo sana :)</a>
+          <a href=""><h1>e-Barangay</h1></a>
           <NavBar/>
         </div>
       </header>
       <main>
         <div className='main-container'>
-
+          <AppRouter/>
         </div>
       </main>
       <footer>

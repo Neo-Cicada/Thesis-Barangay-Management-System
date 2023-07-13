@@ -6,9 +6,9 @@ export default function NavBar() {
   return (
     <>
     <nav style={{display:'flex', gap: '1rem', margin: '1rem'}}>
-      <Link>Home</Link>
-      <Link>Forms</Link>
-      <Link>Report</Link>
+      <Link to="/">Home</Link>
+      <Link to="forms">Forms</Link>
+      <Link to="report">Report</Link>
     </nav>
     </>
   )
