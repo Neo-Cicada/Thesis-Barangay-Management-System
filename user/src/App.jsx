@@ -7,8 +7,6 @@ function App() {
     <>
       <header>
         <div className='header-container'>
-          <div>Logo</div>
-          <div>Home</div>
 
 
         </div>
@@ -20,7 +18,7 @@ function App() {
       </main>
       <footer>
         <div className='footer-container'>
-          
+
         </div>
       </footer>
     </>
