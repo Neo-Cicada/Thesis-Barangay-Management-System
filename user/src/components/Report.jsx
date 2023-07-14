@@ -1,9 +1,9 @@
 import React from 'react'
-
+import { Grid, Paper, Box, Card, Container, Typography } from '@mui/material'
 export default function Report() {
   return (
     <>
-      <h1>Reports</h1>
+      <Typography component="h1" variant='h2'>Report</Typography>
     </>
   )
 }
