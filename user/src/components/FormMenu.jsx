@@ -1,46 +1,26 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import { Box, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
+import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlined';
+import FamilyRestroomOutlinedIcon from '@mui/icons-material/FamilyRestroomOutlined';
+import HouseSidingOutlinedIcon from '@mui/icons-material/HouseSidingOutlined';
+import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+
 export default function FormMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
-    <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        variant='outlined'
-      >
-        Form Lists
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={handleClose}><Link to="certificate-request-form">Certificate Request Form</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link to="enrollment-request-form">Enrollment Request Form</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link to="facility-request-form">Facility Request Form</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link to="medicine-request-form">Medicine Request Form</Link></MenuItem>
+    <>
+    <Box sx={{display: 'flex', gap: '1em'}}>
+      <Link to="certificate-request-form"><CardMembershipOutlinedIcon/> Certificate</Link>
+      <Link to="enrollment-request-form"> <FamilyRestroomOutlinedIcon/>  Enrollment</Link>
+      <Link to="facility-request-form"> <HouseSidingOutlinedIcon/> Facility</Link>
+      <Link to="medicine-request-form"> <MedicalServicesOutlinedIcon/> Medicine</Link>
+      <Link to="medicine-request-form"><BookmarkAddIcon/> Appointment</Link>
 
-      </Menu>
-    </div>
+    </Box>
+
+    </>
 
   );
 }

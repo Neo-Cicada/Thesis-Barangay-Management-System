@@ -20,7 +20,7 @@ export default function Forms() {
         flexDirection: 'column'
       }}>
 
-    <div style={{ height: '10%', display: 'flex', justifyContent:'center', alignItems: 'center'}}>
+    <div style={{ height: '10%', display: 'flex', justifyContent:'center', alignItems: 'center', width: '100%', backgroundColor: 'rgb(255,255,255)' }}>
         <FormMenu/>
     </div>
 
