@@ -4,15 +4,11 @@ import { Link, Outlet } from 'react-router-dom'
 import FormMenu from './FormMenu'
 
 export default function Forms() {
-  const [value, setValue] = React.useState('one');
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   return (
     <>
       <div style={{
-        border: '1px solid red',
+        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
         height: '100%',
         width: '100%',
         display: 'flex',
@@ -27,7 +23,6 @@ export default function Forms() {
         <Container spacing={2} sx={
           {
             paddingTop: '1em',
-            border: '1px solid green',
             height: '100%', display: 'flex',
             justifyContent: 'center',
             backgroundColor: 'rgb(255,255,255)'

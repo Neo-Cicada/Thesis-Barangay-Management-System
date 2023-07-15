@@ -8,7 +8,7 @@ import CertificateForm from '../formComponents/CertificateForm'
 import EnrollmentForm from '../formComponents/EnrollmentForm'
 import FacilityForm from '../formComponents/FacilityForm'
 import MedicineForm from '../formComponents/MedicineForm'
-// import EquipmentForm from '../formComponents/EquipmentForm'
+import EquipmentForm from '../formComponents/EquipmentForm'
 export default function AppRouter() {
   return (
     <Routes>
@@ -18,7 +18,7 @@ export default function AppRouter() {
           <Route path='enrollment-request-form' element={<EnrollmentForm/>}/>
           <Route path="facility-request-form" element={<FacilityForm/>}/>
           <Route path="medicine-request-form" element={<MedicineForm/>}/>
-          {/* <Route path="equipment-request-form" element={<EquipmentForm/>}/> */}
+          <Route path="equipment-request-form" element={<EquipmentForm/>}/>
         </Route>
         <Route path='report' element={<Report/>}/>
     </Routes>

@@ -16,7 +16,7 @@ export default function FormMenu() {
       <Link to="enrollment-request-form"> <FamilyRestroomOutlinedIcon/>  Enrollment</Link>
       <Link to="facility-request-form"> <HouseSidingOutlinedIcon/> Facility</Link>
       <Link to="medicine-request-form"> <MedicalServicesOutlinedIcon/> Medicine</Link>
-      <Link to="medicine-request-form"><BookmarkAddIcon/> Appointment</Link>
+      <Link to="equipment-request-form"><BookmarkAddIcon/> Equipment</Link>
 
     </Box>
 
