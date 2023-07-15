@@ -1,6 +1,8 @@
 import React from 'react'
 import { Container } from '@mui/material'
 import { Link, Outlet } from 'react-router-dom'
+import FormMenu from './FormMenu'
+
 export default function Forms() {
   const [value, setValue] = React.useState('one');
 
@@ -18,11 +20,9 @@ export default function Forms() {
         flexDirection: 'column'
       }}>
 
-        <div style={{ height: '10%' }}>
-          <Link>
-          
-          </Link>
-        </div>
+    <div style={{ height: '10%', display: 'flex', justifyContent:'center', alignItems: 'center'}}>
+        <FormMenu/>
+    </div>
 
         <Container spacing={2} sx={
           {

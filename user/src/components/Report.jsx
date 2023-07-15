@@ -1,10 +1,11 @@
 import React from 'react'
+import FormMenu from './FormMenu'
 export default function Report() {
 
 
   return (
     <>
-      <h1>Report</h1>
+    <FormMenu/>
     </>
   )
 
