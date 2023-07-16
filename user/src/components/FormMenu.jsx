@@ -16,16 +16,26 @@ export default function FormMenu() {
 
   return (
     <>
-    
       <Box sx={{display: 'flex', gap: '1em'}}>
-        <Link to="certificate-request-form" activeClassName="active"><CardMembershipOutlinedIcon/> Certificate</Link>
-        <Link to="enrollment-request-form"> <FamilyRestroomOutlinedIcon/>  Enrollment</Link>
-        <Link to="facility-request-form"> <HouseSidingOutlinedIcon/> Facility</Link>
-        <Link to="medicine-request-form"> <MedicalServicesOutlinedIcon/> Medicine</Link>
-        <Link to="equipment-request-form"><BookmarkAddIcon/> Equipment</Link>
-
+        
+          <Link to="certificate-request-form" activeClassName="active">
+           <CardMembershipOutlinedIcon/> Certificate
+          </Link>
+          <Link to="enrollment-request-form">
+            <FamilyRestroomOutlinedIcon/>
+            Enrollment
+          </Link>
+          <Link to="facility-request-form">
+            <HouseSidingOutlinedIcon/> Facility
+          </Link>
+          <Link to="medicine-request-form">
+            <MedicalServicesOutlinedIcon/> Medicine
+          </Link>
+          <Link to="equipment-request-form">
+            <BookmarkAddIcon/> Equipment
+          </Link>
+        
       </Box>
-    
     </>
 
   );

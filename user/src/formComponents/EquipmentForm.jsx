@@ -1,7 +1,8 @@
 import React from 'react'
 import { TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
   FormControlLabel, Checkbox, FormGroup, Button, } from '@mui/material'
-export default function EquipmentForm() {
+import { useState } from 'react'
+  export default function EquipmentForm() {
   const style ={
     display: 'flex',
     justifyContent: 'center',
