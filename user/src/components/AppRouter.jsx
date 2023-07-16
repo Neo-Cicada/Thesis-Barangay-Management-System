@@ -19,6 +19,7 @@ export default function AppRouter() {
           <Route path="facility-request-form" element={<FacilityForm/>}/>
           <Route path="medicine-request-form" element={<MedicineForm/>}/>
           <Route path="equipment-request-form" element={<EquipmentForm/>}/>
+          <Route index element={<Navigate to='certificate-request-form'/>}/>
         </Route>
         <Route path='report' element={<Report/>}/>
     </Routes>
