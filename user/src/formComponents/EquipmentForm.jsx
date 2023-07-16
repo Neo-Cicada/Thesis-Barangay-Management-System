@@ -3,39 +3,76 @@ import { TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, Textar
   FormControlLabel, Checkbox, FormGroup, Button, } from '@mui/material'
 import { useState } from 'react'
   export default function EquipmentForm() {
+
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [equipment, setEquipment] = useState('');
+    const [messege, setMessege] = useState('');
+
   const style ={
     display: 'flex',
     justifyContent: 'center',
     height: '14%',
     alignItems: 'center'
   }
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    console.log(firstname,lastname, startDate, endDate, phoneNumber, email, equipment, messege)
+
+  }
   return (
     <>
-      <form onSubmit=''>
+      <form onSubmit={handleSubmit}>
         <Box sx={{...style, gap: '4em'}}>
-          <TextField variant="outlined" label="Firstname" />
-          <TextField variant="outlined" label="Lastname" />
+          <TextField
+             value={firstname}
+             onChange={(e)=>setFirstName(e.target.value)}
+             label="Firstname" />
+          <TextField
+             value={lastname}
+             onChange={(e)=>setLastName(e.target.value)}
+             label="Lastname" />
 
         </Box>
         <Box sx={{...style, gap: '4em'}}>
-          <TextField variant="outlined" label="Phone Number" />
-          <TextField variant="outlined" label="Email address" />
+          <TextField
+            value={phoneNumber}
+            onChange={(e)=>setPhoneNumber(e.target.value)}
+            label="Phone Number" />
+          <TextField
+            onChange={(e)=>setEmail(e.target.value)}
+            value={email}
+            label="Email address" />
         </Box>
         <Box sx={{...style, gap: '4em'}}>
-          <TextField variant="outlined" label="Start Date" />
-          <TextField variant="outlined" label="End Date" />
+          <TextField
+            value={startDate}
+            onChange={(e)=>setStartDate(e.target.value)}
+            label="Start Date" />
+          <TextField
+            value={endDate}
+            onChange={(e)=>setEndDate(e.target.value)}
+            label="End Date" />
         </Box>
         <Box sx={{...style, gap: '4em'}}>
           <FormControl fullWidth>
             <InputLabel >Select Available Equipment</InputLabel>
-            <Select label="Select Available Equipment">
-              <MenuItem>Test</MenuItem>
+            <Select
+              value={equipment}
+              onChange={(e)=>setEquipment(e.target.value)}
+              label="Select Available Equipment">
+              <MenuItem value="Equiment">Test</MenuItem>
             </Select>
           </FormControl>
         </Box>
         <Box sx={style}>
           <TextareaAutosize
-
+          value={messege}
+            onChange={(e)=>setMessege(e.target.value)}
             style={{ resize: 'none', height: '100%', width: '100%', fontSize: '1.2rem', paddingLeft: '.8em'}} // Disable resizing
             placeholder="Messege"
             aria-label="fixed size textarea"
