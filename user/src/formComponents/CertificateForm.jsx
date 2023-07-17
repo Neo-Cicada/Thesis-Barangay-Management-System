@@ -2,6 +2,7 @@ import React from 'react'
 import { TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
           FormControlLabel, Checkbox, FormGroup, Button, Alert } from '@mui/material'
 import { useState } from 'react'
+import useUpload from '../hooks/useUpload';
 export default function CertificateForm() {
 
   const [firstName, setFirstName] = useState('');
@@ -16,10 +17,20 @@ export default function CertificateForm() {
     height: '15%',
     alignItems: 'center'
   }
+  const formData = {
+    firstname: firstName,
+    lastname: lastname,
+    phoneNumber: phoneNumber,
+    email: email,
+    certificate: certificate,
+    messege: messege,
+  }
 
   const handleSubmit =(e)=>{
     e.preventDefault();
-    console.log(firstName, lastname, phoneNumber, email, certificate, messege);
+    useUpload(formData, 'CertificateRequest').then(
+      console.log('upload successfully')
+    )
     setFirstName('');
     setLastName('');
     setPhoneNumber('');
@@ -31,7 +42,7 @@ export default function CertificateForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-      
+
         <Box sx={{...style, gap: '4em'}}>
           <TextField
             variant="outlined"

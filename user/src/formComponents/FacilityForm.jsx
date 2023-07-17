@@ -4,26 +4,48 @@ import {
     FormControlLabel, Checkbox, FormGroup, Button,
 } from '@mui/material'
 import { useState } from 'react'
+import useUpload from '../hooks/useUpload'
 const FacilityForm = () => {
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [facility, setFacility] = useState('');
-    const [data, setDate] = useState('');
+    const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [messege, setMessege] = useState('');
 
+
+    const formData = {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        phoneNumber: phoneNumber,
+        facility: facility,
+        date: date,
+        time: time,
+        message: messege,
+    }
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+
+        useUpload(formData, 'FacilityRequest').then(console.log('successfully uploaded!!'))
+        setFirstName('')
+        setLastName('')
+        setEmail('')
+        setPhoneNumber('')
+        setFacility('')
+        setDate('')
+        setTime('')
+        setMessege('')
+    }
     const style = {
         display: 'flex',
         justifyContent: 'center',
         height: '14%',
         alignItems: 'center'
     }
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        console.log(firstname, lastname, email,phoneNumber,facility,data,time,messege)
-    }
+    
 
     return (
         <>
@@ -72,6 +94,7 @@ const FacilityForm = () => {
                     <FormControl sx={{ width: '50%' }}>
                         <InputLabel>Available Date</InputLabel>
                         <Select
+                            value={date}
                             label="Available Date"
                             onChange={(e)=>setDate(e.target.value)}
                         >

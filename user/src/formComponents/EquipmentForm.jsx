@@ -2,6 +2,7 @@ import React from 'react'
 import { TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
   FormControlLabel, Checkbox, FormGroup, Button, } from '@mui/material'
 import { useState } from 'react'
+import useUpload from '../hooks/useUpload';
   export default function EquipmentForm() {
 
     const [firstname, setFirstName] = useState('');
@@ -13,6 +14,16 @@ import { useState } from 'react'
     const [equipment, setEquipment] = useState('');
     const [messege, setMessege] = useState('');
 
+    const formData = {
+      firstname: firstname,
+      lastname: lastname,
+      startDate: startDate,
+      endDate: endDate,
+      phoneNumber: phoneNumber,
+      email: email,
+      equipment: equipment,
+      message: messege,
+    }
   const style ={
     display: 'flex',
     justifyContent: 'center',
@@ -21,8 +32,17 @@ import { useState } from 'react'
   }
   const handleSubmit = (e) =>{
     e.preventDefault();
-    console.log(firstname,lastname, startDate, endDate, phoneNumber, email, equipment, messege)
+    useUpload(formData, 'EquipmentRequest').then('upload successfully')
 
+    setFirstName('')
+    setLastName('')
+    setStartDate('')
+    setStartDate('')
+    setEndDate('')
+    setPhoneNumber('')
+    setEmail('')
+    setEquipment('')
+    setMessege('')
   }
   return (
     <>

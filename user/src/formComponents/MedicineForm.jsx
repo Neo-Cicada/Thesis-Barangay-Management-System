@@ -4,6 +4,7 @@ import {
   FormControlLabel, Checkbox, FormGroup, Button,
 } from '@mui/material'
 import { useState } from 'react'
+import useUpload from '../hooks/useUpload'
 export default function MedicineForm() {
   const [firstName, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
@@ -11,7 +12,14 @@ export default function MedicineForm() {
   const [email, setEmail] = useState('');
   const [medicine, setMedicine] = useState('');
   const [messege, setMessege] = useState('')
-
+  const formData = {
+    firstName: firstName,
+    lastname: lastname,
+    phoneNumber: phoneNumber,
+    email: email,
+    medicine: medicine,
+    message: messege,
+  }
   const style = {
     display: 'flex',
     justifyContent: 'center',
@@ -20,17 +28,24 @@ export default function MedicineForm() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(firstName, lastname, email, phoneNumber, medicine, messege)
+    useUpload(formData, 'MedicineRequest').then(console.log('Successfully uploaded'))
+    setFirstName('')
+    setLastName('')
+    setPhoneNumber('')
+    setEmail('')
+    setMessege('')
   }
   return (
     <>
       <form onSubmit={handleSubmit}>
         <Box sx={{ ...style, gap: '4em' }}>
           <TextField
+            value={firstName}
             label="Firstname"
             onChange={(e)=>setFirstName(e.target.value)}
           />
           <TextField
+            value={lastname}
             label="Lastname"
             onChange={(e)=>setLastName(e.target.value)}
             />
@@ -38,11 +53,13 @@ export default function MedicineForm() {
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
           <TextField
+            value={phoneNumber}
             label="Phone Number"
             onChange={(e)=>setPhoneNumber(e.target.value)}
 
            />
           <TextField
+           value={email}
            label="Email address"
            onChange={(e)=>setEmail(e.target.value)}
 
@@ -52,6 +69,7 @@ export default function MedicineForm() {
           <FormControl fullWidth>
             <InputLabel >Select Medicine</InputLabel>
             <Select
+              value={medicine}
               label="Select Medicine"
               onChange={(e)=>setMedicine(e.target.value)}
 
@@ -62,6 +80,7 @@ export default function MedicineForm() {
         </Box>
         <Box sx={style}>
           <TextareaAutosize
+            value={messege}
             onChange={(e)=>setMessege(e.target.value)}
             style={{ resize: 'none', height: '100%', width: '100%', fontSize: '1.2rem', paddingLeft: '.8em' }} // Disable resizing
             placeholder="Messege"
