@@ -45,7 +45,6 @@ const FacilityForm = () => {
         height: '14%',
         alignItems: 'center'
     }
-    
 
     return (
         <>

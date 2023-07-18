@@ -72,7 +72,6 @@ export default function MedicineForm() {
               value={medicine}
               label="Select Medicine"
               onChange={(e)=>setMedicine(e.target.value)}
-
               >
               <MenuItem value='cert'>Test</MenuItem>
             </Select>

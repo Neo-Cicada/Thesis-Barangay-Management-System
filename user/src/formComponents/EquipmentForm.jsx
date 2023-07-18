@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
-  FormControlLabel, Checkbox, FormGroup, Button, } from '@mui/material'
+  FormControlLabel, Checkbox, FormGroup, Button,  } from '@mui/material'
 import { useState } from 'react'
 import useUpload from '../hooks/useUpload';
   export default function EquipmentForm() {
@@ -72,11 +72,15 @@ import useUpload from '../hooks/useUpload';
           <TextField
             value={startDate}
             onChange={(e)=>setStartDate(e.target.value)}
-            label="Start Date" />
+            // label='date'
+            type='date'
+            />
           <TextField
             value={endDate}
             onChange={(e)=>setEndDate(e.target.value)}
-            label="End Date" />
+            // label="End Date"
+            type='time'
+            />
         </Box>
         <Box sx={{...style, gap: '4em'}}>
           <FormControl fullWidth>
