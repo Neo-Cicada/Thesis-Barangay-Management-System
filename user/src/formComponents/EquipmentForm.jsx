@@ -90,6 +90,17 @@ export default function EquipmentForm() {
             label="Email address" />
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
+          <FormControl fullWidth>
+            <InputLabel >Select Available Equipment</InputLabel>
+            <Select
+              value={equipment}
+              onChange={(e) => setEquipment(e.target.value)}
+              label="Select Available Equipment">
+              {items}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box sx={{ ...style, gap: '4em' }}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker label="Start Date"
               value={startDate}
@@ -103,17 +114,6 @@ export default function EquipmentForm() {
               label="End Date"
             />
           </LocalizationProvider>
-        </Box>
-        <Box sx={{ ...style, gap: '4em' }}>
-          <FormControl fullWidth>
-            <InputLabel >Select Available Equipment</InputLabel>
-            <Select
-              value={equipment}
-              onChange={(e) => setEquipment(e.target.value)}
-              label="Select Available Equipment">
-              {items}
-            </Select>
-          </FormControl>
         </Box>
         <Box sx={style}>
           <TextareaAutosize
