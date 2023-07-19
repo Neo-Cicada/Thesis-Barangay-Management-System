@@ -5,6 +5,7 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 import useUpload from '../hooks/useUpload'
+import useRead from '../hooks/useRead'
 export default function MedicineForm() {
   const [firstName, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
@@ -12,6 +13,16 @@ export default function MedicineForm() {
   const [email, setEmail] = useState('');
   const [medicine, setMedicine] = useState('');
   const [messege, setMessege] = useState('')
+
+  const [data, setData] = useState([])
+  useRead('Medicines', setData);
+  const items = data.map((item) => {
+    return(
+    <MenuItem key={item.id} value={item.id}>
+      {item.type}
+    </MenuItem>
+    )
+  })
   const formData = {
     firstName: firstName,
     lastname: lastname,
@@ -73,7 +84,7 @@ export default function MedicineForm() {
               label="Select Medicine"
               onChange={(e)=>setMedicine(e.target.value)}
               >
-              <MenuItem value='cert'>Test</MenuItem>
+              {items}
             </Select>
           </FormControl>
         </Box>

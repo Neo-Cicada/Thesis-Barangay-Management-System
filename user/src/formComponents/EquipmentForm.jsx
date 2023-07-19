@@ -8,6 +8,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import useUpload from '../hooks/useUpload';
+import useRead from '../hooks/useRead';
 export default function EquipmentForm() {
 
   const [firstname, setFirstName] = useState('');
@@ -18,6 +19,21 @@ export default function EquipmentForm() {
   const [email, setEmail] = useState('');
   const [equipment, setEquipment] = useState('');
   const [messege, setMessege] = useState('');
+
+
+  const [data, setData] = useState([])
+  useRead('Equipments', setData);
+
+  // const selection = data.map((items) =>{
+  //   <MenuItem id={items.id}>{items.Equipment}</MenuItem>
+  // }) 
+  const items = data.map((item) => {
+    return(
+    <MenuItem key={item.id} value={item.id}>
+      {item.Equipment}
+    </MenuItem>
+    )
+  })
 
   const formData = {
     firstname: firstname,
@@ -37,8 +53,8 @@ export default function EquipmentForm() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    useUpload(formData, 'EquipmentRequest').then('upload successfully')
-
+    // useUpload(formData, 'EquipmentRequest').then('upload successfully')
+    console.log(data)
     setFirstName('')
     setLastName('')
     setStartDate('')
@@ -95,7 +111,7 @@ export default function EquipmentForm() {
               value={equipment}
               onChange={(e) => setEquipment(e.target.value)}
               label="Select Available Equipment">
-              <MenuItem value="Equiment">Test</MenuItem>
+              {items}
             </Select>
           </FormControl>
         </Box>

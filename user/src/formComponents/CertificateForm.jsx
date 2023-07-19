@@ -3,6 +3,7 @@ import { TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, Textar
           FormControlLabel, Checkbox, FormGroup, Button, Alert } from '@mui/material'
 import { useState } from 'react'
 import useUpload from '../hooks/useUpload';
+import useRead from '../hooks/useRead'
 export default function CertificateForm() {
 
   const [firstName, setFirstName] = useState('');
@@ -11,6 +12,21 @@ export default function CertificateForm() {
   const [email, setEmail] = useState('');
   const [certificate, setCertificate] = useState('');
   const [messege, setMessege] = useState('')
+
+
+  const [data, setData] = useState([])
+  useRead('Certificates', setData)
+
+
+  const items = data.map((item) => {
+    return(
+    <MenuItem key={item.id} value={item.id}>
+      {item.type}
+    </MenuItem>
+    )
+  })
+
+
   const style ={
     display: 'flex',
     justifyContent: 'center',
@@ -91,7 +107,7 @@ export default function CertificateForm() {
               onChange={(e)=>setCertificate(e.target.value)
               }
             >
-              <MenuItem value="test">Test</MenuItem>
+              {items}
             </Select>
           </FormControl>
         </Box>

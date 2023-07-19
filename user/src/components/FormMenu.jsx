@@ -15,7 +15,7 @@ import { useState, useEffect } from 'react';
 export default function FormMenu() {
   const location = useLocation();
   const loc = location.pathname
-
+  
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
