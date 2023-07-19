@@ -1,17 +1,68 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { Button } from '@mui/material'
 import '../styles/sidebar.css'
 export default function SideBar() {
+  const loc = useLocation();
+  const path = loc.pathname;
+
+
+  const activeLink = {
+    color: 'red'
+  }
+  const normalLink = {
+    color: 'black'
+  }
+
   return (
     <>
       <div className='nav-container'>
         <ul>
-          <li><Link to='/'>Equipment</Link></li>
-          <li><Link to='certificate'>Certification</Link></li>
-          <li><Link to='announcement'>Announcement</Link></li>
-          <li><Link to='enrollment'>Enrollment</Link></li>
-          <li><Link to='facilities'>Facilities</Link></li>
-          <li><Link to='medicine'>Medicine</Link></li>
+          <li>
+            <Button
+              to='/'
+              component={Link}
+              sx={path === '/' ? activeLink : normalLink}
+              >
+                Equipment
+            </Button>
+          </li>
+          <li><Button to='certificate'
+            component={Link}
+            sx={path === "/certificate/manage-certificate" ? activeLink : normalLink}>
+            Certification</Button></li>
+          <li>
+            <Button
+              to='announcement'
+              component={Link}
+              sx={path === "/announcement/announcement-management" ? activeLink : normalLink}>
+              Announcement
+            </Button>
+          </li>
+          <li>
+            <Button to='enrollment'
+              component={Link}
+              sx={path === "/enrollment" ? activeLink : normalLink}
+            >
+              Enrollment
+            </Button>
+          </li>
+          <li>
+            <Button to='facilities'
+              component={Link}
+              sx={path === "/facilities/facility-management" ? activeLink : normalLink}
+            >
+              Facilities
+            </Button>
+          </li>
+          <li>
+            <Button to='medicine'
+              component={Link}
+              sx={path === "/medicine/manage-medicine" ? activeLink : normalLink}
+              >
+              Medicine
+            </Button>
+          </li>
         </ul>
       </div>
     </>
