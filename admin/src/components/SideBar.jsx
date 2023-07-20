@@ -9,11 +9,14 @@ export default function SideBar() {
 
   const activeLink = {
     color: 'black',
-    borderBottom: '3px solid blue'
+    borderBottom: '3px solid blue',
+    width: '100%'
+
 
   }
   const normalLink = {
-    color: 'black'
+    color: 'black',
+    width: '100%'
   }
 
   return (
