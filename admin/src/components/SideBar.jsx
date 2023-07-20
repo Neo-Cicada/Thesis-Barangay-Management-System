@@ -8,7 +8,9 @@ export default function SideBar() {
 
 
   const activeLink = {
-    color: 'red'
+    color: 'black'
+    borderBottom: '3px solid blue'
+
   }
   const normalLink = {
     color: 'black'
