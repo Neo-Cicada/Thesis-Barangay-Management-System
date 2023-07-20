@@ -6,6 +6,16 @@ export default function SideBar() {
   const loc = useLocation();
   const path = loc.pathname;
 
+  const equipmentPath = path === '/' ||
+                        '/request' ||
+                        '/status/ongoing' ||
+                        '/status/completed' ||
+                        '/status/rejected'
+  const certificatePath = path === '/certificate/manage-certificate' || '/certificate/request-list-certificate' || '/certificate-status'
+  const announcementPath = path === '/announcement/announcement-management' || '/announcement/announcement-history'
+  const enrollmentPath = path === '/enrollment'
+  const facilityPath = path === "/facilities/facility-management" || '/facilities/facility-request-list' || '/facilities/facility-status'
+  const medicinePath = path === "/medicine/manage-medicine" || '/medicine/request-list-medicine'
 
   const activeLink = {
     color: 'black',
