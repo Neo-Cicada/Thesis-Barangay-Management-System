@@ -1,14 +1,14 @@
 import React from 'react'
 import { Form, Link } from 'react-router-dom'
 import { Button, TextField, Divider, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material'
-import '../styles/equipManage.css'
+import '../../styles/equipManage.css'
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useState, useEffect } from 'react';
 import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
-import { db } from '../firebase'
+import { db } from '../../firebase'
 
 export default function EquipManage() {
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);

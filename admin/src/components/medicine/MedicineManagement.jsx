@@ -1,11 +1,11 @@
 import React from 'react'
-import FormManagement from '../form-components/FormManagement'
+import FormManagement from '../../form-components/FormManagement'
 import { Divider, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
 import { useState } from 'react'
-import useUpload from '../hooks/useUpload'
-import useRead from '../hooks/useRead'
-import useUpdate from '../hooks/useUpdate'
-import useDelete from '../hooks/useDelete'
+import useUpload from '../../hooks/useUpload'
+import useRead from '../../hooks/useRead'
+import useUpdate from '../../hooks/useUpdate'
+import useDelete from '../../hooks/useDelete'
 
 
 const Container = ({ children }) => {

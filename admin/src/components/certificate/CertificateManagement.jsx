@@ -2,12 +2,12 @@ import React from 'react'
 import { Button, TextField, Divider, MenuItem } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { collection, doc, setDoc, addDoc, QuerySnapshot, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
-import { db } from '../firebase'
-import FormManagement from '../form-components/FormManagement';
-import useUpload from '../hooks/useUpload';
-import useRead from '../hooks/useRead';
-import useDelete from '../hooks/useDelete';
-import useUpdate from '../hooks/useUpdate';
+import { db } from '../../firebase'
+import FormManagement from '../../form-components/FormManagement';
+import useUpload from '../../hooks/useUpload';
+import useRead from '../../hooks/useRead';
+import useDelete from '../../hooks/useDelete';
+import useUpdate from '../../hooks/useUpdate';
 export default function CertificateManagement() {
   const [formName, setFormName] = useState('');
   const [formNumber, setFormNumber] = useState('')

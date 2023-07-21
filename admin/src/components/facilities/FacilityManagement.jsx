@@ -1,5 +1,5 @@
 import React from 'react'
-import FormManagement from '../form-components/FormManagement'
+import FormManagement from '../../form-components/FormManagement'
 import { Divider, TextField, Button, Select, MenuItem } from '@mui/material'
 
 const Container = ({children}) =>{

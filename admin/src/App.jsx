@@ -1,8 +1,7 @@
 import './styles/app.css'
 import SideBar from './components/SideBar'
 import Login from './components/Login.jsx'
-
-import AppRoutes from './routes/AppRoutes'
+ import AppRoutes from './routes/AppRoutes'
 function App() {
 
   return (

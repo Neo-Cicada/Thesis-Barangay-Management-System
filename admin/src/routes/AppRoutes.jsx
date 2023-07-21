@@ -1,24 +1,24 @@
 import React from "react"
 import { Route, Routes, Navigate  } from 'react-router-dom'
-import Certificate from '../components/Certificate'
-import Announcement from '../components/Announcement'
-import Enrollment from '../components/Enrollment'
-import Equipment from '../components/Equipment'
+import Certificate from '../components/certificate/Certificate'
+import Announcement from '../components/announcement/Announcement'
+import Enrollment from '../components/enrollment/Enrollment'
+import Equipment from '../components/equipment/Equipment'
 import Facilities from '../components/Facilities'
 import Medicine from '../components/Medicine'
 
 
-import EquipManage from '../pages/EquipManage'
-import EquipmentRequestList from '../pages/EquipmentRequestList'
+import EquipManage from '../components/equipment/EquipManage'
+import EquipmentRequestList from '../components/equipment/EquipmentRequestList'
 import EquipmentStatus from '../pages/EquipmentStatus'
 
-import EquipmentOngoing from '../pages/EquipmentOngoing'
-import EquipmentCompleted from '../pages/EquipmentCompleted'
-import EquipmentRejected from '../pages/EquipmentRejected'
+import EquipmentOngoing from '../components/equipment/EquipmentOngoing'
+import EquipmentCompleted from '../components/equipment/EquipmentCompleted'
+import EquipmentRejected from '../components/equipment/EquipmentRejected'
 
-import CertificateManagement from '../pages/CertificateManagement'
-import CertificateRequest from '../pages/CertificateRequest'
-import CertificateStatus from '../pages/CertificateStatus'
+import CertificateManagement from '../components/certificate/CertificateManagement'
+import CertificateRequest from '../components/certificate/CertificateRequest'
+import CertificateStatus from '../components/certificate/CertificateStatus'
 
 import MedicineManagement from '../pages/MedicineManagement'
 import MedicineRequestList from '../pages/MedicineRequestList'
@@ -28,8 +28,8 @@ import FacilityManagement from '../pages/FacilityManagement'
 import FacilityRequest from '../pages/FacilityRequest'
 import FacilityStatus from '../pages/FacilityStatus'
 
-import AnnouncementManagement from '../pages/AnnouncementManagement'
-import AnnouncementHistory from '../pages/AnnouncementHistory'
+import AnnouncementManagement from '../components/announcement/AnnouncementManagement'
+import AnnouncementHistory from '../components/announcement/AnnouncementHistory'
 const AppRoutes = () =>{
     return(
         <Routes>
