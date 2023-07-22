@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/eqStatus.css'
+import '../../styles/eqStatus.css'
 import { Link, Outlet } from 'react-router-dom'
 export default function EquipmentStatus() {
   return (

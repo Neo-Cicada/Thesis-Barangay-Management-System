@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import HeroSection from '../structure/HeroSection'
-import FormManagement from '../form-components/FormManagement'
+import HeroSection from '../../structure/HeroSection'
+import FormManagement from '../../form-components/FormManagement'
 import { Divider } from '@mui/material'
 const Navigation = () =>{
   return(

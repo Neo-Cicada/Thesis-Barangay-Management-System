@@ -4,13 +4,13 @@ import Certificate from '../components/certificate/Certificate'
 import Announcement from '../components/announcement/Announcement'
 import Enrollment from '../components/enrollment/Enrollment'
 import Equipment from '../components/equipment/Equipment'
-import Facilities from '../components/Facilities'
-import Medicine from '../components/Medicine'
+import Facilities from '../components/facilities/Facilities'
+import Medicine from '../components/medicine/Medicine'
 
 
 import EquipManage from '../components/equipment/EquipManage'
 import EquipmentRequestList from '../components/equipment/EquipmentRequestList'
-import EquipmentStatus from '../pages/EquipmentStatus'
+import EquipmentStatus from '../components/equipment/EquipmentStatus'
 
 import EquipmentOngoing from '../components/equipment/EquipmentOngoing'
 import EquipmentCompleted from '../components/equipment/EquipmentCompleted'
@@ -20,13 +20,13 @@ import CertificateManagement from '../components/certificate/CertificateManageme
 import CertificateRequest from '../components/certificate/CertificateRequest'
 import CertificateStatus from '../components/certificate/CertificateStatus'
 
-import MedicineManagement from '../pages/MedicineManagement'
-import MedicineRequestList from '../pages/MedicineRequestList'
-import MedicineStatus from '../pages/MedicineStatus'
+import MedicineManagement from '../components/medicine/MedicineManagement'
+import MedicineRequestList from '../components/medicine/MedicineRequestList'
+import MedicineStatus from '../components/medicine/MedicineStatus'
 
-import FacilityManagement from '../pages/FacilityManagement'
-import FacilityRequest from '../pages/FacilityRequest'
-import FacilityStatus from '../pages/FacilityStatus'
+import FacilityManagement from '../components/facilities/FacilityManagement'
+import FacilityRequest from '../components/facilities/FacilityRequest'
+import FacilityStatus from '../components/facilities/FacilityStatus'
 
 import AnnouncementManagement from '../components/announcement/AnnouncementManagement'
 import AnnouncementHistory from '../components/announcement/AnnouncementHistory'

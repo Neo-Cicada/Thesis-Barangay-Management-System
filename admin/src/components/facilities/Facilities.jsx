@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import HeroSection from '../structure/HeroSection'
+import HeroSection from '../../structure/HeroSection'
 const Navigation = () => {
   return(
     <nav className='nav-certificate'>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, Outlet} from 'react-router-dom'
-import Facilites from '../Facilities'
-import EquipManage from './EquipManage'
+import Facilites from '../facilities/Facilities'
+import EquipManage from '../equipment/EquipManage'
 import '../../styles/equipment.css'
-import EquipmentRequestList from './EquipmentRequestList'
+import EquipmentRequestList from '../equipment/EquipmentRequestList'
 
 export default function Equipment() {
   return (
