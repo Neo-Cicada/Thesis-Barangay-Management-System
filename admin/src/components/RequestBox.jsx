@@ -7,7 +7,7 @@ const SecondBox = () =>{
         <>
             <Box sx={{ height: '10em  ' }}>
 
-
+            
             </Box>
 
         </>
@@ -17,7 +17,7 @@ const SecondBox = () =>{
 
 
 
-export default function RequestBox({data, handleReject, handleAccept, getId, itemId}) {
+export default function RequestBox({data, handleReject, handleAccept}) {
 
     const information = data.data
     const [isShow, setIsShow] = useState(false)
@@ -45,7 +45,8 @@ export default function RequestBox({data, handleReject, handleAccept, getId, ite
       <Box sx={boxStyle} onClick={handleExpand} key={data.id} value={data.id}>
           <Box sx={{ height: '2em',
              display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1em' }}>
-           <h4>{information.firstname} {information.lastname}</h4>
+           <h4>{information.firstname} {information.lastname} {data.id}</h4>
+           
             <Box sx={{display: 'flex', gap: '1em'}}>
               <Button variant='contained' onClick={handleAccept}>Accept</Button>
 
@@ -54,7 +55,7 @@ export default function RequestBox({data, handleReject, handleAccept, getId, ite
 
           </Box>
 
-          {isShow && <SecondBox />}
+          {isShow && <SecondBox/>}
         </Box>
     
     </>

@@ -1,9 +1,9 @@
 import React from 'react'
 import useDelete from './useDelete'
 import useUpload from './useUpload'
-const useTransfer = async (to, from, id,) => {
+const useTransfer = async (to, from, id, data) => {
     try{
-        await useUpload(to, id)
+        await useUpload(to)
         await useDelete(from, id)
         console.log('Transfered!')
     }
@@ -11,3 +11,4 @@ const useTransfer = async (to, from, id,) => {
         console.log(error)
     }
 }
+export default useTransfer;
