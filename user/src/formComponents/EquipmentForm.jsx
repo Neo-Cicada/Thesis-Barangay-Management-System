@@ -26,7 +26,7 @@ export default function EquipmentForm() {
 
   // const selection = data.map((items) =>{
   //   <MenuItem id={items.id}>{items.Equipment}</MenuItem>
-  // }) 
+  // })
   const items = data.map((item) => {
     return(
     <MenuItem key={item.id} value={item.id}>
@@ -53,7 +53,7 @@ export default function EquipmentForm() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    // useUpload(formData, 'EquipmentRequest').then('upload successfully')
+    useUpload(formData, 'EquipmentRequest').then('upload successfully')
     console.log(data)
     setFirstName('')
     setLastName('')
