@@ -9,7 +9,9 @@ export default function EquipmentCompleted() {
   useRead('EquipmentCompletedStatus', setData)
 
 
-  const items = data ? data.map((item) => <li key={item.id} style={{ width: '70%', height: "auto" }}>
+  const items = data ? data.map((item) =>
+    <li key={item.id}
+      style={{ width: '70%', height: "auto" }}>
     <CompleteBox /></li>) : <h1>No data available</h1>;
 
   return (
