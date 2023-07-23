@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const useUpload = async (path) => {
+const useUpload = async (path, data) => {
   try{
     await addDoc(collection(db, path),{
-      type: 'success',
-      quantity: 'sucess'
+      data
     })
     console.log("Uploaded!")
   }catch(error){

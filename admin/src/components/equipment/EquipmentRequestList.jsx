@@ -7,22 +7,25 @@ import ScrollableContainer from '../ScrollableContainer'
 export default function EquipmentRequestList() {
   const [data, setData] = useState([])
   const [id, setId] = useState('')
+  const [specificData, setSpecificData] = useState()
   useRead('EquipmentRequest', setData)
 
 
   const handleAccept = async (e) => {
     e.stopPropagation();
-    await useTransfer('EquipmentOngoingStatus', 'EquipmentRequest', id);
-    console.log('Accepted!')
+    await useTransfer('EquipmentOngoingStatus', 'EquipmentRequest', id, specificData);
+    console.log(id)
+    console.log('Accepted!');
   }
   const handleReject = async (e) => {
     e.stopPropagation();
-    await useTransfer('EquipmentRejectedStatus', 'EquipmentRequest', id);
+    await useTransfer('EquipmentRejectedStatus', 'EquipmentRequest', id, specificData);
 
-    console.log('Rejected')
+    console.log('Rejected');
   }
+
   const mapedBox = data.map(item =>
-    <li key={item.id} onFocus={(e => setId(item.id))}
+    <li key={item.id} onFocus={(e => setId(item.id, setSpecificData(item)))}
       style={{ width: '70%', height: "auto" }}>
       <RequestBox
         data={item}

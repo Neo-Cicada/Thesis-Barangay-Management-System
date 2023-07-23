@@ -1,15 +1,18 @@
 import React from 'react'
-import { Box, Button} from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useState } from 'react';
-
+import useRead from '../hooks/useRead'
 const CompleteBox = () => {
     const [isShow, setIsShow] = useState(false)
+
     const handleExpand = (e) => {
         e.preventDefault();
         setIsShow(!isShow);
     }
+
+
     const boxStyle = {
-        marginTop: '1em',
+
         flex: 'none',
         width: '100%',
         height: isShow ? 'auto' : '5em', // Adjust the height to 'auto' when expanded, otherwise '5em'
@@ -27,7 +30,6 @@ const CompleteBox = () => {
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1em'
                 }}>
                     <h4>Hello world</h4>
-                    <Button>Mark as done</Button>
                 </Box>
                 {isShow && <h1>This is where more data go</h1>}
             </Box>

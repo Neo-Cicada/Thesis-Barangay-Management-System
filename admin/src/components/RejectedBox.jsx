@@ -8,7 +8,6 @@ const RejectedBox = () =>{
         setIsShow(!isShow);
       }
     const boxStyle = {
-        marginTop: '1em',
         flex: 'none',
         width: '100%',
         height: isShow ? 'auto' : '5em', // Adjust the height to 'auto' when expanded, otherwise '5em'

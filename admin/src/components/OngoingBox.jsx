@@ -1,13 +1,14 @@
 import React from 'react'
 import { Box, Button } from '@mui/material'
 import { useState } from 'react'
-
-const OngoingBox = () => {
+import useTransfer from '../hooks/useTransfer'
+const OngoingBox = ({onTransfer}) => {
     const [isShow, setIsShow] = useState(false)
     const handleExpand = (e) => {
         e.preventDefault();
         setIsShow(!isShow);
     }
+   
     const boxStyle = {
         flex: 'none',
         width: '100%',
@@ -27,7 +28,7 @@ const OngoingBox = () => {
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1em'
                 }}>
                     <h4>Hello world</h4>
-                    <Button>Mark as done</Button>
+                    <Button onClick={onTransfer}>Mark as done</Button>
                 </Box>
                 {isShow && <h1>This is where more data go</h1>}
             </Box>
