@@ -24,12 +24,14 @@ export default function EquipmentForm() {
   const [data, setData] = useState([])
   useRead('Equipments', setData);
 
+
+  // console.log(data)
   // const selection = data.map((items) =>{
   //   <MenuItem id={items.id}>{items.Equipment}</MenuItem>
   // })
   const items = data.map((item) => {
     return(
-    <MenuItem key={item.id} value={item.id}>
+    <MenuItem key={item.id} id={item.id} value={item.Equipment}>
       {item.Equipment}
     </MenuItem>
     )
@@ -54,7 +56,7 @@ export default function EquipmentForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     useUpload(formData, 'EquipmentRequest').then('upload successfully')
-    console.log(data)
+    // console.log(formData)
     setFirstName('')
     setLastName('')
     setStartDate('')
