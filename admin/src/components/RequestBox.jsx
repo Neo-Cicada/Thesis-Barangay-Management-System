@@ -1,12 +1,31 @@
-import { Box, Container, Button, Paper } from '@mui/material'
+import { Box, Container, Button, Paper, Typography } from '@mui/material'
 import React, { useState, useEffect } from 'react';
 
-const SecondBox = () =>{
-
+const SecondBox = ({data}) =>{
+  console.log(data)
     return(
         <>
             <Box sx={{ height: '10em  ' }}>
-
+              <Typography>
+                First name: {data.data.firstname}
+              </Typography>
+              <Typography>
+               Last name: {data.data.lastname}
+              </Typography>
+              <Typography>
+               Email Address: {data.data.email}
+              </Typography>
+              <Typography>
+               Phone Number: {data.data.phoneNumber}
+              </Typography>
+              <Typography>Equipment: {data.data.equipment}</Typography>
+              <Box sx={{display: 'flex', flexDirection: 'row', gap: '1em'}}>
+              <Typography>
+               Start date: {data.data.startDate}
+              </Typography><Typography>
+               End date: {data.data.endDate}
+              </Typography>
+              </Box>
             </Box>
 
         </>
@@ -50,10 +69,9 @@ export default function RequestBox({data, handleReject, handleAccept}) {
 
               <Button variant='contained' onClick={handleReject}>Reject</Button>
             </Box>
-
           </Box>
 
-          {isShow && <SecondBox/>}
+          {isShow && <SecondBox data={data}/>}
       </Box>
 
     </>
