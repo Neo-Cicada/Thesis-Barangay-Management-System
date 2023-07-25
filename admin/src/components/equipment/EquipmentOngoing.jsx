@@ -7,7 +7,7 @@ import OngoingBox from '../OngoingBox'
 export default function EquipmentOngoing() {
   const [data, setData] = useState([])
   const [id, setId] = useState()
-  const [specificData, setSpecificData] = useState([])
+  const [specificData, setSpecificData] = useState()
   const handleTransfer = async (e) =>{
     e.stopPropagation();
     await useTransfer('EquipmentCompletedStatus', 'EquipmentOngoingStatus', id, specificData )

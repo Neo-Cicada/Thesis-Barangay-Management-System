@@ -2,7 +2,6 @@ import { Box, Container, Button, Paper, Typography } from '@mui/material'
 import React, { useState, useEffect } from 'react';
 
 const SecondBox = ({data}) =>{
-  console.log(data)
     return(
         <>
             <Box sx={{ height: '10em  ' }}>
@@ -42,6 +41,7 @@ export default function RequestBox({data, handleReject, handleAccept}) {
     const handleExpand = (e) => {
         e.preventDefault();
         setIsShow(!isShow);
+        console.log(information)
       }
 
 

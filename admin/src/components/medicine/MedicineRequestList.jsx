@@ -1,65 +1,34 @@
 import { Box, Container, Button, Paper } from '@mui/material'
 import React, { useState } from 'react'
-
-
-
+import ScrollableContainer from '../ScrollableContainer'
+import RequestBox from '../RequestBox'
+import useRead from '../../hooks/useRead'
 export default function MedicineRequestList() {
-  const [isShow, setIsShow] = useState(false)
-  const [boxStyle, setBoxStyle] = useState({
-    flex: 'none',
-    border: '1px solid red',
-    width: '70%', height: '5em', marginTop: '1em', cursor: 'pointer'
-  })
+  const [data, setData] = useState([])
+  const [id, setId] = useState()
+  const [specificData,setSpecificData] = useState()
+  useRead('MedicineRequest', setData)
 
-  const handleExpand = (e) => {
-    e.preventDefault();
-    setIsShow(!isShow)
+  const handleAccept = (e) =>{
+    e.stopPropagation();
+    console.log('Accepted!')
+  }
+
+  const handleReject = (e) => {
+    e.stopPropagation();
+    console.log('Rejected')
   }
 
 
+  const items = data.map(item => <li key={item.id} onFocus={(e => setId(item.id, setSpecificData(item)))}
+  style={{ width: '70%', height: "auto" }}> <RequestBox data={item}
+      handleReject={handleReject} handleAccept={handleAccept}/> </li>)
 
   return (
     <>
-      <Container sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        maxHeight: '25em',
-        height: '100%',
-        overflow: 'auto'
-      }}>
-        <Box sx={boxStyle} onClick={handleExpand} key='1'>
-          {isShow && 'TEst'} 1
-        </Box>
-
-        <Box sx={boxStyle}>
-          2
-        </Box>
-        <Box sx={boxStyle}>
-          3
-        </Box>
-        <Box sx={boxStyle}>
-          4
-        </Box>
-        <Box sx={boxStyle}>
-          5
-        </Box>
-        <Box sx={boxStyle}>
-          6
-        </Box>
-        <Box sx={boxStyle}>
-          7
-        </Box>
-        <Box sx={boxStyle}>
-          8
-        </Box>
-        <Box sx={boxStyle}>
-          9
-        </Box>
-        <Box sx={boxStyle}>
-          10
-        </Box>
-      </Container>
+      <ScrollableContainer>
+        {items}
+      </ScrollableContainer>
     </>
   )
 }
