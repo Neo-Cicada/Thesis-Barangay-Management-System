@@ -39,10 +39,9 @@ export default function EquipmentRequestList() {
   return (
     <>
       <ScrollableContainer>
-
         {mapedBox}
 
-      </ScrollableContainer>    
+      </ScrollableContainer>
       </>
   )
 }

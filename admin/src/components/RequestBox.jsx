@@ -63,10 +63,10 @@ export default function RequestBox({data, handleReject, handleAccept}) {
       <Box sx={boxStyle} onClick={handleExpand} key={data.id} value={data.id}>
           <Box sx={{ height: '2em',
              display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1em' }}>
-           <h4>{information.firstname} {information.lastname} {data.id}</h4>
+           <h4>{information.firstname} {information.lastname}</h4>
             <Box sx={{display: 'flex', gap: '1em'}}>
               <Button variant='contained' onClick={handleAccept}>Accept</Button>
-
+              
               <Button variant='contained' onClick={handleReject}>Reject</Button>
             </Box>
           </Box>

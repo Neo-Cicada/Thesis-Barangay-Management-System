@@ -19,7 +19,7 @@ export default function EquipmentOngoing() {
     <li key={item.id}
         onFocus={(e => setId(item.id, setSpecificData(item)))}
         style={{ width: '70%', height: "auto" }}>
-          <OngoingBox onTransfer={handleTransfer}/>
+          <OngoingBox onTransfer={handleTransfer} data={item}/>
     </li> )
 
   return (
