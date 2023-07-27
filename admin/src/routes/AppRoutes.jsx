@@ -20,9 +20,7 @@ import CertificateManagement from '../components/certificate/CertificateManageme
 import CertificateRequest from '../components/certificate/CertificateRequest'
 import CertificateStatus from '../components/certificate/CertificateStatus'
 
-import CertificateOngoing from '../components/certificate/CertificateOngoing'
-import CertificateAccepted from '../components/certificate/CertificateAccepted'
-import CertificateRejected from '../component/certifcate/CertificateRejected'
+
 
 import MedicineManagement from '../components/medicine/MedicineManagement'
 import MedicineRequestList from '../components/medicine/MedicineRequestList'
@@ -81,10 +79,10 @@ const AppRoutes = () => {
         <Route index element={<Navigate to='manage-certificate' replace />} />
         <Route path='request-list-certificate' element={<CertificateRequest />} />
         <Route path='certificate-status' element={<CertificateStatus />}>
+          {/* <Route />
           <Route />
           <Route />
-          <Route />
-          <Route />
+          <Route /> */}
 
         </Route>
 

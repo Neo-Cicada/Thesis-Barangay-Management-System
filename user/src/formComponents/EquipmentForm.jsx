@@ -17,7 +17,7 @@ export default function EquipmentForm() {
   const [endDate, setEndDate] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [equipment, setEquipment] = useState('');
+  const [type, setType] = useState('');
   const [messege, setMessege] = useState('');
 
 
@@ -25,7 +25,7 @@ export default function EquipmentForm() {
   useRead('Equipments', setData);
 
 
-  // console.log(data)
+
   // const selection = data.map((items) =>{
   //   <MenuItem id={items.id}>{items.Equipment}</MenuItem>
   // })
@@ -44,7 +44,7 @@ export default function EquipmentForm() {
     endDate: endDate,
     phoneNumber: phoneNumber,
     email: email,
-    equipment: equipment,
+    type: type,
     message: messege,
   }
   const style = {
@@ -64,7 +64,7 @@ export default function EquipmentForm() {
     setEndDate('')
     setPhoneNumber('')
     setEmail('')
-    setEquipment('')
+    setType('')
     setMessege('')
   }
   return (
@@ -95,8 +95,8 @@ export default function EquipmentForm() {
           <FormControl fullWidth>
             <InputLabel >Select Available Equipment</InputLabel>
             <Select
-              value={equipment}
-              onChange={(e) => setEquipment(e.target.value)}
+              value={type}
+              onChange={(e) => setType(e.target.value)}
               label="Select Available Equipment">
               {items}
             </Select>
