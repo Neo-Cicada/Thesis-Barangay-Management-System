@@ -3,20 +3,21 @@ import React, { useState } from 'react'
 import ScrollableContainer from '../ScrollableContainer'
 import RequestBox from '../RequestBox'
 import useRead from '../../hooks/useRead'
+import useTransfer from '../../hooks/useTransfer'
 export default function MedicineRequestList() {
   const [data, setData] = useState([])
   const [id, setId] = useState()
   const [specificData,setSpecificData] = useState()
   useRead('MedicineRequest', setData)
 
-  const handleAccept = (e) =>{
+  const handleAccept = async (e) =>{
     e.stopPropagation();
-    console.log('Accepted!')
+    await useTransfer('MedicineOngoingStatus', 'MedicineRequest', id, specificData);
   }
 
-  const handleReject = (e) => {
+  const handleReject = async (e) => {
     e.stopPropagation();
-    console.log('Rejected')
+    await useTransfer('MedicineRejectedStatus', 'MedicineRequest', id, specificData);
   }
 
 

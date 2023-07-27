@@ -3,19 +3,21 @@ import React, { useState } from 'react'
 import ScrollableContainer from '../ScrollableContainer'
 import useRead from '../../hooks/useRead'
 import RequestBox from '../RequestBox'
+import useTransfer from '../../hooks/useTransfer'
 export default function FacilityRequest() {
   const [data, setData] = useState([])
   const [id, setId] = useState()
   const [specificData,setSpecificData] = useState()
+
   useRead('FacilityRequest', setData)
 
-  const handleAccept = (e) =>{
+  const handleAccept = async (e) =>{
     e.stopPropagation();
-    console.log('Accept!')
+    await useTransfer('FacilityOngoingStatus', 'FacilityRequest', id, specificData)
   }
-  const handleReject = (e) =>{
+  const handleReject = async (e) =>{
     e.stopPropagation();
-    console.log('Rejected!')
+    await useTransfer('FacilityRejectedStatus', 'FacilityRequest', id, specificData)
   }
 
 
