@@ -18,7 +18,7 @@ export default function MedicineForm() {
   useRead('Medicines', setData);
   const items = data.map((item) => {
     return(
-    <MenuItem key={item.id} value={item.id}>
+    <MenuItem key={item.id} value={item.type} id={item.id}>
       {item.type}
     </MenuItem>
     )
@@ -45,6 +45,7 @@ export default function MedicineForm() {
     setPhoneNumber('')
     setEmail('')
     setMessege('')
+    setMedicine('')
   }
   return (
     <>

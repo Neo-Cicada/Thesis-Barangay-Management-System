@@ -20,7 +20,7 @@ export default function CertificateForm() {
 
   const items = data.map((item) => {
     return(
-    <MenuItem key={item.id} value={item.id}>
+    <MenuItem key={item.id} value={item.type} id={item.id}>
       {item.type}
     </MenuItem>
     )
