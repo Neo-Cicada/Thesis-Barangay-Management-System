@@ -11,10 +11,17 @@ export default function MedicineOngoing() {
   const [specificData, setSpecificData] = useState()
 
   useRead('MedicineOngoingStatus', setData)
+
+  const handleTransfer = async (e) =>{
+    e.stopPropagation();
+    await useTransfer('MedicineCompletedStatus', 'MedicineOngoingStatus', id, specificData);
+  }
+
+
   const items = data.map( item => <li key={item.id}
     onFocus={(e => setId(item.id, setSpecificData(item)))}
     style={{ width: '70%', height: "auto" }}>
-      <OngoingBox data={item}/>
+      <OngoingBox data={item} onTransfer={handleTransfer}/>
     </li>)
   return (
     <>

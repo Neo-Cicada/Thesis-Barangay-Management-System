@@ -10,9 +10,14 @@ export default function FacilityOngoing() {
   const [specificData, setSpecificData] = useState();
   useRead('FacilityOngoingStatus', setData);
 
+  const handleTransfer = async(e) =>{
+    e.stopPropagation();
+    await useTransfer('FacilityCompletedStatus', 'FacilityOngoingStatus',id, specificData)
+  }
+
   const items = data.map(item => <li key={item.id}
     onFocus={(e => setId(item.id, setSpecificData(item)))}
-    style={{ width: '70%', height: "auto" }}> <OngoingBox data={item} /> </li>)
+    style={{ width: '70%', height: "auto" }}> <OngoingBox data={item} onTransfer={handleTransfer}/> </li>)
 
 
   return (
