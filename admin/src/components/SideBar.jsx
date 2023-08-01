@@ -78,6 +78,11 @@ export default function SideBar() {
               Medicine
             </Button>
           </li>
+          <li>
+            <Button>
+              Profile
+            </Button>
+          </li>
         </ul>
       </div>
     </>

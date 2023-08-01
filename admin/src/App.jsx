@@ -6,9 +6,7 @@ function App() {
 
   return (
     <>
-      <header>
 
-      </header>
       <main>
         <nav className='app-nav'>
           <SideBar />
