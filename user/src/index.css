@@ -2,6 +2,12 @@
     margin: 0;
     padding: 0;
 }
+:root{
+    --facebook-light-blue-color: #dfe3ee;
+    --facebook-dark-blue-color: #3b5998;
+    --facebook-lightdark-blue-color: #8b9dc3;
+    --facebook-white-color: #f7f7f7;
+}
 a{
     text-decoration: none;
     color: inherit;

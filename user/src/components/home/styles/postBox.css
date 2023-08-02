@@ -1,0 +1,23 @@
+:root {
+    --facebook-light-blue-color: #dfe3ee;
+    --facebook-dark-blue-color: #3b5998;
+    --facebook-lightdark-blue-color: #8b9dc3;
+    --facebook-white-color: #f7f7f7;
+}
+
+.postBoxContainer {
+    height: 27em;
+    width: 30em;
+    background-color: var(--facebook-white-color);
+    border-radius: 1rem;
+}
+
+
+.captionPostBox{
+    height: 25%;
+    border-bottom: 3px solid var(--facebook-dark-blue-color);
+}
+
+.imagePostBox{
+    height: 75%;
+}
