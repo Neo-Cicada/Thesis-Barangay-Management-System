@@ -4,8 +4,21 @@
     --facebook-lightdark-blue-color: #8b9dc3;
     --facebook-white-color: #f7f7f7;
 }
+.custom-scrollbar::-webkit-scrollbar { /* scrollbar design for Home.jsx */
+    width: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--facebook-dark-blue-color);
+    border-radius: 5px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: var(--facebook-white-color);
+  }
 
 .postBoxContainer {
+    flex: none;
     height: 27em;
     width: 30em;
     background-color: var(--facebook-white-color);
