@@ -9,7 +9,7 @@ export default function CertificateCompleted() {
   const [specificData, setSpecificData] = useState()
 
 
-  useRead('CertificateOngoingStatus', setData)
+  useRead('CertificateCompletedStatus', setData)
 
   const items = data.map(item => <li key={item.id}
     style={{ width: '70%', height: "auto" }}> <CompletedBox data={item}/> </li>)
