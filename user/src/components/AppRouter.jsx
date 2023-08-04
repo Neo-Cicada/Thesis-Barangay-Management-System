@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import Home from './home/Home'
 import Forms from './Forms'
-import Report from './Report'
+import Report from './report/Report'
 
 import CertificateForm from '../formComponents/CertificateForm'
 import EnrollmentForm from '../formComponents/EnrollmentForm'
