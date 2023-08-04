@@ -2,7 +2,8 @@ import React from 'react'
 import { Container } from '@mui/material'
 import { Link, Outlet } from 'react-router-dom'
 import FormMenu from './FormMenu'
-
+//TODO: add review information by applying link then dialogbox.
+//TODO: dialog box for agreement.
 export default function Forms() {
 
   return (
