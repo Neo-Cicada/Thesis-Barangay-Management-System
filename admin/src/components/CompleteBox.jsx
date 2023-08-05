@@ -1,13 +1,48 @@
 import React from 'react'
-import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import { Box, Button, Typography, Skeleton } from '@mui/material'
+import { useState } from 'react'
 import useRead from '../hooks/useRead'
-const CompleteBox = () => {
-    const [isShow, setIsShow] = useState(false)
 
+const SecondBox = ({ data }) => {
+
+    return (
+        <>
+            <Box sx={{ height: '10em  ' }}>
+                <Typography>
+                    First name: {data.data.data.data.firstname}
+                </Typography>
+                <Typography>
+                    Last name: {data.data.data.data.lastname}
+                </Typography>
+                <Typography>
+                    Email Address: {data.data.data.data.email}
+                </Typography>
+                <Typography>
+                    Phone Number: {data.data.data.data.phoneNumber}
+                </Typography>
+                <Typography>Equipment: {data.data.data.data.equipment}</Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '1em' }}>
+                    <Typography>
+                        Start date: {data.data.data.data.startDate}
+                    </Typography><Typography>
+                        End date: {data.data.data.data.endDate}
+                    </Typography>
+                </Box>
+            </Box>
+
+        </>
+    )
+}
+
+
+
+
+const CompleteBox = ({data}) => {
+    const [isShow, setIsShow] = useState(false)
     const handleExpand = (e) => {
         e.preventDefault();
         setIsShow(!isShow);
+        console.log(data.data.data.data.email)
     }
 
 
@@ -29,9 +64,9 @@ const CompleteBox = () => {
                     height: '2em',
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1em'
                 }}>
-                    <h4>Hello world</h4>
+                     <h4>{data.data.data.data.firstname} {data.data.data.data.lastname}</h4>
                 </Box>
-                {isShow && <h1>This is where more data go</h1>}
+                {isShow && <SecondBox data={data}/>}
             </Box>
         </>
     )

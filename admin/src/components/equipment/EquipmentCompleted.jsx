@@ -12,7 +12,7 @@ export default function EquipmentCompleted() {
   const items = data.map((item) =>
     <li key={item.id}
       style={{ width: '70%', height: "auto" }}>
-    <CompleteBox /></li>)
+    <CompleteBox data={item}/></li>)
   return (
     <>
       <ScrollableContainer>

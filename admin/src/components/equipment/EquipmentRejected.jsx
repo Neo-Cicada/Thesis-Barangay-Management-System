@@ -8,7 +8,7 @@ export default function EquipmentRejected() {
 
   useRead('EquipmentRejectedStatus', setData)
   const items = data.map(item =>  <li key={item.id}
-    style={{ width: '70%', height: "auto" }}><RejectedBox/> </li>)
+    style={{ width: '70%', height: "auto" }}><RejectedBox data={item}/> </li>)
   return (
     <>
       <ScrollableContainer>

@@ -66,7 +66,6 @@ const OngoingBox = ({onTransfer, data}) => {
                 </Box>
                 {isShow && <SecondBox data={data}/>}
             </Box>
-            
         </>
     )
 }
