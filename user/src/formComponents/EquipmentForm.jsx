@@ -30,10 +30,10 @@ export default function EquipmentForm() {
   //   <MenuItem id={items.id}>{items.Equipment}</MenuItem>
   // })
   const items = data.map((item) => {
-    return(
-    <MenuItem key={item.id} id={item.id} value={item.Equipment}>
-      {item.Equipment}
-    </MenuItem>
+    return (
+      <MenuItem key={item.id} id={item.id} value={item.Equipment}>
+        {item.Equipment}
+      </MenuItem>
     )
   })
 
@@ -106,7 +106,7 @@ export default function EquipmentForm() {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker label="Start Date"
               value={startDate}
-              onChange={(e)=>setStartDate(e.target.value)}
+              onChange={(e) => setStartDate(e.target.value)}
             />
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -128,7 +128,15 @@ export default function EquipmentForm() {
         </Box>
         <Box sx={style}>
 
-          <FormControlLabel required control={<Checkbox />} label="Agree" />
+          <FormControlLabel
+            required
+            control={<Checkbox />}
+            label={
+              <span >
+                Agree to the <u>terms and conditions</u>
+              </span>
+            }
+          />
 
         </Box>
         <Box sx={style}>

@@ -1,10 +1,11 @@
 import React from 'react'
 import {
     TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
-    FormControlLabel, Checkbox, FormGroup, Button,
+    FormControlLabel, Checkbox, FormGroup, Button, Dialog, DialogContent
 } from '@mui/material'
 import { useState } from 'react'
 import useUpload from '../hooks/useUpload'
+import Agreement from '../components/dialogs/Agreement'
 const FacilityForm = () => {
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
@@ -15,7 +16,15 @@ const FacilityForm = () => {
     const [time, setTime] = useState('');
     const [messege, setMessege] = useState('');
 
-
+    const [showAgreement, setShowAgreement] = useState(false)
+    const handleAgreement  = (e) =>{
+        e.preventDefault();
+        setShowAgreement(!showAgreement)
+    }
+    const handleCloseAgreement = (e) =>{
+        e.preventDefault();
+        setShowAgreement(false)
+    }
     const formData = {
         firstname: firstname,
         lastname: lastname,
@@ -26,7 +35,7 @@ const FacilityForm = () => {
         time: time,
         message: messege,
     }
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         useUpload(formData, 'FacilityRequest').then(console.log('successfully uploaded!!'))
@@ -58,7 +67,7 @@ const FacilityForm = () => {
                     <TextField
                         label="Lastname"
                         value={lastname}
-                        onChange={(e) =>setLastName(e.target.value)}
+                        onChange={(e) => setLastName(e.target.value)}
 
                     />
 
@@ -73,8 +82,8 @@ const FacilityForm = () => {
                     <TextField
                         value={phoneNumber}
                         label="Phone number"
-                        onChange={(e)=> setPhoneNumber(e.target.value)}
-                         />
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
 
                 </Box>
                 <Box sx={{ ...style }}>
@@ -83,7 +92,7 @@ const FacilityForm = () => {
                         <Select
                             value={facility}
                             label="Available Facility"
-                            onChange={(e)=> setFacility(e.target.value)}
+                            onChange={(e) => setFacility(e.target.value)}
                         >
                             <MenuItem value="facility">Test</MenuItem>
                         </Select>
@@ -95,7 +104,7 @@ const FacilityForm = () => {
                         <Select
                             value={date}
                             label="Available Date"
-                            onChange={(e)=>setDate(e.target.value)}
+                            onChange={(e) => setDate(e.target.value)}
                         >
                             <MenuItem value="date">Test</MenuItem>
                         </Select>
@@ -106,7 +115,7 @@ const FacilityForm = () => {
                         <Select
                             value={time}
                             label="Available Time"
-                            onChange={(e)=>setTime(e.target.value)}
+                            onChange={(e) => setTime(e.target.value)}
                         >
                             <MenuItem value='time'>Test</MenuItem>
                         </Select>
@@ -115,7 +124,7 @@ const FacilityForm = () => {
                 <Box sx={{ ...style, gap: '4em' }} >
                     <TextareaAutosize
                         value={messege}
-                        onChange={(e)=> setMessege(e.target.value)}
+                        onChange={(e) => setMessege(e.target.value)}
                         style={{ resize: 'none', height: '100%', width: '100%', fontSize: '1.2rem', paddingLeft: '.8em' }} // Disable resizing
                         placeholder="Messege"
                         aria-label="fixed size textarea"
@@ -123,13 +132,28 @@ const FacilityForm = () => {
                 </Box>
                 <Box sx={{ ...style }}>
 
-                    <FormControlLabel required control={<Checkbox />} label="Agree" />
+                    <FormControlLabel
+                        required
+                        control={<Checkbox />}
+                        label={
+                            <span onClick={handleAgreement}>
+                                Agree to the <u>terms and conditions</u>
+                            </span>
+                        }
+                    />
 
                 </Box>
                 <Box sx={{ ...style }}>
                     <Button type='submit' variant="contained">Submit</Button>
                 </Box>
             </form>
+            {showAgreement && (
+        <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
+          <DialogContent>
+            <Agreement />
+          </DialogContent>
+        </Dialog>
+      )}
         </>
     )
 }

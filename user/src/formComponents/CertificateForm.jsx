@@ -1,6 +1,8 @@
 import React from 'react'
-import { TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
-          FormControlLabel, Checkbox, FormGroup, Button, Alert } from '@mui/material'
+import {
+  TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
+  FormControlLabel, Checkbox, FormGroup, Button, Alert
+} from '@mui/material'
 import { useState } from 'react'
 import useUpload from '../hooks/useUpload';
 import useRead from '../hooks/useRead'
@@ -19,15 +21,15 @@ export default function CertificateForm() {
 
 
   const items = data.map((item) => {
-    return(
-    <MenuItem key={item.id} value={item.type} id={item.id}>
-      {item.type}
-    </MenuItem>
+    return (
+      <MenuItem key={item.id} value={item.type} id={item.id}>
+        {item.type}
+      </MenuItem>
     )
   })
 
 
-  const style ={
+  const style = {
     display: 'flex',
     justifyContent: 'center',
     height: '15%',
@@ -42,7 +44,7 @@ export default function CertificateForm() {
     messege: messege,
   }
 
-  const handleSubmit =(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     useUpload(formData, 'CertificateRequest').then(
       console.log('upload successfully')
@@ -59,12 +61,12 @@ export default function CertificateForm() {
     <>
       <form onSubmit={handleSubmit}>
 
-        <Box sx={{...style, gap: '4em'}}>
+        <Box sx={{ ...style, gap: '4em' }}>
           <TextField
             variant="outlined"
             label="Firstname"
             value={firstName}
-            onChange={(e)=>{
+            onChange={(e) => {
               setFirstName(e.target.value)
             }}
             required
@@ -74,37 +76,37 @@ export default function CertificateForm() {
             variant="outlined"
             label="Lastname"
             value={lastname}
-            onChange={(e)=>{
+            onChange={(e) => {
               setLastName(e.target.value)
             }}
             required
 
-            />
+          />
 
         </Box>
-        <Box sx={{...style, gap: '4em'}}>
+        <Box sx={{ ...style, gap: '4em' }}>
           <TextField
             variant="outlined"
             label="Phone Number"
             value={phoneNumber}
-            onChange={(e)=>setPhoneNumber(e.target.value)}
+            onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
           <TextField
             variant="outlined"
             label="Email address"
             value={email}
-            onChange={(e)=>setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
 
-            />
+          />
         </Box>
-        <Box sx={{...style, gap: '4em'}}>
+        <Box sx={{ ...style, gap: '4em' }}>
           <FormControl fullWidth>
             <InputLabel >Select Certificate</InputLabel>
             <Select label="Select Certificate"
               value={certificate}
-              onChange={(e)=>setCertificate(e.target.value)
+              onChange={(e) => setCertificate(e.target.value)
               }
             >
               {items}
@@ -114,16 +116,23 @@ export default function CertificateForm() {
         <Box sx={style}>
           <TextareaAutosize
             value={messege}
-            style={{ resize: 'none', height: '100%', width: '100%', fontSize: '1.2rem', paddingLeft: '.8em'}} // Disable resizing
+            style={{ resize: 'none', height: '100%', width: '100%', fontSize: '1.2rem', paddingLeft: '.8em' }} // Disable resizing
             placeholder="Messege"
             aria-label="fixed size textarea"
-            onChange={(e)=>setMessege(e.target.value)}
+            onChange={(e) => setMessege(e.target.value)}
           />
         </Box>
         <Box sx={style}>
 
-            <FormControlLabel required control={<Checkbox />} label="Agree" />
-
+          <FormControlLabel
+            required
+            control={<Checkbox />}
+            label={
+              <span >
+                Agree to the <u>terms and conditions</u>
+              </span>
+            }
+          />
         </Box>
         <Box sx={style}>
           <Button type='submit' variant="contained">Submit</Button>

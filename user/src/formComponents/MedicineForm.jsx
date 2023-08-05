@@ -1,11 +1,12 @@
 import React from 'react'
 import {
   TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
-  FormControlLabel, Checkbox, FormGroup, Button,
+  FormControlLabel, Checkbox, FormGroup, Button, Dialog, DialogContent
 } from '@mui/material'
 import { useState } from 'react'
 import useUpload from '../hooks/useUpload'
 import useRead from '../hooks/useRead'
+import Agreement from '../components/dialogs/Agreement'
 export default function MedicineForm() {
   const [firstName, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
@@ -15,12 +16,22 @@ export default function MedicineForm() {
   const [messege, setMessege] = useState('')
 
   const [data, setData] = useState([])
+
+  const [showAgreement, setShowAgreement] = useState(false)
+    const handleAgreement  = (e) =>{
+        e.preventDefault();
+        setShowAgreement(!showAgreement)
+    }
+    const handleCloseAgreement = (e) =>{
+        e.preventDefault();
+        setShowAgreement(false)
+    }
   useRead('Medicines', setData);
   const items = data.map((item) => {
-    return(
-    <MenuItem key={item.id} value={item.type} id={item.id}>
-      {item.type}
-    </MenuItem>
+    return (
+      <MenuItem key={item.id} value={item.type} id={item.id}>
+        {item.type}
+      </MenuItem>
     )
   })
   const formData = {
@@ -54,28 +65,28 @@ export default function MedicineForm() {
           <TextField
             value={firstName}
             label="Firstname"
-            onChange={(e)=>setFirstName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <TextField
             value={lastname}
             label="Lastname"
-            onChange={(e)=>setLastName(e.target.value)}
-            />
+            onChange={(e) => setLastName(e.target.value)}
+          />
 
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
           <TextField
             value={phoneNumber}
             label="Phone Number"
-            onChange={(e)=>setPhoneNumber(e.target.value)}
+            onChange={(e) => setPhoneNumber(e.target.value)}
 
-           />
+          />
           <TextField
-           value={email}
-           label="Email address"
-           onChange={(e)=>setEmail(e.target.value)}
+            value={email}
+            label="Email address"
+            onChange={(e) => setEmail(e.target.value)}
 
-           />
+          />
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
           <FormControl fullWidth>
@@ -83,8 +94,8 @@ export default function MedicineForm() {
             <Select
               value={medicine}
               label="Select Medicine"
-              onChange={(e)=>setMedicine(e.target.value)}
-              >
+              onChange={(e) => setMedicine(e.target.value)}
+            >
               {items}
             </Select>
           </FormControl>
@@ -92,7 +103,7 @@ export default function MedicineForm() {
         <Box sx={style}>
           <TextareaAutosize
             value={messege}
-            onChange={(e)=>setMessege(e.target.value)}
+            onChange={(e) => setMessege(e.target.value)}
             style={{ resize: 'none', height: '100%', width: '100%', fontSize: '1.2rem', paddingLeft: '.8em' }} // Disable resizing
             placeholder="Messege"
             aria-label="fixed size textarea"
@@ -100,13 +111,27 @@ export default function MedicineForm() {
         </Box>
         <Box sx={style}>
 
-          <FormControlLabel required control={<Checkbox />} label="Agree" />
+          <FormControlLabel
+            required
+            control={<Checkbox />}
+            label={
+              <span onClick={handleAgreement}>
+              Agree to the <u>terms and conditions</u>
+              </span>
+            }
+          />
 
         </Box>
         <Box sx={style}>
           <Button type='submit' variant="contained">Submit</Button>
         </Box>
       </form>
+      {showAgreement &&
+        <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
+          <DialogContent>
+            <Agreement />
+          </DialogContent>
+        </Dialog>}
     </>
   )
 }
