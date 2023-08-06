@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
-  FormControlLabel, Checkbox, FormGroup, Button,
+  FormControlLabel, Checkbox, FormGroup, Button, Dialog, DialogContent
 } from '@mui/material'
 import { useState } from 'react'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import useUpload from '../hooks/useUpload';
 import useRead from '../hooks/useRead';
+import Agreement from '../components/dialogs/Agreement';
 export default function EquipmentForm() {
 
   const [firstname, setFirstName] = useState('');
@@ -20,6 +21,15 @@ export default function EquipmentForm() {
   const [type, setType] = useState('');
   const [messege, setMessege] = useState('');
 
+  const [showAgreement, setShowAgreement] = useState(false)
+    const handleAgreement  = (e) =>{
+        e.preventDefault();
+        setShowAgreement(!showAgreement)
+    }
+    const handleCloseAgreement = (e) =>{
+        e.preventDefault();
+        setShowAgreement(false)
+    }
 
   const [data, setData] = useState([])
   useRead('Equipments', setData);
@@ -132,7 +142,7 @@ export default function EquipmentForm() {
             required
             control={<Checkbox />}
             label={
-              <span >
+              <span onClick={handleAgreement} >
                 Agree to the <u>terms and conditions</u>
               </span>
             }
@@ -143,6 +153,12 @@ export default function EquipmentForm() {
           <Button type='submit' variant="contained">Submit</Button>
         </Box>
       </form>
+      {showAgreement && (
+        <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
+          <DialogContent>
+            <Agreement />
+          </DialogContent>
+        </Dialog>)}
     </>
   )
 }

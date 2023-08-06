@@ -1,11 +1,12 @@
 import React from 'react'
 import {
   TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
-  FormControlLabel, Checkbox, FormGroup, Button, Alert
+  FormControlLabel, Checkbox, FormGroup, Button, Alert, Dialog, DialogContent
 } from '@mui/material'
 import { useState } from 'react'
 import useUpload from '../hooks/useUpload';
 import useRead from '../hooks/useRead'
+import Agreement from '../components/dialogs/Agreement';
 export default function CertificateForm() {
 
   const [firstName, setFirstName] = useState('');
@@ -15,6 +16,15 @@ export default function CertificateForm() {
   const [certificate, setCertificate] = useState('');
   const [messege, setMessege] = useState('')
 
+  const [showAgreement, setShowAgreement] = useState(false)
+  const handleAgreement = (e) => {
+    e.preventDefault();
+    setShowAgreement(!showAgreement)
+  }
+  const handleCloseAgreement = (e) => {
+    e.preventDefault();
+    setShowAgreement(false)
+  }
 
   const [data, setData] = useState([])
   useRead('Certificates', setData)
@@ -128,7 +138,7 @@ export default function CertificateForm() {
             required
             control={<Checkbox />}
             label={
-              <span >
+              <span onClick={handleAgreement}>
                 Agree to the <u>terms and conditions</u>
               </span>
             }
@@ -138,7 +148,13 @@ export default function CertificateForm() {
           <Button type='submit' variant="contained">Submit</Button>
         </Box>
       </form>
-
+      {showAgreement && (
+        <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
+          <DialogContent>
+            <Agreement />
+          </DialogContent>
+        </Dialog>
+      )}
     </>
   )
 }
