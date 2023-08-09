@@ -1,3 +1,4 @@
+//TODO: use Select not dropdown on choosing an equipment
 import React from 'react'
 import {
   TextField, Box, Grid, FormControl, Select, MenuItem, InputLabel, TextareaAutosize,
