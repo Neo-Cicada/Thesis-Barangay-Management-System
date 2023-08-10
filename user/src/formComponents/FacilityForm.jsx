@@ -16,6 +16,15 @@ const FacilityForm = () => {
     const [time, setTime] = useState('');
     const [messege, setMessege] = useState('');
 
+    const [showInformation, setShowInformation] = useState(false)
+    const handleShowInformation = (e) =>{
+        e.preventDefault()
+        setShowInformation(!showInformation)
+    }
+    const handleCloseInformation = (e) =>{
+        e.preventDefault()
+        setShowInformation(false)
+    }
     const [showAgreement, setShowAgreement] = useState(false)
     const handleAgreement  = (e) =>{
         e.preventDefault();
@@ -130,6 +139,13 @@ const FacilityForm = () => {
                         aria-label="fixed size textarea"
                     />
                 </Box>
+                <Box sx={{display: 'flex', alignItems: 'center',
+                 justifyContent: 'center', marginTop: '0.3em',
+                 fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+                 cursor: 'pointer'
+                 }} >
+              <span onClick={handleShowInformation}>Review summary of informaton provided</span>
+        </Box>
                 <Box sx={{ ...style }}>
 
                     <FormControlLabel
@@ -147,6 +163,15 @@ const FacilityForm = () => {
                     <Button type='submit' variant="contained">Submit</Button>
                 </Box>
             </form>
+            {showInformation && (
+        <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
+          <DialogContent>
+            <h1>Hello world</h1>
+          </DialogContent>
+        </Dialog>
+      )
+
+      }
             {showAgreement && (
         <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
           <DialogContent>

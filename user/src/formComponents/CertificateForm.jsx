@@ -7,6 +7,7 @@ import { useState } from 'react'
 import useUpload from '../hooks/useUpload';
 import useRead from '../hooks/useRead'
 import Agreement from '../components/dialogs/Agreement';
+import ShowInformation from '../components/dialogs/ShowInformation';
 //TODO: Add a confirmation dialog to each forms
 export default function CertificateForm() {
 
@@ -18,15 +19,23 @@ export default function CertificateForm() {
   const [messege, setMessege] = useState('')
 
   const [showAgreement, setShowAgreement] = useState(false)
+  const [showInformation, setShowInformation] = useState(false)
   const handleAgreement = (e) => {
     e.preventDefault();
     setShowAgreement(!showAgreement)
+  }
+  const handleShowInformation = (e) =>{
+    e.preventDefault();
+    setShowInformation(!showInformation)
   }
   const handleCloseAgreement = (e) => {
     e.preventDefault();
     setShowAgreement(false)
   }
-
+  const handleCloseInformation = (e) =>{
+    e.preventDefault();
+    setShowInformation(false)
+  }
   const [data, setData] = useState([])
   useRead('Certificates', setData)
 
@@ -133,8 +142,14 @@ export default function CertificateForm() {
             onChange={(e) => setMessege(e.target.value)}
           />
         </Box>
+        <Box sx={{display: 'flex', alignItems: 'center',
+                 justifyContent: 'center', marginTop: '1em',
+                 fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+                 cursor: 'pointer'
+                 }} >
+              <span onClick={handleShowInformation}>Review summary of informaton provided</span>
+        </Box>
         <Box sx={style}>
-
           <FormControlLabel
             required
             control={<Checkbox />}
@@ -149,6 +164,18 @@ export default function CertificateForm() {
           <Button type='submit' variant="contained">Submit</Button>
         </Box>
       </form>
+      {showInformation && (
+        <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
+          <DialogContent>
+            <ShowInformation
+              firstname={firstName} lastname={lastname}
+             phone={phoneNumber} certificates={certificate} email={email} message={messege}/>
+          </DialogContent>
+        </Dialog>
+      )
+
+      }
+
       {showAgreement && (
         <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
           <DialogContent>
