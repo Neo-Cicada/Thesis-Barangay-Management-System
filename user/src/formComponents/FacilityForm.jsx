@@ -6,6 +6,7 @@ import {
 import { useState } from 'react'
 import useUpload from '../hooks/useUpload'
 import Agreement from '../components/dialogs/Agreement'
+import ShowInformation from '../components/dialogs/ShowInformation'
 const FacilityForm = () => {
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
@@ -17,20 +18,20 @@ const FacilityForm = () => {
     const [messege, setMessege] = useState('');
 
     const [showInformation, setShowInformation] = useState(false)
-    const handleShowInformation = (e) =>{
+    const handleShowInformation = (e) => {
         e.preventDefault()
         setShowInformation(!showInformation)
     }
-    const handleCloseInformation = (e) =>{
+    const handleCloseInformation = (e) => {
         e.preventDefault()
         setShowInformation(false)
     }
     const [showAgreement, setShowAgreement] = useState(false)
-    const handleAgreement  = (e) =>{
+    const handleAgreement = (e) => {
         e.preventDefault();
         setShowAgreement(!showAgreement)
     }
-    const handleCloseAgreement = (e) =>{
+    const handleCloseAgreement = (e) => {
         e.preventDefault();
         setShowAgreement(false)
     }
@@ -139,13 +140,14 @@ const FacilityForm = () => {
                         aria-label="fixed size textarea"
                     />
                 </Box>
-                <Box sx={{display: 'flex', alignItems: 'center',
-                 justifyContent: 'center', marginTop: '0.3em',
-                 fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
-                 cursor: 'pointer'
-                 }} >
-              <span onClick={handleShowInformation}>Review summary of informaton provided</span>
-        </Box>
+                <Box sx={{
+                    display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', marginTop: '0.3em',
+                    fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+                    cursor: 'pointer'
+                }} >
+                    <span onClick={handleShowInformation}>Review summary of informaton provided</span>
+                </Box>
                 <Box sx={{ ...style }}>
 
                     <FormControlLabel
@@ -164,21 +166,29 @@ const FacilityForm = () => {
                 </Box>
             </form>
             {showInformation && (
-        <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
-          <DialogContent>
-            <h1>Hello world</h1>
-          </DialogContent>
-        </Dialog>
-      )
+                <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
+                    <DialogContent>
+                        <ShowInformation
+                          firstname={firstname}
+                          lastname = {lastname}
+                          phone = {phoneNumber}
+                          email = {email}
+                          message = {messege}
+                          facility = {facility}
+                          medicine
+                          equipment/>
+                    </DialogContent>
+                </Dialog>
+            )
 
-      }
+            }
             {showAgreement && (
-        <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
-          <DialogContent>
-            <Agreement />
-          </DialogContent>
-        </Dialog>
-      )}
+                <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
+                    <DialogContent>
+                        <Agreement />
+                    </DialogContent>
+                </Dialog>
+            )}
         </>
     )
 }

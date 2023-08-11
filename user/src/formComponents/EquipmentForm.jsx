@@ -11,6 +11,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import useUpload from '../hooks/useUpload';
 import useRead from '../hooks/useRead';
 import Agreement from '../components/dialogs/Agreement';
+import ShowInformation from '../components/dialogs/ShowInformation';
 export default function EquipmentForm() {
 
   const [firstname, setFirstName] = useState('');
@@ -22,8 +23,18 @@ export default function EquipmentForm() {
   const [type, setType] = useState('');
   const [messege, setMessege] = useState('');
 
+  const [showInformation, setShowInformation] = useState(false);
+
+  const handleShowInformation = (e) =>{
+    e.preventDefault()
+    setShowInformation(!showInformation)
+  }
+  const handleCloseInformation = (e) =>{
+    e.preventDefault()
+    setShowInformation(false)
+  }
   const [showAgreement, setShowAgreement] = useState(false)
-    const handleAgreement  = (e) =>{
+  const handleAgreement  = (e) =>{
         e.preventDefault();
         setShowAgreement(!showAgreement)
     }
@@ -137,6 +148,14 @@ export default function EquipmentForm() {
             aria-label="fixed size textarea"
           />
         </Box>
+        <Box sx={{
+                    display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', marginTop: '0.3em',
+                    fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+                    cursor: 'pointer'
+                }} >
+                    <span onClick={handleShowInformation}>Review summary of informaton provided</span>
+                </Box>
         <Box sx={style}>
 
           <FormControlLabel
@@ -154,6 +173,21 @@ export default function EquipmentForm() {
           <Button type='submit' variant="contained">Submit</Button>
         </Box>
       </form>
+      {showInformation && (
+                <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
+                    <DialogContent>
+                    <ShowInformation
+                          firstname={firstname}
+                          lastname = {lastname}
+                          phone = {phoneNumber}
+                          email = {email}
+                          message = {messege}
+                          equipment = {type}/>
+                    </DialogContent>
+                </Dialog>
+            )
+
+            }
       {showAgreement && (
         <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
           <DialogContent>

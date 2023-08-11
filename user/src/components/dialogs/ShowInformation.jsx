@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box } from '@mui/material'
-export default function ShowInformation({ firstname, lastname, phone, email, certificates, message }) {
+export default function ShowInformation({ firstname, lastname, phone,
+     email, certificates, message, facility, medicine, equipment  }) {
     return (
         <>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignContent: 'center' }}>
@@ -20,9 +21,16 @@ export default function ShowInformation({ firstname, lastname, phone, email, cer
                 <Box sx={{ display: 'flex', gap: '1em' }}>
                     <Box>Email:</Box> <Box>{email}</Box>
                 </Box>
+
+
                 <Box sx={{ display: 'flex', gap: '1em' }}>
-                    <Box>Certificates:</Box> <Box>{certificates}</Box>
+                   {certificates && <Box> Certificates: <b> {certificates} </b></Box> }
+                   {facility && <Box>Facility:  {facility}</Box>}
+                   {equipment && <Box>Equipment:  {equipment}</Box>}
+                   {medicine && <Box>Medicine:  {medicine}</Box>}
                 </Box>
+
+
                 <Box sx={{ display: 'flex', gap: '1em' }}>
                     <Box>Message: </Box> <Box>{message}</Box>
                 </Box>

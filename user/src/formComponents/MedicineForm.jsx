@@ -7,6 +7,7 @@ import { useState } from 'react'
 import useUpload from '../hooks/useUpload'
 import useRead from '../hooks/useRead'
 import Agreement from '../components/dialogs/Agreement'
+import ShowInformation from '../components/dialogs/ShowInformation'
 export default function MedicineForm() {
   const [firstName, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
@@ -17,15 +18,25 @@ export default function MedicineForm() {
 
   const [data, setData] = useState([])
 
+  const [showInformation, setShowInformation] = useState(false);
+
+  const handleShowInformation = (e) => {
+    e.preventDefault()
+    setShowInformation(!showInformation)
+  }
+  const handleCloseInformation = (e) => {
+    e.preventDefault()
+    setShowInformation(false)
+  }
   const [showAgreement, setShowAgreement] = useState(false)
-    const handleAgreement  = (e) =>{
-        e.preventDefault();
-        setShowAgreement(!showAgreement)
-    }
-    const handleCloseAgreement = (e) =>{
-        e.preventDefault();
-        setShowAgreement(false)
-    }
+  const handleAgreement = (e) => {
+    e.preventDefault();
+    setShowAgreement(!showAgreement)
+  }
+  const handleCloseAgreement = (e) => {
+    e.preventDefault();
+    setShowAgreement(false)
+  }
   useRead('Medicines', setData);
   const items = data.map((item) => {
     return (
@@ -109,6 +120,14 @@ export default function MedicineForm() {
             aria-label="fixed size textarea"
           />
         </Box>
+        <Box sx={{
+          display: 'flex', alignItems: 'center',
+          justifyContent: 'center', marginTop: '0.3em',
+          fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+          cursor: 'pointer'
+        }} >
+          <span onClick={handleShowInformation}>Review summary of informaton provided</span>
+        </Box>
         <Box sx={style}>
 
           <FormControlLabel
@@ -116,7 +135,7 @@ export default function MedicineForm() {
             control={<Checkbox />}
             label={
               <span onClick={handleAgreement}>
-              Agree to the <u>terms and conditions</u>
+                Agree to the <u>terms and conditions</u>
               </span>
             }
           />
@@ -126,6 +145,22 @@ export default function MedicineForm() {
           <Button type='submit' variant="contained">Submit</Button>
         </Box>
       </form>
+      {showInformation && (
+        <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
+          <DialogContent>
+          <ShowInformation
+                          firstname={firstName}
+                          lastname = {lastname}
+                          phone = {phoneNumber}
+                          email = {email}
+                          message = {messege}
+                          medicine = {medicine}
+                          />
+          </DialogContent>
+        </Dialog>
+      )
+
+      }
       {showAgreement &&
         <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
           <DialogContent>
