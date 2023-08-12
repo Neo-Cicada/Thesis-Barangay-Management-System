@@ -1,61 +1,80 @@
 import React from 'react'
-import { Box, TextField, Typography, Button } from '@mui/material'
+import { Box, TextField, Typography, Button, Container } from '@mui/material'
 export default function EnrollmentForm() {
-  const style = {
-    display: 'flex',
-    justifyContent: 'center',
-    height: '13%',
-    alignItems: 'center',
-    maxWidth: '36em'
-  }
+
   return (
     <>
-      <form>
-        <Typography sx={{ ...style }}>Enrollment</Typography>
-        <Box sx={{ ...style, gap: '4em' }}>
-          <TextField
-            label="Firstname"
-            sx={{width: '50%'}}
-          />
-          <TextField
-           sx={{width: '50%'}}
-            label="Lastname"
-          />
-        </Box>
-        <Box sx={{ ...style, gap: '4em' }}>
-          <TextField
-            label="Age"
-            sx={{width: '50%'}}
-          />
-          <TextField
-            type='file'
-            sx={{width: '50%'}}
-
-          />
-        </Box>
-        <Box sx={{ ...style, gap: '4em' }}>
-          <TextField
-            type='file'
-            sx={{width: '50%'}}
-          />
-          <TextField
-            type='file'
-            sx={{width: '50%'}}
-          />
-        </Box>
-        <Box sx={{ ...style, gap: '4em' }}>
-          <Typography>Guardian Information</Typography>
-        </Box>
-        <Box sx={{ ...style, gap: '4em' }}>
-          <TextField label="Firstname"
-           sx={{width: '50%'}} />
-          <TextField label="Lastname"
-           sx={{width: '50%'}} />
-        </Box>
-        <Box sx={{ ...style, gap: '4em' }}>
-          <Button>Next</Button>
-        </Box>
-      </form>
+      <Container sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        maxHeight: '35em',
+        height: '100%',
+        overflow: 'auto', // Adding scrollable overflow
+        paddingTop: '1em',
+        gap: '1em',
+        border: '1px solid red'
+      }}>
+        <form style={{
+          display: 'flex',
+          flexDirection: 'column',
+          flex: 'none'
+        }}>
+          <Box>Child Information</Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>Parents and Guardian Information</Box>
+          <Box>Father Information</Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>Mother Information</Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>Guardian Information</Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+          <Box>
+            <TextField />
+            <TextField />
+          </Box>
+        </form>
+      </Container>
     </>
   )
 }
