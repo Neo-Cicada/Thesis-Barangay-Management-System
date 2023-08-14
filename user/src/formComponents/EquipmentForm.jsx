@@ -16,8 +16,8 @@ export default function EquipmentForm() {
 
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [type, setType] = useState('');
@@ -25,23 +25,23 @@ export default function EquipmentForm() {
 
   const [showInformation, setShowInformation] = useState(false);
 
-  const handleShowInformation = (e) =>{
+  const handleShowInformation = (e) => {
     e.preventDefault()
     setShowInformation(!showInformation)
   }
-  const handleCloseInformation = (e) =>{
+  const handleCloseInformation = (e) => {
     e.preventDefault()
     setShowInformation(false)
   }
   const [showAgreement, setShowAgreement] = useState(false)
-  const handleAgreement  = (e) =>{
-        e.preventDefault();
-        setShowAgreement(!showAgreement)
-    }
-    const handleCloseAgreement = (e) =>{
-        e.preventDefault();
-        setShowAgreement(false)
-    }
+  const handleAgreement = (e) => {
+    e.preventDefault();
+    setShowAgreement(!showAgreement)
+  }
+  const handleCloseAgreement = (e) => {
+    e.preventDefault();
+    setShowAgreement(false)
+  }
 
   const [data, setData] = useState([])
   useRead('Equipments', setData);
@@ -89,18 +89,30 @@ export default function EquipmentForm() {
     setType('')
     setMessege('')
   }
+  const validateStartDate = () => {
+    return startDate !== null; // Implement your validation logic here
+  };
+  const validateEndDate = () => {
+    return endDate !== null;
+  }
   return (
     <>
       <form onSubmit={handleSubmit}>
         <Box sx={{ ...style, gap: '4em' }}>
-          <TextField
-            value={firstname}
-            onChange={(e) => setFirstName(e.target.value)}
-            label="Firstname" />
-          <TextField
-            value={lastname}
-            onChange={(e) => setLastName(e.target.value)}
-            label="Lastname" />
+           <TextField
+        value={firstname}
+        onChange={(e) => setFirstName(e.target.value)}
+        label="First Name"
+        error={firstname === ''}
+        helperText={firstname === '' ? 'First name is required' : ''}
+      />
+      <TextField
+        value={lastname}
+        onChange={(e) => setLastName(e.target.value)}
+        label="Last Name"
+        error={lastname === ''}
+        helperText={lastname === '' ? 'Last name is required' : ''}
+      />
 
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
@@ -114,32 +126,56 @@ export default function EquipmentForm() {
             label="Email address" />
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
-          <FormControl fullWidth>
-            <InputLabel >Select Available Equipment</InputLabel>
-            <Select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              label="Select Available Equipment">
-              {items}
-            </Select>
-          </FormControl>
+          <Box sx={{ width: '30em' }}>
+            <FormControl fullWidth>
+              <InputLabel >Select Available Equipment</InputLabel>
+              <Select
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+                label="Select Available Equipment">
+                {items}
+              </Select>
+            </FormControl>
+          </Box>
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker label="Start Date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </LocalizationProvider>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              label="End Date"
-            />
-          </LocalizationProvider>
+          <Box sx={{ width: '13em', }}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Start Date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                error={!validateStartDate()}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    error={!validateStartDate()}
+                    helperText={!validateStartDate() ? 'Please select a start date' : ''}
+                  />
+                )}
+              />
+            </LocalizationProvider>
+          </Box>
+          <Box sx={{ width: '13em', }}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                label="End Date"
+                error={!validateEndDate()}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    error={!validateEndDate()}
+                    helperText={!validateEndDate() ? 'Please select an end date' : ''}
+                  />
+                )}
+              />
+            </LocalizationProvider>
+          </Box>
         </Box>
         <Box sx={style}>
+
           <TextareaAutosize
             value={messege}
             onChange={(e) => setMessege(e.target.value)}
@@ -149,13 +185,13 @@ export default function EquipmentForm() {
           />
         </Box>
         <Box sx={{
-                    display: 'flex', alignItems: 'center',
-                    justifyContent: 'center', marginTop: '0.3em',
-                    fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
-                    cursor: 'pointer'
-                }} >
-                    <span onClick={handleShowInformation}>Review summary of informaton provided</span>
-                </Box>
+          display: 'flex', alignItems: 'center',
+          justifyContent: 'center', marginTop: '0.3em',
+          fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+          cursor: 'pointer'
+        }} >
+          <span onClick={handleShowInformation}>Review summary of informaton provided</span>
+        </Box>
         <Box sx={style}>
 
           <FormControlLabel
@@ -174,20 +210,20 @@ export default function EquipmentForm() {
         </Box>
       </form>
       {showInformation && (
-                <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
-                    <DialogContent>
-                    <ShowInformation
-                          firstname={firstname}
-                          lastname = {lastname}
-                          phone = {phoneNumber}
-                          email = {email}
-                          message = {messege}
-                          equipment = {type}/>
-                    </DialogContent>
-                </Dialog>
-            )
+        <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
+          <DialogContent>
+            <ShowInformation
+              firstname={firstname}
+              lastname={lastname}
+              phone={phoneNumber}
+              email={email}
+              message={messege}
+              equipment={type} />
+          </DialogContent>
+        </Dialog>
+      )
 
-            }
+      }
       {showAgreement && (
         <Dialog open={showAgreement} onClose={handleCloseAgreement} maxWidth="md" fullWidth>
           <DialogContent>
