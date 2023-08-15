@@ -9,6 +9,7 @@ import EnrollmentForm from '../formComponents/EnrollmentForm'
 import FacilityForm from '../formComponents/FacilityForm'
 import MedicineForm from '../formComponents/MedicineForm'
 import EquipmentForm from '../formComponents/EquipmentForm'
+import FileUpload from './FileUpload'
 export default function AppRouter() {
   return (
     <Routes>
@@ -21,7 +22,7 @@ export default function AppRouter() {
           <Route path="equipment-request-form" element={<EquipmentForm/>}/>
           <Route index element={<Navigate to='certificate-request-form'/>}/>
         </Route>
-        <Route path='report' element={<Report/>}/>
+        <Route path='report' element={<FileUpload/>}/>
     </Routes>
   )
 }
