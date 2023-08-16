@@ -72,13 +72,22 @@ const FacilityForm = () => {
                     <TextField
                         label="Firstname"
                         value={firstname}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        onChange={(e) => {
+                            const inputValue = e.target.value;
+                            if (/^[A-Za-z]*$/.test(inputValue) || inputValue === '') {
+                              setLastName(inputValue);
+                            }
+                          }}
                     />
                     <TextField
                         label="Lastname"
                         value={lastname}
-                        onChange={(e) => setLastName(e.target.value)}
-
+                        onChange={(e) => {
+                            const inputValue = e.target.value;
+                            if (/^[A-Za-z]*$/.test(inputValue) || inputValue === '') {
+                              setLastName(inputValue);
+                            }
+                          }}
                     />
 
                 </Box>
@@ -86,7 +95,10 @@ const FacilityForm = () => {
                     <TextField
                         value={email}
                         label="Email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => {
+                            
+                        }
+                        }
                     />
 
                     <TextField
