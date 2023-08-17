@@ -13,6 +13,7 @@ const FacilityForm = () => {
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [facility, setFacility] = useState('');
+    const [isValidEmail, setIsValidEmail] = useState(true);
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [messege, setMessege] = useState('');
@@ -74,10 +75,10 @@ const FacilityForm = () => {
                         value={firstname}
                         onChange={(e) => {
                             const inputValue = e.target.value;
-                            if (/^[A-Za-z]*$/.test(inputValue) || inputValue === '') {
-                              setLastName(inputValue);
+                            if (/^[a-zA-Z ]*$/.test(inputValue) || inputValue === '') {
+                                setFirstName(inputValue);
                             }
-                          }}
+                        }}
                     />
                     <TextField
                         label="Lastname"
@@ -85,27 +86,45 @@ const FacilityForm = () => {
                         onChange={(e) => {
                             const inputValue = e.target.value;
                             if (/^[A-Za-z]*$/.test(inputValue) || inputValue === '') {
-                              setLastName(inputValue);
+                                setLastName(inputValue);
                             }
-                          }}
+                        }}
                     />
 
                 </Box>
                 <Box sx={{ ...style, gap: '4em' }}>
-                    <TextField
-                        value={email}
-                        label="Email"
-                        onChange={(e) => {
-                            
-                        }
-                        }
-                    />
+                    <Box>
+
+                        <TextField
+                            variant="outlined"
+                            label="Email address"
+                            value={email}
+                            onChange={(e) => {
+                                const enteredEmail = e.target.value;
+                                setEmail(enteredEmail);
+                                const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+                                setIsValidEmail(emailRegex.test(enteredEmail));
+                            }}
+                            required
+                            fullWidth
+                        />
+                        {!isValidEmail && <p style={{ color: 'red', }}><small>Please enter a valid email address</small></p>}
+
+
+                    </Box>
 
                     <TextField
                         value={phoneNumber}
                         label="Phone number"
-                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="09..."
+                        onChange={(e) => {
+                            const inputValue = e.target.value;
+                            if (/^0\d{0,10}$/.test(inputValue)) {
+                                setPhoneNumber(inputValue);
+                            }
+                        }}
                     />
+
 
                 </Box>
                 <Box sx={{ ...style }}>
@@ -181,14 +200,14 @@ const FacilityForm = () => {
                 <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
                     <DialogContent>
                         <ShowInformation
-                          firstname={firstname}
-                          lastname = {lastname}
-                          phone = {phoneNumber}
-                          email = {email}
-                          message = {messege}
-                          facility = {facility}
-                          medicine
-                          equipment/>
+                            firstname={firstname}
+                            lastname={lastname}
+                            phone={phoneNumber}
+                            email={email}
+                            message={messege}
+                            facility={facility}
+                            medicine
+                            equipment />
                     </DialogContent>
                 </Dialog>
             )

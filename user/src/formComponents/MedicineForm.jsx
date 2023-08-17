@@ -15,6 +15,7 @@ export default function MedicineForm() {
   const [email, setEmail] = useState('');
   const [medicine, setMedicine] = useState('');
   const [messege, setMessege] = useState('')
+  const [isValidEmail, setIsValidEmail] = useState(true);
 
   const [data, setData] = useState([])
 
@@ -76,12 +77,22 @@ export default function MedicineForm() {
           <TextField
             value={firstName}
             label="Firstname"
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) => {
+              const inputValue = e.target.value;
+              if (/^[a-zA-Z ]*$/.test(inputValue) || inputValue === '') {
+                setFirstName(inputValue);
+              }
+            }}
           />
           <TextField
             value={lastname}
             label="Lastname"
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => {
+              const inputValue = e.target.value;
+              if (/^[a-zA-Z ]*$/.test(inputValue) || inputValue === '') {
+                setLastName(inputValue);
+              }
+            }}
           />
 
         </Box>
@@ -89,15 +100,33 @@ export default function MedicineForm() {
           <TextField
             value={phoneNumber}
             label="Phone Number"
-            onChange={(e) => setPhoneNumber(e.target.value)}
-
+            placeholder="09..."
+            onChange={(e) => {
+              const inputValue = e.target.value;
+              if (/^0\d{0,10}$/.test(inputValue)) {
+                setPhoneNumber(inputValue);
+              }
+            }}
           />
-          <TextField
-            value={email}
-            label="Email address"
-            onChange={(e) => setEmail(e.target.value)}
+          <Box>
 
-          />
+            <TextField
+              variant="outlined"
+              label="Email address"
+              value={email}
+              onChange={(e) => {
+                const enteredEmail = e.target.value;
+                setEmail(enteredEmail);
+                const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+                setIsValidEmail(emailRegex.test(enteredEmail));
+              }}
+              required
+              fullWidth
+            />
+            {!isValidEmail && <p style={{ color: 'red', }}><small>Please enter a valid email address</small></p>}
+
+
+          </Box>
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
           <FormControl fullWidth>
@@ -148,14 +177,14 @@ export default function MedicineForm() {
       {showInformation && (
         <Dialog open={showInformation} onClose={handleCloseInformation} maxWidth="md" fillWidth>
           <DialogContent>
-          <ShowInformation
-                          firstname={firstName}
-                          lastname = {lastname}
-                          phone = {phoneNumber}
-                          email = {email}
-                          message = {messege}
-                          medicine = {medicine}
-                          />
+            <ShowInformation
+              firstname={firstName}
+              lastname={lastname}
+              phone={phoneNumber}
+              email={email}
+              message={messege}
+              medicine={medicine}
+            />
           </DialogContent>
         </Dialog>
       )
