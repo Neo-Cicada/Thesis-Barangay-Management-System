@@ -13,6 +13,7 @@ import useRead from '../hooks/useRead';
 import Agreement from '../components/dialogs/Agreement';
 import ShowInformation from '../components/dialogs/ShowInformation';
 export default function EquipmentForm() {
+  const [isValidEmail, setIsValidEmail] = useState(true);
 
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
@@ -99,31 +100,59 @@ export default function EquipmentForm() {
     <>
       <form onSubmit={handleSubmit}>
         <Box sx={{ ...style, gap: '4em' }}>
-           <TextField
-        value={firstname}
-        onChange={(e) => setFirstName(e.target.value)}
-        label="First Name"
-        error={firstname === ''}
-        helperText={firstname === '' ? 'First name is required' : ''}
-      />
-      <TextField
-        value={lastname}
-        onChange={(e) => setLastName(e.target.value)}
-        label="Last Name"
-        error={lastname === ''}
-        helperText={lastname === '' ? 'Last name is required' : ''}
-      />
+          <TextField
+            value={firstname}
+            onChange={(e) => {
+              const inputValue = e.target.value;
+              if (/^[a-zA-Z ]*$/.test(inputValue) || inputValue === '') {
+                setFirstName(inputValue);
+              }
+            }}
+            label="First Name"
+          />
+          <TextField
+            value={lastname}
+            onChange={(e) => {
+              const inputValue = e.target.value;
+              if (/^[a-zA-Z ]*$/.test(inputValue) || inputValue === '') {
+                setLastName(inputValue);
+              }
+            }}
+            label="Last Name"
+
+          />
 
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
           <TextField
             value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="09..."
+            onChange={(e) => {
+              const inputValue = e.target.value;
+              if (/^0\d{0,10}$/.test(inputValue)) {
+                setPhoneNumber(inputValue);
+              }
+            }}
             label="Phone Number" />
-          <TextField
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            label="Email address" />
+          <Box>
+
+            <TextField
+              variant="outlined"
+              label="Email address"
+              value={email}
+              onChange={(e) => {
+                const enteredEmail = e.target.value;
+                setEmail(enteredEmail);
+                const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+                setIsValidEmail(emailRegex.test(enteredEmail));
+              }}
+              required
+              fullWidth
+            />
+            {!isValidEmail && <p style={{ color: 'red', }}><small>Please enter a valid email address</small></p>}
+
+
+          </Box>
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
           <Box sx={{ width: '30em' }}>
