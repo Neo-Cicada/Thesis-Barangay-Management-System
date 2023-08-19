@@ -6,7 +6,7 @@ import { storage } from '../../firebase'
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
 export default function Home() {
   const [imageList, setImageList] = useState([]);
-  const imageListRef = ref(storage, "images/");
+  const imageListRef = ref(storage, "announcement/");
 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -19,7 +19,17 @@ export default function Home() {
     });
 }, []);
 
-  const imageMap = imageList.map((item)=><PostBox/>);
+const imageMap = imageList.map((item) => {
+  // Extract the filename from the URL and replace %2F with /
+  const parts = item.split('/');
+  const filenameWithEncodedSlash = parts[parts.length - 1];
+  const filename = filenameWithEncodedSlash.replace(/%2F/g, '/');
+
+  // Remove query string and parameters
+  const filenameWithoutQueryString = filename.split('?')[0];
+
+  return <PostBox image={item} filename={filenameWithoutQueryString} />;
+});
   return (
     <>
       <Container className="custom-scrollbar" style={{
