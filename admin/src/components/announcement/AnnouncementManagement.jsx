@@ -50,7 +50,7 @@ export default function AnnouncementManagement() {
         },
       };
       await updateMetadata(imageRef, newMetadata);
-
+      
       console.log("Upload successful");
     } catch (error) {
       console.error("Error uploading image:", error);
