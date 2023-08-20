@@ -29,8 +29,8 @@ const PostBox = ({ image, filename }) => {
     return (
         <>
             <div className='postBoxContainer'>
-                <div className='captionPostBox'>
-                    <h1>{title}</h1>
+                <div className='captionPostBox' style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}>
+                    <p>{title}</p>
                 </div>
                 <div className='imagePostBox'>
                     <img src={image} width="100%" height="100%" onLoad={handleImageClick} />

@@ -1,6 +1,7 @@
 import './App.css'
 import NavBar from './components/NavBar'
 import AppRouter from './components/AppRouter'
+import textLogo from '../src/assets/ebarangay.png'
 function App() {
 
 
@@ -8,7 +9,7 @@ function App() {
     <>
       <header>
         <div className='header-container'>
-          <a href=""><h1>e-Barangay</h1></a>
+          <a href=""><img src={textLogo} style={{height: '18em'}} /></a>
           <NavBar/>
         </div>
       </header>
