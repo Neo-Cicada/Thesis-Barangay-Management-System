@@ -33,7 +33,7 @@ const PostBox = ({ image, filename }) => {
                     <p>{title}</p>
                 </div>
                 <div className='imagePostBox'>
-                    <img src={image} width="100%" height="100%" onLoad={handleImageClick} />
+                    <img src={image} width="100%" height="100%" onDurationChange={handleImageClick} />
                 </div>
             </div>
         </>

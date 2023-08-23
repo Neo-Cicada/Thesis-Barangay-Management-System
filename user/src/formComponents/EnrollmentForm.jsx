@@ -1,11 +1,38 @@
 import React from 'react'
 import { Box, TextField, Typography, Button, Container } from '@mui/material'
 import { getStorage, ref } from "firebase/storage";
-
+import { useState } from 'react';
 
 
 export default function EnrollmentForm() {
+  const [childInfo, setChildInfo] = useState({
+    childFirstName: "",
+    childLastName: "",
+    childMiddleName: "",
+    childBirthDate: ""
+  })
+  const [fatherInfo, setFatherInfo] = useState({
+    fatherFirstName: "",
+    fatherLastName: "",
+    fatherOccupation: "",
+    fatherPhoneNumber: "",
+    fatherEmail: ""
+  })
+  const [motherInfo, setMotherInfo] = useState({
+     motherFirstName: "",
+     motherLastName: "",
+     motherOccupation: "",
+     motherPhoneNumber: "",
+     motherEmail: ""
+  })
+  const [guardinInfo, setGuardianInfo] = useState({
+    guardianFirstName: "",
+    guardianLastName: "",
+    guardianPhoneNumber: "",
+    guardianEmail: ""
 
+  })
+  console.log(childInfo)
   return (
     <>
       <Container
@@ -37,25 +64,41 @@ export default function EnrollmentForm() {
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Lastname" fullWidth />
+              <TextField
+               label="Lastname"
+               fullWidth
+               onChange={(e)=>setChildInfo({...childInfo, childLastName: e.target.value})}
+               />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Firstname" fullWidth /></Box>
+              <TextField
+                label="Firstname"
+                fullWidth
+                onChange={(e)=>setChildInfo({...childInfo, childFirstName: e.target.value})}
+                />
+            </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Middlename" fullWidth />
+              <TextField
+                label="Middlename"
+                fullWidth
+                onChange={(e)=>setChildInfo({...childInfo, childMiddleName: e.target.value})}
+                />
             </Box>
+
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 type="date"
                 label="Date of Birth"
+                onChange={(e)=>setChildInfo({...childInfo, childBirthDate: e.target.value})}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 fullWidth
               />
             </Box>
+
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
@@ -92,20 +135,44 @@ export default function EnrollmentForm() {
           <Typography variant="subtitle1">Father Information</Typography>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Father's Lastname" fullWidth /></Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Father's Firstname" fullWidth /></Box>
-          </Box>
-          <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Occupation" fullWidth />
+              <TextField
+                label="Father's Lastname"
+                fullWidth
+                onChange={(e)=>setFatherInfo({...fatherInfo, fatherLastName: e.target.value})}
+              />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Phone number" fullWidth /></Box>
+              <TextField
+                label="Father's Firstname"
+                fullWidth
+                onChange={(e)=>setFatherInfo({...fatherInfo, fatherFirstName: e.target.value})}
+                />
+            </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Email" fullWidth /></Box>
+              <TextField
+                label="Occupation"
+                fullWidth
+                onChange={(e)=>setFatherInfo({...fatherInfo, fatherOccupation: e.target.value})}
+              />
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
+              <TextField
+                label="Phone number"
+                fullWidth
+                onChange={(e)=>setFatherInfo({...fatherInfo, fatherPhoneNumber: e.target.value})}
+                /></Box>
+          </Box>
+          <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
+              <TextField
+                label="Email"
+                fullWidth
+                onChange={(e)=>setFatherInfo({...fatherInfo, fatherEmail: e.target.value})}
+              />
+            </Box>
+
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField label="Marriage Certificate" fullWidth /></Box>
           </Box>
