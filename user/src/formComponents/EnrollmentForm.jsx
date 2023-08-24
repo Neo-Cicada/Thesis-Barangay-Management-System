@@ -32,7 +32,7 @@ export default function EnrollmentForm() {
     guardianEmail: ""
 
   })
-  console.log(childInfo)
+  console.log(childInfo, fatherInfo, motherInfo, guardinInfo)
   return (
     <>
       <Container
@@ -181,38 +181,83 @@ export default function EnrollmentForm() {
           <Typography variant="subtitle1">Mother Information</Typography>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Mother's Lastname" fullWidth /></Box>
+              <TextField
+                label="Mother's Lastname"
+                fullWidth
+                onChange={(e)=>setMotherInfo({...motherInfo, motherLastName: e.target.value})}
+                /></Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Mother's Firstname" fullWidth /></Box>
+              <TextField
+                label="Mother's Firstname"
+                fullWidth
+                onChange={(e)=>setMotherInfo({...motherInfo, motherFirstName})}
+                /></Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Occupation" fullWidth />
+              <TextField
+                label="Occupation"
+                fullWidth
+                onChange={setMotherInfo({...motherInfo, motherOccupation: e.target.value})}
+                />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Phone number" fullWidth />
+              <TextField
+                label="Phone number"
+                fullWidth
+                onChange={(e)=>setMotherInfo({...motherInfo, motherPhoneNumber: e.target.value})}
+              />
             </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Email" fullWidth /></Box>
+              <TextField
+                label="Email"
+                fullWidth
+                onChange={(e)=>setMotherInfo({...motherInfo, motherEmail: e.target.value})}
+                />
+            </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Marriage Certificate" fullWidth /></Box>
+              <TextField
+                label="Marriage Certificate"
+                fullWidth
+                /></Box>
           </Box>
 
           {/* Guardian Information */}
           <Typography variant="subtitle1">Guardian Information</Typography>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Guardian's Lastname" fullWidth /></Box>
+              <TextField
+                label="Guardian's Lastname"
+                fullWidth
+                onChange={(e)=>setGuardianInfo({...guardinInfo, guardianLastName: e.target.value})}
+                />
+            </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Guardian's Firstname" fullWidth /></Box>
+              <TextField
+                label="Guardian's Firstname"
+                fullWidth
+                onChange={(e)=>setGuardianInfo({...guardinInfo, guardianLastName: e.target.value})}
+                />
+            </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Phone number" fullWidth /></Box>
+              <TextField
+                label="Phone number"
+                fullWidth
+                onChange={(e)=>setGuardianInfo({...guardinInfo, guardianPhoneNumber: e.target.value})}
+
+                />
+            </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Email" fullWidth /></Box>
+              <TextField
+                label="Email"
+                fullWidth
+                onChange={(e)=>setGuardianInfo({...guardinInfo, guardianEmail: e.target.value})}
+                />
+            </Box>
           </Box>
 
           <Button type="submit" variant="contained" color="primary">
