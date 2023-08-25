@@ -1,38 +1,48 @@
 import React from 'react'
 import { Box, TextField, Typography, Button, Container } from '@mui/material'
 import { getStorage, ref } from "firebase/storage";
+import useUpload from '../hooks/useUpload';
 import { useState } from 'react';
 
 
 export default function EnrollmentForm() {
-  const [childInfo, setChildInfo] = useState({
-    childFirstName: "",
-    childLastName: "",
-    childMiddleName: "",
-    childBirthDate: ""
-  })
-  const [fatherInfo, setFatherInfo] = useState({
-    fatherFirstName: "",
-    fatherLastName: "",
-    fatherOccupation: "",
-    fatherPhoneNumber: "",
-    fatherEmail: ""
-  })
-  const [motherInfo, setMotherInfo] = useState({
-     motherFirstName: "",
-     motherLastName: "",
-     motherOccupation: "",
-     motherPhoneNumber: "",
-     motherEmail: ""
-  })
-  const [guardinInfo, setGuardianInfo] = useState({
-    guardianFirstName: "",
-    guardianLastName: "",
-    guardianPhoneNumber: "",
-    guardianEmail: ""
 
-  })
-  console.log(childInfo, fatherInfo, motherInfo, guardinInfo)
+  const [formData, setFormData] = useState({
+    childInfo: {
+      childFirstName: "",
+      childLastName: "",
+      childMiddleName: "",
+      childBirthDate: ""
+    },
+    fatherInfo: {
+      fatherFirstName: "",
+      fatherLastName: "",
+      fatherOccupation: "",
+      fatherPhoneNumber: "",
+      fatherEmail: ""
+    },
+    motherInfo: {
+      motherFirstName: "",
+      motherLastName: "",
+      motherOccupation: "",
+      motherPhoneNumber: "",
+      motherEmail: ""
+    },
+    guardianInfo: {
+      guardianFirstName: "",
+      guardianLastName: "",
+      guardianPhoneNumber: "",
+      guardianEmail: ""
+    }
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData)
+   await useUpload(formData, "EnrollmentRequest").then(
+    console.log("done!")
+   )
+
+  }
   return (
     <>
       <Container
@@ -50,6 +60,7 @@ export default function EnrollmentForm() {
         }}
       >
         <form
+          onSubmit={handleSubmit}
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -65,17 +76,27 @@ export default function EnrollmentForm() {
 
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
-               label="Lastname"
-               fullWidth
-               onChange={(e)=>setChildInfo({...childInfo, childLastName: e.target.value})}
-               />
+                label="Lastname"
+                fullWidth
+                onChange={(e) => setFormData((prevData) => ({
+                  ...prevData,
+                  childInfo: {
+                    ...prevData.childInfo,
+                    childLastName: e.target.value
+                  }
+                }))} />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Firstname"
                 fullWidth
-                onChange={(e)=>setChildInfo({...childInfo, childFirstName: e.target.value})}
-                />
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  childInfo:{
+                    ...prevData.childInfo,
+                    childFirstName: e.target.value
+                  }
+                }))}                 />
             </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
@@ -83,16 +104,26 @@ export default function EnrollmentForm() {
               <TextField
                 label="Middlename"
                 fullWidth
-                onChange={(e)=>setChildInfo({...childInfo, childMiddleName: e.target.value})}
-                />
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  childInfo:{
+                    ...prevData.childInfo,
+                    childMiddleName: e.target.value
+                  }
+                }))}                 />
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 type="date"
                 label="Date of Birth"
-                onChange={(e)=>setChildInfo({...childInfo, childBirthDate: e.target.value})}
-                InputLabelProps={{
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  childInfo:{
+                    ...prevData.childInfo,
+                    childBirthDate: e.target.value
+                  }
+                }))}                InputLabelProps={{
                   shrink: true,
                 }}
                 fullWidth
@@ -138,15 +169,25 @@ export default function EnrollmentForm() {
               <TextField
                 label="Father's Lastname"
                 fullWidth
-                onChange={(e)=>setFatherInfo({...fatherInfo, fatherLastName: e.target.value})}
-              />
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  fatherInfo:{
+                    ...prevData.fatherInfo,
+                    fatherLastName: e.target.value
+                  }
+                }))}              />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Father's Firstname"
                 fullWidth
-                onChange={(e)=>setFatherInfo({...fatherInfo, fatherFirstName: e.target.value})}
-                />
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  fatherInfo:{
+                    ...prevData.fatherInfo,
+                    fatherFirstName: e.target.value
+                  }
+                }))}              />
             </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
@@ -154,23 +195,40 @@ export default function EnrollmentForm() {
               <TextField
                 label="Occupation"
                 fullWidth
-                onChange={(e)=>setFatherInfo({...fatherInfo, fatherOccupation: e.target.value})}
-              />
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  fatherInfo:{
+                    ...prevData.fatherInfo,
+                    fatherOccupation: e.target.value
+                  }
+                }))}              />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Phone number"
                 fullWidth
-                onChange={(e)=>setFatherInfo({...fatherInfo, fatherPhoneNumber: e.target.value})}
-                /></Box>
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  fatherInfo:{
+                    ...prevData.fatherInfo,
+                    fatherPhoneNumber: e.target.value
+                  }
+                }))}              />
+              
+              </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Email"
                 fullWidth
-                onChange={(e)=>setFatherInfo({...fatherInfo, fatherEmail: e.target.value})}
-              />
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  fatherInfo:{
+                    ...prevData.fatherInfo,
+                    fatherEmail: e.target.value
+                  }
+                }))}              />
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
@@ -184,29 +242,50 @@ export default function EnrollmentForm() {
               <TextField
                 label="Mother's Lastname"
                 fullWidth
-                onChange={(e)=>setMotherInfo({...motherInfo, motherLastName: e.target.value})}
-                /></Box>
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  motherInfo:{
+                    ...prevData.motherInfo,
+                    motherLastName: e.target.value
+                  }
+                }))}              /></Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Mother's Firstname"
                 fullWidth
-                onChange={(e)=>setMotherInfo({...motherInfo, motherFirstName})}
-                /></Box>
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  motherInfo:{
+                    ...prevData.motherInfo,
+                    motherFirstName: e.target.value
+                  }
+                }))}              /></Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Occupation"
                 fullWidth
-                onChange={setMotherInfo({...motherInfo, motherOccupation: e.target.value})}
+                onChange={(e) => setFormData((prevData)=>({
+                  ...prevData,
+                  motherInfo:{
+                    ...prevData.motherInfo,
+                    motherOccupation: e.target.value
+                  }
+                }))}
                 />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Phone number"
                 fullWidth
-                onChange={(e)=>setMotherInfo({...motherInfo, motherPhoneNumber: e.target.value})}
-              />
+                onChange={(e) => setFormData((prevData) => ({
+                  ...prevData,
+                  motherInfo: {
+                    ...prevData.motherInfo,
+                    motherPhoneNumber: e.target.value
+                  }
+                }))}              />
             </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
@@ -214,14 +293,20 @@ export default function EnrollmentForm() {
               <TextField
                 label="Email"
                 fullWidth
-                onChange={(e)=>setMotherInfo({...motherInfo, motherEmail: e.target.value})}
-                />
+                onChange={(e) => setFormData((prevData) => ({
+                  ...prevData,
+                  motherInfo: {
+                    ...prevData.motherInfo,
+                    motherEmail: e.target.value
+                  }
+                }))}
+              />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Marriage Certificate"
                 fullWidth
-                /></Box>
+              /></Box>
           </Box>
 
           {/* Guardian Information */}
@@ -231,15 +316,25 @@ export default function EnrollmentForm() {
               <TextField
                 label="Guardian's Lastname"
                 fullWidth
-                onChange={(e)=>setGuardianInfo({...guardinInfo, guardianLastName: e.target.value})}
-                />
+                onChange={(e) => setFormData((prevData) => ({
+                  ...prevData,
+                  guardianInfo: {
+                    ...prevData.guardianInfo,
+                    guardianLastName: e.target.value
+                  }
+                }))} />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Guardian's Firstname"
                 fullWidth
-                onChange={(e)=>setGuardianInfo({...guardinInfo, guardianLastName: e.target.value})}
-                />
+                onChange={(e) => setFormData((prevData) => ({
+                  ...prevData,
+                  guardianInfo: {
+                    ...prevData.guardianInfo,
+                    guardianFirstName: e.target.value
+                  }
+                }))} />
             </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
@@ -247,16 +342,26 @@ export default function EnrollmentForm() {
               <TextField
                 label="Phone number"
                 fullWidth
-                onChange={(e)=>setGuardianInfo({...guardinInfo, guardianPhoneNumber: e.target.value})}
-
-                />
+                onChange={(e) => setFormData((prevData) => ({
+                  ...prevData,
+                  guardianInfo: {
+                    ...prevData.guardianInfo,
+                    guardianPhoneNumber: e.target.value
+                  }
+                }))}
+              />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
                 label="Email"
                 fullWidth
-                onChange={(e)=>setGuardianInfo({...guardinInfo, guardianEmail: e.target.value})}
-                />
+                onChange={(e) => setFormData((prevData) => ({
+                  ...prevData,
+                  guardianInfo: {
+                    ...prevData.guardianInfo,
+                    guardianEmail: e.target.value
+                  }
+                }))} />
             </Box>
           </Box>
 
