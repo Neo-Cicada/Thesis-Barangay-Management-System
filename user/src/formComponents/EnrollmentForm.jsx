@@ -258,7 +258,17 @@ export default function EnrollmentForm() {
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
-              <TextField label="Marriage Certificate" fullWidth /></Box>
+            <TextField
+                type="file"
+                label="Marriage Certificate"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  accept: '.pdf,.doc,.docx,image/*',
+                }}
+              />
+            </Box>
           </Box>
 
           {/* Mother Information */}
@@ -330,9 +340,16 @@ export default function EnrollmentForm() {
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
               <TextField
-                label="Marriage Certificate"
-                fullWidth
-              /></Box>
+                  type="file"
+                  label="Marriage Certificate"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    accept: '.pdf,.doc,.docx,image/*',
+                  }}
+                />
+            </Box>
           </Box>
 
           {/* Guardian Information */}
