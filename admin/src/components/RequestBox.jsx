@@ -66,7 +66,7 @@ export default function RequestBox({data, handleReject, handleAccept}) {
            <h4>{information.firstname} {information.lastname}</h4>
             <Box sx={{display: 'flex', gap: '1em'}}>
               <Button variant='contained' onClick={handleAccept}>Accept</Button>
-              
+
               <Button variant='contained' onClick={handleReject}>Reject</Button>
             </Box>
           </Box>
