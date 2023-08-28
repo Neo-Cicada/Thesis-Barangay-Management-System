@@ -6,6 +6,10 @@ import MotherInfo from './MotherInfo'
 import GuardianInfo from './GuardianInfo'
 const SecondBox = ({data}) =>{
     const [infoStatus, setInfoStatus] = useState("child")
+    const childInfo = data[0].data.childInfo;
+    const motherInfo = data[0].data.motherInfo;
+    const fatherInfo = data[0].data.fatherInfo;
+    const guardianInfo = data[0].data.guardianInfo;
     return(
         <>
             <Box sx={{ height: '15em', border: '1px solid red' }}>
@@ -29,10 +33,10 @@ const SecondBox = ({data}) =>{
                     >Guardian Information</Button>
                 </Box>
                 <Box sx={{border:'1px solid pink', height: '90%'}}>
-                    {infoStatus === "child" && <h1>Child</h1>}
-                    {infoStatus === "father" && <h1>father</h1>}
-                    {infoStatus === "mother" && <h1>mother</h1>}
-                    {infoStatus === "guardian" && <h1>guardian</h1>}
+                    {infoStatus === "child" && <ChildInfo data={childInfo}/>}
+                    {infoStatus === "father" && <FatherInfo data={fatherInfo}/>}
+                    {infoStatus === "mother" && <MotherInfo data={motherInfo}/>}
+                    {infoStatus === "guardian" && <GuardianInfo data={guardianInfo}/>}
 
                 </Box>
             </Box>
