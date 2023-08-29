@@ -8,7 +8,12 @@ export default function EnrollmentRequest() {
     const [data, setData] = useState([]);
     useRead("EnrollmentRequest", setData)
 
-    const items = data.map(item => <RequestBoxEnrollment data={data}/>)
+
+    const items = data.map(item =>
+        <RequestBoxEnrollment
+            dataID={item.id}
+            data={data}
+            />)
 
     return (
         <>

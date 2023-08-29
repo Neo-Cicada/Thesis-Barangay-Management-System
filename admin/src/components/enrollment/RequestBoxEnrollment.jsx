@@ -4,6 +4,7 @@ import ChildInfo from './ChildInfo'
 import FatherInfo from './FatherInfo'
 import MotherInfo from './MotherInfo'
 import GuardianInfo from './GuardianInfo'
+import useTransfer from '../../hooks/useTransfer'
 const SecondBox = ({data}) =>{
     const [infoStatus, setInfoStatus] = useState("child")
     const childInfo = data[0].data.childInfo;
@@ -46,7 +47,7 @@ const SecondBox = ({data}) =>{
 }
 
 
-export default function RequestBoxEnrollment({data}) {
+export default function RequestBoxEnrollment({data, dataID}) {
     const [isShow, setIsShow] = useState(false);
     const childInfo = data[0].data.childInfo;
     const motherInfo = data[0].data.motherInfo;
@@ -55,8 +56,17 @@ export default function RequestBoxEnrollment({data}) {
     const handleExpand = (e) => {
         e.preventDefault();
         setIsShow(!isShow);
-        console.log(data[0].data.childInfo)
+        console.log(dataID)
       }
+    const handleAccept = async (e) =>{
+        e.stopPropagation();
+        await useTransfer("EnrollmentAccepted", "EnrollmentRequest", dataID, data).then(()=>console.log("Transfer Succ fucking cess"))
+    }
+    const handleDecline = async (e) =>{
+        e.stopPropagation();
+        await e.stopProgation("EnrollmentRejected", "EnrollmentRequest", dataID, data);
+
+    }
     const boxStyle = {
 
         flex: 'none',
@@ -74,8 +84,8 @@ export default function RequestBoxEnrollment({data}) {
              display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1em' }}>
              <h4>{childInfo.childFirstName} {childInfo.childLastName}</h4>
             <Box sx={{display: 'flex', gap: '1em'}}>
-              <Button variant='contained' >Accept</Button>
-              <Button variant='contained' >Reject</Button>
+              <Button variant='contained' onClick={handleAccept}>Accept</Button>
+              <Button variant='contained' onClick={handleDecline}>Reject</Button>
             </Box>
           </Box>
           {isShow && <SecondBox data={data}/>}
