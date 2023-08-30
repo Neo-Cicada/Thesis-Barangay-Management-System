@@ -79,7 +79,10 @@ export default function SideBar() {
             </Button>
           </li>
           <li>
-            <Button>
+            <Button
+              to="profile"
+              component={Link}
+            >
               Profile
             </Button>
           </li>

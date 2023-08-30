@@ -42,6 +42,8 @@ import FacilityRejected from '../components/facilities/FacilityRejected'
 
 import AnnouncementManagement from '../components/announcement/AnnouncementManagement'
 import AnnouncementHistory from '../components/announcement/AnnouncementHistory'
+
+import Profile from "../components/profile/Profile"
 const AppRoutes = () => {
   return (
     <Routes>
@@ -128,6 +130,9 @@ const AppRoutes = () => {
 
       </Route>
 
+      <Route path="profile" element={<Profile/>}>
+        
+      </Route>
 
     </Routes>
   )
