@@ -1,12 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/header';
-
+import HeaderApp from './components/HeaderApp';
 export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Header />
+        <HeaderApp/>
+      </View>
+      <View style={styles.body}>
+        
       </View>
     </View>
   );
@@ -18,10 +19,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f7f7', // Set the background color
   },
   headerContainer: {
+    marginTop: 25,
     flex: 0.1,
     borderColor: 'red', // Set border color
     borderWidth: 1,     // Set border width
     alignItems: 'center',     // Center horizontally
     justifyContent: 'center', // Center vertically
   },
+  body: {
+    flex: 0.9,
+    backgroundColor: '#f7f7f7',
+    borderColor: 'red', // Set border color
+    borderWidth: 1,
+    
+  }
 });
