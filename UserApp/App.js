@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import HeaderApp from './components/HeaderApp';
+import BodyApp from './components/BodyApp';
 export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <HeaderApp/>
+        <HeaderApp />
       </View>
       <View style={styles.body}>
-        
+        <BodyApp/>
       </View>
     </View>
   );
@@ -19,7 +20,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f7f7', // Set the background color
   },
   headerContainer: {
-    marginTop: 25,
     flex: 0.1,
     borderColor: 'red', // Set border color
     borderWidth: 1,     // Set border width
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f7f7',
     borderColor: 'red', // Set border color
     borderWidth: 1,
-    
+
   }
 });

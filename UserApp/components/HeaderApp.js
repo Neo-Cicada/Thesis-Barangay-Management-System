@@ -6,7 +6,7 @@ const HeaderApp = () => {
         <>
             <View style={styles.headerContainer}>
                 <View style={styles.content}>
-                    <Text>Navigation Burger</Text>
+                    <Text>Navigation Burgers</Text>
                 </View>
                 <View style={styles.content}>
                     <Text>EBarangay</Text>
@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'flex-start'
+        justifyContent:'flex-start',
+        gap: '2em'
     },
     content:{
         flex:0.33,
-        marginHorizontal: 20
-        
+
     }
 })
 export default HeaderApp;
