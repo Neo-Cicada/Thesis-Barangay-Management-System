@@ -6,7 +6,7 @@ ul{
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 1.5em;
 }
 li{
     display: flex;
@@ -21,7 +21,7 @@ li{
 .sidebar-logo{
     width: 20%;
     height: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
