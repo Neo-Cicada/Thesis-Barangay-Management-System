@@ -2,88 +2,118 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
 import '../styles/sidebar.css'
+import { useState } from 'react'
+
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 export default function SideBar() {
-  const loc = useLocation();
-  const path = loc.pathname;
-
-  const equipmentPath = path === '/' ||
-                        '/request' ||
-                        '/status/ongoing' ||
-                        '/status/completed' ||
-                        '/status/rejected'
-  const certificatePath = path === '/certificate/manage-certificate' || '/certificate/request-list-certificate' || '/certificate-status'
-  const announcementPath = path === '/announcement/announcement-management' || '/announcement/announcement-history'
-  const enrollmentPath = path === '/enrollment'
-  const facilityPath = path === "/facilities/facility-management" || '/facilities/facility-request-list' || '/facilities/facility-status'
-  const medicinePath = path === "/medicine/manage-medicine" || '/medicine/request-list-medicine'
-
-  const activeLink = {
+  // const loc = useLocation();
+  // const path = loc.pathname; scan current location
+  const [status, setStatus] = useState('equipment')
+  const normalStyle = {
     color: 'black',
-    borderBottom: '3px solid blue',
-    width: '100%'
-
+    width: '100%',
+    fontSize: '1rem',
+    padingRight: '5px',
+    gap: '1em',
+    display: 'flex',
+    justifyContent: 'flex-start'
 
   }
-  const normalLink = {
-    color: 'black',
-    width: '100%'
+
+  const activeStyle = {
+    ...normalStyle,
+    fontWeight: 'bold',
+    fontSize: '1.1rem',
+
+
+
   }
 
   return (
     <>
       <div className='nav-container'>
+        <div style={{ border: '1px solid red', height: '10%', marginTop: '15%' }}>
+          <h1 >Logo</h1>
+
+        </div>
         <ul>
           <li>
             <Button
               to='/'
               component={Link}
-              sx={path === '/' ? activeLink : normalLink}
-              >
-                Equipment
+              sx={status === "equipment" ? activeStyle : normalStyle}
+              onClick={() => setStatus("equipment")}
+            >
+              <div className='sidebar-logo'>Logo</div>
+              <div className='sidebar-btn-name'>Equipment</div>
             </Button>
           </li>
-          <li><Button to='certificate'
+          <li><Button
+            to='certificate'
             component={Link}
-            sx={path === "/certificate/manage-certificate" ? activeLink : normalLink}>
-            Certification</Button></li>
+            sx={status === "certificate" ? activeStyle : normalStyle}
+            onClick={() => setStatus("certificate")}
+          >
+            <div className='sidebar-logo'>Logo</div>
+            <div className='sidebar-btn-name'>Certification</div>
+          </Button></li>
           <li>
             <Button
+
               to='announcement'
               component={Link}
-              sx={path === "/announcement/announcement-management" ? activeLink : normalLink}>
-              Announcement
+              sx={status === "announcement" ? activeStyle : normalStyle}
+              onClick={() => setStatus("announcement")}
+            >
+              <div className='sidebar-logo'>Logo</div>
+              <div className='sidebar-btn-name'>Announcement</div>
             </Button>
           </li>
           <li>
             <Button to='enrollment'
               component={Link}
-              sx={path === "/enrollment" ? activeLink : normalLink}
+              sx={status === "enrollment" ? activeStyle : normalStyle}
+              onClick={() => setStatus("enrollment")}
             >
-              Enrollment
+              <div className='sidebar-logo'>Logo</div>
+              <div className='sidebar-btn-name'>Enrollment</div>
             </Button>
           </li>
           <li>
             <Button to='facilities'
               component={Link}
-              sx={path === "/facilities/facility-management" ? activeLink : normalLink}
+              sx={status === "facilities" ? activeStyle : normalStyle}
+              onClick={() => setStatus("facilities")}
             >
-              Facilities
+              <div className='sidebar-logo'>Logo</div>
+              <div className='sidebar-btn-name'>Facilities</div>
             </Button>
           </li>
           <li>
             <Button to='medicine'
               component={Link}
-              sx={path === "/medicine/manage-medicine" ? activeLink : normalLink}
-              >
-              Medicine
+              sx={status === "medicine" ? activeStyle : normalStyle}
+              onClick={() => setStatus("medicine")}
+            >
+              <div className='sidebar-logo'>Logo</div>
+              <div className='sidebar-btn-name'>Medicine</div>
             </Button>
           </li>
           <li>
             <Button
               to="profile"
               component={Link}
+              sx={status === "profile" ? activeStyle : normalStyle}
+              onClick={() => setStatus("profile")}
             >
-              Profile
+              <div className='sidebar-logo'>
+                {status === "profile" ?
+                    <AccountCircleIcon fontSize='large' />
+                 : <AccountCircleOutlinedIcon fontSize="large" /> }
+              </div>
+              <div className='sidebar-btn-name'>Profile</div>
             </Button>
           </li>
         </ul>

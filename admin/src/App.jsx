@@ -1,29 +1,24 @@
-import './styles/app.css'
-import SideBar from './components/SideBar'
-import Login from './components/Login.jsx'
- import AppRoutes from './routes/AppRoutes'
+import React, { useState, useEffect } from 'react';
+
+import Main from "./components/Main";
+import Login from "./components/Login";
+
 function App() {
+  // Check if the user is authenticated from localStorage on component initialization
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem('isAuthenticated') === 'true'
+  );
+
+  // useEffect to update localStorage when isAuthenticated changes
+  useEffect(() => {
+    localStorage.setItem('isAuthenticated', isAuthenticated);
+  }, [isAuthenticated]);
 
   return (
     <>
-
-      <main>
-        <nav className='app-nav'>
-          <SideBar />
-        </nav>
-        <div className="hero">
-          <div className='hero-box'>
-            <div className="hero-line">
-            <AppRoutes/>
-            </div>
-          </div>
-        </div>
-      </main>
-
+      {isAuthenticated ? <Main /> : <Login setLoginStatus={setIsAuthenticated} />}
     </>
-  )
+  );
 }
 
-
-
-export default App
+export default App;

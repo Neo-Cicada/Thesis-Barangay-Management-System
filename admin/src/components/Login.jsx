@@ -3,38 +3,32 @@ import '../styles/login.css'
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { NavLink, Navigate, useNavigate,} from 'react-router-dom';
+import { NavLink, Navigate, useNavigate, } from 'react-router-dom';
 import { auth } from '../firebase'
 import App from '../App';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-export default function Login() {
-  const navigate = useNavigate();
+export default function Login({setLoginStatus}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState(false);
+
   const onLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
-        console.log('welcome');
-        navigate('/');
-        setLogin(true)
+        setLoginStatus(true);
 
       }
       )
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('Hello error',errorCode, errorMessage);
+        console.log('Hello error', errorCode, errorMessage);
       })
   }
 
-  if(login){
-   return <App/>
-  }
-  else{
 
   return (
     <>
@@ -69,5 +63,4 @@ export default function Login() {
       </div>
     </>
   )
-}
 }
