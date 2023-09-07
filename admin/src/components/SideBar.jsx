@@ -52,7 +52,7 @@ export default function SideBar() {
   return (
     <>
       <div className='nav-container'>
-        <div style={{  height: '10%', marginTop: '15%' }}>
+        <div style={{  height: '10%', marginTop: '13%', borderBottom: '2px solid black' }}>
           {/* <h1 >Logo</h1> */}
 
         </div>
