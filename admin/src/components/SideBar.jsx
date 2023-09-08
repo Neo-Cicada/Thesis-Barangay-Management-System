@@ -44,7 +44,7 @@ export default function SideBar() {
     ...normalStyle,
     fontWeight: 'bolder',
     fontSize: '1.1rem',
-
+    color:'#3b5998'
 
 
   }

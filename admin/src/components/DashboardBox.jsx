@@ -28,7 +28,7 @@ export default function DashboardBox({name, numbers, logo}) {
                         </div>
                     </div>
                     <div>
-                        <div  style={{paddingLeft:'1em', fontSize:'1.5rem',}}>{numbers}</div>
+                        <div  style={{paddingLeft:'1em', fontSize:'1.5rem', color:'#3b5998'}}>{numbers}</div>
                     </div>
                 </div>
             </div>
