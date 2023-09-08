@@ -9,6 +9,7 @@ import useRead from '../../hooks/useRead'
 import { useState } from 'react';
 import EquipmentAllRequest from './EquipmentAllRequest';
 import EquipManage from './EquipManage'
+import EquipmentCrud from './EquipmentCrud';
 export default function Equipment() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState("default")
@@ -24,6 +25,7 @@ export default function Equipment() {
     fifth={'888'}
     sixth={item.data.type}
     seventh={item.data.status}
+    status={item.data.status === 'ongoing' ? 'ongoing' : undefined}
   />
   )
   const ongoingItems = data.filter(item => item.data.status === "ongoing").map(item => <DashboardList
@@ -34,8 +36,10 @@ export default function Equipment() {
     third={item.data.phoneNumber}
     fourth={"09/08/23"}
     fifth={'888'}
+
     sixth={item.data.type}
     seventh={item.data.status}
+    status={'ongoing'}
   />)
   const acceptedItems = data.filter(item => item.data.status === "accepted").map(item => <DashboardList
     key={item.id}
@@ -88,6 +92,7 @@ export default function Equipment() {
               numbers={'11'}
               logo={<ChecklistIcon />} />
           </div>
+
           <DashboardNavigation setStatus={setStatus} status={status} />
         </Container>
         <div className="equipment-hero">
@@ -95,7 +100,7 @@ export default function Equipment() {
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
           {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
           {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
-          {status === "fifth" && <EquipManage />}
+          {status === "fifth" && <EquipmentCrud/>}
 
 
         </div>

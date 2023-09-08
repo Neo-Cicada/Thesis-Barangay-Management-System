@@ -3,7 +3,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardConfirmation from './DashboardConfirmation';
 import useStatusUpdate from '../hooks/useStatusUpdate'
 export default function DashboardList({ first, second, third, fourth, fifth,
-  sixth, seventh, itemId }) {
+  sixth, seventh, itemId, status }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const togglePopup = () => {
@@ -14,9 +14,10 @@ export default function DashboardList({ first, second, third, fourth, fifth,
     await useStatusUpdate('EquipmentAllRequest', itemId, 'accepted')
     console.log(itemId)
   }
-  const onDecline = (e) => {
+  const  onDecline = async (e) => {
     e.stopPropagation();
-    console.log('Equipment onDecline')
+    await useStatusUpdate('EquipmentAllRequest', itemId, 'rejected')
+    console.log(itemId)
   }
   return (
     <>
@@ -36,11 +37,14 @@ export default function DashboardList({ first, second, third, fourth, fifth,
         <div style={{ width: '6%', textAlign:'center'  }}>{fifth}</div>
         <div style={{ width: '12.5%',  textAlign:'center' }}>{sixth}</div>
         <div style={{ width: '12.5%', textAlign:'center'  }}>{seventh}</div>
-        <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }} onClick={togglePopup}>
-          <MoreHorizIcon />
-          {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline} />}
+        {status === "ongoing" ?
+          <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }} onClick={togglePopup}>
+            <MoreHorizIcon />
+            {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline} />}
 
-        </div>
+          </div>:
+          <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }}></div>
+        }
       </div>
     </>
   );

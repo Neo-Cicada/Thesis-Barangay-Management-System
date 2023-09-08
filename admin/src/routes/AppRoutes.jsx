@@ -9,12 +9,6 @@ import Medicine from '../components/medicine/Medicine'
 
 
 import EquipManage from '../components/equipment/EquipManage'
-import EquipmentRequestList from '../components/equipment/EquipmentRequestList'
-import EquipmentStatus from '../components/equipment/EquipmentStatus'
-
-import EquipmentOngoing from '../components/equipment/EquipmentOngoing'
-import EquipmentCompleted from '../components/equipment/EquipmentCompleted'
-import EquipmentRejected from '../components/equipment/EquipmentRejected'
 
 import CertificateManagement from '../components/certificate/CertificateManagement'
 import CertificateRequest from '../components/certificate/CertificateRequest'

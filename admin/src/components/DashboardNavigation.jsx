@@ -12,7 +12,7 @@ export default function DashboardNavigation({setStatus, status}) {
     }
     const activeBtn = {
         border: '0',
-        background: 'none',
+            background: 'none',
         borderRadius: '0px',
         fontSize: '1.1rem',
         cursor: 'pointer',
