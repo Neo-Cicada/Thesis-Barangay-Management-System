@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from '@mui/material'
-const ScrollableContainer = ({ children }) => {
+const ScrollableContainer = ({ children}) => {
     return (
         <>
             <Container style={{

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@mui/material'
-export default function DashboardConfirmation() {
+export default function DashboardConfirmation({accept, reject}) {
   return (
     <>
       <div
@@ -9,14 +9,14 @@ export default function DashboardConfirmation() {
             background: 'white',
             border: '1px solid black',
             padding: '5px',
-            marginLeft:'2em',
+            marginLeft:'1.5em',
             zIndex:'1',
             display:'flex',
             flexDirection:'column'
           }}
         >
-          <Button>Accept</Button>
-          <Button>Reject</Button>
+          <Button onClick={accept}>Accept</Button>
+          <Button onClick={reject}>Reject</Button>
 
         </div>
     </>

@@ -1,8 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function DashboardNavigation() {
-    const [status, setStatus] = useState("default")
+export default function DashboardNavigation({setStatus, status}) {
     const btnStyle = {
         border: '0',
         background: 'none',
@@ -17,7 +16,7 @@ export default function DashboardNavigation() {
         borderRadius: '0px',
         fontSize: '1.1rem',
         cursor: 'pointer',
-        borderBottom: '5px solid black'
+        borderBottom: '5px solid #3b5998'
     }
     return (
         <>

@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardConfirmation from './DashboardConfirmation';
-
-export default function DashboardList({ first, second, third, fourth, fifth, sixth, seventh }) {
+import useStatusUpdate from '../hooks/useStatusUpdate'
+export default function DashboardList({ first, second, third, fourth, fifth,
+  sixth, seventh, itemId }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
-
+  const onAccept = async (e) => {
+    e.stopPropagation();
+    await useStatusUpdate('EquipmentAllRequest', itemId, 'accepted')
+    console.log(itemId)
+  }
+  const onDecline = (e) => {
+    e.stopPropagation();
+    console.log('Equipment onDecline')
+  }
   return (
     <>
       <div
@@ -20,16 +29,16 @@ export default function DashboardList({ first, second, third, fourth, fifth, six
           justifyContent: 'space-between',
         }}
       >
-        <div style={{ width: '12.5%' }}>{first}</div>
-        <div style={{ width: '12.5%' }}>{second}</div>
-        <div style={{ width: '12.5%' }}>{third}</div>
-        <div style={{ width: '12.5%' }}>{fourth}</div>
-        <div style={{ width: '12.5%' }}>{fifth}</div>
-        <div style={{ width: '12.5%' }}>{sixth}</div>
-        <div style={{ width: '12.5%' }}>{seventh}</div>
-        <div style={{ width: '12.5%', cursor: 'pointer', display:'flex' }} onClick={togglePopup}>
+        <div style={{ width: '18%', textAlign:'center' }}>{first}</div>
+        <div style={{ width: '20%',  textAlign:'center' }}>{second}</div>
+        <div style={{ width: '10%',  textAlign:'center' }}>{third}</div>
+        <div style={{ width: '12.5%', textAlign:'center'  }}>{fourth}</div>
+        <div style={{ width: '6%', textAlign:'center'  }}>{fifth}</div>
+        <div style={{ width: '12.5%',  textAlign:'center' }}>{sixth}</div>
+        <div style={{ width: '12.5%', textAlign:'center'  }}>{seventh}</div>
+        <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }} onClick={togglePopup}>
           <MoreHorizIcon />
-          {isPopupOpen && <DashboardConfirmation />}
+          {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline} />}
 
         </div>
       </div>

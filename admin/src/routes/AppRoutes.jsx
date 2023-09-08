@@ -52,31 +52,6 @@ const AppRoutes = () => {
           path='/'
           element={<EquipManage />}
         />
-        <Route
-          path='request'
-          element={<EquipmentRequestList />}
-        />
-
-        <Route
-          path='status'
-          element={<EquipmentStatus />}
-        >
-          <Route
-            path='ongoing'
-            element={<EquipmentOngoing />}
-          />
-          <Route
-            path='completed'
-            element={<EquipmentCompleted />}
-          />
-          <Route
-            path='rejected'
-            element={<EquipmentRejected />}
-          />
-          <Route index element={<Navigate to='ongoing' replace />} />
-
-
-        </Route>
       </Route>
       <Route path='certificate' element={<Certificate />} >
         <Route path='manage-certificate' element={<CertificateManagement />} />
