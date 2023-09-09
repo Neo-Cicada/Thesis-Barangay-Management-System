@@ -1,12 +1,23 @@
 import React from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material'
 import { useState } from 'react'
-export default function EquipmentAdd({ handleDialogClose, isDialogOpen, handleButtonAction }) {
+import useUploadDirectly from '../../hooks/useUploadDirectly';
+export default function EquipmentAdd({ handleDialogClose, isDialogOpen, setIsDialogOpen }) {
+  const [item, setItem] = useState({
+    equipment: '',
+    quantity: ''
+  })
 
+  const handleClickOk = async (e)=>{
+    console.log(item)
+
+    await useUploadDirectly('Equipments', item).then(()=> setIsDialogOpen(false))
+    console.log(item)
+  }
   return (
     <>
       <Dialog open={isDialogOpen} onClose={handleDialogClose}>
-        <DialogTitle sx={{textAlign:'center'}}> Add Item</DialogTitle>
+        <DialogTitle sx={{ textAlign: 'center' }}> Add Item</DialogTitle>
         <DialogContent
         >
           <div style={{
@@ -16,13 +27,21 @@ export default function EquipmentAdd({ handleDialogClose, isDialogOpen, handleBu
             paddingTop: '1em',
             gap: '1em'
           }}>
-            <TextField label="Name" />
-            <TextField label="quantity" />
+            <TextField
+              value={item.equipment}
+              label="Name"
+              onChange={(e)=> setItem({...item, equipment:(e.target.value)})}
+              />
+            <TextField
+              value={item.quantity}
+              label="quantity"
+              onChange={(e)=> setItem({...item, quantity:(e.target.value)})}
+              />
           </div>
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleButtonAction}>OK</Button>
+          <Button onClick={handleClickOk}>OK</Button>
         </DialogActions>
       </Dialog>
     </>
