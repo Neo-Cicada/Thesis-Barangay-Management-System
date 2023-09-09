@@ -7,6 +7,7 @@ export default function EquipmentAllRequest({items}) {
       <DashboardHeader />
           <ScrollableContainer>
             {items}
+
           </ScrollableContainer>
     </>
   )

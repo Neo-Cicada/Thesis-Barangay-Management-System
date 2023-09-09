@@ -1,13 +1,18 @@
 import React from 'react'
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import EquipmentAdd from './EquipmentAdd';
-import useUploadDirectly from '../../hooks/useUploadDirectly'
+import useRead from '../../hooks/useRead';
+import DashboardItem from '../DashboardItem';
+import ScrollableContainer from '../ScrollableContainer';
 export default function EquipmentCrud() {
-
+    const [data, setData] = useState([])
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+    useRead('Equipments', setData)
+
+    const items = data.map((item)=> <DashboardItem data={item}/>)
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
     };
@@ -15,7 +20,6 @@ export default function EquipmentCrud() {
         <>
             <Container
                 sx={{
-                    border: '1px solid red',
                     height: '100%',
                 }}
             >
@@ -37,9 +41,9 @@ export default function EquipmentCrud() {
                         textAlign:'center'}}
                     > <AddIcon /> Add Inventory</div>
                 </Container>
-                <Container sx={{ height: '90%' }}>
-
-                </Container>
+                <ScrollableContainer>
+                    {items}
+                </ScrollableContainer>
             </Container>
 
 

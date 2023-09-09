@@ -17,8 +17,8 @@ export default function EquipmentForm() {
 
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [type, setType] = useState('');
@@ -63,12 +63,13 @@ export default function EquipmentForm() {
   const formData = {
     firstname: firstname,
     lastname: lastname,
-    startDate: startDate,
-    endDate: endDate,
+    startDate: String(startDate.$d),
+    endDate: String(endDate.$d),
     phoneNumber: phoneNumber,
     email: email,
     type: type,
     message: messege,
+    status: 'ongoing'
   }
   const style = {
     display: 'flex',
@@ -78,8 +79,8 @@ export default function EquipmentForm() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    useUpload(formData, 'EquipmentRequest').then('upload successfully')
-    // console.log(formData)
+    useUpload(formData, 'EquipmentAllRequest').then('upload successfully')
+    console.log(startDate.$d)
     setFirstName('')
     setLastName('')
     setStartDate('')
@@ -173,7 +174,7 @@ export default function EquipmentForm() {
               <DatePicker
                 label="Start Date"
                 value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
+                onChange={(newStartDate) => setStartDate(newStartDate)}
                 error={!validateStartDate()}
                 renderInput={(params) => (
                   <TextField
@@ -189,7 +190,7 @@ export default function EquipmentForm() {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
+                onChange={(newEndDate) => setEndDate(newEndDate)}
                 label="End Date"
                 error={!validateEndDate()}
                 renderInput={(params) => (

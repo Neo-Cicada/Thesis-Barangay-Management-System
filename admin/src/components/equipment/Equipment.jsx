@@ -102,7 +102,6 @@ export default function Equipment() {
           {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
           {status === "fifth" && <EquipmentCrud/>}
 
-
         </div>
       </div>
     </>
