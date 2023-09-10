@@ -7,17 +7,6 @@ import Equipment from '../components/equipment/Equipment'
 import Facilities from '../components/facilities/Facilities'
 import Medicine from '../components/medicine/Medicine'
 
-
-import EquipManage from '../components/equipment/EquipManage'
-
-import CertificateManagement from '../components/certificate/CertificateManagement'
-import CertificateRequest from '../components/certificate/CertificateRequest'
-import CertificateStatus from '../components/certificate/CertificateStatus'
-
-import CertificateOngoing from '../components/certificate/CertificateOngoing'
-import CertificateCompleted from'../components/certificate/CertificateCompleted'
-import CertificateRejected from '../components/certificate/CertificateRejected'
-
 import MedicineManagement from '../components/medicine/MedicineManagement'
 import MedicineRequestList from '../components/medicine/MedicineRequestList'
 import MedicineStatus from '../components/medicine/MedicineStatus'
@@ -41,24 +30,11 @@ import Profile from "../components/profile/Profile"
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Equipment />}>
-        <Route
-          path='/'
-          element={<EquipManage />}
-        />
-      </Route>
-      <Route path='certificate' element={<Certificate />} >
-        <Route path='manage-certificate' element={<CertificateManagement />} />
-        <Route index element={<Navigate to='manage-certificate' replace />} />
-        <Route path='request-list-certificate' element={<CertificateRequest />} />
-        <Route path='certificate-status' element={<CertificateStatus />}>
-          <Route path="ongoing" element={<CertificateOngoing/>} />
-          <Route index element={<Navigate to="ongoing" replace/>}/>
-          <Route path="completed" element={<CertificateCompleted/>}/>
-          <Route path="rejected" element={<CertificateRejected/>}/>
-        </Route>
+      <Route path='/' element={<Equipment />} />
+      <Route path='certificate' element={<Certificate />} />
 
-      </Route>
+
+
 
       <Route path='announcement' element={<Announcement />}>
         <Route path="announcement-management" element={<AnnouncementManagement />} />
@@ -77,10 +53,10 @@ const AppRoutes = () => {
         <Route index element={<Navigate to='facility-management' replace />} />
         <Route path="facility-request-list" element={<FacilityRequest />} />
         <Route path="facility-status" element={<FacilityStatus />}>
-          <Route path="ongoing" element={<FacilityOngoing/>}/>
-          <Route path="completed" element={<FacilityCompleted/>}/>
-          <Route path="rejected" element={<FacilityRejected/>}/>
-          <Route index element={<Navigate to="ongoing"/>}/>
+          <Route path="ongoing" element={<FacilityOngoing />} />
+          <Route path="completed" element={<FacilityCompleted />} />
+          <Route path="rejected" element={<FacilityRejected />} />
+          <Route index element={<Navigate to="ongoing" />} />
         </Route>
       </Route>
 
@@ -90,17 +66,17 @@ const AppRoutes = () => {
 
         <Route path='request-list-medicine' element={<MedicineRequestList />} />
         <Route path='medicine-status' element={<MedicineStatus />} >
-          <Route path="ongoing" element={<MedicineOngoing/>}/>
-          <Route path="completed" element={<MedicineCompleted/>}/>
-          <Route path="rejected" element={<MedicineRejected/>}/>
-          <Route index element={<Navigate to="ongoing"/>}/>
+          <Route path="ongoing" element={<MedicineOngoing />} />
+          <Route path="completed" element={<MedicineCompleted />} />
+          <Route path="rejected" element={<MedicineRejected />} />
+          <Route index element={<Navigate to="ongoing" />} />
 
         </Route>
 
       </Route>
 
-      <Route path="profile" element={<Profile/>}>
-        
+      <Route path="profile" element={<Profile />}>
+
       </Route>
 
     </Routes>

@@ -4,18 +4,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import useDelete from '../hooks/useDelete'
 import useUpdate from '../hooks/useUpdate'
-export default function DashboardItem({ data }) {
+export default function DashboardItem({ data, path }) {
   const [quantityValue, setQuantityValue] = React.useState(false)
   const [newValue, setNewValue] = React.useState(data.quantity)
   const handleDelete = async (e) => {
     console.log('clicked')
     e.preventDefault();
-    await useDelete('Equipments', data.id)
+    await useDelete(path, data.id)
   }
   const handleEdit = async (e)=>{
     e.preventDefault();
     setQuantityValue(!quantityValue)
-   {quantityValue === true && useUpdate('Equipments', data.id, newValue)}
+   {quantityValue === true && useUpdate(path, data.id, newValue)}
 
   }
   return (

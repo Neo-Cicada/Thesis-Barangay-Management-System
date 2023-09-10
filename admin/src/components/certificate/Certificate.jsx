@@ -83,19 +83,19 @@ export default function Certificate() {
           <div style={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
-              numbers={'1'}
+              numbers={items.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
-              numbers={'1'}
+              numbers={ongoingItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Completed"
-              numbers={'1'}
+              numbers={acceptedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Rejected"
-              numbers={'1'}
+              numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Certificates"
