@@ -12,7 +12,7 @@ export default function EquipmentCrud() {
 
     useRead('Equipments', setData)
 
-    const items = data.map((item)=> <DashboardItem path={'Equipments'} data={item}/>)
+    const items = data.map((item)=> <DashboardItem path={'Equipments'} data={item} name={item.equipment}/>)
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
     };

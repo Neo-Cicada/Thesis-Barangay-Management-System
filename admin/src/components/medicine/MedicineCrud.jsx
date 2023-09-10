@@ -4,19 +4,21 @@ import { Container } from '@mui/material'
 import ScrollableContainer from '../ScrollableContainer';
 import DashboardItem from '../DashboardItem';
 import useRead from '../../hooks/useRead';
-import CertificateAdd from './CertificateAdd'
-export default function CertificateCrud() {
+import MedicineAdd from './MedicineAdd';
+
+export default function MedicineCrud() {
     const [data, setData] = useState([]);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    useRead('Certificates', setData);
+    useRead('Medicines', setData);
+    const items = data.map(item => <DashboardItem data={item} path="Medicines" name={item.type}/>)
     const handleDialogClose = () => {
       setIsDialogOpen(!isDialogOpen);
-  };
-    const items = data.map(item => <DashboardItem data={item} path="Certificates" name={item.type}/>)
+  };  
+
   return (
     <>
-    <Container sx={{ height:'100%'}}>
+      <Container sx={{ height:'100%'}}>
       <Container
                     style={{
                         borderBottom: '1px solid black',
@@ -25,7 +27,11 @@ export default function CertificateCrud() {
                         justifyContent:'space-between'
                     }}
                 >
-                    <div>
+                    <div style={{width:'28em', display:'flex',
+                     justifyContent:'space-between', alignItems:'center', paddingLeft:'0.6em'}}>
+                        <div style={{fontSize:'1.2rem'}}>Name</div>
+                        <div style={{fontSize:'1.2rem'}}>Quantity</div>
+                        <div></div>
 
                     </div>
                     <div
@@ -42,11 +48,11 @@ export default function CertificateCrud() {
                     {items}
                 </ScrollableContainer>
     </Container>
-      <CertificateAdd
-         handleDialogClose={handleDialogClose}
-         isDialogOpen={isDialogOpen}
-         setIsDialogOpen={setIsDialogOpen}
-      />
+    <MedicineAdd
+                handleDialogClose={handleDialogClose}
+                isDialogOpen={isDialogOpen}
+                setIsDialogOpen={setIsDialogOpen}
+            />
     </>
   )
 }

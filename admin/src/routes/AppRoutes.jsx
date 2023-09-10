@@ -7,14 +7,6 @@ import Equipment from '../components/equipment/Equipment'
 import Facilities from '../components/facilities/Facilities'
 import Medicine from '../components/medicine/Medicine'
 
-import MedicineManagement from '../components/medicine/MedicineManagement'
-import MedicineRequestList from '../components/medicine/MedicineRequestList'
-import MedicineStatus from '../components/medicine/MedicineStatus'
-
-import MedicineOngoing from '../components/medicine/MedicineOngoing'
-import MedicineCompleted from '../components/medicine/MedicineCompleted'
-import MedicineRejected from '../components/medicine/MedicineRejected'
-
 import FacilityManagement from '../components/facilities/FacilityManagement'
 import FacilityRequest from '../components/facilities/FacilityRequest'
 import FacilityStatus from '../components/facilities/FacilityStatus'
@@ -60,20 +52,7 @@ const AppRoutes = () => {
         </Route>
       </Route>
 
-      <Route path='medicine' element={<Medicine />} >
-        <Route path='manage-medicine' element={<MedicineManagement />} />
-        <Route index element={<Navigate to='manage-medicine' replace />} />
-
-        <Route path='request-list-medicine' element={<MedicineRequestList />} />
-        <Route path='medicine-status' element={<MedicineStatus />} >
-          <Route path="ongoing" element={<MedicineOngoing />} />
-          <Route path="completed" element={<MedicineCompleted />} />
-          <Route path="rejected" element={<MedicineRejected />} />
-          <Route index element={<Navigate to="ongoing" />} />
-
-        </Route>
-
-      </Route>
+      <Route path='medicine' element={<Medicine />} />
 
       <Route path="profile" element={<Profile />}>
 

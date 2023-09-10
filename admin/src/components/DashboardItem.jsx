@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import useDelete from '../hooks/useDelete'
 import useUpdate from '../hooks/useUpdate'
-export default function DashboardItem({ data, path }) {
+export default function DashboardItem({ data, path, name }) {
   const [quantityValue, setQuantityValue] = React.useState(false)
   const [newValue, setNewValue] = React.useState(data.quantity)
   const handleDelete = async (e) => {
@@ -28,13 +28,21 @@ export default function DashboardItem({ data, path }) {
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          <div style={{ fontSize: '1.2rem' }}>{data.equipment}</div>
+          <div style={{ fontSize: '1.2rem' }}>{name}</div>
          {quantityValue === false ? <div style={{ fontSize: '1.2rem' }}>{data.quantity}</div>
           :  <input
-            value={newValue}
-            type="number"
-            onChange={(e)=>setNewValue(e.target.value)}
-        />
+          value={newValue}
+          type="number"
+          onChange={(e) => setNewValue(e.target.value)}
+          style={{
+            border: "none",
+            fontSize:'1.2rem',
+            textAlign: "center",
+            borderBottom: "5px solid blue", // Add borderBottom for the underline effect
+            width: "3em", // Adjust the width as needed
+            // Other styles if needed
+        }}
+      />
         }
         </div>
 
