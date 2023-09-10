@@ -4,9 +4,9 @@ import { db } from '../firebase';
 
 const useUpload = async (data, path) => {
   try{
-    await addDoc(collection(db, path),{
+    await addDoc(collection(db, path),
         data
-    })
+      )
     console.log("Uploaded!")
   }catch(error){
     console.log(error)

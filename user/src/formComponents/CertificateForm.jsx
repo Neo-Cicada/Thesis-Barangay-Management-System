@@ -10,6 +10,7 @@ import Agreement from '../components/dialogs/Agreement';
 import ShowInformation from '../components/dialogs/ShowInformation';
 //TODO: Add a confirmation dialog to each forms
 export default function CertificateForm() {
+  const now = new Date();
   const [firstName, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -61,11 +62,13 @@ export default function CertificateForm() {
     email: email,
     certificate: certificate,
     messege: messege,
+    status: 'ongoing',
+    date: now,
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    useUpload(formData, 'CertificateRequest').then(
+    useUpload(formData, 'CertificateAllRequest').then(
       console.log('upload successfully')
     )
     setFirstName('');

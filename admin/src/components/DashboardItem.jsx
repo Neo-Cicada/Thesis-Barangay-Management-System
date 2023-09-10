@@ -6,7 +6,7 @@ import useDelete from '../hooks/useDelete'
 import useUpdate from '../hooks/useUpdate'
 export default function DashboardItem({ data }) {
   const [quantityValue, setQuantityValue] = React.useState(false)
-  const [newValue, setNewValue] = React.useState('')
+  const [newValue, setNewValue] = React.useState(data.quantity)
   const handleDelete = async (e) => {
     console.log('clicked')
     e.preventDefault();

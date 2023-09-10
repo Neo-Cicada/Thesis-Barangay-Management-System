@@ -25,6 +25,7 @@ export default function Equipment() {
     fifth={'888'}
     sixth={item.data.type}
     seventh={item.data.status}
+    path={'EquipmentAllRequest'}
     status={item.data.status === 'ongoing' ? 'ongoing' : undefined}
   />
   )
@@ -36,10 +37,10 @@ export default function Equipment() {
     third={item.data.phoneNumber}
     fourth={"09/08/23"}
     fifth={'888'}
-
     sixth={item.data.type}
     seventh={item.data.status}
     status={'ongoing'}
+    path={'EquipmentAllRequest'}
   />)
   const acceptedItems = data.filter(item => item.data.status === "accepted").map(item => <DashboardList
     key={item.id}

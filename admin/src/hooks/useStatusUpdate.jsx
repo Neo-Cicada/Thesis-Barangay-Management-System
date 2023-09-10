@@ -14,10 +14,8 @@ const useStatusUpdate = async (path, id, status) => {
 
       // Create an updated object with the new status
       const updatedData = {
-        data: {
             ...existingData.data,
             status: status,
-        }
 
       };
 

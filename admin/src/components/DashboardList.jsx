@@ -3,7 +3,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardConfirmation from './DashboardConfirmation';
 import useStatusUpdate from '../hooks/useStatusUpdate'
 export default function DashboardList({ first, second, third, fourth, fifth,
-  sixth, seventh, itemId, status }) {
+  sixth, seventh, itemId, status, path }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const togglePopup = () => {
@@ -11,12 +11,12 @@ export default function DashboardList({ first, second, third, fourth, fifth,
   };
   const onAccept = async (e) => {
     e.stopPropagation();
-    await useStatusUpdate('EquipmentAllRequest', itemId, 'accepted')
-    console.log(itemId)
+    console.log(path)
+    await useStatusUpdate(path, itemId, 'accepted')
   }
   const  onDecline = async (e) => {
     e.stopPropagation();
-    await useStatusUpdate('EquipmentAllRequest', itemId, 'rejected')
+    await useStatusUpdate(path, itemId, 'rejected')
     console.log(itemId)
   }
   return (

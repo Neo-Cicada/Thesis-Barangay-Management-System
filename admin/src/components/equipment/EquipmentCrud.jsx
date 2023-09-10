@@ -28,9 +28,16 @@ export default function EquipmentCrud() {
                         borderBottom: '1px solid black',
                         height: '10%',
                         display:'flex',
-                        justifyContent:'end'
+                        justifyContent:'space-between'
                     }}
                 >
+                    <div style={{width:'28em', display:'flex',
+                     justifyContent:'space-between', alignItems:'center', paddingLeft:'0.6em'}}>
+                        <div style={{fontSize:'1.2rem'}}>Name</div>
+                        <div style={{fontSize:'1.2rem'}}>Quantity</div>
+                        <div></div>
+
+                    </div>
                     <div
                         onClick={() => setIsDialogOpen(true)}
                         style={{height:'100%',
