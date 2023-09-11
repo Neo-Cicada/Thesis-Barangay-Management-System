@@ -54,8 +54,8 @@ export default function EquipmentForm() {
   // })
   const items = data.map((item) => {
     return (
-      <MenuItem key={item.id} id={item.id} value={item.Equipment}>
-        {item.Equipment}
+      <MenuItem key={item.id} id={item.id} value={item.equipment}>
+        {item.equipment}
       </MenuItem>
     )
   })

@@ -6,6 +6,7 @@ import DashboardBox from '../DashboardBox'
 import DashboardNavigation from '../DashboardNavigation'
 import ScrollableContainer from '../ScrollableContainer'
 import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
+import FacilityCrud from './FacilityCrud'
 
 export default function Facilities() {
   const [status, setStatus] = useState('default')
@@ -41,8 +42,9 @@ export default function Facilities() {
         <DashboardNavigation setStatus={setStatus} status={status} />
 
       </Container>
-      <Container sx={{border:'1px solid red', height:'70%'}}>
-      </Container>
+      <div sx={{border:'1px solid red', height:'70%'}}>
+        <FacilityCrud/>
+      </div>
     </>
   )
 }

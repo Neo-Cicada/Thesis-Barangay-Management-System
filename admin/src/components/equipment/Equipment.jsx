@@ -17,51 +17,51 @@ export default function Equipment() {
 
   const allItems = data.map(item => <DashboardList
     key={item.id}
-    item={item.data}
-    first={item.data.firstname + " " + item.data.lastname}
-    second={item.data.email}
-    third={item.data.phoneNumber}
+    item={item}
+    first={item.firstname + " " + item.lastname}
+    second={item.email}
+    third={item.phoneNumber}
     fourth={"09/08/23"}
     fifth={'888'}
-    sixth={item.data.type}
-    seventh={item.data.status}
+    sixth={item.type}
+    seventh={item.status}
     path={'EquipmentAllRequest'}
-    status={item.data.status === 'ongoing' ? 'ongoing' : undefined}
+    status={item.status === 'ongoing' ? 'ongoing' : undefined}
   />
   )
-  const ongoingItems = data.filter(item => item.data.status === "ongoing").map(item => <DashboardList
+  const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashboardList
     itemId={item.id}
     key={item.id}
-    first={item.data.firstname + " " + item.data.lastname}
-    second={item.data.email}
-    third={item.data.phoneNumber}
+    first={item.firstname + " " + item.lastname}
+    second={item.email}
+    third={item.phoneNumber}
     fourth={"09/08/23"}
     fifth={'888'}
-    sixth={item.data.type}
-    seventh={item.data.status}
+    sixth={item.type}
+    seventh={item.status}
     status={'ongoing'}
     path={'EquipmentAllRequest'}
   />)
-  const acceptedItems = data.filter(item => item.data.status === "accepted").map(item => <DashboardList
+  const acceptedItems = data.filter(item => item.status === "accepted").map(item => <DashboardList
     key={item.id}
-    first={item.data.firstname + " " + item.data.lastname}
-    second={item.data.email}
-    third={item.data.phoneNumber}
+    first={item.firstname + " " + item.lastname}
+    second={item.email}
+    third={item.phoneNumber}
     fourth={"09/08/23"}
     fifth={'888'}
-    sixth={item.data.type}
-    seventh={item.data.status}
+    sixth={item.type}
+    seventh={item.status}
   />)
 
-  const rejectedItems = data.filter(item => item.data.status === "rejected").map(item => <DashboardList
+  const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashboardList
     key={item.id}
-    first={item.data.firstname + " " + item.data.lastname}
-    second={item.data.email}
-    third={item.data.phoneNumber}
+    first={item.firstname + " " + item.lastname}
+    second={item.email}
+    third={item.phoneNumber}
     fourth={"09/08/23"}
     fifth={'888'}
-    sixth={item.data.type}
-    seventh={item.data.status}
+    sixth={item.type}
+    seventh={item.status}
   />)
   return (
     <>
