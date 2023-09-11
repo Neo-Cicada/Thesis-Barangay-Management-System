@@ -53,6 +53,7 @@ export default function MedicineForm() {
     email: email,
     medicine: medicine,
     message: messege,
+    status: 'ongoing'
   }
   const style = {
     display: 'flex',
@@ -62,7 +63,7 @@ export default function MedicineForm() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    useUpload(formData, 'MedicineRequest').then(console.log('Successfully uploaded'))
+    useUpload(formData, 'MedicineAllRequest').then(console.log('Successfully uploaded'))
     setFirstName('')
     setLastName('')
     setPhoneNumber('')
