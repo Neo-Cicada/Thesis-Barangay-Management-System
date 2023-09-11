@@ -24,7 +24,7 @@ import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 
 import HandymanOutlinedIcon from '@mui/icons-material/HandymanOutlined';
 import HandymanIcon from '@mui/icons-material/Handyman';
-
+import Logo from '../assets/2.png'
 export default function SideBar() {
   // const loc = useLocation();
   // const path = loc.pathname; scan current location
@@ -52,9 +52,8 @@ export default function SideBar() {
   return (
     <>
       <div className='nav-container'>
-        <div style={{  height: '10%', marginTop: '13%', borderBottom: '2px solid black' }}>
-          {/* <h1 >Logo</h1> */}
-
+        <div style={{  height: '10%', borderBotton: '2px solid black', display:'flex', justifyContent:'center' }}>
+          <img src={Logo} height={'100%'} />
         </div>
         <ul>
           <li>
