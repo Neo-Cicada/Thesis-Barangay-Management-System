@@ -1,7 +1,13 @@
 import React from 'react'
 import { Container } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
+import FacilityAdd from './FacilityAdd';
+import { useState } from 'react';
 export default function FacilityCrud() {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const handleDialogClose = () => {
+        setIsDialogOpen(!isDialogOpen);
+    };
   return (
     <>
        <Container
@@ -25,7 +31,7 @@ export default function FacilityCrud() {
 
                     </div>
                     <div
-                        // onClick={() => setIsDialogOpen(true)}
+                        onClick={() => setIsDialogOpen(true)}
                         style={{height:'100%',
                         cursor: 'pointer', width:'10em',
                         display:'flex',
@@ -36,6 +42,11 @@ export default function FacilityCrud() {
                 </Container>
                 
             </Container>
+            <FacilityAdd
+         handleDialogClose={handleDialogClose}
+         isDialogOpen={isDialogOpen}
+         setIsDialogOpen={setIsDialogOpen}
+      />
     </>
   )
 }
