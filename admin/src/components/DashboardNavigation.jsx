@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function DashboardNavigation({setStatus, status}) {
+export default function DashboardNavigation({ setStatus, status }) {
     const btnStyle = {
         border: '0',
         background: 'none',
@@ -12,7 +12,7 @@ export default function DashboardNavigation({setStatus, status}) {
     }
     const activeBtn = {
         border: '0',
-            background: 'none',
+        background: 'none',
         borderRadius: '0px',
         fontSize: '1.1rem',
         cursor: 'pointer',
@@ -20,7 +20,13 @@ export default function DashboardNavigation({setStatus, status}) {
     }
     return (
         <>
-            <div style={{ borderBottom: '2px solid #868686', display: 'flex', gap: '1.5em' }}>
+            <div style={{
+               borderBottom: '2px solid #868686',
+               display: 'flex',
+               gap: '1.5em',
+               /* Clamp the width to 768px on mobile devices */
+               maxWidth: 'minMax(768px, 100%)'
+            }}>
                 <button
                     style={status === 'default' ? activeBtn : btnStyle}
                     onClick={() => setStatus("default")}
