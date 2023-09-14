@@ -22,8 +22,9 @@ export default function DashboardItem({ data, path, name }) {
     <>
       <Container sx={{ height: '2em', width: '100%', borderBottom: '1px solid black', display: 'flex', justifyContent: 'space-between' }}>
         <div style={{
+          border:'1px solid red',
           width: '15em',
-          height: '100%',
+          height: '95%%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between'

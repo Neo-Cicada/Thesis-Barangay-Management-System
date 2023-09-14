@@ -7,7 +7,7 @@ const ScrollableContainer = ({ children}) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                maxHeight: '25em',
+                maxHeight: '23em',
                 height: '100%',
                 overflow: 'auto',
                 paddingTop: '1em',

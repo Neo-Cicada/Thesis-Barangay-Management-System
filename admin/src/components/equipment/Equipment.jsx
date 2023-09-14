@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/equipment.css'
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import DashboardBox from '../DashboardBox'
 import DashboardNavigation from '../DashboardNavigation'
@@ -71,7 +71,7 @@ export default function Equipment() {
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <h3>Manage Equipment</h3>
           </div>
-          <div style={{ display: 'flex', gap: '1em' }}>
+          <Box sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
               numbers={allItems.length}
@@ -92,10 +92,11 @@ export default function Equipment() {
               name="Items"
               numbers={'11'}
               logo={<ChecklistIcon />} />
-          </div>
+          </Box>
 
-          <DashboardNavigation setStatus={setStatus} status={status} />
         </Container>
+        <DashboardNavigation setStatus={setStatus} status={status} />
+
         <div className="equipment-hero">
           {status === "default" && <EquipmentAllRequest items={allItems} />}
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}

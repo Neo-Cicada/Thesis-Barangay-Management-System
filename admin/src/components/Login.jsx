@@ -34,8 +34,17 @@ export default function Login({setLoginStatus}) {
     <>
       <div className='login-container'>
         <form className='login-box'>
-          <h1 className='e-barangay'>E-Barangay</h1>
+          <h1 className='ebarangay'>EBarangay Login</h1>
           <TextField
+            sx={{
+              width: {
+                xs: 200,
+                sm: 300,
+                md: 400,
+                lg: 500,
+                xl: 600,
+              }
+            }}
             name='email'
             type='email'
             label="Email"
@@ -44,6 +53,15 @@ export default function Login({setLoginStatus}) {
             required
           />
           <TextField
+            sx={{
+              width: {
+                xs: 200,
+                sm: 300,
+                md: 400,
+                lg: 500,
+                xl: 600,
+              }
+            }}
             name='password'
             type='password'
             label="Password"

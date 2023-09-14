@@ -76,7 +76,7 @@ export default function Certificate() {
   return (
     <>
       <div className="certificate-container">
-        <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em' }}>
+        <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em', }}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <h3>Manage Certificate</h3>
           </div>
@@ -102,8 +102,8 @@ export default function Certificate() {
               numbers={'11'}
               logo={<ChecklistIcon />} />
           </div>
-          <DashboardNavigation setStatus={setStatus} status={status} />
         </Container>
+        <DashboardNavigation setStatus={setStatus} status={status} />
         <div className="certificate-hero" style={{border:'none'}}>
           {status === "default" && <EquipmentAllRequest items={items} />}
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}

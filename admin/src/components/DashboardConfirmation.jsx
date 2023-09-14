@@ -8,7 +8,7 @@ export default function DashboardConfirmation({accept, reject}) {
             position:'absolute',
             background: 'white',
             border: '1px solid black',
-            padding: '5px',
+            padding: '2px',
             marginLeft:'1.5em',
             zIndex:'1',
             display:'flex',

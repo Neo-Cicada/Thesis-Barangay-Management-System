@@ -39,9 +39,9 @@ export default function Facilities() {
             numbers={'888'}
             logo={<ChecklistIcon />} />
         </div>
-        <DashboardNavigation setStatus={setStatus} status={status} />
-
       </Container>
+      <DashboardNavigation setStatus={setStatus} status={status} />
+
       <div sx={{border:'1px solid red', height:'70%'}}>
         <FacilityCrud/>
       </div>

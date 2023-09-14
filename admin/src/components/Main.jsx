@@ -10,7 +10,7 @@ export default function Main() {
                 <nav className='app-nav'>
                     <SideBar />
                 </nav>
-                <div className="hero">
+                <div className="hero" >
                     <div className='hero-box'>
                         <div className="hero-line">
                             <AppRoutes />
