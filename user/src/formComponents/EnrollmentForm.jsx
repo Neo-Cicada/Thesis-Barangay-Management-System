@@ -63,7 +63,7 @@ export default function EnrollmentForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData)
-    await useUpload(formData, "EnrollmentRequest").then(
+    await useUpload(formData, "EnrollmentAllRequest").then(
       console.log("done!")
     )
 

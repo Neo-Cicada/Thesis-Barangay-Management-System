@@ -49,7 +49,7 @@ const FacilityForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        useUpload(formData, 'FacilityRequest').then(console.log('successfully uploaded!!'))
+        useUpload(formData, 'FacilityAllRequest').then(() => console.log('successfully uploaded!!'))
         setFirstName('')
         setLastName('')
         setEmail('')
