@@ -1,16 +1,29 @@
 import React, { useState } from 'react'
-import HeroSection from '../../structure/HeroSection'
 import { Container } from '@mui/material'
 import ChecklistIcon from '@mui/icons-material/Checklist'
 import DashboardBox from '../DashboardBox'
 import DashboardNavigation from '../DashboardNavigation'
-import ScrollableContainer from '../ScrollableContainer'
-import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import FacilityCrud from './FacilityCrud'
-
+import useRead from '../../hooks/useRead'
+import DashboardList from '../DashboardList'
+import EquipmentAllRequest from '../../components/equipment/EquipmentAllRequest'
 export default function Facilities() {
+  const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
+  useRead('FacilityAllRequest', setData)
 
+  const items = data.map((item) =>  <DashboardList
+  first={item.firstname}
+  second={item.email}
+  third={item.phoneNumber}
+  fourth={'12/12/12'}
+  fifth={'Time'}
+  sixth={item.facility}
+  seventh={'request'}
+  itemId={item.id}
+  status={'ongoing'}
+  path="FacilityAllRequest"
+/>)
   return (
     <>
       <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em',}}>
@@ -43,7 +56,8 @@ export default function Facilities() {
       <DashboardNavigation setStatus={setStatus} status={status} />
 
       <div sx={{border:'1px solid red', height:'70%'}}>
-        <FacilityCrud/>
+      <EquipmentAllRequest items={items}/>
+       {status === "fifth" && <FacilityCrud/>}
       </div>
     </>
   )

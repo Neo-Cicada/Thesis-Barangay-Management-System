@@ -10,14 +10,14 @@ export default function DashboardHeader() {
         alignItems: 'center',
         justifyContent: "space-between",
       }}>
-        <Container style={{ width: '18%', textAlign: 'center' }}>Name</Container>
-        <Container style={{ width: '20%', textAlign: 'center' }}>Email</Container>
-        <Container style={{ width: '10%', textAlign: 'center' }}>Phone</Container>
-        <Container style={{ width: '12.5%', textAlign: 'center' }}>Date</Container>
-        <Container style={{ width: '6%', textAlign: 'center' }}>Quantity</Container>
-        <Container style={{ width: '12.5%', textAlign: 'center' }}>Item</Container>
-        <Container style={{ width: '12.5%', textAlign: 'center' }}>Status</Container>
-        <Container style={{ width: '5%', textAlign: 'center' }}></Container>
+        <div style={{ width: '20%', textAlign: 'center' }}>Name</div>
+        <div style={{ width: '25%', textAlign: 'center' }}>Email</div>
+        <div style={{ width: '8%', textAlign: 'center' }}>Phone</div>
+        <div style={{ width: '12.5%', textAlign: 'center' }}>Date</div>
+        <div style={{ width: '5%', textAlign: 'center' }}>Quantity</div>
+        <div style={{ width: '10%', textAlign: 'center' }}>Item</div>
+        <div style={{ width: '10%', textAlign: 'center' }}>Status</div>
+        <div style={{ width: '5%', textAlign: 'center' }}></div>
       </Container>
     </>
   );

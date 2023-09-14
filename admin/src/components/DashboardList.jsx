@@ -30,13 +30,13 @@ export default function DashboardList({ first, second, third, fourth, fifth,
           justifyContent: 'space-between',
         }}
       >
-        <div style={{ width: '18%', textAlign:'center' }}>{first}</div>
-        <div style={{ width: '20%',  textAlign:'center' }}>{second}</div>
-        <div style={{ width: '10%',  textAlign:'center' }}>{third}</div>
+        <div style={{ width: '20%', textAlign:'center',}}>{first}</div>
+        <div style={{ width: '25%',  textAlign:'center' }}>{second}</div>
+        <div style={{ width: '8%',  textAlign:'center' }}>{third}</div>
         <div style={{ width: '12.5%', textAlign:'center'  }}>{fourth}</div>
-        <div style={{ width: '6%', textAlign:'center'  }}>{fifth}</div>
-        <div style={{ width: '12.5%',  textAlign:'center' }}>{sixth}</div>
-        <div style={{ width: '12.5%', textAlign:'center'  }}>{seventh}</div>
+        <div style={{ width: '5%', textAlign:'center'  }}>{fifth}</div>
+        <div style={{ width: '10%',  textAlign:'center' }}>{sixth}</div>
+        <div style={{ width: '10%', textAlign:'center'  }}>{seventh}</div>
         {status === "ongoing" ?
           <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }} onClick={togglePopup}>
             <MoreHorizIcon />

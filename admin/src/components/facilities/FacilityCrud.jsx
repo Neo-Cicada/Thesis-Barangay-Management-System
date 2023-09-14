@@ -3,11 +3,21 @@ import { Container } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import FacilityAdd from './FacilityAdd';
 import { useState } from 'react';
+import useRead from '../../hooks/useRead';
+import FacilityItem from './FacilityItem';
+import ScrollableContainer from '../ScrollableContainer';
 export default function FacilityCrud() {
+    const [data, setData] = useState([])
+
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
     };
+    const items = data.map((item)=> <FacilityItem data={item} name={item.type}/>)
+
+    useRead('Facility', setData)
+
+
   return (
     <>
        <Container
@@ -40,7 +50,9 @@ export default function FacilityCrud() {
                         textAlign:'center'}}
                     > <AddIcon /> Add Facility</div>
                 </Container>
-                
+                <ScrollableContainer>
+                    {items}
+                </ScrollableContainer>
             </Container>
             <FacilityAdd
          handleDialogClose={handleDialogClose}
