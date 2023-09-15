@@ -21,7 +21,6 @@ export default function Profile() {
             <DashboardBox
               name="Numbers of admins"
               logo={<ChecklistIcon />} />
-            
           </Box>
         </Container>
         <DashboardNavigation  />
