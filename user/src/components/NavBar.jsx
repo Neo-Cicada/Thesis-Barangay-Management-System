@@ -28,7 +28,7 @@ export default function NavBar() {
     <nav style={{display:'flex', gap: '1rem', margin: '1rem'}}>
       <Button to="/" component={Link} sx={loc==="/" ? activeLink: normalLink}>Home</Button>
       <Button to="forms" component={Link} sx={pathForm ? activeLink: normalLink}>Forms</Button>
-      <Button to="report" component={Link } sx={loc==="/report" ? activeLink: normalLink}>Report</Button>
+      {/* <Button to="report" component={Link } sx={loc==="/report" ? activeLink: normalLink}>Report</Button> */}
     </nav>
     </>
   )

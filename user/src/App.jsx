@@ -18,11 +18,11 @@ function App() {
           <AppRouter/>
         </div>
       </main>
-      <footer>
+      {/* <footer>
         <div className='footer-container'>
 
         </div>
-      </footer>
+      </footer> */}
     </>
   )
 }
