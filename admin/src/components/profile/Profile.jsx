@@ -4,14 +4,18 @@ import { useState } from 'react'
 import DashboardBox from '../DashboardBox';
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import DashboardNavigation from '../DashboardNavigation';
+import ProfileNavigation from './ProfileNavigation';
 export default function Profile() {
   const [profile, setProfile] = useState("profile");
+  const [status, setStatus] = useState("default")
+
   return (
     <>
-      <div style={{ height: '100%', width: '100%', border: '1px solid red' }}>
+      <div style={{ height: '100%', width: '100%', }}>
         <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <h3>Manage Profile</h3>
+            <div>Logout</div>
           </div>
           <Box sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
@@ -23,7 +27,7 @@ export default function Profile() {
               logo={<ChecklistIcon />} />
           </Box>
         </Container>
-        <DashboardNavigation  />
+        <ProfileNavigation setStatus={setStatus} status={status}/>
 
       </div>
     </>
