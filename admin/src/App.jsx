@@ -14,9 +14,14 @@ function App() {
     localStorage.setItem('isAuthenticated', isAuthenticated);
   }, [isAuthenticated]);
 
+  const handleSignout = async () => {
+    // Perform sign out logic here
+    setIsAuthenticated(false); // Update the state to reflect logout
+  };
+
   return (
     <>
-      {isAuthenticated ? <Main /> : <Login setLoginStatus={setIsAuthenticated} />}
+      {isAuthenticated ? <Main handleSignout={handleSignout}/> : <Login setLoginStatus={setIsAuthenticated} />}
     </>
   );
 }

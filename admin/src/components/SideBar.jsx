@@ -25,7 +25,7 @@ import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import HandymanOutlinedIcon from '@mui/icons-material/HandymanOutlined';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import Logo from '../assets/2.png'
-export default function SideBar() {
+export default function SideBar({handleSignout}) {
   // const loc = useLocation();
   // const path = loc.pathname; scan current location
   const [status, setStatus] = useState('equipment')
@@ -150,6 +150,20 @@ export default function SideBar() {
               </div>
               <div className='sidebar-btn-name'>Profile</div>
             </Button>
+          </li>
+          <li style={{height: '7em',
+             display:'flex',
+             justifyContent:'end',
+             alignItems:'end'}}>
+            <div
+              onClick={handleSignout}
+            style={{
+               cursor:'pointer',
+               border:'1px solid black',
+               width:'6em',
+               color:'#3b5998',
+               borderRadius:'0.8rem',
+               textAlign:'center', }}>Signout</div>
           </li>
         </ul>
       </div>

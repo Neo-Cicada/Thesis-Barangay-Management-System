@@ -20,6 +20,7 @@ export default function ProfileNavigation({ setStatus, status }) {
   return (
     <>
        <div style={{
+                height:'5%',
                borderBottom: '2px solid #868686',
                display: 'flex',
                gap: '1.5em',

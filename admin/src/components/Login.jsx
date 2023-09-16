@@ -6,7 +6,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, Navigate, useNavigate, } from 'react-router-dom';
 import { auth } from '../firebase'
 import App from '../App';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function Login({setLoginStatus}) {
   const [email, setEmail] = useState('');
@@ -18,7 +17,7 @@ export default function Login({setLoginStatus}) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
-        setLoginStatus(true);
+        setLoginStatus("true");
 
       }
       )
