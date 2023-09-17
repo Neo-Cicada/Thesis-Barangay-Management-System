@@ -8,38 +8,33 @@ export default function ProfileInformation() {
   const [currentUser, setCurrentUser] = useState('');
   const [profileData, setProfileData] = useState({
     fullname: '',
-    email: '', // Initialize email as empty
+    email: '',
     phoneNumber: ''
   });
   const [data, setData] = useState([]);
   useRead('ProfileData', setData);
+  const userEmail = data.filter(item => item.email === profileData.email)
+    .map(item  => <h1>{item.fullname}</h1>)
 
-  useEffect(() => {
-    // Create a reference to the Firebase authentication instance
+    useEffect(() => {
     const auth = getAuth();
 
-    // Set up an observer for authentication state changes
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in
-        setCurrentUser(user.email); // Set email from user object
+        setCurrentUser(user.email);
         setProfileData({...profileData, email: user.email})
-        // ...
       } else {
-        // User is signed out
-        // ...
       }
     });
 
-    // Clean up the observer when the component unmounts
     return () => unsubscribe();
-  }, []); // Empty dependency array ensures the effect runs only once
+  }, []);
 
 
 
   const onUpdateProfile = async (e) => {
-    // await useUploadDirectly('ProfileData', profileData)
-    console.log(profileData);
+    await useUploadDirectly('ProfileData', profileData)
+    // console.log(data);
   }
 
   return (

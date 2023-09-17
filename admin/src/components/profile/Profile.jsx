@@ -3,7 +3,7 @@ import { Box, Button, Container, TextField } from '@mui/material'
 import { useState } from 'react'
 import DashboardBox from '../DashboardBox';
 import ChecklistIcon from '@mui/icons-material/Checklist';
-import DashboardNavigation from '../DashboardNavigation';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ProfileNavigation from './ProfileNavigation';
 import ProfileInformation from './ProfileInformation';
 
@@ -11,7 +11,7 @@ export default function Profile() {
   const [profile, setProfile] = useState("profile");
   const [status, setStatus] = useState("default")
 
-
+ 
 
 
   return (
@@ -25,9 +25,6 @@ export default function Profile() {
             <DashboardBox
               name="Current Admin"
 
-              logo={<ChecklistIcon />} />
-            <DashboardBox
-              name="Numbers of admins"
               logo={<ChecklistIcon />} />
           </Box>
         </Container>
