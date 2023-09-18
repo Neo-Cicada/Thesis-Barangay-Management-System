@@ -12,7 +12,7 @@ export default function Facilities() {
   const [status, setStatus] = useState('default')
   useRead('FacilityAllRequest', setData)
 
-  const items = data.map((item) =>  <DashboardList
+  const items = data.filter(item=> item.status === "request").map((item) =>  <DashboardList
   first={item.firstname}
   second={item.email}
   third={item.phoneNumber}
@@ -56,7 +56,7 @@ export default function Facilities() {
       <DashboardNavigation setStatus={setStatus} status={status} />
 
       <div sx={{border:'1px solid red', height:'70%'}}>
-      <EquipmentAllRequest items={items}/>
+        <EquipmentAllRequest items={items}/>
        {status === "fifth" && <FacilityCrud/>}
       </div>
     </>

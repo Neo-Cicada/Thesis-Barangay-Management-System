@@ -14,7 +14,7 @@ export default function Certificate() {
   const [data, setData] = useState([])
 
   useRead('CertificateAllRequest', setData)
-  const items = data.map(item => <DashboardList
+  const items = data.filter(item => item.status === "request").map(item => <DashboardList
     key={item.id}
     first={item.firstname + " " + item.lastname}
     second={item.email}

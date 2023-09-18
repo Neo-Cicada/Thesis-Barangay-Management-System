@@ -4,11 +4,20 @@ import DashboardConfirmation from './DashboardConfirmation';
 import useStatusUpdate from '../hooks/useStatusUpdate'
 import ConfirmationDialog from './ConfirmationDialog';
 import GreenToast from './GreenToast';
+import RedToast from './RedToast'
 export default function DashboardList({ first, second, third, fourth, fifth,
   sixth, seventh, itemId, status, path }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [openToast, setOpenToast] = useState(false);
+  const [openRedToast, setRedToast] = useState(false);
+
+  const handleOpenRedToast = () =>{
+    setRedToast(true)
+  }
+  const handleCloseRedToast = () =>{
+    setRedToast(false)
+  }
   const handleOpenToast = () => {
     setOpenToast(true);
   };
@@ -23,6 +32,7 @@ export default function DashboardList({ first, second, third, fourth, fifth,
 
   const handleClose = () => {
     setOpen(false);
+    handleOpenRedToast()
   };
 
   const handleConfirm = () => {
@@ -30,9 +40,10 @@ export default function DashboardList({ first, second, third, fourth, fifth,
     // For example, you can perform a delete operation or any other action
     // and then close the dialog
 
-    handleClose();
+    setOpen(false);
     handleOpenToast();
   };
+
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
@@ -40,12 +51,14 @@ export default function DashboardList({ first, second, third, fourth, fifth,
     e.stopPropagation();
     console.log(path)
     handleOpen()
-    // handleOpenToast()
-    // await useStatusUpdate(path, itemId, 'accepted')
+    togglePopup()
+    // await useStatusUpdate(path, itemId, 'ongoing')
   }
   const onDecline = async (e) => {
     e.stopPropagation();
-    await useStatusUpdate(path, itemId, 'rejected')
+    handleOpen()
+    togglePopup()
+     // await useStatusUpdate(path, itemId, 'rejected')
     console.log(itemId)
   }
   return (
@@ -67,10 +80,11 @@ export default function DashboardList({ first, second, third, fourth, fifth,
         <div style={{ width: '10%', textAlign: 'center' }}>{sixth}</div>
         <div style={{ width: '10%', textAlign: 'center' }}>{seventh}</div>
         <GreenToast open={openToast} onClose={handleCloseToast} />
-        {status === "ongoing" ?
+        <RedToast open={openRedToast} onClose={handleCloseRedToast}/>
+        {status === "ongoing" || status ==="request" ?
           <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }} onClick={togglePopup}>
             <MoreHorizIcon />
-            {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline} />}
+            {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline} status={status} />}
 
           </div> :
           <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }}></div>

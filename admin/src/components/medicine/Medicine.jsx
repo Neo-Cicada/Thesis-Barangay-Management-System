@@ -13,7 +13,7 @@ export default function Medicine() {
 
   useRead('MedicineAllRequest', setData)
 
-  const items = data.map(item => <DashboardList
+  const items = data.filter(item => item.status === "request").map(item => <DashboardList
     first={item.firstName}
     second={item.email}
     third={item.phoneNumber}

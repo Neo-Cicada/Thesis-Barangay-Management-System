@@ -15,7 +15,7 @@ export default function Equipment() {
   const [status, setStatus] = useState("default")
   useRead('EquipmentAllRequest', setData)
 
-  const allItems = data.map(item => <DashboardList
+  const allItems = data.filter(item => item.status ==="request").map(item => <DashboardList
     key={item.id}
     item={item}
     first={item.firstname + " " + item.lastname}
@@ -26,7 +26,7 @@ export default function Equipment() {
     sixth={item.type}
     seventh={item.status}
     path={'EquipmentAllRequest'}
-    status={item.status === 'ongoing' ? 'ongoing' : undefined}
+    status={"request"}
   />
   )
   const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashboardList

@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
 
-function GreenToast({ open, onClose }) {
+function RedToast({ open, onClose }) {
   const [autoHideDuration, setAutoHideDuration] = useState(1500);
 
   useEffect(() => {
@@ -23,9 +23,9 @@ function GreenToast({ open, onClose }) {
       onClose={onClose}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
     >
-      <div style={{ backgroundColor: 'green', color: 'white', padding: '12px', display: 'flex', alignItems: 'center' }}>
+      <div style={{ backgroundColor: 'red', color: 'white', padding: '12px', display: 'flex', alignItems: 'center' }}>
         <CheckCircleIcon style={{ marginRight: '8px' }} />
-        Successful!
+        Cancelled!
         <IconButton size="small" aria-label="close" color="inherit" onClick={onClose}>
           <CloseIcon fontSize="small" />
         </IconButton>
@@ -34,4 +34,4 @@ function GreenToast({ open, onClose }) {
   );
 }
 
-export default GreenToast;
+export default RedToast;
