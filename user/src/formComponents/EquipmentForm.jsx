@@ -69,7 +69,7 @@ export default function EquipmentForm() {
     email: email,
     type: type,
     message: messege,
-    status: 'ongoing'
+    status: 'request'
   }
   const style = {
     display: 'flex',
