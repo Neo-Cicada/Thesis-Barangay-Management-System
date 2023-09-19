@@ -1,9 +1,18 @@
 import React from 'react'
-import { Button } from '@mui/material'
-export default function DashboardConfirmation({ accept, reject, status }) {
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'
+export default function DashboardConfirmation({ accept, reject, status, open, onClose, }) {
   return (
     <>
-      <div
+      <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Accept or Reject</DialogTitle>
+      <DialogContent>Choose on how you want to procced on this transaction</DialogContent>
+        <DialogActions>
+          {status === "ongoing" ? <Button onClick={accept}>Confirm</Button> : <Button onClick={accept}>Accept</Button>}
+
+          <Button onClick={reject}>Reject</Button>
+        </DialogActions>
+      </Dialog>
+      {/* <div
         style={{
           position: 'absolute',
           background: 'white',
@@ -18,7 +27,7 @@ export default function DashboardConfirmation({ accept, reject, status }) {
 
         <Button onClick={reject}>Reject</Button>
 
-      </div>
+      </div> */}
     </>
   )
 }

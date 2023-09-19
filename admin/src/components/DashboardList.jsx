@@ -5,13 +5,29 @@ import useStatusUpdate from '../hooks/useStatusUpdate'
 import ConfirmationDialog from './ConfirmationDialog';
 import GreenToast from './GreenToast';
 import RedToast from './RedToast'
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import EquipmentViewInformation from './equipment/EquipmentViewInformation';
 export default function DashboardList({ first, second, third, fourth, fifth,
   sixth, seventh, itemId, status, path }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [openToast, setOpenToast] = useState(false);
   const [openRedToast, setRedToast] = useState(false);
+  const [confirmation, setConfirmation] = useState(false)
+  const [information, setInformation] = useState(false)
+  const openInformation = () =>{
+    setInformation(true)
+  }
+  const handleCloseInformation = () =>{
+    setInformation(false)
+  }
+  const handleOpenConfirmation = () =>{
+    setConfirmation(true)
+  }
+  const handleCloseConfirmation = () =>{
+    setConfirmation(false)
 
+  }
   const handleOpenRedToast = () =>{
     setRedToast(true)
   }
@@ -81,13 +97,16 @@ export default function DashboardList({ first, second, third, fourth, fifth,
         <div style={{ width: '10%', textAlign: 'center' }}>{seventh}</div>
         <GreenToast open={openToast} onClose={handleCloseToast} />
         <RedToast open={openRedToast} onClose={handleCloseRedToast}/>
+        <EquipmentViewInformation open={information} onClose={handleCloseInformation}/>
         {status === "ongoing" || status ==="request" ?
-          <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }} onClick={togglePopup}>
-            <MoreHorizIcon />
-            {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline} status={status} />}
+          <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }} >
+            <VisibilityIcon onClick={openInformation}/>
+            <MoreHorizIcon onClick={togglePopup}/>
+            {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline}
+             status={status} open={handleOpenConfirmation} onClose={handleCloseConfirmation} />}
 
           </div> :
-          <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }}></div>
+          <div style={{ width: '5%', cursor: 'pointer', display: 'flex' }}><VisibilityIcon/></div>
         }
         <ConfirmationDialog
           showToast={setOpenToast}
