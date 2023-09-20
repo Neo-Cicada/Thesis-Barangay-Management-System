@@ -34,7 +34,6 @@ const AppRoutes = () => {
       <Route path='enrollment' element={<Enrollment />} />
 
       <Route path='facilities' element={<Facilities />}/>
-        
 
       <Route path='medicine' element={<Medicine />} />
 

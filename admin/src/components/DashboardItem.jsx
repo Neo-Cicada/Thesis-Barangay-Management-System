@@ -4,13 +4,30 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import useDelete from '../hooks/useDelete'
 import useUpdate from '../hooks/useUpdate'
+import ConfirmationDialog from './ConfirmationDialog'
+import GreenToast from './GreenToast'
+import RedToast from './RedToast'
 export default function DashboardItem({ data, path, name }) {
   const [quantityValue, setQuantityValue] = React.useState(false)
   const [newValue, setNewValue] = React.useState(data.quantity)
+  const [onpenDialog, setOpenDialog] = React.useState(false)
+  const [greenToast, setGreenToast] = React.useState(false)
+  const [redToast, setRedToast] = React.useState(false)
   const handleDelete = async (e) => {
     console.log('clicked')
     e.preventDefault();
-    await useDelete(path, data.id)
+    setOpenDialog(true)
+    // await useDelete(path, data.id)
+  }
+  const handleClose = () =>{
+
+    setOpenDialog(!onpenDialog)
+    setRedToast(true)
+  }
+  const handleConfirm = async (e) =>{
+     useDelete(path, data.id)
+     setOpenDialog(!onpenDialog)
+     setGreenToast(true) // is a must maybe use Promise, i dont have internet so ill just comment it.
   }
   const handleEdit = async (e)=>{
     e.preventDefault();
@@ -22,7 +39,7 @@ export default function DashboardItem({ data, path, name }) {
     <>
       <Container sx={{ height: '2em', width: '100%', borderBottom: '1px solid black', display: 'flex', justifyContent: 'space-between' }}>
         <div style={{
-          border:'1px solid red',
+          // border:'1px solid red',
           width: '15em',
           height: '95%%',
           display: 'flex',
@@ -59,6 +76,16 @@ export default function DashboardItem({ data, path, name }) {
           ><DeleteIcon />Delete</div>
         </div>
       </Container>
+      <ConfirmationDialog
+         title={'Confirmation'}
+         message={'Do you want to procced?'}
+         open={onpenDialog}
+         onClose={handleClose}
+         onConfirm={handleConfirm}
+        />
+        <GreenToast open={greenToast}
+         onClose={()=>setGreenToast(!greenToast)}/>
+         <RedToast open={redToast} onClose={()=>setRedToast(!redToast)}/>
     </>
   )
 }

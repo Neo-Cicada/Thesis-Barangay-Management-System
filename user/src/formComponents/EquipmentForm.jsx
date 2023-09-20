@@ -23,6 +23,7 @@ export default function EquipmentForm() {
   const [email, setEmail] = useState('');
   const [type, setType] = useState('');
   const [messege, setMessege] = useState('');
+  const [quantity, setQuantity] = useState('')
 
   const [showInformation, setShowInformation] = useState(false);
 
@@ -69,7 +70,8 @@ export default function EquipmentForm() {
     email: email,
     type: type,
     message: messege,
-    status: 'request'
+    status: 'request',
+    quantity: quantity
   }
   const style = {
     display: 'flex',
@@ -90,6 +92,7 @@ export default function EquipmentForm() {
     setEmail('')
     setType('')
     setMessege('')
+    setQuantity('')
   }
   const validateStartDate = () => {
     return startDate !== null; // Implement your validation logic here
@@ -156,17 +159,22 @@ export default function EquipmentForm() {
           </Box>
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
-          <Box sx={{ width: '30em' }}>
             <FormControl fullWidth>
-              <InputLabel >Select Available Equipment</InputLabel>
+              <InputLabel >Select Equipment</InputLabel>
               <Select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                label="Select Available Equipment">
+                label="Select Equipment">
                 {items}
               </Select>
             </FormControl>
-          </Box>
+          <TextField
+            value={quantity}
+            onChange={(e)=>setQuantity(e.target.value)}
+            fullWidth
+            label="Quantity"
+            type='number'
+          />
         </Box>
         <Box sx={{ ...style, gap: '4em' }}>
           <Box sx={{ width: '13em', }}>

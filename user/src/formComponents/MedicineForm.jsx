@@ -16,7 +16,7 @@ export default function MedicineForm() {
   const [medicine, setMedicine] = useState('');
   const [messege, setMessege] = useState('')
   const [isValidEmail, setIsValidEmail] = useState(true);
-
+  const [quantity, setQuantity] = useState('')
   const [data, setData] = useState([])
 
   const [showInformation, setShowInformation] = useState(false);
@@ -53,7 +53,8 @@ export default function MedicineForm() {
     email: email,
     medicine: medicine,
     message: messege,
-    status: 'ongoing'
+    status: 'request',
+    quantity: quantity
   }
   const style = {
     display: 'flex',
@@ -70,6 +71,7 @@ export default function MedicineForm() {
     setEmail('')
     setMessege('')
     setMedicine('')
+    setQuantity('')
   }
   return (
     <>
@@ -140,6 +142,14 @@ export default function MedicineForm() {
               {items}
             </Select>
           </FormControl>
+            <TextField
+            fullWidth
+            label="Quantity"
+            type='number'
+            value={quantity}
+            onChange={(e)=>setQuantity(e.target.value)}
+            // put max base on the item selected
+            />
         </Box>
         <Box sx={style}>
           <TextareaAutosize

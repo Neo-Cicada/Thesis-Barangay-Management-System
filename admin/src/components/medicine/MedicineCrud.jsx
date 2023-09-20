@@ -14,7 +14,7 @@ export default function MedicineCrud() {
     const items = data.map(item => <DashboardItem data={item} path="Medicines" name={item.type}/>)
     const handleDialogClose = () => {
       setIsDialogOpen(!isDialogOpen);
-  };  
+  };
 
   return (
     <>

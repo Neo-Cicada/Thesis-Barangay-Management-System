@@ -4,6 +4,7 @@ const ScrollableContainer = ({ children}) => {
     return (
         <>
             <Container style={{
+                // border:'1px solid red',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

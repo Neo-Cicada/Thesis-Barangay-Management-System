@@ -12,6 +12,7 @@ export default function MedicineAdd({ handleDialogClose, isDialogOpen, setIsDial
 
         await useUploadDirectly('Medicines', item).then(()=> setIsDialogOpen(false))
         console.log(item)
+        setIsDialogOpen(false)
       }
   return (
     <>
