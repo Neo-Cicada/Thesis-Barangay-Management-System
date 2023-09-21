@@ -2,14 +2,15 @@ import './App.css'
 import NavBar from './components/NavBar'
 import AppRouter from './components/AppRouter'
 import textLogo from '../src/assets/ebarangay.png'
+import NewHeader from './newComponents/newHeader/NewHeader'
+
 function App() {
 
 
   return (
     <>
-      <header style={{height:'10vh'}}>
-
-      </header>
+      <NewHeader/>
+      <div style={{border:'1px solid red', height:'90vh'}}>qweqweqwe</div>
     </>
   )
 }

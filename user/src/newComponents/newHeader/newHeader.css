@@ -1,0 +1,71 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+header{
+    height: clamp(80px, 10vh, 120px);
+    align-items: center;
+    background-color: #D0E7D2;
+    display: flex;
+    justify-content: center;
+}
+.header-div{
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+/* for mobile design */
+@media screen and (max-width: 767px) {
+    .desktop-navigation{
+     display: none;   
+    }
+    .burger-icon{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    .popUp-navigation{
+        background-color: #79AC78;
+        z-index: 1;
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .popUp-navigation > ul {
+        list-style: none;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    .popUp-navigation > ul > li{
+        font-size: clamp(14px, 4vw, 20px);
+
+    }
+    .nav-menu:hover{
+        color: white;
+    }
+}
+
+/* Desktop design */
+
+@media screen and (min-width: 768px) {
+    /* Your desktop-specific CSS rules go here */
+    .popUp-navigation{
+        display: none;
+    }
+    .burger-icon{
+        display: none;
+    }
+    .desktop-navigation > ul{
+        display: flex;
+        gap: 1em
+    }
+    .desktop-navigation > ul >li{
+        list-style: none;
+        font-size: clamp(16px, 2vw, 24px);    }
+}
