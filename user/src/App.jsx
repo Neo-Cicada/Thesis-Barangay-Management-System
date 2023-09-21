@@ -7,22 +7,9 @@ function App() {
 
   return (
     <>
-      <header>
-        <div className='header-container'>
-          <a href=""><img src={textLogo} style={{height: '18em'}} /></a>
-          <NavBar/>
-        </div>
-      </header>
-      <main>
-        <div className='main-container'>
-          <AppRouter/>
-        </div>
-      </main>
-      {/* <footer>
-        <div className='footer-container'>
+      <header style={{height:'10vh'}}>
 
-        </div>
-      </footer> */}
+      </header>
     </>
   )
 }
