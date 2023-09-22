@@ -8,6 +8,7 @@
     font-size: clamp(20px, 5vw, 40px);
     height: clamp(3%, 5%, 10%);
 }
+
 .service-body{
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
@@ -22,13 +23,14 @@
 
 /* service box */
 .service-box {
-  width: clamp(160px, 50%, 400px);
+  width: clamp(40vw, 50%, 400px);
   height: clamp(100px, 18vh, 250px);
   background-color: #DFE3EE;
   position: relative; /* Set position to relative for pseudo-element */
   transition: box-shadow 0.3s ease; /* Add transition for the box shadow */
   border-radius: 1em;
   cursor: pointer;
+
 }
 
 .service-box::before {
@@ -56,6 +58,8 @@
 
 .service-box-title{
   text-align: center;
+  font-size: clamp(10px, 1rem, 1.2rem);
+  
 }
 @media screen and (min-width: 768px) {
 

@@ -38,7 +38,7 @@ export default function NewHeader() {
           <ul>
             <li className='nav-menu'>Home</li>
             <li className='nav-menu'>Announcement</li>
-            <li className='nav-menu'>Reservation and Request</li>
+            <li className='nav-menu'>Services</li>
             <li className='nav-menu'>About</li>
           </ul>
         </div>}

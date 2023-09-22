@@ -29,12 +29,13 @@ header{
         cursor: pointer;
     }
     .popUp-navigation{
-        background-color: #79AC78;
+        background-color: #48d2e4;
         z-index: 1;
         position: absolute;
-        width: 100%;
+        width: clamp(100vw, 100%, 100em);
         display: flex;
         justify-content: center;
+        min-width: 174px;
     }
     .popUp-navigation > ul {
         list-style: none;

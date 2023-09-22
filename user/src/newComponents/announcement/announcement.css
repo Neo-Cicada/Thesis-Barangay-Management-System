@@ -29,9 +29,48 @@
 .announcementBox{
     width: clamp(100px, 70%, 600px);
     height: clamp(100px, 30vh, 400px);
-    background-color: lightblue;
+    background-color: #DFE3EE;
+    border-radius: 0.8em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
-
+.announcementBox::before {
+    content: ''; /* Create a pseudo-element */
+    position: absolute;
+    border-radius: 1em;
+    border: 2px solid transparent; /* Start with a transparent border */
+    transition: border-color 0.3s ease; /* Add transition for border color */
+    pointer-events: none; /* Allow interaction with the box underneath */
+  }
+  .announcementBox:hover::before {
+    border-radius: 1em;
+    border-color: #3B5998; /* Change the border color on hover */
+  }
+  .announcementBox:hover {
+    box-shadow: 0 0 0 5px #3B5998; /* Add a box shadow to create the frame on hover */
+  }
+.announcement-image{
+    height:60%;
+}
+.announcement-text{
+    overflow: hidden;
+    height:25%;
+}
+.announcement-footer{
+    height: 15%;
+     display: flex;
+     justify-content: space-between;
+}
+.announcement-footer > .date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.announcement-footer > .btn{
+    width: 30% !important;
+    cursor: pointer;
+    
+}
 @media screen and (min-width: 768px) {
 
     .announcement-body{
@@ -42,6 +81,5 @@
     .announcementBox{
         width: clamp(300px, 70%, 400px);
         height: clamp(200px, 40vh, 300px);
-        background-color: lightblue;
     }
 }

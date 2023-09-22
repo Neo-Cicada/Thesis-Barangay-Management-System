@@ -5,8 +5,8 @@ export default function ServiceBox({title, image}) {
   return (
     <>
       <div className='service-box' >
-        <img src={image} width={'100%'} height={'80%'}/>
-        <p className='service-box-title'>{title}</p>
+        <img className='service-image' src={image} width={'100%'} height={'75%'}/>
+        <p className='service-box-title' style={{height:'25%'}}>{title}</p>
 
       </div>
     </>
