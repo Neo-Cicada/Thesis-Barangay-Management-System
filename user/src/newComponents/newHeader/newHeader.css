@@ -7,6 +7,9 @@ header{
     background-color: #D0E7D2;
     display: flex;
     justify-content: center;
+    width: 100%;
+    min-width: 174px;
+
 }
 .header-div{
     display: flex;
