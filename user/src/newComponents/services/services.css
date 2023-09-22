@@ -6,12 +6,14 @@
 .services-title{
     text-align: center;
     font-size: clamp(20px, 5vw, 40px);
-    height: 10%;
+    height: clamp(3%, 5%, 10%);
 }
 .service-body{
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
     height: 80%;
+    padding-top: clamp(1em, 2em,3em);
+    padding-bottom: clamp(1em, 2em,3em);
     grid-gap: 1em;
     justify-items: center;
     align-items: center;
@@ -19,32 +21,42 @@
     }
 
 /* service box */
-.service-box{
-    width: clamp(100px, 30%, 300px);
-    height: clamp(100px, 20vh, 100px);
-    background-color: rgb(0, 0, 0);
-    position: relative; /* Set position to relative for pseudo-element */
-     transition: box-shadow 0.3s ease; /* Add transition for the box shadow */
+.service-box {
+  width: clamp(160px, 50%, 400px);
+  height: clamp(100px, 18vh, 250px);
+  background-color: #DFE3EE;
+  position: relative; /* Set position to relative for pseudo-element */
+  transition: box-shadow 0.3s ease; /* Add transition for the box shadow */
+  border-radius: 1em;
+  cursor: pointer;
 }
+
 .service-box::before {
-    content: ''; /* Create a pseudo-element */
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px solid transparent; /* Start with a transparent border */
-    transition: border-color 0.3s ease; /* Add transition for border color */
-    pointer-events: none; /* Allow interaction with the box underneath */
-  }
-  
-  .service-box:hover::before {
-    border-color: pink; /* Change the border color on hover */
-  }
-  
-  .service-box:hover {
-    box-shadow: 0 0 0 5px pink; /* Add a box shadow to create the frame on hover */
-  }
+  content: ''; /* Create a pseudo-element */
+  position: absolute;
+  border-radius: 1em;
+  border: 2px solid transparent; /* Start with a transparent border */
+  transition: border-color 0.3s ease; /* Add transition for border color */
+  pointer-events: none; /* Allow interaction with the box underneath */
+  /* Set dimensions and position to cover the entire box */
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+}
+
+.service-box:hover::before {
+  border-radius: 1em;
+  border-color: #3B5998; /* Change the border color on hover */
+}
+
+.service-box:hover {
+  box-shadow: 0 0 0 5px #3B5998; /* Add a box shadow to create the frame on hover */
+}
+
+.service-box-title{
+  text-align: center;
+}
 @media screen and (min-width: 768px) {
 
     .service-body{
@@ -60,7 +72,6 @@
         .service-box {
             width: clamp(200px, 30vw, 300px);
             height: clamp(200px, 10vw, 300px);
-            background-color: rgb(19, 20, 20);
             
           }
 }

@@ -16,7 +16,7 @@
   width: clamp(6em, 60vmin, 12em);
   height: clamp(6em, 60vmin, 12em);
   margin-top: clamp(1em, 5%, 3em);
-  background-color: #618264;
+  background-color: #3B5998;
   color: white;
   letter-spacing: 2px;
 }
@@ -38,7 +38,7 @@
 .introduction-circle:hover::after {
   width: 140%; /* Adjust the size as needed */
   height: 140%; /* Adjust the size as needed */
-  background: #79AC78;
+  background: #8B9DC3;
   mix-blend-mode: normal;
   opacity: 0.1;
 }
