@@ -5,6 +5,9 @@ import textLogo from '../src/assets/ebarangay.png'
 import NewHeader from './newComponents/newHeader/NewHeader'
 import Introduction from './newComponents/introduction/Introduction'
 import Announcement from './newComponents/announcement/Announcement'
+import Services from './newComponents/services/Services'
+import About from './newComponents/about/About'
+import Footer from './newComponents/footer/Footer'
 function App() {
 
 
@@ -13,7 +16,9 @@ function App() {
       <NewHeader/>
       <Introduction/>
       <Announcement/>
-      <div style={{height:'50vh'}}></div>
+      <Services/>
+      <About/>
+      <Footer/>
     </>
   )
 }

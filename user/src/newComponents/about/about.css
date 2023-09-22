@@ -1,0 +1,5 @@
+.about{
+    min-width: 174px;
+    height: clamp(500px, 80vh, 100vh);
+}
+

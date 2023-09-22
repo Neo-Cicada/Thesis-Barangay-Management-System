@@ -1,7 +1,7 @@
 .announcement{
-    border: 1px solid green;
     height: clamp(500px, 90vh, 100vh);
     min-width: 174px;
+    border: 1px solid red;
 }
 .announcement-title{
     text-align: center;
@@ -10,14 +10,13 @@
 }
 .announcement-body {
     display: grid;
-    border: 1px solid red;
     grid-template-columns: 100%;
     height: 80%;
     grid-gap: 1em;
     justify-items: center;
     align-items: center;
-    overflow: 'auto';
-    
+    overflow: hidden;
+    /* max-height: 80vh; */
 }
 .announcement-btn{
     text-align: center;
@@ -36,16 +35,13 @@
 @media screen and (min-width: 768px) {
 
     .announcement-body{
-        border: 1px solid red;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-        grid-template-rows: repeat(3, 50%);
-        justify-content: center;
-        
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjust the minimum width (100px) as needed */
+        gap: 10px; /* Adjust the gap between items as needed */
     }
     .announcementBox{
-        width: clamp(200px, 40%, 300px);
-        height: clamp(200px, 30vh, 300px);
+        width: clamp(300px, 70%, 400px);
+        height: clamp(200px, 40vh, 300px);
         background-color: lightblue;
     }
 }
