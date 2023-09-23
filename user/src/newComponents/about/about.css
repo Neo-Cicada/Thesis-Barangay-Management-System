@@ -1,5 +1,67 @@
-.about{
+.about-new{
     min-width: 174px;
     height: clamp(500px, 80vh, 100vh);
+    border: 1px solid red;
+
+}
+.about-title{
+    height: 10%;
+    border: 1px solid red;
+}
+.about-body{
+    border: 1px solid black;
+    height: 86%;
+}
+.about-body > .body-content{
+    height: 90%;
+    border: 1px solid red;
+}
+.about-body > .body-navigation{
+    border: 1px solid green;
+    height: 10%;
+}
+.about-body > .body-navigation > ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+.bd-nav-cirlces{
+    border: 1px solid #8B9DC3;
+    height: clamp(1em, 2em, 2.1em);
+    width: clamp(1em, 2em, 2.1em);
+    border-radius: 50%;
+    list-style: none;
+    background-color: #DFE3EE;
+    cursor: pointer;
+}
+.bd-nav-cirlces:hover{
+    background-color: #3B5998;
 }
 
+/* AboutEB css starts here*/
+
+.aboutEB{
+    border: 1px solid rgb(245, 25, 227);
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+
+}
+.aboutEB > * {
+    border: 1px solid rgb(245, 25, 227);
+}
+.aboutEB > .EB-title{
+   grid-column-start: 1;
+   grid-column-end: 4;
+   grid-row-start: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: clamp(1.3rem, 1.5rem, 1.7rem);
+}
+.aboutEB > .EB-description{
+    grid-row-start: 2;
+    grid-column: 2/span 3;
+}
