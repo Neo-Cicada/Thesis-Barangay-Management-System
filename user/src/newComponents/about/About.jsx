@@ -3,6 +3,7 @@ import './about.css'
 import AboutEB from './AboutEB'
 import Location from './Location'
 import Officials from './Officials'
+import AboutNavigation from './AboutNavigation'
 const jsonData = {
   introduction: {
     title: 'What is EBarangay?',
@@ -45,35 +46,7 @@ export default function About() {
               {state==="five"&&<Officials/>}
 
           </div>
-          <div className='body-navigation'>
-            <ul>
-              <li className='bd-nav-cirlces'
-               onClick={()=>setState('default')}>
-
-               </li>
-              <li
-                className='bd-nav-cirlces'
-                onClick={()=>setState('two')}
-              >
-
-              </li>
-              <li
-                className='bd-nav-cirlces'
-               onClick={()=>setState('three')}>
-
-              </li>
-              <li
-                className='bd-nav-cirlces'
-                onClick={()=>setState('four')}>
-
-              </li>
-              <li className='bd-nav-cirlces'
-                  onClick={()=>setState('five')}
-                >
-
-              </li>
-            </ul>
-          </div>
+          <AboutNavigation state={state} setState={setState}/>
         </div>
       </div>
     </>
