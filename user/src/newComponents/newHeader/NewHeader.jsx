@@ -4,6 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import {HashLink as Link} from 'react-router-hash-link'
 export default function NewHeader() {
   const [isMenuClicked, setIsMenuClicked] = useState(false)
 
@@ -23,10 +24,10 @@ export default function NewHeader() {
           <div className='desktop-navigation'>
 
             <ul>
-              <li className='nav-menu'>Home</li>
-              <li className='nav-menu'>Announcement</li>
-              <li className='nav-menu'>Request</li>
-              <li className='nav-menu'>About</li>
+              <Link className='nav-menu' to="#home" smooth>Home</Link>
+              <Link className='nav-menu' to="#announcement" smooth>Announcement</Link>
+              <Link className='nav-menu' to="#services" smooth>Request</Link>
+              <Link className='nav-menu' to="#about" smooth>About</Link>
             </ul>
 
           </div>
@@ -36,10 +37,10 @@ export default function NewHeader() {
         &&
         <div className='popUp-navigation'>
           <ul>
-            <li className='nav-menu'>Home</li>
-            <li className='nav-menu'>Announcement</li>
-            <li className='nav-menu'>Services</li>
-            <li className='nav-menu'>About</li>
+            <li className='nav-menu' to="/">Home</li>
+            <li className='nav-menu' to="announcement">Announcement</li>
+            <li className='nav-menu' to="services">Services</li>
+            <li className='nav-menu' to="about">About</li>
           </ul>
         </div>}
 

@@ -3,7 +3,7 @@ import './introduction.css'
 export default function Introduction() {
   return (
     <>
-      <div className='introduction'>
+      <div className='introduction' id='home'>
         <div className='intro-discription-box'>
           <p className='intro-title'>
             BARANGAY AMAMPEREZ

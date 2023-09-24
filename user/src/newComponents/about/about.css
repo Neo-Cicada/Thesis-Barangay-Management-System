@@ -1,23 +1,25 @@
 .about-new{
     min-width: 174px;
     height: clamp(500px, 80vh, 100vh);
-    border: 1px solid red;
+    /* border: 1px solid red; */
 
 }
 .about-title{
     height: 10%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    font-size: clamp(1.5rem, 2rem, 2.2rem);
+    text-align: center;
 }
 .about-body{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 86%;
 }
 .about-body > .body-content{
     height: 90%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 .about-body > .body-navigation{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     height: 10%;
 }
 .about-body > .body-navigation > ul{
@@ -28,21 +30,21 @@
 }
 .bd-nav-cirlces{
     border: 1px solid #8B9DC3;
-    height: clamp(1em, 2em, 2.1em);
-    width: clamp(1em, 2em, 2.1em);
+    height: clamp(1em, 1.5em, 2em);
+    width: clamp(1em, 1.5em, 21em);
     border-radius: 50%;
     list-style: none;
     background-color: #DFE3EE;
     cursor: pointer;
 }
 .bd-nav-cirlces:hover{
-    background-color: #3B5998;
+    background-color: #8B9DC3;
 }
 
 /* AboutEB css starts here*/
 
 .aboutEB{
-    border: 1px solid rgb(245, 25, 227);
+    /* border: 1px solid rgb(245, 25, 227); */
     height: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -50,7 +52,7 @@
 
 }
 .aboutEB > * {
-    border: 1px solid rgb(245, 25, 227);
+    /* border: 1px solid rgb(245, 25, 227); */
 }
 .aboutEB > .EB-title{
    grid-column-start: 1;
@@ -64,4 +66,58 @@
 .aboutEB > .EB-description{
     grid-row-start: 2;
     grid-column: 2/span 3;
+}
+
+/* Location css */
+.location{
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+.location > .location-title{
+    /* border: 1px solid red; */
+    text-align: center;
+    grid-column: 1/span 3;
+
+}
+.location >  .location-map{
+    /* border: 1px solid red; */
+    grid-row: 2/span 2;
+    grid-column: 3/span 4;
+}
+.location > .location-image{
+    /* border: 1px solid rgb(128, 235, 114); */
+    grid-row: 3/span 4;
+    grid-column: 1/span 2;
+}
+
+/* Officials css */
+.officials{
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+.officials > .official-title{
+    /* border: 1px solid red; */
+    grid-column: 1/span 3;
+}
+.officials > .official-current{
+    /* border: 1px solid red; */
+    grid-row: 2/span 3;
+    grid-column: 3/span 4;
+}
+.officials > .official-image{
+    /* border: 1px solid red; */
+    grid-row: 2/span 2;
+    grid-column: 1/span 2;
+
+}
+
+@media screen and (min-width: 768px) {
+    .aboutEB > .EB-description{
+        grid-row: 2/span 3;
+        grid-column: 3/span 2;
+    }
 }

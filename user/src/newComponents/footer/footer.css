@@ -1,4 +1,34 @@
 .footer{
     height: clamp(20vh, 40vh, 420px);
-    /* border: 1px solid red; */
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.foot{
+    border: 1px solid red;
+    display: flex;
+}
+.site-map{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.site-map > ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.copyright{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.loc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

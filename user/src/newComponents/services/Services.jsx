@@ -10,7 +10,7 @@ import Equipment from '../../assets/equipment.svg'
 export default function Services() {
   return (
     <>
-      <div className='services'>
+      <div className='services' id='services'>
         <p className='services-title'>Services</p>
         <div className='service-body'>
             <ServiceBox title={'Medicines'} image={MedicineIcon}/>

@@ -26,7 +26,7 @@ export default function About() {
   const [state, setState] = useState('default');
   return(
     <>
-      <div className='about-new'>
+      <div className='about-new' id='about'>
         <p className='about-title'>About</p>
         <div className='about-body'>
           <div className='body-content'>

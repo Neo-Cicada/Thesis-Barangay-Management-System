@@ -1,7 +1,6 @@
 .announcement{
     height: clamp(500px, 90vh, 100vh);
     min-width: 174px;
-    border: 1px solid red;
 }
 .announcement-title{
     text-align: center;
@@ -69,7 +68,6 @@
 .announcement-footer > .btn{
     width: 30% !important;
     cursor: pointer;
-    
 }
 @media screen and (min-width: 768px) {
 

@@ -19,6 +19,7 @@
   background-color: #3B5998;
   color: white;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
 .introduction-circle::after {
@@ -26,7 +27,7 @@
   position: absolute;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background-color:#D0E7D2;
+  background-color:#3B5998;
   transition: background-color 0.3s;
   pointer-events: none;
   top: 50%; /* Added */
@@ -38,7 +39,7 @@
 .introduction-circle:hover::after {
   width: 140%; /* Adjust the size as needed */
   height: 140%; /* Adjust the size as needed */
-  background: #8B9DC3;
+  background: #3B5998;
   mix-blend-mode: normal;
   opacity: 0.1;
 }

@@ -9,7 +9,7 @@ export default function Announcement() {
   const style = isExpand ? scrollable : {};
   return (
     <>
-      <div className='announcement'>
+      <div className='announcement' id='announcement'>
         <p className='announcement-title'>Announcements</p>
         <div className='announcement-body' style={style}>
             <AnnouncementBox/>
