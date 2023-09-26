@@ -1,0 +1,22 @@
+.medicine-dialog-content{
+    border: 1px solid red;
+}
+.items-medicine-dialog{
+    border: 1px solid pink;
+    height: 69%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    overflow-y: auto;
+    align-items: center;
+    justify-items: center;
+}
+.selected-medicine-dialog {
+    max-height: 30%;
+    /* border: 1px solid red; */
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
