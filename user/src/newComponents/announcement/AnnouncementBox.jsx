@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './announcement.css'
-import {Button} from '@mui/material'
+import {Button, Dialog, DialogActions, DialogContent} from '@mui/material'
+import AnnouncementDialog from './AnnouncementDialog'
+
 export default function AnnouncementBox({image, description, date}) {
+  const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
   return (
     <>
       <div className='announcementBox'>
@@ -11,9 +22,17 @@ export default function AnnouncementBox({image, description, date}) {
         <div className='announcement-text' >{description}</div>
         <div className='announcement-footer' >
           <div className='date'>08/27/2023</div>
-          <Button className='btn'>View</Button>
+          <Button className='btn' onClick={handleOpen}>View</Button>
         </div>
       </div>
+     <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <AnnouncementDialog image={image} description={description}/>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+     </Dialog>
     </>
   )
 }

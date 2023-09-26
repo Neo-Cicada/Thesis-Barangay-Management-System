@@ -18,7 +18,7 @@ function App() {
       <Announcement/>
       <Services/>
       <About/>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   )
 }
