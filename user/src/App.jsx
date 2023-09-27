@@ -15,10 +15,16 @@ function App() {
     <>
       <NewHeader/>
       <Introduction/>
+      <hr/>
       <Announcement/>
+      <hr/>
+
       <Services/>
+      <hr/>
+
       <About/>
-      {/* <Footer/> */}
+      <hr />
+      <Footer/>
     </>
   )
 }

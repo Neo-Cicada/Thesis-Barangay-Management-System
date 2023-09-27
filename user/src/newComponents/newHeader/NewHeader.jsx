@@ -26,7 +26,7 @@ export default function NewHeader() {
             <ul>
               <Link className='nav-menu' to="#home" smooth>Home</Link>
               <Link className='nav-menu' to="#announcement" smooth>Announcement</Link>
-              <Link className='nav-menu' to="#services" smooth>Request</Link>
+              <Link className='nav-menu' to="#services" smooth>Services</Link>
               <Link className='nav-menu' to="#about" smooth>About</Link>
             </ul>
 

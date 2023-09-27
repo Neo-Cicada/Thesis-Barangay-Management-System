@@ -18,6 +18,8 @@ export default function Announcement() {
         <p className='announcement-title'>Announcements</p>
         <div className='announcement-body' style={style}>
             {items}
+            {items}
+
         </div>
         <div className='announcement-btn'>
             <button onClick={()=>setIsExpand(!isExpand)}>{isExpand ? 'See less': 'See more'}</button>
