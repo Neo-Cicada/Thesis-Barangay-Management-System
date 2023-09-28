@@ -3,6 +3,11 @@ import { Button, Divider, TextField, Typography, InputAdornment } from '@mui/mat
 
 export default function AnnouncementTitle({title, setTitle}) {
     const wordCount = title.length;
+    const handleChange = (e) => {
+      if (e.target.value.length <= 80) {
+        setTitle(e.target.value);
+      }
+    };
   return (
     <>
        <div className='announcement-title'>
@@ -13,11 +18,11 @@ export default function AnnouncementTitle({title, setTitle}) {
         fullWidth
         multiline
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={handleChange}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              {wordCount} / 300 words
+              {wordCount} / 80 characters
             </InputAdornment>
           ),
         }}
@@ -25,9 +30,6 @@ export default function AnnouncementTitle({title, setTitle}) {
           shrink: false,
         }}
       />
-  
-    
-
       </div>
     </>
   )

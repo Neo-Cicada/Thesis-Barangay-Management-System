@@ -6,9 +6,7 @@ export default function AnnouncementNav() {
   return (
     <>
       <div className='announcement-nav'>
-        <div className='annav one'><FormatAlignJustifyIcon/> Post</div>
-        <hr />
-        <div className='annav two'> <InsertPhotoIcon/> Image & Videos</div>
+      <div className='annav one'><FormatAlignJustifyIcon/> Post</div>
       </div>
     </>
   )

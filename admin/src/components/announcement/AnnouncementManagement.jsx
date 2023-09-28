@@ -1,24 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Divider, TextField, Typography, InputAdornment } from '@mui/material';
-
 import { storage, db } from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './styles/announcement.css'
 import useUpload from '../../hooks/useUpload';
-import FormatBoldIcon from '@mui/icons-material/FormatBold';
-import FormatItalicIcon from '@mui/icons-material/FormatItalic';
-import AddLinkIcon from '@mui/icons-material/AddLink';
-import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
-import StrikethroughSIcon from '@mui/icons-material/StrikethroughS';
-import SuperscriptIcon from '@mui/icons-material/Superscript';
-import KeyboardCapslockIcon from '@mui/icons-material/KeyboardCapslock';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import AnnouncementNav from './AnnouncementNav';
 import AnnouncementTitle from './AnnouncementTitle';
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import AddLink from '@mui/icons-material/AddLink';
 import AnnouncementImage from './AnnouncementImage';
 
 const boxStyle = {
@@ -32,15 +18,26 @@ const boxStyle = {
 export default function AnnouncementManagement() {
   const [message, setMessage] = useState('');
   const [file, setFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState('');
   const [title, setTitle] = useState('');
   const wordCount = title.length;
+  const currentDate = new Date();
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  
+  // Get the month, day, and year components
+  const month = monthNames[currentDate.getMonth()];
+  const day = currentDate.getDate();
+  const year = currentDate.getFullYear();
+  const formattedDate = `${month} ${day}, ${year}`;
+  const content = {
+    title: title,
+    description: message,
+    date: formattedDate
+  }
 
 
-  const handleImageUpload = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-  };
 
   const handlePost = async (e) => {
     e.preventDefault();
@@ -52,8 +49,6 @@ export default function AnnouncementManagement() {
       try {
         const snapshot = await uploadBytes(imageRef, file);
         const downloadURL = await getDownloadURL(snapshot.ref);
-        setImageUrl(downloadURL);
-
         // Step 2: Save image URL and description to Firestore
         addImageAndDescription(downloadURL, message);
       } catch (error) {
@@ -70,7 +65,8 @@ export default function AnnouncementManagement() {
   };
 
   function addImageAndDescription(imageUrl, description) {
-    useUpload('images', { imageUrl: imageUrl, description: description });
+    useUpload('images', {...content, imageUrl: imageUrl });
+    // console.log(file)
   }
 
   return (
@@ -78,29 +74,19 @@ export default function AnnouncementManagement() {
       <AnnouncementNav />
       <AnnouncementTitle title={title} setTitle={setTitle} />
       <div className='announcement-body'>
-        {/* <div className='announcement-body-head'>
-          <label style={{height: '5em'}} label="Inser Image">
-                <InsertPhotoIcon />
-                <input
-                  type='file'
-                  accept='image/*' // Specify accepted file types if necessary
-                  style={{ display: 'none' }}
 
-                />
-          </label>
-        </div> */}
-        <AnnouncementImage/>
+        <AnnouncementImage  setFile={setFile}/>
         <div className='announcement-text'>
           <textarea
             className="dynamic-textarea"
             placeholder='Text (optional)'
-          // value={text}
-          // onChange={handleTextChange}
+            value={message}
+          onChange={(e)=>setMessage(e.target.value)}
           />
         </div>
       </div>
       <div className='ann-btn'>
-        <button>Post</button>
+        <button onClick={handlePost}>Post</button>
       </div>
     </div>
   );
