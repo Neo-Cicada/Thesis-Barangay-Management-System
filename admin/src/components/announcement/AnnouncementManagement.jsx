@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Divider, TextField, Typography, InputAdornment } from '@mui/material';
+
 import { storage, db } from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './styles/announcement.css'
@@ -18,6 +19,7 @@ import AnnouncementNav from './AnnouncementNav';
 import AnnouncementTitle from './AnnouncementTitle';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import AddLink from '@mui/icons-material/AddLink';
+import AnnouncementImage from './AnnouncementImage';
 
 const boxStyle = {
   border: '1px solid white',
@@ -33,6 +35,8 @@ export default function AnnouncementManagement() {
   const [imageUrl, setImageUrl] = useState('');
   const [title, setTitle] = useState('');
   const wordCount = title.length;
+
+
   const handleImageUpload = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
@@ -71,25 +75,28 @@ export default function AnnouncementManagement() {
 
   return (
     <div style={boxStyle}>
-      <AnnouncementNav/>
-      <AnnouncementTitle title={title} setTitle={setTitle}/>
+      <AnnouncementNav />
+      <AnnouncementTitle title={title} setTitle={setTitle} />
       <div className='announcement-body'>
-        <div className='announcement-body-head'>
-          <ul className='announcement-list'>
-            <li className='anncon'><FormatBoldIcon/></li>
-            <li className='anncon'><FormatItalicIcon/></li>
-            <li className='anncon'><AddLink/></li>
-            <li className='anncon'><StrikethroughSIcon/></li>
-            <li className='anncon'><KeyboardCapslockIcon/></li>
-            <li className='anncon'><SuperscriptIcon/></li>
-            <li className='anncon'><FormatListBulletedIcon/></li>
-            <li className='anncon'><FormatListNumberedIcon/></li>
-            <li className='anncon'><FormatQuoteIcon/></li>
-            <li className='anncon'><InsertPhotoIcon/></li>
-          </ul>
-        </div>
+        {/* <div className='announcement-body-head'>
+          <label style={{height: '5em'}} label="Inser Image">
+                <InsertPhotoIcon />
+                <input
+                  type='file'
+                  accept='image/*' // Specify accepted file types if necessary
+                  style={{ display: 'none' }}
+
+                />
+          </label>
+        </div> */}
+        <AnnouncementImage/>
         <div className='announcement-text'>
-         textfield
+          <textarea
+            className="dynamic-textarea"
+            placeholder='Text (optional)'
+          // value={text}
+          // onChange={handleTextChange}
+          />
         </div>
       </div>
       <div className='ann-btn'>

@@ -17,29 +17,36 @@
     border: 1px solid rgb(207, 206, 206);
     border-radius: 0.3em;
 }
-.announcement-body-head > ul{
-    display: flex;
-    flex-direction: row;
-    background-color: #DFE3EE;
+.announcement-body-head{
+    border: 1px solid red;
+    height: 10em;
+}
 
-    /* border: 1px solid red; */
-}
-.anncon{
-    /* border: 1px solid red; */
-    width: 2em;
-    cursor: pointer;
-}
-.anncon:hover{
-    background-color: #8B9DC3;
-    border-radius: 0.7em;
+
+.ann-btn > * {
+    vertical-align:middle;
 
 }
+
+
 .announcement-textarea{
     min-width: 100%;
     min-height: clamp(5em,50vh, 500px);
 
     height: clamp(5em,50vh, 500px);
 }
+.dynamic-textarea {
+    min-width: 100%; /* Set your desired initial width */
+    min-height: 5em; /* Set your desired initial height */
+    resize: vertical; /* Allow vertical resizing */
+    border: 2px black #ccc;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 1em 0 0 1em;
+    box-sizing: border-box; /* Include padding in the element's size */
+
+  }
+ 
 .annav{
     width: 50%;
     /* border: 1px solid red; */
