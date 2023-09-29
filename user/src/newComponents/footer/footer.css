@@ -3,6 +3,7 @@
     /* border: 1px solid red; */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    background-color: #8B9DC3;
 }
 .foot{
     /* border: 1px solid red; */

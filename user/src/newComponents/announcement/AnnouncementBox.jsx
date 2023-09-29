@@ -3,7 +3,7 @@ import './announcement.css'
 import {Button, Dialog, DialogActions, DialogContent} from '@mui/material'
 import AnnouncementDialog from './AnnouncementDialog'
 
-export default function AnnouncementBox({image, description, date}) {
+export default function AnnouncementBox({image, description, date, title}) {
   const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -19,11 +19,11 @@ export default function AnnouncementBox({image, description, date}) {
       <img src={image} height='100%' width={'100%'} style={{borderRadius: '0.8em 0.8em 0 0'}}/>
     </div>
     <div className='announcement-text'>
-      Title | August 27 2002
+     <b>{title}</b>  &nbsp; {date}
     </div>
-    
+
   </div>
-  
+
      <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <AnnouncementDialog image={image} description={description}/>

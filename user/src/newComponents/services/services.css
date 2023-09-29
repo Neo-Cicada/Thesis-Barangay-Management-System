@@ -1,7 +1,7 @@
 .services{
     /* border: 1px solid red; */
     min-width: 174px;
-    height: clamp(500px, 80vh, 100vh);
+    height: clamp(500px, 100vh, 100vh);
 }
 .services-title{
     text-align: center;
@@ -59,7 +59,7 @@
 .service-box-title{
   text-align: center;
   font-size: clamp(10px, 1rem, 1.2rem);
-  
+
 }
 @media screen and (min-width: 768px) {
 
@@ -76,6 +76,5 @@
         .service-box {
             width: clamp(200px, 30vw, 300px);
             height: clamp(200px, 10vw, 300px);
-            
           }
 }
