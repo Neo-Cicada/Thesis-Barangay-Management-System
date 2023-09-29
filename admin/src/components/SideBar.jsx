@@ -51,7 +51,7 @@ export default function SideBar({handleSignout}) {
 
   return (
     <>
-      <div className='nav-container'>
+      <div className='nav-container' >
         <div style={{  height: '10%', borderBotton: '2px solid black', display:'flex', justifyContent:'center' }}>
           <img src={Logo} height={'100%'} />
         </div>

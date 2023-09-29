@@ -7,7 +7,7 @@ export default function Announcement() {
   const [isExpand, setIsExpand] = useState(false)
   useRead('images', setData)
   console.log(data)
-  const items = data.map(item=><AnnouncementBox image={item.data.imageUrl} description={item.data.description}/>)
+  const items = data.map(item=><AnnouncementBox image={item.imageUrl} description={item.description}/>)
   const scrollable = {
     overflow: 'auto'
   }
@@ -17,8 +17,11 @@ export default function Announcement() {
       <div className='announcement' id='announcement'>
         <p className='announcement-title'>Announcements</p>
         <div className='announcement-body' style={style}>
-            {items}
-            {items}
+            <AnnouncementBox/>
+            <AnnouncementBox/>
+            <AnnouncementBox/>
+            <AnnouncementBox/>
+
 
         </div>
         <div className='announcement-btn'>

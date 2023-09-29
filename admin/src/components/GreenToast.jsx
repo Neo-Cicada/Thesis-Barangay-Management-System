@@ -5,7 +5,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
 
 function GreenToast({ open, onClose }) {
-  const [autoHideDuration, setAutoHideDuration] = useState(1500);
+  const [autoHideDuration, setAutoHideDuration] = useState(2500);
 
   useEffect(() => {
     if (open) {

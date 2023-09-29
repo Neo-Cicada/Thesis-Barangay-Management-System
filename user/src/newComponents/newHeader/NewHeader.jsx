@@ -2,9 +2,9 @@ import React from 'react'
 import './newHeader.css'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
-import { Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import {HashLink as Link} from 'react-router-hash-link'
+import { HashLink as Link } from 'react-router-hash-link'
 export default function NewHeader() {
   const [isMenuClicked, setIsMenuClicked] = useState(false)
 
@@ -24,10 +24,56 @@ export default function NewHeader() {
           <div className='desktop-navigation'>
 
             <ul>
-              <Link className='nav-menu' to="#home" smooth>Home</Link>
-              <Link className='nav-menu' to="#announcement" smooth>Announcement</Link>
-              <Link className='nav-menu' to="#services" smooth>Services</Link>
-              <Link className='nav-menu' to="#about" smooth>About</Link>
+              <Button
+                sx={{
+                  color: 'black',
+                  fontSize: '1.2rem',
+                  fontWeight: '1em',
+                  '&:hover': {
+                    border: '1px dashed black',
+                    color:'white'
+                  }
+                }}
+                component={Link}
+                className='nav-menu'
+                to="#home"
+                smooth>Home</Button>
+              <Button
+                sx={{
+                  color: 'black',
+                  fontSize: '1.2rem',
+                  fontWeight: '1em',
+                  '&:hover': {
+                    color:'white',
+                    border: '1px dashed black'
+                  }
+                }}
+                component={Link}
+                className='nav-menu'
+                to="#announcement"
+                smooth>Announcement</Button>
+              <Button
+                sx={{
+                  color: 'black',
+                  fontSize: '1.2rem',
+                  fontWeight: '1em',
+                  '&:hover': {
+                    color:'white',
+                    border: '1px dashed black'
+                  }
+                }}
+                component={Link} className='nav-menu' to="#services" smooth>Services</Button>
+              <Button
+                sx={{
+                  color: 'black',
+                  fontSize: '1.2rem',
+                  fontWeight: '1em',
+                  '&:hover': {
+                    color:'white',
+                    border: '1px dashed black'
+                  }
+                }}
+                component={Link} className='nav-menu' to="#about" smooth>About</Button>
             </ul>
 
           </div>

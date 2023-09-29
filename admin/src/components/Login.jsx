@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
 import '../styles/login.css'
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, } from '@mui/material';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, Navigate, useNavigate, } from 'react-router-dom';
 import { auth } from '../firebase'
 import App from '../App';
-
+import GreenToast from './GreenToast';
 export default function Login({setLoginStatus}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState(false);
-
+  const [toast, setToast] = useState(false)
   const onLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
-        setLoginStatus("true");
-
+        setToast(true)
+        setTimeout(() => {
+          setLoginStatus(true);
+        }, 2000); // 3000 milliseconds (3 seconds)
       }
       )
       .catch((error) => {
@@ -78,6 +80,7 @@ export default function Login({setLoginStatus}) {
           <a id='forgot-password'>forgot password</a>
         </form>
       </div>
+      <GreenToast open={toast} onClose={()=>setToast(!toast)}/>
     </>
   )
 }

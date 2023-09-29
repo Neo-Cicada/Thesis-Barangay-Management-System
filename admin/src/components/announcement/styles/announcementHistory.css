@@ -1,12 +1,14 @@
 .history-box {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     height: 100%; /* Set a fixed height for the container */
     width: 90%;
-    display: grid;
-    grid-template-columns: minmax(400px, 1fr);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     overflow-y: auto; /* Enable vertical scrolling */
 }
 .history-box > *{
     border-bottom: 1px solid gray;
     min-height: 4em;
+    height: 4em;
 }

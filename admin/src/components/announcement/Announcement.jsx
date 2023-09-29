@@ -2,12 +2,12 @@ import React from 'react'
 import { Link , Outlet} from 'react-router-dom'
 //TODO: figure out how to handle images in firebase
 const navStyle={
-  border: '1px solid red',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   height: '10%',
-  gap: '20%'
+  gap: '20%',
+  borderBottom: '1px solid gray'
 }
 
 const heroStyle ={
