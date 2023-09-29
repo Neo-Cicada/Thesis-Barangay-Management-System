@@ -1,6 +1,7 @@
 .announcement{
     height: clamp(500px, 100vh, 100vh);
     min-width: 174px;
+    background-color: #DFE3EE;
 }
 .announcement-title{
     text-align: center;

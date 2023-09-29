@@ -1,9 +1,10 @@
 .footer{
-    height: clamp(20vh, 40vh, 50vh);
+    height: 70vh;
     /* border: 1px solid red; */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     background-color: #8B9DC3;
+    border: 1px solid red;
 }
 .foot{
     /* border: 1px solid red; */

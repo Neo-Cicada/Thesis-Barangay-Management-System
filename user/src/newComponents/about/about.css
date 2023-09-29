@@ -1,6 +1,6 @@
 .about-new{
     min-width: 174px;
-    height: clamp(500px, 80vh, 100vh);
+    height: clamp(500px, 100vh, 100vh);
     /* border: 1px solid red; */
     /* background-color: #DFE3EE; */
 

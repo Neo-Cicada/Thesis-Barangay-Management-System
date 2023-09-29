@@ -64,11 +64,11 @@
   .introduction{
     display: flex;
     flex-direction: row;
-    gap: clamp(2em, 5em, 10em)
+    gap: clamp(2em, 5em, 10em);
   }
   .intro-discription-box{
     width: clamp(30%, 60%, 80%);
-    margin-top: clamp(10px, 10%, 15%);
+    /* margin-top: clamp(10px, 5%, 10%); */
   }
 
 }
