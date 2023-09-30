@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import IconButton from '@mui/material/IconButton';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-
-export default function SelectedMedicine({medicine, key}) {
-    const [count, setCount] = useState(1);
-
+import { MyContext } from './MedicineDialogForm';
+export default function SelectedMedicine({medicine, key,}) {
+    const {selectedMedicines, setSelectedMedicines} = useContext(MyContext)
     const handleIncrement = () => {
-        setCount(count + 1);
-    };
-
-    const handleDecrement = () => {
-        if (count > 0) {
-            setCount(count - 1);
-        }
-    };
+        const updatedSelectedMedicines = selectedMedicines.map((item) => {
+          if (item.name === medicine.name) {
+            return { ...item, count: item.count + 1 };
+          }
+          return item;
+        });
+        setSelectedMedicines(updatedSelectedMedicines);
+      };
+    
+      const handleDecrement = () => {
+        const updatedSelectedMedicines = selectedMedicines.map((item) => {
+          if (item.name === medicine.name && item.count > 1) {
+            return { ...item, count: item.count - 1 };
+          }
+          return item;
+        });
+        setSelectedMedicines(updatedSelectedMedicines);
+      };
 
     return (
         <div className='selected-medicine' key={key} style={{borderBottom:'1px solid black',
@@ -22,7 +31,7 @@ export default function SelectedMedicine({medicine, key}) {
             <IconButton onClick={handleDecrement} aria-label="Decrement">
                 <RemoveIcon />
             </IconButton>
-            <span><b>{medicine}</b>: Amount <b>{count}</b></span>
+            <span><b>{medicine.name}</b>: Amount <b>{medicine.count}</b></span>
             <IconButton onClick={handleIncrement} aria-label="Increment">
                 <AddIcon />
             </IconButton>

@@ -7,25 +7,36 @@ import MedForm from './MedForm';
 export const MyContext = createContext();
 
 export default function MedicineDialogForm({ open, handleClose }) {
+    const [selectedMedicines, setSelectedMedicines] = useState([]);
     const [proceed, setProceed] = useState(false)
     const dialogContentStyle = {
         height: '100vh',
     };
 
-    const [selectedMedicines, setSelectedMedicines] = useState([]);
 
-    const handleBoxSelect = (name) => {
-        if (selectedMedicines.includes(name)) {
-            // If already selected, deselect it
-            setSelectedMedicines(selectedMedicines.filter(item => item !== name));
+    const handleBoxSelect = (name, count) => {
+        const index = selectedMedicines.findIndex((item) => item.name === name);
+      
+        if (index !== -1) {
+          // If already selected, check if count is greater than 1
+          if (count > 1) {
+            // If count is greater than 1, decrement the count
+            const updatedSelected = [...selectedMedicines];
+            updatedSelected[index].count -= 1;
+            setSelectedMedicines(updatedSelected);
+          } else {
+            // If count is 1 or less, remove the item from selectedMedicines
+            const updatedSelected = selectedMedicines.filter((item) => item.name !== name);
+            setSelectedMedicines(updatedSelected);
+          }
         } else {
-            // If not selected, select it
-            setSelectedMedicines([...selectedMedicines, name]);
+          // If not selected, select it with a count of 1
+          setSelectedMedicines([...selectedMedicines, { name: name, count: 1 }]);
         }
-    };
-
+      };
+      
     return (
-        <MyContext.Provider value={{selectedMedicines}}>
+        <MyContext.Provider value={{selectedMedicines, setSelectedMedicines ,}}>
             <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle style={{ textAlign: 'center' }}>{proceed ? 'Medicine Form' : 'List of Medicines'}</DialogTitle>
                 <DialogContent style={dialogContentStyle} className='medicine-dialog-content'>
