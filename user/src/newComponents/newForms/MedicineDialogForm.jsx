@@ -8,6 +8,11 @@ export const MyContext = createContext();
 
 export default function MedicineDialogForm({ open, handleClose }) {
     const [selectedMedicines, setSelectedMedicines] = useState([]);
+    const [details, setDetails] = useState({
+      fullname: '',
+      email: '',
+      phoneNumber: ''
+    })
     const [proceed, setProceed] = useState(false)
     const dialogContentStyle = {
         height: '100vh',
@@ -34,9 +39,8 @@ export default function MedicineDialogForm({ open, handleClose }) {
           setSelectedMedicines([...selectedMedicines, { name: name, count: 1 }]);
         }
       };
-      
     return (
-        <MyContext.Provider value={{selectedMedicines, setSelectedMedicines ,}}>
+        <MyContext.Provider value={{selectedMedicines, setSelectedMedicines , setDetails, details}}>
             <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle style={{ textAlign: 'center' }}>{proceed ? 'Medicine Form' : 'List of Medicines'}</DialogTitle>
                 <DialogContent style={dialogContentStyle} className='medicine-dialog-content'>
@@ -46,7 +50,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
                 </DialogContent>
                 <DialogActions>
                     {proceed ? <Button onClick={() => setProceed(!proceed)}>Back</Button> : <Button onClick={handleClose}>Close</Button>}
-                    {proceed ? <Button onClick={() => console.log(selectedMedicines)}>Submit</Button> : <Button onClick={() => setProceed(!proceed)}>Next</Button>}
+                    {proceed ? <Button onClick={() => console.log(details)}>Submit</Button> : <Button onClick={() => setProceed(!proceed)}>Next</Button>}
                 </DialogActions>
             </Dialog>
         </MyContext.Provider>
