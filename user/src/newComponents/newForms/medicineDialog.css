@@ -1,8 +1,6 @@
-.medicine-dialog-content{
-    border: 1px solid red;
-}
+
 .items-medicine-dialog{
-    border: 1px solid pink;
+    border-bottom: 2px dashed grey;
     height: 69%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));

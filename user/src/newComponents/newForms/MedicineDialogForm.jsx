@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogActions, Button } from '@mui/material';
 import './medicineDialog.css';
 import SelectedMedicine from './SelectedMedicine';
@@ -11,13 +11,19 @@ export default function MedicineDialogForm({ open, handleClose }) {
     const [details, setDetails] = useState({
       fullname: '',
       email: '',
-      phoneNumber: ''
-    })
+      phoneNumber: '',
+      selectedMedicines: [...selectedMedicines] // spread the array elements
+    });
     const [proceed, setProceed] = useState(false)
     const dialogContentStyle = {
         height: '100vh',
     };
-
+    useEffect(() => {
+      setDetails((prevDetails) => ({
+        ...prevDetails,
+        selectedMedicines: selectedMedicines,
+      }));
+    }, [selectedMedicines]);
 
     const handleBoxSelect = (name, count) => {
         const index = selectedMedicines.findIndex((item) => item.name === name);

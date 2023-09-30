@@ -2,12 +2,13 @@ import React, { createContext, useContext, useState } from 'react';
 import { TextField, Box, FormControlLabel, Checkbox, Dialog, Button } from '@mui/material'
 import { MyContext } from './MedicineDialogForm'
 import Agreement from '../../components/dialogs/Agreement'
-function InnerDialog({ open, onClose }) {
+import MedSummary from './MedSummary';
+function TermsAndCondition({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose}>
       {/* Inner Dialog content */}
       <div>
-        <Agreement/>
+        <Agreement />
         <Button onClick={onClose} color="primary">
           Close
         </Button>
@@ -15,12 +16,31 @@ function InnerDialog({ open, onClose }) {
     </Dialog>
   );
 }
+const Summary = ({ open, onClose }) => {
+  const dialogStyle = {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  };
+
+  return (
+    <Dialog open={open} onClose={onClose} fullWidth >
+      <div style={dialogStyle}>
+        <MedSummary />
+        <Button onClick={onClose}>Close</Button>
+      </div>
+    </Dialog>
+  );
+};
+
 export default function MedForm() {
 
   const [showAgreement, setShowAgreement] = useState(false);
   const { selectedMedicines, details, setDetails } = useContext(MyContext);
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
-
+  const [showSummary, setShowSummary] = useState(false)
   const handleOpenInnerDialog = () => {
     setOpenInnerDialog(true);
   };
@@ -32,42 +52,49 @@ export default function MedForm() {
     <>
 
       <div style={{
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1em',
-        marginTop: '1em'
+        gap: '3em',
+        marginTop: '1em',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}>
-        <TextField label="Fullname" onChange={(e)=>setDetails({...details, fullname: e.target.value})}/>
+        <TextField
+          value={details.fullname}
+          label="Fullname"
+          onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
         <TextField
           label="Phone Number"
           placeholder="09..."
-          onChange={(e)=>setDetails({...details, phoneNumber: e.target.value})}
+          value={details.phoneNumber}
+          onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
         />
         <TextField
           variant="outlined"
           label="Email address"
-          onChange={(e)=> setDetails({...details, email:e.target.value})}
-          />
+          value={details.email}
+          onChange={(e) => setDetails({ ...details, email: e.target.value })}
+        />
         <Box sx={{
           display: 'flex', alignItems: 'center',
           justifyContent: 'center', marginTop: '0.3em',
           fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
           cursor: 'pointer'
         }} >
-          <span>Review summary of informaton provided</span>
+          <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>
         </Box>
         <FormControlLabel
           required
           control={<Checkbox />}
           label={
-            <span  style={{ cursor: 'pointer' }}>
+            <span style={{ cursor: 'pointer' }}>
               Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>
             </span>
           }
         />
       </div>
-      <InnerDialog open={openInnerDialog} onClose={handleCloseInnerDialog} />
+      <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
+      <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />
     </>
   )
 }
