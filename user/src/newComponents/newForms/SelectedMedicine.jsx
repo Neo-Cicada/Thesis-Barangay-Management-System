@@ -5,7 +5,10 @@ import AddIcon from '@mui/icons-material/Add';
 import { MyContext } from './MedicineDialogForm';
 export default function SelectedMedicine({medicine, key,}) {
     const {selectedMedicines, setSelectedMedicines} = useContext(MyContext)
+    console.log(selectedMedicines);
+
     const handleIncrement = () => {
+
         const updatedSelectedMedicines = selectedMedicines.map((item) => {
           if (item.name === medicine.name) {
             return { ...item, count: item.count + 1 };
@@ -14,7 +17,7 @@ export default function SelectedMedicine({medicine, key,}) {
         });
         setSelectedMedicines(updatedSelectedMedicines);
       };
-    
+
       const handleDecrement = () => {
         const updatedSelectedMedicines = selectedMedicines.map((item) => {
           if (item.name === medicine.name && item.count > 1) {

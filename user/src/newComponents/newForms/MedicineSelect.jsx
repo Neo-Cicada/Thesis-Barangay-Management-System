@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 import SelectedMedicine from './SelectedMedicine';
 import { MyContext } from './MedicineDialogForm';
 
-export  function Box({ name, isSelected, onSelect }) {
+export function Box({ name, isSelected, onSelect }) {
   const boxStyle = {
     height: '5em',
     textAlign: 'center',
@@ -13,25 +13,35 @@ export  function Box({ name, isSelected, onSelect }) {
   };
 
   return (
-    <div style={boxStyle} onClick={() => onSelect(name)}>
+    <div
+      style={boxStyle}
+      onClick={() => onSelect(name)}
+    >
       <p style={{ fontSize: '1em' }}>{name}</p>
     </div>
   );
 }
 
-export default function   MedicineSelect({ handleBoxSelect }) {
+export default function MedicineSelect({ handleBoxSelect }) {
   const { selectedMedicines } = useContext(MyContext);
 
   return (
     <>
       <div className='items-medicine-dialog'>
-      <Box name="Paracetamol" isSelected={selectedMedicines.includes("Paracetamol")} onSelect={handleBoxSelect} />
-        <Box name="Medicine 2" isSelected={selectedMedicines.includes("Medicine 2")} onSelect={handleBoxSelect} />
-        <Box name="Medicine 3" isSelected={selectedMedicines.includes("Medicine 3")} onSelect={handleBoxSelect} />
-        <Box name="Medicine 4" isSelected={selectedMedicines.includes("Medicine 4")} onSelect={handleBoxSelect} />
-        <Box name="Medicine 5" isSelected={selectedMedicines.includes("Medicine 5")} onSelect={handleBoxSelect} />
-        <Box name="Medicine 6" isSelected={selectedMedicines.includes("Medicine 6")} onSelect={handleBoxSelect} />
-        <Box name="Medicine 7" isSelected={selectedMedicines.includes("Medicine 7")} onSelect={handleBoxSelect} />
+        <Box
+          name="Paracetamol"
+          isSelected={selectedMedicines.some((medicine) => medicine.name === "Paracetamol")}
+          onSelect={handleBoxSelect}
+        />
+        <Box name="Medicine 2"
+          onSelect={handleBoxSelect}
+          isSelected={selectedMedicines.some((medicine) => medicine.name === "Medicine 2")}
+        />
+
+        <Box name="Medicine 4" onSelect={handleBoxSelect} />
+        <Box name="Medicine 5" onSelect={handleBoxSelect} />
+        <Box name="Medicine 6" onSelect={handleBoxSelect} />
+        <Box name="Medicine 7" onSelect={handleBoxSelect} />
         {/* Add more boxes with different names */}
       </div>
       <p style={{ textAlign: 'center' }}>Selected Medicines:</p>

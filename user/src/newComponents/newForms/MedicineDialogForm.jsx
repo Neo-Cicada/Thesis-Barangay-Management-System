@@ -16,7 +16,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
 
     const handleBoxSelect = (name, count) => {
         const index = selectedMedicines.findIndex((item) => item.name === name);
-      
+
         if (index !== -1) {
           // If already selected, check if count is greater than 1
           if (count > 1) {
