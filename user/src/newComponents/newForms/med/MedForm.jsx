@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { TextField, Box, FormControlLabel, Checkbox, Dialog, Button } from '@mui/material'
 import { MyContext } from './MedicineDialogForm'
-import Agreement from '../../components/dialogs/Agreement'
+import Agreement from '../../../components/dialogs/Agreement'
 import MedSummary from './MedSummary';
 function TermsAndCondition({ open, onClose }) {
   return (

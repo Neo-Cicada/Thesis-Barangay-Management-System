@@ -7,7 +7,7 @@ import CertificateIcon from '../../assets/certificate.svg';
 import EnrollmentIcon from '../../assets/enrollment.svg';
 import ReportIcon from '../../assets/report.svg';
 import Equipment from '../../assets/equipment.svg';
-import MedicineDialogForm from '../newForms/MedicineDialogForm';
+import MedicineDialogForm from '../newForms/med/MedicineDialogForm';
 
 export default function Services() {
   const [isMedicineOpen, setIsMedicineOpen] = useState(false); // Initialize to false
