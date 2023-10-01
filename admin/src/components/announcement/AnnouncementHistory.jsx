@@ -13,7 +13,7 @@ export default function AnnouncementHistory() {
   return (
     <>
       <div className='history-box'>
-        <div><History /></div>
+        {items}
 
 
       </div>

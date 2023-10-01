@@ -1,5 +1,5 @@
 .history-box {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 100%; /* Set a fixed height for the container */
     width: 90%;
     display: flex;

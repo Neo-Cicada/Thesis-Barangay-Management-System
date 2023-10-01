@@ -20,7 +20,7 @@ export default function AnnouncementImage({ setFile }) {
             <div className='announcement-body-head'
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
 
-                {selectedImage ? <img src={selectedImage} alt='Selected' height={'100%'} /> :
+                {selectedImage ? <img src={selectedImage} alt='Selected' height={'100%'} width="50%" /> :
                     <label style={{
                         height: '100%', width: '50%',
                         cursor: 'pointer',
