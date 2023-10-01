@@ -5,7 +5,6 @@ import SelectedMedicine from './SelectedMedicine';
 import MedicineSelect from './MedicineSelect';
 import MedForm from './MedForm';
 export const MyContext = createContext();
-
 export default function MedicineDialogForm({ open, handleClose }) {
     const [selectedMedicines, setSelectedMedicines] = useState([]);
     const [details, setDetails] = useState({

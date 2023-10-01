@@ -5,7 +5,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { MyContext } from './MedicineDialogForm';
 export default function SelectedMedicine({medicine, key,}) {
     const {selectedMedicines, setSelectedMedicines} = useContext(MyContext)
-    console.log(selectedMedicines);
 
     const handleIncrement = () => {
 
