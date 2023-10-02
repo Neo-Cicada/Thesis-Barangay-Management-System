@@ -1,50 +1,45 @@
-import React from 'react'
-import { View, Text, ScrollView, KeyboardAvoidingView, TextInput, StyleSheet } from 'react-native'
+import React from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
+
 export default function BodyApp() {
     return (
-        <>
-            <KeyboardAvoidingView style={styles.dadyContainer}>
-                <ScrollView contentContainerStyle={styles.childContainer}>
-                    <TextInput
-                        style={styles.textField}
-                        placeholder='First Name'
-                    />
-                    <TextInput
-                        style={styles.textField}
-                        placeholder='First Name'
-                    /><TextInput
-                        style={styles.textField}
-                        placeholder='First Name'
-                    />
-                    <TextInput
-                        style={styles.textField}
-                        placeholder='First Name'
-                    />
-                </ScrollView>
-            </KeyboardAvoidingView>
-        </>
-    )
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.scrollContent}>
+                <View style={styles.section}>
+                    {/* Content for section 1 */}
+                    <Text>Section 1</Text>
+                </View>
+                <View style={styles.section}>
+                    {/* Content for section 2 */}
+                    <Text>Section 2</Text>
+                </View>
+                <View style={styles.section}>
+                    {/* Content for section 3 */}
+                    <Text>Section 3</Text>
+                </View>
+                <View style={styles.section}>
+                    {/* Content for section 4 */}
+                    <Text>Section 4</Text>
+                </View>
+            </ScrollView>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-    dadyContainer: {
+    container: {
         flex: 1,
-    },
-    childContainer: {
-        flex: 1,
-        display: 'flex',
-        borderColor: 'red',
         borderWidth: 1,
-        alignItems:'center',
-        gap: 11
-
+        borderColor: 'red',
     },
-    textField: {
-        borderColor: '#dfe3ee',
-        borderWidth: 2,
-        height: 40,
-        width: '50%',
-        borderRadius: 12,
-        padding: 12
-    }
-})
+    scrollContent: {
+        flexGrow: 1,
+    },
+    section: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: 'green',
+    },
+});
