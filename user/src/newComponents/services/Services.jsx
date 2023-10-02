@@ -9,7 +9,7 @@ import ReportIcon from '../../assets/report.svg';
 import Equipment from '../../assets/equipment.svg';
 import MedicineDialogForm from '../newForms/med/MedicineDialogForm';
 import CertificateDialog from '../newForms/cert/CertificateDialog';
-import EnrollmentDialog from '../newForms/equip/EquipmentDialog'
+import EnrollmentDialog from '../newForms/enroll/EnrollmentDialog'
 import FacilityDialog from '../newForms/faci/FacilityDialog'
 import ReportDialog from '../newForms/report/ReportDialog'
 import EquipmentDialog from '../newForms/equip/EquipmentDialog';

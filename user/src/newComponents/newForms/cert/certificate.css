@@ -6,6 +6,7 @@
     overflow-y: auto;
     align-items: center;
     justify-items: center;
+    gap: 1em;
 }
 .selected-certificates-dialog {
     max-height: 30%;
