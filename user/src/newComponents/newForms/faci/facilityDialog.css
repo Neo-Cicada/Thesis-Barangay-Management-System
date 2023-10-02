@@ -1,0 +1,9 @@
+.items-dialog-content{
+    border-bottom: 2px dashed grey;
+    height: 69%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    overflow-y: auto;
+    align-items: center;
+    justify-items: center;
+}
