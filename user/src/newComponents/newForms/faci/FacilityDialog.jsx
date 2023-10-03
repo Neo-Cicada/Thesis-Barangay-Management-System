@@ -2,9 +2,26 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogActions, Button } from '@mui/material';
 import FacilitySelect from './FacilitySelect'
 import './facilityDialog.css'
+import FacilityForm from './FacilityForm';
+
 export const MyFacilityContext = createContext();
+
 export default function FacilityDialog({ open, handleClose }) {
   const [selectedFacility, setselectedFacility] = useState([]);
+  const [proceed, setProceed] = useState(false);
+
+  const [details, setDetails] = useState({
+    fullname: '',
+    email: '',
+    phoneNumber: '',
+    selectedFacility: [...selectedFacility] // spread the array elements
+  });
+  useEffect(() => {
+    setDetails((prevDetails) => ({
+      ...prevDetails,
+      selectedFacility: selectedFacility,
+    }));
+  }, [selectedFacility]);
 
   const handleBoxSelect = (name) => {
     const index = selectedFacility.findIndex((facility) => facility.name === name);
@@ -20,15 +37,15 @@ export default function FacilityDialog({ open, handleClose }) {
   };
   return (
     <>
-      <MyFacilityContext.Provider value={{ selectedFacility, setselectedFacility, handleBoxSelect }}>
+      <MyFacilityContext.Provider value={{ selectedFacility, setselectedFacility, handleBoxSelect, details, setDetails }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle>Available Facility</DialogTitle>
+          <DialogTitle sx={{textAlign:'center'}}>{proceed ?'Facility Form' :'Available Facility'}</DialogTitle>
           <DialogContent className="facility-dialog-content" style={{ height: '100vh' }}>
-            <FacilitySelect />
+            {proceed ? <FacilityForm /> : <FacilitySelect />}
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Close</Button>
-            <Button>Submit</Button>
+           {proceed ?<Button onClick={()=>setProceed(!proceed)}>Back</Button> : <Button onClick={handleClose}>Close</Button>}
+           {proceed ? <Button>Submit</Button> : <Button onClick={()=>setProceed(true)}>Next</Button>}
           </DialogActions>
         </Dialog>
       </MyFacilityContext.Provider>

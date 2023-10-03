@@ -9,7 +9,7 @@ function TermsAndCondition({ open, onClose }) {
       {/* Inner Dialog content */}
       <div>
         <Agreement />
-        <Button onClick={onClose} color="primary">
+        <Button color="secondary" variant="filled" onClick={onClose} >
           Close
         </Button>
       </div>

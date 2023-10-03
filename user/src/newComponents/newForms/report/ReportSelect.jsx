@@ -35,10 +35,19 @@ export default function ReportSelect() {
 
       </div>
       <div className='selected-certificates-dialog'>
-      {selectedReport.map((report, index) => (
-                    <div style={{textAlign:'center'}} key={index}>{report.name} </div>
-                ))}
-            </div>
+        {selectedReport.map((report, index) => (
+          <div style={{ textAlign: 'center' }} key={index}>
+            <p>{report.name}</p>
+            <label htmlFor={`report-input-${index}`}>Who's the person you're reporting?</label>
+            <input
+              type="text"
+              id={`report-input-${index}`}
+              aria-label="who"
+              placeholder="Enter person's name"
+            />
+          </div>
+        ))}
+      </div>
     </>
   )
 }
