@@ -13,6 +13,7 @@ export default function EquipmentSummary() {
             <p>Full Name: {details.fullname}</p>
             <p>Phone Number:{details.phoneNumber}</p>
             <p>Email:{details.email}</p>
+            <p>Return Date: {details.returnDate}</p>
           </div>
         </div>
         <div>

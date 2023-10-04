@@ -4,10 +4,13 @@ import './medicineDialog.css';
 import SelectedMedicine from './SelectedMedicine';
 import MedicineSelect from './MedicineSelect';
 import MedForm from './MedForm';
+import useUpload from '../../../hooks/useUpload'
 export const MyContext = createContext();
 export default function MedicineDialogForm({ open, handleClose }) {
   const [selectedMedicines, setSelectedMedicines] = useState([]);
+  const [agreement, setAgreement] = useState(true)
   const [details, setDetails] = useState({
+    status: 'request',
     fullname: '',
     email: '',
     phoneNumber: '',
@@ -23,7 +26,17 @@ export default function MedicineDialogForm({ open, handleClose }) {
       selectedMedicines: selectedMedicines,
     }));
   }, [selectedMedicines]);
-
+  const handleSubmit = async () => {
+    // useUpload(details, 'MedicineRequest')
+    setSelectedMedicines([]);
+    setDetails({
+      fullname: '',
+      email: '',
+      phoneNumber: '',
+      selectedMedicines: [],
+    });
+    console.log(selectedMedicines);
+  };
   const handleBoxSelect = (name, count) => {
     const index = selectedMedicines.findIndex((item) => item.name === name);
 
@@ -45,7 +58,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
     }
   };
   return (
-    <MyContext.Provider value={{ selectedMedicines, setSelectedMedicines, setDetails, details }}>
+    <MyContext.Provider value={{ selectedMedicines, setSelectedMedicines, setDetails, details, setAgreement,agreement }}>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle style={{ textAlign: 'center' }}>
           {proceed ? 'Medicine Form' : 'List of Medicines'}
@@ -67,10 +80,12 @@ export default function MedicineDialogForm({ open, handleClose }) {
               onClick={handleClose}>
               Close</Button>}
           {proceed ?
-            <Button
+              <Button
               variant="contained"
-              onClick={() => console.log(details)}>
-              Submit</Button>
+              disabled={agreement}
+              onClick={handleSubmit}
+            >
+                {agreement?  'Disabled': 'Submit'}</Button>
             :
             <Button
               variant="contained"

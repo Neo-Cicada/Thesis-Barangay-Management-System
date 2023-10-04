@@ -38,7 +38,7 @@ const Summary = ({ open, onClose }) => {
 export default function MedForm() {
 
   const [showAgreement, setShowAgreement] = useState(false);
-  const { selectedMedicines, details, setDetails } = useContext(MyContext);
+  const { selectedMedicines, details, setDetails, setAgreement, agreement, } = useContext(MyContext);
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
   const handleOpenInnerDialog = () => {
@@ -60,16 +60,19 @@ export default function MedForm() {
         justifyContent: 'center'
       }}>
         <TextField
+          fullWidth
           value={details.fullname}
           label="Fullname"
           onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
         <TextField
+          fullWidth
           label="Phone Number"
           placeholder="09..."
           value={details.phoneNumber}
           onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
         />
         <TextField
+          fullWidth
           variant="outlined"
           label="Email address"
           value={details.email}
@@ -85,7 +88,8 @@ export default function MedForm() {
         </Box>
         <FormControlLabel
           required
-          control={<Checkbox />}
+          control={<Checkbox checked={!agreement} />}
+          onClick={() => setAgreement(!agreement)}
           label={
             <span style={{ cursor: 'pointer' }}>
               Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>

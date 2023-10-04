@@ -10,7 +10,7 @@
 }
 .selected-certificates-dialog {
     max-height: 30%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     overflow-y: auto;
     display: grid;
     grid-template-columns: 1fr;

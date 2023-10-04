@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogActions, Button } from '@mui/material';
 import ReportSelect from './ReportSelect';
-
+import ReportForm from './ReportForm';
 export const MyReportContext = createContext();
 export default function ReportDialog({ open, handleClose }) {
   const [selectedReport, setSelectReportDalog] = useState([]);
+  const [proceed, setProceed] = useState(false);
 
 
   const handleBoxSelect = (name) => {
@@ -17,23 +18,37 @@ export default function ReportDialog({ open, handleClose }) {
       setSelectReportDalog([...selectedReport, { name: name }]);
     }
   };
+
   return (
     <>
       <MyReportContext.Provider value={{ selectedReport, setSelectReportDalog, handleBoxSelect }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle sx={{ textAlign: 'center' }}>Report Someone</DialogTitle>
+          <DialogTitle sx={{ textAlign: 'center' }}>{proceed ? 'Report Form':  'Report Someone'}</DialogTitle>
           <DialogContent style={{ height: '100vh' }}>
-            <ReportSelect />
+            {proceed ? <ReportForm /> : <ReportSelect />}
 
           </DialogContent>
           <DialogActions>
-            <Button
+
+            {proceed ? <Button
+              onClick={() => setProceed(false)}
+            >Back</Button> : <Button
               variant="contained"
-              onClick={handleClose}>Close</Button>
-            <Button
-              variant="contained"
-              
-            >Submit</Button>
+              onClick={handleClose}>
+              Close
+            </Button>}
+
+            {proceed ?
+              <Button>
+                Submit
+              </Button> :
+              <Button
+                variant="contained"
+                onClick={() => setProceed(true)}
+              >Next</Button>
+
+            }
+
           </DialogActions>
         </Dialog>
       </MyReportContext.Provider>

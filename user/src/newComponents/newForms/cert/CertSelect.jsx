@@ -37,7 +37,7 @@ export default function CertSelect() {
                     isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 2")}
                     onSelect={handleBoxSelect}
                 />
-                 <Box
+                <Box
                     name="Certificate 3"
                     isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 3")}
                     onSelect={handleBoxSelect}
@@ -47,17 +47,36 @@ export default function CertSelect() {
                     isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 4")}
                     onSelect={handleBoxSelect}
                 /> <Box
-                name="Certificate 5"
-                isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 5")}
-                onSelect={handleBoxSelect}
-            />
+                    name="Certificate 5"
+                    isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 5")}
+                    onSelect={handleBoxSelect}
+                />
                 {/* Add more boxes with different names */}
             </div>
             <p style={{ textAlign: 'center' }}>Selected Certificates:</p>
             <div className='selected-certificates-dialog'>
-            {selectedCertificates.map((certificate, index) => (
-                    <div style={{textAlign:'center'}} key={index}>{certificate.name} </div>
+                {selectedCertificates.map((certificate, index) => (
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '1em',
+                            borderBottom:'1px solid grey'
+                        }}
+                        key={index}
+                    >
+                        <div>{certificate.name}</div>
+
+                        <label htmlFor={`paymentMethod-${index}`}>Mod of payment:</label>
+                        <select id={`paymentMethod-${index}`}>
+                            <option>GCASH</option>
+                            <option>Cash</option>
+                        </select>
+                    </div>
                 ))}
+
             </div>
         </>
     )

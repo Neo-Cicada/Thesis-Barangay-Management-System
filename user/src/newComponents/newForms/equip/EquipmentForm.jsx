@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { TextField, Box, FormControlLabel, Checkbox, Dialog, Button } from '@mui/material'
+import { TextField, Box, FormControlLabel, FormControl, Checkbox, Dialog, Button, InputLabel } from '@mui/material'
 import { MyEquipmentContext } from './EquipmentDialog';
 import Agreement from '../../../components/dialogs/Agreement'
 import EquipmentSummary from './EquipmentSummary'
@@ -36,7 +36,7 @@ const Summary = ({ open, onClose }) => {
 };
 export default function EquipmentDialogForm() {
   const [showAgreement, setShowAgreement] = useState(false);
-  const { selectedEquipment, details, setDetails } = useContext(MyEquipmentContext);
+  const { selectedEquipment, details, setDetails, agreement, setAgreement } = useContext(MyEquipmentContext);
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
   const handleOpenInnerDialog = () => {
@@ -58,21 +58,38 @@ export default function EquipmentDialogForm() {
         justifyContent: 'center'
       }}>
         <TextField
+        fullWidth
           value={details.fullname}
           label="Fullname"
           onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
         <TextField
+        fullWidth
           label="Phone Number"
           placeholder="09..."
           value={details.phoneNumber}
           onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
         />
         <TextField
+        fullWidth
           variant="outlined"
           label="Email address"
           value={details.email}
           onChange={(e) => setDetails({ ...details, email: e.target.value })}
         />
+        <FormControl fullWidth >
+          {/* <InputLabel htmlFor="returnDate">Return Date</InputLabel> */}
+          <TextField
+            label="Return Date"
+            id="returnDate"
+            variant="outlined"
+            type="date"
+            value={details.returnDate}
+            onChange={(e) => setDetails({ ...details, returnDate: e.target.value })}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </FormControl>
         <Box sx={{
           display: 'flex', alignItems: 'center',
           justifyContent: 'center', marginTop: '0.3em',
@@ -83,7 +100,8 @@ export default function EquipmentDialogForm() {
         </Box>
         <FormControlLabel
           required
-          control={<Checkbox />}
+          control={<Checkbox checked={!agreement}/>}
+          onClick={()=>setAgreement(!agreement)}
           label={
             <span style={{ cursor: 'pointer' }}>
               Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>

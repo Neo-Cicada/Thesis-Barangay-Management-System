@@ -5,7 +5,7 @@ export default function MedSummary() {
     return (
         <>
             <div style={{ width: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div>
+                <div style={{borderBottom:'2px dashed grey'}}>
                     <h2 style={{ textAlign: 'center' }}>
                         Personal Information</h2>
                     <div>
@@ -14,6 +14,7 @@ export default function MedSummary() {
                         <p>Email:{details.email}</p>
                     </div>
                 </div>
+            
                 <div>
                     <h2 style={{ textAlign: 'center' }}>
                         Selected Items</h2>

@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import SelectedMedicine from './SelectedMedicine';
 import { MyContext } from './MedicineDialogForm';
-
-export function Box({ name, isSelected, onSelect }) {
+import useRead from '../../../hooks/useRead'
+export function Box({ name, isSelected, onSelect, quantity }) {
   const boxStyle = {
     height: '5em',
     textAlign: 'center',
@@ -18,31 +18,28 @@ export function Box({ name, isSelected, onSelect }) {
       onClick={() => onSelect(name)}
     >
       <p style={{ fontSize: '1em' }}>{name}</p>
+      <p>{quantity}</p>
     </div>
   );
 }
 
 export default function MedicineSelect({ handleBoxSelect }) {
   const { selectedMedicines } = useContext(MyContext);
+  const [data, setData] = useState([])
 
+  useRead('Medicines', setData)
+
+  const items = data.map(item => <Box
+    name={item.type}
+    quantity={item.quantity}
+    isSelected={selectedMedicines.some((medicine) => medicine.name == String(item.type))}
+    onSelect={handleBoxSelect}
+  />)
   return (
     <>
       <div className='items-medicine-dialog'>
-        <Box
-          name="Paracetamol"
-          isSelected={selectedMedicines.some((medicine) => medicine.name === "Paracetamol")}
-          onSelect={handleBoxSelect}
-        />
-        <Box name="Medicine 2"
-          onSelect={handleBoxSelect}
-          isSelected={selectedMedicines.some((medicine) => medicine.name === "Medicine 2")}
-        />
+        {items}
 
-        <Box name="Medicine 4" onSelect={handleBoxSelect} />
-        <Box name="Medicine 5" onSelect={handleBoxSelect} />
-        <Box name="Medicine 6" onSelect={handleBoxSelect} />
-        <Box name="Medicine 7" onSelect={handleBoxSelect} />
-        {/* Add more boxes with different names */}
       </div>
       <p style={{ textAlign: 'center' }}>Selected Medicines:</p>
       <div className='selected-medicine-dialog'>

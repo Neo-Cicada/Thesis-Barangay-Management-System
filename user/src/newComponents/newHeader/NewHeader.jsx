@@ -15,8 +15,16 @@ export default function NewHeader() {
     <>
       <header>
         <div className='header-div'>
-          <div className='navigation-logo'>EBarangay</div>
-          {/* for mobile */}
+          <div className='navigation-logo' style={{
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '3.2rem',
+            fontWeight: 'bold',
+            letterSpacing: '-0.05rem',
+            color: '#1877F2',  // Facebook's blue color
+            textShadow: '0px 1px 1px rgba(0,0,0,0.2)',  // Optional text shadow
+          }}>
+            E<span style={{ color: '#3B5998' }}>Barangay</span>
+          </div>          {/* for mobile */}
           <div className='burger-icon' onClick={onClickMenu}>
             {isMenuClicked ? <CloseIcon fontSize='large' /> : <MenuIcon fontSize='large' />}
           </div>
@@ -31,7 +39,7 @@ export default function NewHeader() {
                   fontWeight: '1em',
                   '&:hover': {
                     border: '1px dashed black',
-                    color:'white'
+                    color: 'white'
                   }
                 }}
                 component={Link}
@@ -44,7 +52,7 @@ export default function NewHeader() {
                   fontSize: '1.2rem',
                   fontWeight: '1em',
                   '&:hover': {
-                    color:'white',
+                    color: 'white',
                     border: '1px dashed black'
                   }
                 }}
@@ -58,7 +66,7 @@ export default function NewHeader() {
                   fontSize: '1.2rem',
                   fontWeight: '1em',
                   '&:hover': {
-                    color:'white',
+                    color: 'white',
                     border: '1px dashed black'
                   }
                 }}
@@ -69,7 +77,7 @@ export default function NewHeader() {
                   fontSize: '1.2rem',
                   fontWeight: '1em',
                   '&:hover': {
-                    color:'white',
+                    color: 'white',
                     border: '1px dashed black'
                   }
                 }}

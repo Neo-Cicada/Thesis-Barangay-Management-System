@@ -3,11 +3,15 @@ import { Dialog, DialogContent, DialogTitle, DialogActions, Button } from '@mui/
 import './equipmentDialog.css'
 import EquipmentSelect from './EquipmentSelect'
 import EquipmentForm from './EquipmentForm'
+import useUpload from '../../../hooks/useUpload';
 export const MyEquipmentContext = createContext();
 export default function EquipmentDialog({ open, handleClose }) {
+  const [agreement, setAgreement] = useState(true)
   const [selectedEquipment, setSelectedEquipment] = useState([])
   const [proceed, setProceed] = useState(false)
   const [details, setDetails] = useState({
+    returnDate: '',
+    status: 'request',
     fullname: '',
     email: '',
     phoneNumber: '',
@@ -19,6 +23,17 @@ export default function EquipmentDialog({ open, handleClose }) {
       selectedEquipment: selectedEquipment,
     }));
   }, [selectedEquipment]);
+  const handleSubmit = () => {
+    //useUpload here
+    setSelectedEquipment([])
+    setDetails({
+      returnDate: '',
+      fullname: '',
+      email: '',
+      phoneNumber: '',
+      selectedEquipment: []
+    })
+  }
   const handleBoxSelect = (name, count) => {
     const index = selectedEquipment.findIndex((item) => item.name === name);
 
@@ -41,16 +56,32 @@ export default function EquipmentDialog({ open, handleClose }) {
   };
   return (
     <>
-      <MyEquipmentContext.Provider value={{ selectedEquipment, setSelectedEquipment, details, setDetails, handleBoxSelect }}>
+      <MyEquipmentContext.Provider value={{
+        selectedEquipment,
+        setSelectedEquipment,
+        details,
+        agreement,
+        setAgreement,
+        setDetails,
+        handleBoxSelect,
+      }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle style={{textAlign:'center'}}>Available Equipment</DialogTitle>
+          <DialogTitle style={{ textAlign: 'center' }}>Available Equipment</DialogTitle>
           <DialogContent style={{ height: '100vh' }}>
-         {proceed ? <EquipmentForm/> :   <EquipmentSelect />}
+            {proceed ? <EquipmentForm /> : <EquipmentSelect />}
           </DialogContent>
           <DialogActions>
-                    {proceed ? <Button onClick={() => setProceed(!proceed)}>Back</Button> : <Button onClick={handleClose}>Close</Button>}
-                    {proceed ? <Button >Submit</Button> : <Button onClick={() => setProceed(!proceed)}>Next</Button>}
-                </DialogActions>
+            {proceed ?
+              <Button onClick={() => setProceed(!proceed)}>Back</Button> :
+              <Button onClick={handleClose}>Close</Button>}
+            {proceed ?
+              <Button
+                onClick={handleSubmit}
+                disabled={agreement}
+              >{agreement ? 'Disabled' : 'Submit'}</Button>
+              :
+              <Button onClick={() => setProceed(!proceed)}>Next</Button>}
+          </DialogActions>
         </Dialog>
       </MyEquipmentContext.Provider>
     </>
