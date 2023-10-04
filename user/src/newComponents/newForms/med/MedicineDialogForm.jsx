@@ -66,7 +66,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
           {proceed ? 'Medicine Form' : 'List of Medicines'}
         </DialogTitle>
         <DialogContent style={dialogContentStyle} className='medicine-dialog-content'>
-          {proceed ? <MedForm /> : <MedicineSelect
+          {proceed ?<MedForm /> : <MedicineSelect
             handleBoxSelect={handleBoxSelect}
           />}
         </DialogContent>

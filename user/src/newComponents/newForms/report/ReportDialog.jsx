@@ -23,8 +23,8 @@ export default function ReportDialog({ open, handleClose }) {
     <>
       <MyReportContext.Provider value={{ selectedReport, setSelectReportDalog, handleBoxSelect }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle sx={{ textAlign: 'center' }}>{proceed ? 'Report Form':  'Report Someone'}</DialogTitle>
-          <DialogContent style={{ height: '100vh' }}>
+          <DialogTitle sx={{ textAlign: 'center',borderBottom:'2px dashed grey' }}>{proceed ? 'Report Form':  'Report Someone'}</DialogTitle>
+          <DialogContent style={{ height: '100vh',borderBottom:'2px dashed grey' }}>
             {proceed ? <ReportForm /> : <ReportSelect />}
 
           </DialogContent>

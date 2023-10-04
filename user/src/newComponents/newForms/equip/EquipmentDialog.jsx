@@ -70,8 +70,8 @@ export default function EquipmentDialog({ open, handleClose }) {
         handleSubmit
       }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle style={{ textAlign: 'center' }}>Available Equipment</DialogTitle>
-          <DialogContent style={{ height: '100vh' }}>
+          <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>Available Equipment</DialogTitle>
+          <DialogContent style={{ height: '100vh', borderBottom: '2px dashed grey' }}>
             {proceed ? <EquipmentForm /> : <EquipmentSelect />}
           </DialogContent>
           <DialogActions>

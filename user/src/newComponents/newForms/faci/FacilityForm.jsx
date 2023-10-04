@@ -49,26 +49,32 @@ export default function FacilityForm() {
 
   return (
     <>
+    <div style={{display:'flex', justifyContent:'center', alignItems:'center', paddingTop:'1em'}}>
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '3em',
+        gap: '1em',
         marginTop: '1em',
         alignItems: 'center',
         justifyContent: 'center'
       }}>
         <TextField
+        fullWidth
           value={details.fullname}
           label="Fullname"
           onChange={(e) => setDetails({ ...details, fullname: e.target.value })}
           />
         <TextField
+                fullWidth
+
           label="Phone Number"
           placeholder="09..."
           value={details.phoneNumber}
           onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
         />
         <TextField
+                fullWidth
+
           variant="outlined"
           label="Email address"
           value={details.email}
@@ -91,6 +97,7 @@ export default function FacilityForm() {
             </span>
           }
         />
+      </div>
       </div>
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />

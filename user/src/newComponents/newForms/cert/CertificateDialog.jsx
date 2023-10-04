@@ -34,13 +34,14 @@ export default function CertificateDialog({ open, handleClose }) {
     };
     const dialogContentStyle = {
         height: '100vh',
+        borderBottom:'2px dashed grey'
     };
     return (
         <>
             <MyCertContext.Provider value={{ selectedCertificates, handleBoxSelect, details,setDetails }}>
                 <Dialog open={open} onClose={handleClose} fullWidth>
-                    <DialogTitle style={{ textAlign: 'center' }}>Available Certificates</DialogTitle>
-                    <DialogContent style={dialogContentStyle} className='certificate-dialog-content'>
+                    <DialogTitle style={{ textAlign: 'center', borderBottom:'2px dashed grey' }}>Available Certificates</DialogTitle>
+                    <DialogContent  style={dialogContentStyle} className='certificate-dialog-content'>
                         {proceed ? <CertForm /> : <CertSelect />}
                     </DialogContent>
                     <DialogActions>

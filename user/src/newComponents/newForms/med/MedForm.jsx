@@ -51,64 +51,64 @@ export default function MedForm() {
   };
   return (
     <>
+<div style={{ maxWidth: '400px', margin: '0 auto' }}>        <form onSubmit={handleSubmit} style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1em',
+          marginTop: '1em',
+          alignItems: 'center',
+          justifyContent: 'center',
+          maxWidth: '400px',
+        }}>
+          <TextField
+            required
+            fullWidth
+            value={details.fullname}
+            label="Fullname"
+            onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
+          <TextField
+            required
+            fullWidth
+            label="Phone Number"
+            placeholder="09..."
+            value={details.phoneNumber}
+            onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
+          />
+          <TextField
+            required
 
-      <form onSubmit={handleSubmit} style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1em',
-        marginTop: '1em',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <TextField
-          required
-          fullWidth
-          value={details.fullname}
-          label="Fullname"
-          onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
-        <TextField
-          required
-          fullWidth
-          label="Phone Number"
-          placeholder="09..."
-          value={details.phoneNumber}
-          onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
-        />
-        <TextField
-          required
-
-          fullWidth
-          variant="outlined"
-          label="Email address"
-          value={details.email}
-          onChange={(e) => setDetails({ ...details, email: e.target.value })}
-        />
-        <Box sx={{
-          display: 'flex', alignItems: 'center',
-          justifyContent: 'center', marginTop: '0.3em',
-          fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
-          cursor: 'pointer'
-        }} >
-          <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>
-        </Box>
-        <FormControlLabel
-          required
-          control={<Checkbox checked={!agreement} />}
-          onClick={() => setAgreement(!agreement)}
-          label={
-            <span style={{ cursor: 'pointer' }}>
-              Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>
-            </span>
-          }
-        />
-        <Button
-          variant="contained"
-          disabled={agreement}
-          type={'submit'}
-        >
-          {agreement ? 'Disabled' : 'Submit'}</Button>
-      </form>
-
+            fullWidth
+            variant="outlined"
+            label="Email address"
+            value={details.email}
+            onChange={(e) => setDetails({ ...details, email: e.target.value })}
+          />
+          <Box sx={{
+            display: 'flex', alignItems: 'center',
+            justifyContent: 'center', marginTop: '0.3em',
+            fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+            cursor: 'pointer'
+          }} >
+            <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>
+          </Box>
+          <FormControlLabel
+            required
+            control={<Checkbox checked={!agreement} />}
+            onClick={() => setAgreement(!agreement)}
+            label={
+              <span style={{ cursor: 'pointer' }}>
+                Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>
+              </span>
+            }
+          />
+          <Button
+            variant="contained"
+            disabled={agreement}
+            type={'submit'}
+          >
+            {agreement ? 'Disabled' : 'Submit'}</Button>
+        </form>
+      </div>
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />
     </>

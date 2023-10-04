@@ -49,7 +49,7 @@ export default function EquipmentDialogForm() {
 
   return (
     <>
-      <div style={{
+      <div style={{ maxWidth: '400px', margin: '0 auto' }}>        <div style={{
         display: 'flex',
         flexDirection: 'column',
         gap: '1em',
@@ -119,6 +119,7 @@ export default function EquipmentDialogForm() {
           onClick={handleSubmit}
           disabled={agreement}
         >{agreement ? 'Disabled' : 'Submit'}</Button>
+      </div>
       </div>
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />

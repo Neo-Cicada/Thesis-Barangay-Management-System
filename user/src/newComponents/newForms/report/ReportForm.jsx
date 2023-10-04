@@ -29,9 +29,9 @@ export default function ReportForm() {
   };
 
   return (
-    <div style={{  padding: '16px', maxWidth: '400px', margin: '0 auto' }}>
+    <div style={{   maxWidth: '400px', margin: '0 auto' }}>
       <form onSubmit={handleSubmit}>
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" fullWidth>
           <RadioGroup row   aria-label="reportType" name="reportType" value={reportType} onChange={handleRadioChange}>
             <FormControlLabel value="anonymous" control={<Radio />} label="Anonymous Report" />
             <FormControlLabel value="personal" control={<Radio />} label="Personal Information" />

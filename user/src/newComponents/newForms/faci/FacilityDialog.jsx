@@ -39,13 +39,13 @@ export default function FacilityDialog({ open, handleClose }) {
     <>
       <MyFacilityContext.Provider value={{ selectedFacility, setselectedFacility, handleBoxSelect, details, setDetails }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle sx={{textAlign:'center'}}>{proceed ?'Facility Form' :'Available Facility'}</DialogTitle>
-          <DialogContent className="facility-dialog-content" style={{ height: '100vh' }}>
+          <DialogTitle sx={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>{proceed ? 'Facility Form' : 'Available Facility'}</DialogTitle>
+          <DialogContent sx={{ borderBottom: '2px dashed grey' }} className="facility-dialog-content" style={{ height: '100vh' }}>
             {proceed ? <FacilityForm /> : <FacilitySelect />}
           </DialogContent>
           <DialogActions>
-           {proceed ?<Button onClick={()=>setProceed(!proceed)}>Back</Button> : <Button onClick={handleClose}>Close</Button>}
-           {proceed ? <Button>Submit</Button> : <Button onClick={()=>setProceed(true)}>Next</Button>}
+            {proceed ? <Button onClick={() => setProceed(!proceed)}>Back</Button> : <Button onClick={handleClose}>Close</Button>}
+            {proceed ? <Button>Submit</Button> : <Button onClick={() => setProceed(true)}>Next</Button>}
           </DialogActions>
         </Dialog>
       </MyFacilityContext.Provider>

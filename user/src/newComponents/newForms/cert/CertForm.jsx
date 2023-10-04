@@ -48,54 +48,61 @@ export default function CertForm() {
   };
   return (
     <>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '3em',
-        marginTop: '1em',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <TextField
-          label="Fullname"
-          onChange={(e) => setDetails({ ...details, fullname: e.target.value })}
-          value={details.fullname}
-        />
-        <TextField
-          label="Phone number"
-          onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
-          value={details.phoneNumber}
-        />
-        <TextField
-          label="Email"
-          value={details.email}
-          onChange={(e) => setDetails({ ...details, email: e.target.value })}
-
-        // Add your state and onChange logic here
-        />
-        <Box sx={{
+      <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+        <div style={{
           display: 'flex',
+          flexDirection: 'column',
+          gap: '1em',
+          marginTop: '1em',
           alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: '0.3em',
-          fontSize: '1.1rem',
-          color: 'red',
-          textDecoration: 'underline',
-          cursor: 'pointer'
+          justifyContent: 'center'
         }}>
-          <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>        </Box>
-        <FormControlLabel
-          required
-          control={<Checkbox />}
-          label={
-            <span style={{ cursor: 'pointer' }}>
-              Agree to the <u onClick={handleOpenAgreement}>terms and conditions</u>
-            </span>
-          }
-        />
+          <TextField
+            fullWidth
+            label="Fullname"
+            onChange={(e) => setDetails({ ...details, fullname: e.target.value })}
+            value={details.fullname}
+          />
+          <TextField
+            fullWidth
+
+            label="Phone number"
+            onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
+            value={details.phoneNumber}
+          />
+          <TextField
+            fullWidth
+
+            label="Email"
+            value={details.email}
+            onChange={(e) => setDetails({ ...details, email: e.target.value })}
+
+          // Add your state and onChange logic here
+          />
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: '0.3em',
+            fontSize: '1.1rem',
+            color: 'red',
+            textDecoration: 'underline',
+            cursor: 'pointer'
+          }}>
+            <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>        </Box>
+          <FormControlLabel
+            required
+            control={<Checkbox />}
+            label={
+              <span style={{ cursor: 'pointer' }}>
+                Agree to the <u onClick={handleOpenAgreement}>terms and conditions</u>
+              </span>
+            }
+          />
+        </div>
       </div>
       <TermsAndCondition open={showAgreement} onClose={handleCloseAgreement} />
-      <Summary open={showSummary} onClose={()=>setShowSummary(false)}/>
+      <Summary open={showSummary} onClose={() => setShowSummary(false)} />
     </>
   )
 }
