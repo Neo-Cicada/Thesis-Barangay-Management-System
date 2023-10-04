@@ -21,7 +21,17 @@ const Box = ({ name, isSelected, onSelect }) => {
 }
 
 export default function ReportSelect() {
-  const { selectedReport, setSelectReportDalog, handleBoxSelect } = useContext(MyReportContext)
+  const { selectedReport, setSelectReportDalog, handleBoxSelect } = useContext(MyReportContext);
+
+  const handleReport = (ReportName, badGuy) => {
+    const updatedSelectedReport = selectedReport.map((item) => {
+      if (item.name === ReportName) {
+        return { ...item, person: badGuy };
+      }
+      return item;
+    });
+    setSelectReportDalog(updatedSelectedReport);
+  };
   return (
     <>
       <div className='items-certificates-dialog'>
@@ -40,6 +50,7 @@ export default function ReportSelect() {
             <p>{report.name}</p>
             <label htmlFor={`report-input-${index}`}>Who's the person you're reporting?</label>
             <input
+              onChange={(e)=>handleReport(report.name, e.target.value)}
               type="text"
               id={`report-input-${index}`}
               aria-label="who"

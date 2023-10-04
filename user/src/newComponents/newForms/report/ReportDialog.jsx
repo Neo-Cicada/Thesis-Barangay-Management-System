@@ -6,16 +6,30 @@ export const MyReportContext = createContext();
 export default function ReportDialog({ open, handleClose }) {
   const [selectedReport, setSelectReportDalog] = useState([]);
   const [proceed, setProceed] = useState(false);
+  const [details, setDetails] = useState({
+    fullname: '',
+    email: '',
+    phoneNumber: '',
+    selectedReport: [...selectedReport] // spread the array elements
+  });
+  useEffect(() => {
+    setDetails((prevDetails) => ({
+      ...prevDetails,
+      selectedReport: selectedReport,
+    }));
+  }, [selectedReport]);
 
-
-  const handleBoxSelect = (name) => {
+  const handleBoxSelect = (name, badGuy) => {
     const index = selectedReport.findIndex((report) => report.name === name);
 
     if (index !== -1) {
-      const updatedSelected = selectedReport.filter((report) => report.name !== name);
+      const updatedSelected = selectedReport.map((report) =>
+        report.name === name ? { ...report, person: badGuy } : report
+      );
       setSelectReportDalog(updatedSelected);
     } else {
-      setSelectReportDalog([...selectedReport, { name: name }]);
+      // Add a new report with the person's name when it's selected
+      setSelectReportDalog([...selectedReport, { name: name, person: badGuy }]);
     }
   };
 
@@ -23,8 +37,8 @@ export default function ReportDialog({ open, handleClose }) {
     <>
       <MyReportContext.Provider value={{ selectedReport, setSelectReportDalog, handleBoxSelect }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle sx={{ textAlign: 'center',borderBottom:'2px dashed grey' }}>{proceed ? 'Report Form':  'Report Someone'}</DialogTitle>
-          <DialogContent style={{ height: '100vh',borderBottom:'2px dashed grey' }}>
+          <DialogTitle sx={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>{proceed ? 'Report Form' : 'Report Someone'}</DialogTitle>
+          <DialogContent style={{ height: '100vh', borderBottom: '2px dashed grey' }}>
             {proceed ? <ReportForm /> : <ReportSelect />}
 
           </DialogContent>
@@ -39,7 +53,7 @@ export default function ReportDialog({ open, handleClose }) {
             </Button>}
 
             {proceed ?
-              <Button>
+              <Button onClick={() => console.log(details)}>
                 Submit
               </Button> :
               <Button
