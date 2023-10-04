@@ -42,7 +42,6 @@ header{
         display: flex;
         justify-content: center;
         min-width: 174px;
-        padding-top: 10px;
         opacity: 0.9;
         margin-top: 5em;
     }

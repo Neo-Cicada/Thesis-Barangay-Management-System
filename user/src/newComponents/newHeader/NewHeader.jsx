@@ -13,7 +13,8 @@ export default function NewHeader() {
   }
   return (
     <>
-      <header style={{position:'fixed', zIndex:'5'}}>
+
+      <header style={{ position: 'sticky', top: '0', zIndex: '5' }}>
         <div className='header-div'>
           <div className='navigation-logo' style={{
             fontFamily: 'Arial, sans-serif',
@@ -89,7 +90,7 @@ export default function NewHeader() {
       </header>
       {isMenuClicked
         &&
-        <div className='popUp-navigation' style={{ marginTop: '70px', position:'fixed' }}>
+        <div className='popUp-navigation' style={{position: 'fixed', top: '0', zIndex: '2' }}>
           <ul>
             <Button
               sx={{

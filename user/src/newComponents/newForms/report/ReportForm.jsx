@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, Button, Checkbox } from '@mui/material';
+import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, Button, Checkbox, Box } from '@mui/material';
 
 export default function ReportForm() {
   const [reportType, setReportType] = useState('anonymous');
@@ -29,10 +29,10 @@ export default function ReportForm() {
   };
 
   return (
-    <div style={{   maxWidth: '400px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
       <form onSubmit={handleSubmit}>
         <FormControl component="fieldset" fullWidth>
-          <RadioGroup row   aria-label="reportType" name="reportType" value={reportType} onChange={handleRadioChange}>
+          <RadioGroup row aria-label="reportType" name="reportType" value={reportType} onChange={handleRadioChange}>
             <FormControlLabel value="anonymous" control={<Radio />} label="Anonymous Report" />
             <FormControlLabel value="personal" control={<Radio />} label="Personal Information" />
           </RadioGroup>
@@ -68,18 +68,41 @@ export default function ReportForm() {
           margin="normal"
           disabled={reportType === 'anonymous'}
         />
-        <FormControlLabel
-          control={
-            <Checkbox
-              name="summon"
-              checked={formData.summon}
-              onChange={handleChange}
-              color="primary"
-              disabled={reportType === 'anonymous'}
-            />
-          }
-          label="Summon the person being reported"
-        />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="summon"
+                checked={formData.summon}
+                onChange={handleChange}
+                color="primary"
+                disabled={reportType === 'anonymous'}
+              />
+            }
+            label="Summon the person being reported"
+          />
+        </Box>
+        <Box sx={{
+          
+          display: 'flex', alignItems: 'center',
+          justifyContent: 'center', marginTop: '0.3em',
+          fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+          cursor: 'pointer'
+        }} >
+          <span>Review summary of informaton provided</span>
+        </Box>
+        <Box sx={{display: 'flex', justifyContent: 'center' }}>
+          <FormControlLabel
+            required
+            control={<Checkbox />}
+            label={
+              <span style={{ cursor: 'pointer' }}>
+                Agree to the <u >terms and conditions</u>
+              </span>
+            }
+          />
+        </Box>
 
         {/* <Button type="submit" variant="contained" color="primary" disabled={reportType === 'anonymous'}>
           Submit

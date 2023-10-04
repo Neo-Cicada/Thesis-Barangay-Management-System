@@ -21,18 +21,16 @@ export default function ReportDialog({ open, handleClose }) {
 
   const handleBoxSelect = (name, badGuy) => {
     const index = selectedReport.findIndex((report) => report.name === name);
-
+  
     if (index !== -1) {
-      const updatedSelected = selectedReport.map((report) =>
-        report.name === name ? { ...report, person: badGuy } : report
-      );
+      // Item is already selected, so remove it
+      const updatedSelected = selectedReport.filter((report) => report.name !== name);
       setSelectReportDalog(updatedSelected);
     } else {
       // Add a new report with the person's name when it's selected
       setSelectReportDalog([...selectedReport, { name: name, person: badGuy }]);
     }
   };
-
   return (
     <>
       <MyReportContext.Provider value={{ selectedReport, setSelectReportDalog, handleBoxSelect }}>
