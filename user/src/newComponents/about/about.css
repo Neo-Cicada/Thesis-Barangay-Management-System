@@ -69,9 +69,9 @@
     grid-column: 2/span 3;
 }
 .aboutEB> .EB-image{
-    /* border: 1px solid red; */
+    border: 1px solid red;
     grid-column: 1/span 2;
-    grid-row: 2/span 4;
+    grid-row: 3/span 4;
 }
 /* Location css */
 .location{
@@ -92,9 +92,9 @@
     grid-column: 3/span 4;
 }
 .location > .location-image{
-    /* border: 1px solid rgb(128, 235, 114); */
-    grid-row: 3/span 4;
+    border: 1px solid rgb(128, 235, 114);
     grid-column: 1/span 2;
+    grid-row: 3/span 4;
 }
 
 /* Officials css */
@@ -115,8 +115,8 @@
 }
 .officials > .official-image{
     /* border: 1px solid red; */
-    grid-row: 2/span 2;
     grid-column: 1/span 2;
+    grid-row: 3/span 4;
 
 }
 

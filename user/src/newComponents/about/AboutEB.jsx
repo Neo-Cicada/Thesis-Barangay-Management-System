@@ -11,7 +11,7 @@ export default function AboutEB({title, description, image}) {
            {description}
         </p>
         <div className='EB-image'>
-          <img src={image} height={'100%'} width={"100%"} style={{borderRadius:'13em'}}/>
+          <img src={image} height={'100%'} width={"100%"} style={{borderRadius:'1em'}}/>
         </div>
       </div>
     </>
