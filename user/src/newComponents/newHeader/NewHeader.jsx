@@ -89,7 +89,7 @@ export default function NewHeader() {
       </header>
       {isMenuClicked
         &&
-        <div className='popUp-navigation'>
+        <div className='popUp-navigation' style={{ marginTop: '70px', position:'fixed' }}>
           <ul>
             <Button
               sx={{

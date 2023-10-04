@@ -34,14 +34,17 @@ header{
         cursor: pointer;
     }
     .popUp-navigation{
-        background-color: #DFE3EE;
+        background-color: #8B9DC3;
         z-index: 1;
+        font-weight: bold;
         position: absolute;
         width: clamp(100vw, 100%, 100em);
         display: flex;
         justify-content: center;
         min-width: 174px;
+        padding-top: 10px;
         opacity: 0.9;
+        margin-top: 5em;
     }
     .popUp-navigation > ul {
         list-style: none;
