@@ -20,8 +20,16 @@ export function Box({ name, isSelected, onSelect }) {
   );
 }
 export default function FacilitySelect() {
-  const { selectedFacility, setselectedFacility, handleBoxSelect } = useContext(MyFacilityContext)
-
+  const { selectedFacility, setselectedFacility, handleBoxSelect, } = useContext(MyFacilityContext)
+  const handleOptionSelect = (facilityName, selectedSlot) => {
+    const updatedSelectedFacility = selectedFacility.map((item) => {
+      if (item.name === facilityName) {
+        return { ...item, slot: selectedSlot };
+      }
+      return item;
+    });
+    setselectedFacility(updatedSelectedFacility);
+  };
 
   return (
     <>
@@ -39,10 +47,13 @@ export default function FacilitySelect() {
       </div>
       <p style={{ textAlign: 'center' }}>Selected Facility</p>
       <div className='selected-certificates-dialog'>
-      {selectedFacility.map((facility, index) => (
-          <div style={{ textAlign: 'center', display: 'flex', borderBottom:'1px solid black', alignItems: 'center', gap:'1em',justifyContent: 'center' }} key={index}>
+        {selectedFacility.map((facility, index) => (
+          <div style={{ textAlign: 'center', display: 'flex', borderBottom: '1px solid black', alignItems: 'center', gap: '1em', justifyContent: 'center' }} key={index}>
             <div >{facility.name}</div>
-            <select>
+            <select
+              value={facility.slot || ''} // Use the facility's slot value
+              onChange={(e) => handleOptionSelect(facility.name, e.target.value)}
+            >
               <option value="" disabled>
                 Select Time Slot
               </option>

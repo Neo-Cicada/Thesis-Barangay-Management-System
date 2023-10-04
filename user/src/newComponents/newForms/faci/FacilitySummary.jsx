@@ -13,13 +13,14 @@ export default function FacilitySummary() {
             <p>Full Name: {details.fullname}</p>
             <p>Phone Number:{details.phoneNumber}</p>
             <p>Email:{details.email}</p>
+
           </div>
         </div>
         <div>
           <h2 style={{ textAlign: 'center' }}>
             Selected Items</h2>
           <div>
-            {details.selectedFacility.map(item => <p>name: {item.name}</p>)}
+            {details.selectedFacility.map(item => <p>name: {item.name} - {item.slot}</p>)}
           </div>
         </div>
 
