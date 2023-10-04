@@ -60,6 +60,7 @@ export default function CertSelect() {
                         style={{
                             textAlign: 'center',
                             display: 'flex',
+                            flexDirection:'column',
                             alignItems: 'center',
                             justifyContent: 'center',
                             gap: '1em',
@@ -74,6 +75,7 @@ export default function CertSelect() {
                             <option>GCASH</option>
                             <option>Cash</option>
                         </select>
+                        <div>Cost: 50</div>
                     </div>
                 ))}
 

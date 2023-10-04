@@ -62,7 +62,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
     <MyContext.Provider value={{ selectedMedicines, setSelectedMedicines,
       handleSubmit, setDetails, details, setAgreement,agreement }}>
       <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle style={{ textAlign: 'center' }}>
+        <DialogTitle style={{ textAlign: 'center', borderBottom:'2px dashed grey' }}>
           {proceed ? 'Medicine Form' : 'List of Medicines'}
         </DialogTitle>
         <DialogContent style={dialogContentStyle} className='medicine-dialog-content'>

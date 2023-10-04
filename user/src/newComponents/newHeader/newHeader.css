@@ -9,7 +9,7 @@ header{
     justify-content: center;
     width: 100%;
     min-width: 174px;
-
+    opacity: 0.9;
 }
 .header-div{
     display: flex;
@@ -17,6 +17,7 @@ header{
     justify-content: space-between;
     align-items: center;
     width: 90%;
+    
 }
 .nav-menu
 {
@@ -33,13 +34,14 @@ header{
         cursor: pointer;
     }
     .popUp-navigation{
-        background-color: #48d2e4;
+        background-color: #DFE3EE;
         z-index: 1;
         position: absolute;
         width: clamp(100vw, 100%, 100em);
         display: flex;
         justify-content: center;
         min-width: 174px;
+        opacity: 0.9;
     }
     .popUp-navigation > ul {
         list-style: none;

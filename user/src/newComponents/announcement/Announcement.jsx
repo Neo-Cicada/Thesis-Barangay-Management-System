@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button } from '@mui/material'
 import './announcement.css'
 import AnnouncementBox from './AnnouncementBox'
 import useRead from '../../hooks/useRead'
@@ -22,7 +23,9 @@ export default function Announcement() {
 
         </div>
         <div className='announcement-btn'>
-            <button onClick={()=>setIsExpand(!isExpand)}>{isExpand ? 'See less': 'See more'}</button>
+            <Button
+              variant='contained'
+            onClick={()=>setIsExpand(!isExpand)}>{isExpand ? 'See less': 'See more'}</Button>
         </div>
       </div>
     </>

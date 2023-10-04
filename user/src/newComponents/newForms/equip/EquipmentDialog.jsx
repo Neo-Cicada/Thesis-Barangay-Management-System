@@ -25,17 +25,17 @@ export default function EquipmentDialog({ open, handleClose }) {
   }, [selectedEquipment]);
   const isDetailsFilled = Object.values(details).every((value) => Boolean(value));
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     //useUpload here
-    console.log(isDetailsFilled)
-    // setSelectedEquipment([])
-    // setDetails({
-    //   returnDate: '',
-    //   fullname: '',
-    //   email: '',
-    //   phoneNumber: '',
-    //   selectedEquipment: []
-    // })
+    await useUpload(details, 'EquipmentRequest')
+    setSelectedEquipment([])
+    setDetails({
+      returnDate: '',
+      fullname: '',
+      email: '',
+      phoneNumber: '',
+      selectedEquipment: []
+    })
   }
   const handleBoxSelect = (name, count) => {
     const index = selectedEquipment.findIndex((item) => item.name === name);
@@ -67,6 +67,7 @@ export default function EquipmentDialog({ open, handleClose }) {
         setAgreement,
         setDetails,
         handleBoxSelect,
+        handleSubmit
       }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle style={{ textAlign: 'center' }}>Available Equipment</DialogTitle>
@@ -77,12 +78,8 @@ export default function EquipmentDialog({ open, handleClose }) {
             {proceed ?
               <Button onClick={() => setProceed(!proceed)}>Back</Button> :
               <Button onClick={handleClose}>Close</Button>}
-            {proceed ?
-              <Button
-                onClick={handleSubmit}
-                disabled={agreement}
-              >{agreement ? 'Disabled' : 'Submit'}</Button>
-              :
+            {!proceed &&
+
               <Button onClick={() => setProceed(!proceed)}>Next</Button>}
           </DialogActions>
         </Dialog>

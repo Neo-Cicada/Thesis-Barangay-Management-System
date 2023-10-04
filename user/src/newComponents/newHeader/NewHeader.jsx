@@ -13,15 +13,15 @@ export default function NewHeader() {
   }
   return (
     <>
-      <header>
+      <header style={{position:'fixed', zIndex:'5'}}>
         <div className='header-div'>
           <div className='navigation-logo' style={{
             fontFamily: 'Arial, sans-serif',
-            fontSize: '3.2rem',
-            fontWeight: 'bold',
+            fontSize: '3.3rem',
+            fontWeight: 'bolder',
             letterSpacing: '-0.05rem',
-            color: '#1877F2',  // Facebook's blue color
-            textShadow: '0px 1px 1px rgba(0,0,0,0.2)',  // Optional text shadow
+            color: '#3B5998',
+            textShadow: '0px 1px 1px rgba(0.5,0.5,0.5,0.5)',  // Optional text shadow
           }}>
             E<span style={{ color: '#3B5998' }}>Barangay</span>
           </div>          {/* for mobile */}
@@ -91,10 +91,50 @@ export default function NewHeader() {
         &&
         <div className='popUp-navigation'>
           <ul>
-            <li className='nav-menu' to="/">Home</li>
-            <li className='nav-menu' to="announcement">Announcement</li>
-            <li className='nav-menu' to="services">Services</li>
-            <li className='nav-menu' to="about">About</li>
+            <Button
+              sx={{
+                color: 'black',
+                fontSize: '1.2rem',
+                fontWeight: '1em',
+                '&:hover': {
+                  color: 'white',
+                  border: '1px dashed black'
+                }
+              }}
+              className='nav-menu' component={Link} to="#home">Home</Button>
+            <Button
+              sx={{
+                color: 'black',
+                fontSize: '1.2rem',
+                fontWeight: '1em',
+                '&:hover': {
+                  color: 'white',
+                  border: '1px dashed black'
+                }
+              }}
+              className='nav-menu' component={Link} to="#announcement">Announcement</Button>
+            <Button
+              sx={{
+                color: 'black',
+                fontSize: '1.2rem',
+                fontWeight: '1em',
+                '&:hover': {
+                  color: 'white',
+                  border: '1px dashed black'
+                }
+              }}
+              className='nav-menu' component={Link} to="#services">Services</Button>
+            <Button
+              sx={{
+                color: 'black',
+                fontSize: '1.2rem',
+                fontWeight: '1em',
+                '&:hover': {
+                  color: 'white',
+                  border: '1px dashed black'
+                }
+              }}
+              className='nav-menu' component={Link} to="#about">Abou</Button>
           </ul>
         </div>}
 

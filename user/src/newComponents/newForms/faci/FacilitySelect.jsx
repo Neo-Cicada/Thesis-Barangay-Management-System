@@ -40,8 +40,8 @@ export default function FacilitySelect() {
       <p style={{ textAlign: 'center' }}>Selected Facility</p>
       <div className='selected-certificates-dialog'>
       {selectedFacility.map((facility, index) => (
-          <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }} key={index}>
-            <p style={{ marginRight: '10px' }}>{facility.name}</p>
+          <div style={{ textAlign: 'center', display: 'flex', borderBottom:'1px solid black', alignItems: 'center', gap:'1em',justifyContent: 'center' }} key={index}>
+            <div >{facility.name}</div>
             <select>
               <option value="" disabled>
                 Select Time Slot

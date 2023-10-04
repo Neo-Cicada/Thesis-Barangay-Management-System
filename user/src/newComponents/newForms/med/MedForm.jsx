@@ -55,18 +55,19 @@ export default function MedForm() {
       <form onSubmit={handleSubmit} style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '3em',
+        gap: '1em',
         marginTop: '1em',
         alignItems: 'center',
         justifyContent: 'center'
       }}>
         <TextField
-        required
+          required
           fullWidth
           value={details.fullname}
           label="Fullname"
           onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
         <TextField
+          required
           fullWidth
           label="Phone Number"
           placeholder="09..."
@@ -74,6 +75,8 @@ export default function MedForm() {
           onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
         />
         <TextField
+          required
+
           fullWidth
           variant="outlined"
           label="Email address"

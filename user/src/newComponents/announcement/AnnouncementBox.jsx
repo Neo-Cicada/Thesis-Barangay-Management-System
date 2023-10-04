@@ -25,8 +25,7 @@ export default function AnnouncementBox({image, description, date, title}) {
   </div>
 
      <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <AnnouncementDialog image={image} description={description}/>
+     <DialogContent sx={{ maxWidth: '100vw' }}>          <AnnouncementDialog image={image} description={description} title={title} date={date}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>

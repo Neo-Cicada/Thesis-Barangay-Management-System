@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { MyEquipmentContext } from './EquipmentDialog'; // Update with the correct import path
 import SelectedEquipment from './SelectedEquipment';
-
-export function Box({ name, isSelected, onSelect }) {
+import useRead from '../../../hooks/useRead'
+export function Box({ name, isSelected, onSelect, quantity }) {
   const boxStyle = {
     height: '5em',
     textAlign: 'center',
@@ -18,27 +18,27 @@ export function Box({ name, isSelected, onSelect }) {
       onClick={() => onSelect(name)}
     >
       <p style={{ fontSize: '1em' }}>{name}</p>
+      <p>{quantity}</p>
     </div>
   );
 }
 
 export default function EquipmentSelect() {
   const { selectedEquipment, handleBoxSelect } = useContext(MyEquipmentContext);
+  const [data, setData] = useState([])
 
+  useRead('Equipments', setData)
+
+  const items = data.map(item => <Box
+    name={item.equipment}
+    isSelected={selectedEquipment.some((equipment) => equipment.name === String(item.equipment))}
+    onSelect={handleBoxSelect}
+    quantity={item.quantity}
+  />)
   return (
     <>
       <div className='items-equipment-dialog'>
-        <Box
-          name="Equipment 1"
-          isSelected={selectedEquipment.some((equipment) => equipment.name === "Equipment 1")}
-          onSelect={handleBoxSelect}
-        />
-        <Box
-          name="Equipment 2"
-          isSelected={selectedEquipment.some((equipment) => equipment.name === "Equipment 2")}
-          onSelect={handleBoxSelect}
-        />
-        {/* Add more boxes with different equipment names */}
+        {items}
       </div>
       <p style={{ textAlign: 'center' }}>Selected Equipment:</p>
       <div className='selected-equipment-dialog'>
@@ -52,4 +52,3 @@ export default function EquipmentSelect() {
     </>
   );
 }
-  

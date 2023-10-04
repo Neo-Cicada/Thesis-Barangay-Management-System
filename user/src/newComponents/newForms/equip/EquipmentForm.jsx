@@ -36,7 +36,7 @@ const Summary = ({ open, onClose }) => {
 };
 export default function EquipmentDialogForm() {
   const [showAgreement, setShowAgreement] = useState(false);
-  const { selectedEquipment, details, setDetails, agreement, setAgreement } = useContext(MyEquipmentContext);
+  const { selectedEquipment, details, setDetails, agreement, setAgreement, handleSubmit } = useContext(MyEquipmentContext);
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
   const handleOpenInnerDialog = () => {
@@ -52,25 +52,31 @@ export default function EquipmentDialogForm() {
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '3em',
+        gap: '1em',
         marginTop: '1em',
         alignItems: 'center',
         justifyContent: 'center'
       }}>
         <TextField
-        fullWidth
+          required
+
+          fullWidth
           value={details.fullname}
           label="Fullname"
           onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
         <TextField
-        fullWidth
+          required
+
+          fullWidth
           label="Phone Number"
           placeholder="09..."
           value={details.phoneNumber}
           onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
         />
         <TextField
-        fullWidth
+          required
+
+          fullWidth
           variant="outlined"
           label="Email address"
           value={details.email}
@@ -79,6 +85,7 @@ export default function EquipmentDialogForm() {
         <FormControl fullWidth >
           {/* <InputLabel htmlFor="returnDate">Return Date</InputLabel> */}
           <TextField
+            required
             label="Return Date"
             id="returnDate"
             variant="outlined"
@@ -100,14 +107,18 @@ export default function EquipmentDialogForm() {
         </Box>
         <FormControlLabel
           required
-          control={<Checkbox checked={!agreement}/>}
-          onClick={()=>setAgreement(!agreement)}
+          control={<Checkbox checked={!agreement} />}
+          onClick={() => setAgreement(!agreement)}
           label={
             <span style={{ cursor: 'pointer' }}>
               Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>
             </span>
           }
         />
+        <Button
+          onClick={handleSubmit}
+          disabled={agreement}
+        >{agreement ? 'Disabled' : 'Submit'}</Button>
       </div>
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />
