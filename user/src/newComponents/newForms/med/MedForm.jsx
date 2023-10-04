@@ -38,7 +38,8 @@ const Summary = ({ open, onClose }) => {
 export default function MedForm() {
 
   const [showAgreement, setShowAgreement] = useState(false);
-  const { selectedMedicines, details, setDetails, setAgreement, agreement, } = useContext(MyContext);
+  const { selectedMedicines, details, setDetails,
+    setAgreement, agreement, handleSubmit } = useContext(MyContext);
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
   const handleOpenInnerDialog = () => {
@@ -51,7 +52,7 @@ export default function MedForm() {
   return (
     <>
 
-      <div style={{
+      <form onSubmit={handleSubmit} style={{
         display: 'flex',
         flexDirection: 'column',
         gap: '3em',
@@ -60,6 +61,7 @@ export default function MedForm() {
         justifyContent: 'center'
       }}>
         <TextField
+        required
           fullWidth
           value={details.fullname}
           label="Fullname"
@@ -96,7 +98,14 @@ export default function MedForm() {
             </span>
           }
         />
-      </div>
+        <Button
+          variant="contained"
+          disabled={agreement}
+          type={'submit'}
+        >
+          {agreement ? 'Disabled' : 'Submit'}</Button>
+      </form>
+
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />
     </>

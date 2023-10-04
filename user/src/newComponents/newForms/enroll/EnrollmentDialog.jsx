@@ -5,8 +5,8 @@ export default function EnrollmentDialog({ open, handleClose }) {
   return (
     <>
       <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle>Available Certificates</DialogTitle>
-        <DialogContent>
+        <DialogTitle sx={{textAlign:'center'}}>Available Certificates</DialogTitle>
+        <DialogContent fullWidth>
           <EnrollmentForm/>
         </DialogContent>
         <DialogActions>

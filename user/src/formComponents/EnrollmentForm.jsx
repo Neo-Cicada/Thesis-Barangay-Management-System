@@ -97,7 +97,7 @@ export default function EnrollmentForm() {
   }
   return (
     <>
-      <Container
+      {/* <Container
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -110,7 +110,7 @@ export default function EnrollmentForm() {
           padding: '1em',
 
         }}
-      >
+      > */}
         <form
           onSubmit={handleSubmit}
           style={{
@@ -475,7 +475,7 @@ export default function EnrollmentForm() {
               <Agreement />
             </DialogContent>
           </Dialog>}
-      </Container>
+      {/* </Container> */}
     </>
   )
 }

@@ -26,8 +26,9 @@ export default function MedicineDialogForm({ open, handleClose }) {
       selectedMedicines: selectedMedicines,
     }));
   }, [selectedMedicines]);
-  const handleSubmit = async () => {
-    // useUpload(details, 'MedicineRequest')
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+   await useUpload(details, 'MedicineRequest')
     setSelectedMedicines([]);
     setDetails({
       fullname: '',
@@ -58,7 +59,8 @@ export default function MedicineDialogForm({ open, handleClose }) {
     }
   };
   return (
-    <MyContext.Provider value={{ selectedMedicines, setSelectedMedicines, setDetails, details, setAgreement,agreement }}>
+    <MyContext.Provider value={{ selectedMedicines, setSelectedMedicines,
+      handleSubmit, setDetails, details, setAgreement,agreement }}>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle style={{ textAlign: 'center' }}>
           {proceed ? 'Medicine Form' : 'List of Medicines'}
@@ -68,7 +70,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
             handleBoxSelect={handleBoxSelect}
           />}
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{borderTop:'2px dashed grey'}}>
           {proceed ?
             <Button
               variant="contained"
@@ -79,14 +81,8 @@ export default function MedicineDialogForm({ open, handleClose }) {
               variant="contained"
               onClick={handleClose}>
               Close</Button>}
-          {proceed ?
-              <Button
-              variant="contained"
-              disabled={agreement}
-              onClick={handleSubmit}
-            >
-                {agreement?  'Disabled': 'Submit'}</Button>
-            :
+          {!proceed &&
+             
             <Button
               variant="contained"
               onClick={() => setProceed(!proceed)}>

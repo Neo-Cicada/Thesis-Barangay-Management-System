@@ -23,16 +23,19 @@ export default function EquipmentDialog({ open, handleClose }) {
       selectedEquipment: selectedEquipment,
     }));
   }, [selectedEquipment]);
+  const isDetailsFilled = Object.values(details).every((value) => Boolean(value));
+
   const handleSubmit = () => {
     //useUpload here
-    setSelectedEquipment([])
-    setDetails({
-      returnDate: '',
-      fullname: '',
-      email: '',
-      phoneNumber: '',
-      selectedEquipment: []
-    })
+    console.log(isDetailsFilled)
+    // setSelectedEquipment([])
+    // setDetails({
+    //   returnDate: '',
+    //   fullname: '',
+    //   email: '',
+    //   phoneNumber: '',
+    //   selectedEquipment: []
+    // })
   }
   const handleBoxSelect = (name, count) => {
     const index = selectedEquipment.findIndex((item) => item.name === name);
