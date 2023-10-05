@@ -1,36 +1,82 @@
-import React, { useState } from 'react';
-import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, Button, Checkbox, Box } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, Button, Checkbox, Dialog, Box } from '@mui/material';
+import SummarayReport from './SummarayReport';
+import Agreement from '../../../components/dialogs/Agreement';
+import { MyReportContext } from './ReportDialog';
+import { useContext } from 'react';
+function TermsAndCondition({ open, onClose }) {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      {/* Inner Dialog content */}
+      <div>
+        <Agreement />
+        <Button onClick={onClose} color="primary">
+          Close
+        </Button>
+      </div>
+    </Dialog>
+  );
+}
+const Summary = ({ open, onClose }) => {
+  const dialogStyle = {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  };
 
+  return (
+    <Dialog open={open} onClose={onClose} fullWidth >
+      <div style={dialogStyle}>
+        <SummarayReport />
+        <Button onClick={onClose}>Close</Button>
+      </div>
+    </Dialog>
+  );
+};
 export default function ReportForm() {
+  const { details, setDetails } = useContext(MyReportContext)
   const [reportType, setReportType] = useState('anonymous');
-  const [formData, setFormData] = useState({
-    name: '',
-    number: '',
-    email: '',
-    summon: false,
-  });
+  const [showSummary, setShowSummary] = useState(false);
+  const [showCondition, setShowCondition] = useState(false);
 
+  useEffect(() => {
+    if (reportType === 'anonymous') {
+      // Clear the values when reportType is 'anonymous'
+      setDetails({
+        ...details,
+        fullname: 'anonymous',
+        phoneNumber: 'anonymous',
+        email: 'anonymous',
+        summon: false,
+      })
+    } else {
+      setDetails({
+        ...details,
+        fullname: '',
+        phoneNumber: '',
+        email: '',
+        summon: false,
+      })
+    }
+  }, [reportType])
   const handleRadioChange = (event) => {
     setReportType(event.target.value);
+
   };
 
-  const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
-  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission, you can access formData here
-    console.log('Form Data:', formData);
+    console.log('Form Data:', details);
   };
 
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
         <FormControl component="fieldset" fullWidth>
           <RadioGroup row aria-label="reportType" name="reportType" value={reportType} onChange={handleRadioChange}>
             <FormControlLabel value="anonymous" control={<Radio />} label="Anonymous Report" />
@@ -39,10 +85,10 @@ export default function ReportForm() {
         </FormControl>
 
         <TextField
-          label="Name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
+          label="Fullname"
+          name="Fullname"
+          value={details.fullname}
+          onChange={(e) => setDetails({ ...details, fullname: e.target.value })}
           fullWidth
           required
           margin="normal"
@@ -51,18 +97,19 @@ export default function ReportForm() {
         <TextField
           label="Number"
           name="number"
-          value={formData.number}
-          onChange={handleChange}
+          value={details.phoneNumber}
+          onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
           fullWidth
           required
           margin="normal"
           disabled={reportType === 'anonymous'}
         />
+
         <TextField
           label="Email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
+          value={details.email}
+          onChange={(e) => setDetails({ ...details, email: e.target.value })}
           fullWidth
           required
           margin="normal"
@@ -74,8 +121,8 @@ export default function ReportForm() {
             control={
               <Checkbox
                 name="summon"
-                checked={formData.summon}
-                onChange={handleChange}
+                checked={details.summon}
+                onChange={(e) => setDetails({ ...details, summon: e.target.checked })}
                 color="primary"
                 disabled={reportType === 'anonymous'}
               />
@@ -84,30 +131,32 @@ export default function ReportForm() {
           />
         </Box>
         <Box sx={{
-          
+
           display: 'flex', alignItems: 'center',
           justifyContent: 'center', marginTop: '0.3em',
           fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
           cursor: 'pointer'
         }} >
-          <span>Review summary of informaton provided</span>
+          <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>
         </Box>
-        <Box sx={{display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <FormControlLabel
             required
             control={<Checkbox />}
             label={
-              <span style={{ cursor: 'pointer' }}>
+              <span style={{ cursor: 'pointer' }} onClick={() => setShowCondition(true)}>
                 Agree to the <u >terms and conditions</u>
               </span>
             }
           />
         </Box>
 
-        {/* <Button type="submit" variant="contained" color="primary" disabled={reportType === 'anonymous'}>
+        <Button type="submit" variant="contained" color="primary">
           Submit
-        </Button> */}
+        </Button>
       </form>
+      {showCondition && <TermsAndCondition open={showCondition} onClose={() => setShowCondition(false)} />}
+      {showSummary && <Summary open={showSummary} onClose={() => setShowSummary(false)} />}
     </div>
   );
 }

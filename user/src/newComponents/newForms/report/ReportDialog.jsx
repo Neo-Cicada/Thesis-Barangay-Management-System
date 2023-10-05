@@ -10,7 +10,8 @@ export default function ReportDialog({ open, handleClose }) {
     fullname: '',
     email: '',
     phoneNumber: '',
-    selectedReport: [...selectedReport] // spread the array elements
+    selectedReport: [...selectedReport], // spread the array elements
+    summon: false
   });
   useEffect(() => {
     setDetails((prevDetails) => ({
@@ -21,7 +22,7 @@ export default function ReportDialog({ open, handleClose }) {
 
   const handleBoxSelect = (name, badGuy) => {
     const index = selectedReport.findIndex((report) => report.name === name);
-  
+
     if (index !== -1) {
       // Item is already selected, so remove it
       const updatedSelected = selectedReport.filter((report) => report.name !== name);
@@ -33,7 +34,7 @@ export default function ReportDialog({ open, handleClose }) {
   };
   return (
     <>
-      <MyReportContext.Provider value={{ selectedReport, setSelectReportDalog, handleBoxSelect }}>
+      <MyReportContext.Provider value={{ selectedReport, setSelectReportDalog, handleBoxSelect, details, setDetails }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle sx={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>{proceed ? 'Report Form' : 'Report Someone'}</DialogTitle>
           <DialogContent style={{ height: '100vh', borderBottom: '2px dashed grey' }}>
@@ -50,15 +51,11 @@ export default function ReportDialog({ open, handleClose }) {
               Close
             </Button>}
 
-            {proceed ?
-              <Button onClick={() => console.log(details)}>
-                Submit
-              </Button> :
+            {!proceed &&
               <Button
                 variant="contained"
                 onClick={() => setProceed(true)}
               >Next</Button>
-
             }
 
           </DialogActions>
