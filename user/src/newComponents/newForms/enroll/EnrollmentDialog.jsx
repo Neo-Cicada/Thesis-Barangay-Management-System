@@ -11,8 +11,7 @@ export default function EnrollmentDialog({ open, handleClose }) {
           <EnrollForm />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-          <Button>Submit</Button>
+          <Button onClick={handleClose} variant='contained'>Close</Button>
         </DialogActions>
       </Dialog>
     </>
