@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { MyCertContext } from './CertificateDialog';
+import { TextField } from '@mui/material';
 const Box = ({ name, isSelected, onSelect }) => {
     const boxStyle = {
         height: '5em',
@@ -22,8 +24,30 @@ const Box = ({ name, isSelected, onSelect }) => {
 
 export default function CertSelect() {
     // Replace MyContext with the appropriate context for certificates
-    const { selectedCertificates, handleBoxSelect } = useContext(MyCertContext);
+    const { selectedCertificates, handleBoxSelect, setSelectedCertificates } = useContext(MyCertContext);
+    const handleMopSelect = (certName, mop) => {
+        const updateSelectedCertificates = selectedCertificates.map((item) => {
+            if (item.name === certName) {
+                return { ...item, mop: mop }
+            }
+            else {
+                return item
+            }
+        });
+        setSelectedCertificates(updateSelectedCertificates)
+    }
+    const handleReference = (certName, reference) => {
+        const updateSelectedCertificates = selectedCertificates.map((item) => {
+            if (item.name === certName) {
+                return { ...item, reference: reference }
+            }
+            else {
+                return item
+            }
+        });
+        setSelectedCertificates(updateSelectedCertificates)
 
+    }
     return (
         <>
             <div className='items-certificates-dialog'>
@@ -60,22 +84,40 @@ export default function CertSelect() {
                         style={{
                             textAlign: 'center',
                             display: 'flex',
-                            flexDirection:'column',
+                            flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
                             gap: '1em',
-                            borderBottom:'1px solid grey'
+                            borderBottom: '1px solid grey'
                         }}
                         key={index}
                     >
                         <div>{certificate.name}</div>
 
                         <label htmlFor={`paymentMethod-${index}`}>Mod of payment:</label>
-                        <select id={`paymentMethod-${index}`}>
-                            <option>GCASH</option>
-                            <option>Cash</option>
-                        </select>
+                        <div style={{ width: '60%' }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="paymentMethod-label">Payment Method</InputLabel>
+                                <Select
+                                    label="Payment Method"
+                                    id={`paymentMethod-${index}`}
+                                    onChange={(e) => handleMopSelect(certificate.name, e.target.value)}
+                                >
+                                    <MenuItem value={'CASH'}>Cash</MenuItem>
+                                    <MenuItem value={'GCASH'}>GCASH</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
                         <div>Cost: 50</div>
+                        {certificate.mop === "GCASH" && (
+                            <TextField
+                                onChange={(e) => handleReference(certificate.name, e.target.value)}
+                                variant="standard"
+                                size="small"
+                                label="Reference"
+                                width="small"
+                            />
+                        )}
                     </div>
                 ))}
 

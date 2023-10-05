@@ -18,7 +18,10 @@ export default function CertSummary() {
                     <h2 style={{ textAlign: 'center' }}>
                         Selected Certificate</h2>
                     <div>
-                        {details.selectedCertificates.map(item => <p>name: {item.name}</p>)}
+                        {details.selectedCertificates.map(item =>
+                            <p>name: {item.name} - {item.mop} {item.reference}</p>
+                            )
+                        }
                     </div>
                 </div>
             </div>

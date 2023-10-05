@@ -23,9 +23,9 @@ const Box = ({ name, isSelected, onSelect }) => {
 export default function ReportSelect() {
   const { selectedReport, setSelectReportDalog, handleBoxSelect } = useContext(MyReportContext);
 
-  const handleReport = (ReportName, badGuy) => {
+  const handleReport = (reportName, badGuy) => {
     const updatedSelectedReport = selectedReport.map((item) => {
-      if (item.name === ReportName) {
+      if (item.name === reportName) {
         return { ...item, person: badGuy };
       }
       return item;

@@ -12,15 +12,17 @@ export default function CertificateDialog({ open, handleClose }) {
         fullname: '',
         email: '',
         phoneNumber: '',
+        
         selectedCertificates: [...selectedCertificates] // spread the array elements
-      });
-      useEffect(() => {
+    });
+    useEffect(() => {
         setDetails((prevDetails) => ({
-          ...prevDetails,
-          selectedCertificates: selectedCertificates,
+            ...prevDetails,
+            selectedCertificates: selectedCertificates,
         }));
-      }, [selectedCertificates]);
-    const handleBoxSelect = (name) => {
+    }, [selectedCertificates]);
+    
+    const handleBoxSelect = (name, mop, reference) => {
         const index = selectedCertificates.findIndex((certificate) => certificate.name === name);
 
         if (index !== -1) {
@@ -29,19 +31,28 @@ export default function CertificateDialog({ open, handleClose }) {
             setSelectedCertificates(updatedSelected);
         } else {
             // If not selected, select it
-            setSelectedCertificates([...selectedCertificates, { name: name }]);
+            setSelectedCertificates([...selectedCertificates, {
+                name: name,
+                mop: mop,
+                reference: reference
+            }]);
         }
     };
     const dialogContentStyle = {
         height: '100vh',
-        borderBottom:'2px dashed grey'
+        borderBottom: '2px dashed grey'
     };
     return (
         <>
-            <MyCertContext.Provider value={{ selectedCertificates, handleBoxSelect, details,setDetails }}>
+            <MyCertContext.Provider value={{
+                selectedCertificates,
+                setSelectedCertificates,
+                handleBoxSelect,
+                details, setDetails
+            }}>
                 <Dialog open={open} onClose={handleClose} fullWidth>
-                    <DialogTitle style={{ textAlign: 'center', borderBottom:'2px dashed grey' }}>Available Certificates</DialogTitle>
-                    <DialogContent  style={dialogContentStyle} className='certificate-dialog-content'>
+                    <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>Available Certificates</DialogTitle>
+                    <DialogContent style={dialogContentStyle} className='certificate-dialog-content'>
                         {proceed ? <CertForm /> : <CertSelect />}
                     </DialogContent>
                     <DialogActions>
