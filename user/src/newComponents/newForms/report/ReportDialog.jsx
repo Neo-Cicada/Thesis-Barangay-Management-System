@@ -44,6 +44,8 @@ export default function ReportDialog({ open, handleClose }) {
           <DialogActions>
 
             {proceed ? <Button
+              variant="contained"
+
               onClick={() => setProceed(false)}
             >Back</Button> : <Button
               variant="contained"

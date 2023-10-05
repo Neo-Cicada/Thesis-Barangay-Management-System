@@ -29,12 +29,7 @@ export default function AboutNavigation({ state, setState }) {
                         onClick={() => setState('four')}>
 
                     </li>
-                    <li className='bd-nav-cirlces'
-                        style={state === "five" ? { backgroundColor: "#3B5998" } : {}}
-                        onClick={() => setState('five')}
-                    >
-
-                    </li>
+                   
                 </ul>
             </div>
         </>

@@ -116,6 +116,8 @@ export default function EquipmentDialogForm() {
           }
         />
         <Button
+          fullWidth
+          variant="contained"
           onClick={handleSubmit}
           disabled={agreement}
         >{agreement ? 'Disabled' : 'Submit'}</Button>

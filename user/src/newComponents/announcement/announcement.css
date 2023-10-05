@@ -94,7 +94,13 @@
     overflow-y: auto;
 }
 @media screen and (min-width: 768px) {
-
+  .announcement-dialog{
+    height: 25em;
+    width: 30em;
+  }
+  .announcement-image-popup{
+    height: 100%;
+  }
     .announcement-body {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));

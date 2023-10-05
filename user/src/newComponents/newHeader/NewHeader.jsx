@@ -24,7 +24,7 @@ export default function NewHeader() {
             color: '#3B5998',
             textShadow: '0px 1px 1px rgba(0.5,0.5,0.5,0.5)',  // Optional text shadow
           }}>
-            E<span style={{ color: '#3B5998' }}>Barangay</span>
+            e<span style={{ color: '#3B5998' }}>Barangay</span>
           </div>          {/* for mobile */}
           <div className='burger-icon' onClick={onClickMenu}>
             {isMenuClicked ? <CloseIcon fontSize='large' /> : <MenuIcon fontSize='large' />}

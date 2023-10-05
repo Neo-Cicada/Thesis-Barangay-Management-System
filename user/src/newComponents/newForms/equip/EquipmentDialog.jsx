@@ -76,11 +76,11 @@ export default function EquipmentDialog({ open, handleClose }) {
           </DialogContent>
           <DialogActions>
             {proceed ?
-              <Button onClick={() => setProceed(!proceed)}>Back</Button> :
-              <Button onClick={handleClose}>Close</Button>}
+              <Button variant="contained" onClick={() => setProceed(!proceed)}>Back</Button> :
+              <Button variant="contained"  onClick={handleClose}>Close</Button>}
             {!proceed &&
 
-              <Button onClick={() => setProceed(!proceed)}>Next</Button>}
+              <Button variant="contained"  onClick={() => setProceed(!proceed)}>Next</Button>}
           </DialogActions>
         </Dialog>
       </MyEquipmentContext.Provider>

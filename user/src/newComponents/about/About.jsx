@@ -49,8 +49,8 @@ export default function About() {
               title={jsonData.visson.title}
               description={jsonData.visson.description}
             />}
-            {state === "four" && <Location />}
-            {state === "five" && <Officials />}
+           
+            {state === "four" && <Officials />}
 
           </div>
           <AboutNavigation state={state} setState={setState} />

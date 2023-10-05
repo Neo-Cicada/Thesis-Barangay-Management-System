@@ -30,7 +30,7 @@ const Summary = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose} fullWidth >
       <div style={dialogStyle}>
         <SummarayReport />
-        <Button onClick={onClose}>Close</Button>
+        <Button variant='contained' onClick={onClose}>Close</Button>
       </div>
     </Dialog>
   );

@@ -102,6 +102,7 @@ export default function MedForm() {
             }
           />
           <Button
+          fullWidth
             variant="contained"
             disabled={agreement}
             type={'submit'}

@@ -9,9 +9,9 @@ export default function Introduction() {
             BARANGAY AMAMPEREZ
           </p>
           <p className='intro-location'>Villasis Pangasinan</p>
-          <p className='intro-description'><span style={{color:'#3B5998', fontSize:'2rem'}}><b>Welcome to EBarangay</b></span> <br/>
-            EBarangay is the ultimate solution for streamlined and efficient barangay management. Say goodbye to paperwork and long queues.
-            With EBarangay, you can access a wide range of online services and stay informed with ease.
+          <p className='intro-description'><span style={{color:'#3B5998', fontSize:'2rem'}}><b>Welcome to eBarangay</b></span> <br/>
+            eBarangay is the ultimate solution for streamlined and efficient barangay management. Say goodbye to paperwork and long queues.
+            With eBarangay, you can access a wide range of online services and stay informed with ease.
           </p>
         </div>
 

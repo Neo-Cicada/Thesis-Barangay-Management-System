@@ -44,8 +44,8 @@ export default function FacilityDialog({ open, handleClose }) {
             {proceed ? <FacilityForm /> : <FacilitySelect />}
           </DialogContent>
           <DialogActions>
-            {proceed ? <Button onClick={() => setProceed(!proceed)}>Back</Button> : <Button onClick={handleClose}>Close</Button>}
-            {proceed ? <Button>Submit</Button> : <Button onClick={() => setProceed(true)}>Next</Button>}
+            {proceed ? <Button variant="contained"  onClick={() => setProceed(!proceed)}>Back</Button> : <Button variant="contained"  onClick={handleClose}>Close</Button>}
+            {!proceed &&<Button variant="contained" onClick={() => setProceed(true)}>Next</Button>}
           </DialogActions>
         </Dialog>
       </MyFacilityContext.Provider>
