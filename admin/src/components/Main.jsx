@@ -6,17 +6,17 @@ export default function Main({handleSignout}) {
     return (
         <>
 
-            <main>
+            <main style={{}}>
                 <nav className='app-nav'>
                     <SideBar handleSignout={handleSignout}/>
                 </nav>
-                <div className="hero">
+                {/* <div className="hero">
                     <div className='hero-box'>
                         <div className="hero-line">
                             <AppRoutes />
                         </div>
                     </div>
-                </div>
+                </div> */}
             </main>
 
         </>

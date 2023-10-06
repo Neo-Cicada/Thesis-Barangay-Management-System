@@ -33,11 +33,8 @@ export default function SideBar({handleSignout}) {
     color: 'black',
     width: '100%',
     fontSize: '1rem',
-    padingRight: '5px',
-    gap: '1em',
     display: 'flex',
-    justifyContent: 'flex-start'
-
+    flexDirection:'column'
   }
 
   const activeStyle = {
@@ -53,10 +50,10 @@ export default function SideBar({handleSignout}) {
     <>
       <div className='nav-container' >
         <div style={{  height: '10%', borderBotton: '2px solid black', display:'flex', justifyContent:'center' }}>
-          <img src={Logo} height={'100%'} />
+          <h1>Logo</h1>
         </div>
-        <ul>
-          <li>
+        <ul className='sb-ul-list' >
+          <li className='sb-list'>
             <Button
               to='/'
               component={Link}
@@ -65,13 +62,13 @@ export default function SideBar({handleSignout}) {
             >
               <div className='sidebar-logo'>
                 {
-                  status === "equipment" ? <HandymanIcon fontSize="large" /> : <HandymanOutlinedIcon fontSize="large" />
+                  status === "equipment" ? <HandymanIcon fontSize="medium" /> : <HandymanOutlinedIcon fontSize="medium" />
                 }
               </div>
               <div className='sidebar-btn-name'>Equipment</div>
             </Button>
           </li>
-          <li><Button
+          <li className='sb-list'><Button
             to='certificate'
             component={Link}
             sx={status === "certificate" ? activeStyle : normalStyle}
@@ -84,7 +81,7 @@ export default function SideBar({handleSignout}) {
             </div>
             <div className='sidebar-btn-name'>Certification</div>
           </Button></li>
-          <li>
+          <li  className='sb-list'>
             <Button
 
               to='announcement'
@@ -100,7 +97,7 @@ export default function SideBar({handleSignout}) {
               <div className='sidebar-btn-name'>Announcement</div>
             </Button>
           </li>
-          <li>
+          <li className='sb-list'>
             <Button to='enrollment'
               component={Link}
               sx={status === "enrollment" ? activeStyle : normalStyle}
@@ -113,7 +110,7 @@ export default function SideBar({handleSignout}) {
               <div className='sidebar-btn-name'>Enrollment</div>
             </Button>
           </li>
-          <li>
+          <li className='sb-list'>
             <Button to='facilities'
               component={Link}
               sx={status === "facilities" ? activeStyle : normalStyle}
@@ -125,7 +122,7 @@ export default function SideBar({handleSignout}) {
               <div className='sidebar-btn-name'>Facilities</div>
             </Button>
           </li>
-          <li>
+          <li className='sb-list'>
             <Button to='medicine'
               component={Link}
               sx={status === "medicine" ? activeStyle : normalStyle}
@@ -136,7 +133,7 @@ export default function SideBar({handleSignout}) {
               <div className='sidebar-btn-name'>Medicine</div>
             </Button>
           </li>
-          <li>
+          <li className='sb-list'>
             <Button
               to="profile"
               component={Link}
@@ -151,10 +148,9 @@ export default function SideBar({handleSignout}) {
               <div className='sidebar-btn-name'>Profile</div>
             </Button>
           </li>
-          <li style={{height: '7em',
-             display:'flex',
-             justifyContent:'end',
-             alignItems:'end'}}>
+          <li
+          className='sb-list'
+           >
             <div
               onClick={handleSignout}
             style={{

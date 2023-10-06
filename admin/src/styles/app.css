@@ -9,6 +9,7 @@ main{
     height: 100%;
     width: 20%;
     background-color: #ffffff;
+    min-width: 37.5px;
 }
 .hero{
     height: 100%;

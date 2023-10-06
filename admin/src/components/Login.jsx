@@ -35,7 +35,7 @@ export default function Login({setLoginStatus}) {
     <>
       <div className='login-container'>
         <form className='login-box'>
-          <h1 className='ebarangay'>EBarangay Login</h1>
+          <h1 className='ebarangay' style={{textAlign:'center'}}>eBarangay Login</h1>
           <TextField
             sx={{
               width: {
