@@ -1,21 +1,51 @@
 import React from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Box } from '@mui/material'
 
-export default function EquipmentViewInformation({ item,  open, onClose, onConfirm, title, message  }) {
+export default function EquipmentViewInformation({ item, open, onClose, onConfirm, title, message }) {
+    const styleP = {
+        borderBottom: '1px solid grey',
+        display: 'flex',
+        gap: '2em',
+
+    }
+    const items = item.selectedEquipment.map(item => <Box
+        style={styleP}> <p style={{ width: '50%', textAlign: 'center' }}>Name: {item.name}</p>
+        <hr />
+        <p style={{ width: '50%', textAlign: 'center' }}>Quantity: {item.count}</p>
+    </Box>)
+    const boxStyle ={
+        width: '100%', display:'flex', justifyContent:'center', gap:'1em'
+    }
+    const nameStyle = {
+        width:'40%',
+        display:'flex',
+        justifyContent:'end',
+    }
+    const valueStyle={
+        width:'60%',
+        display:'flex',
+        justifyContent:'start',
+    }
     return (
         <>
-            <Dialog open={open} onClose={onClose}>
-                <DialogTitle>
-                    Lord Neo Barnachea Full information
+            <Dialog open={open} onClose={onClose} fullWidth>
+                <DialogTitle sx={{ textAlign: 'center' }}>
+                    {item.fullname} Request Information
                 </DialogTitle>
-                <DialogContent>
-                    age: 21
-                    blah blac
-                    <Box>Lorem ipsum dolor sit amet consectetur,</Box>
-                    <Box>adipisicing elit. Officiis voluptatibus dolorum accusantium deserunt ad reprehenderit, aspernatur dolor omnis veritatis voluptas,
-                        ex magnam totam </Box>
-
-                    <Box> quia obcaecati vel alias incidunt repudiandae doloremque?</Box>
+                <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Fullname: </p>
+                        <p style={valueStyle}>{item.fullname}</p>  </Box>
+                    <Box sx={boxStyle}> <p style={nameStyle}>Email: </p><p style={valueStyle}>{item.email}</p></Box>
+                    <Box sx={boxStyle}><p style={nameStyle}>Phone Number:</p> <p style={valueStyle}>{item.phoneNumber} </p></Box>
+                    <Box sx={boxStyle}><p style={nameStyle}>Date: </p> <p style={valueStyle}></p></Box>
+                    <Box sx={boxStyle}><p style={nameStyle}>Return Date:</p> <p style={valueStyle}> {item.returnDate}</p></Box>
+                    <Box sx={{width:'100%'}}>
+                        <Box sx={{ textAlign: 'center' }}>Selected Items</Box>
+                        <Box style={{ width: '100%' }}>
+                            {items}
+                        </Box>
+                    </Box>
                 </DialogContent>
             </Dialog>
         </>

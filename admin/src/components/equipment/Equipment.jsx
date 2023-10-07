@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../../styles/equipment.css'
-import { Container, Box } from '@mui/material'
+import { Container, Box, Skeleton } from '@mui/material'
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import DashboardBox from '../DashboardBox'
 import DashboardNavigation from '../DashboardNavigation'
@@ -14,8 +14,16 @@ import DashboardHeader from '../DashboardHeader';
 export default function Equipment() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState("default")
+  const [isLoading, setIsLoading] = useState(true);
   useRead('EquipmentRequest', setData)
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
   const allItems = data.filter(item => item.status === "request").map(item => <DashboardList
     key={item.id}
     item={item}
@@ -23,47 +31,11 @@ export default function Equipment() {
     second={item.email}
     third={item.phoneNumber}
     fourth={"09/08/23"}
-    fifth={'888'}
-    sixth={'idont know'}
     seventh={item.status}
     path={'EquipmentAllRequest'}
     status={"request"}
   />
   )
-  const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashboardList
-    itemId={item.id}
-    key={item.id}
-    first={item.firstname + " " + item.lastname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    fifth={'888'}
-    sixth={item.type}
-    seventh={item.status}
-    status={'ongoing'}
-    path={'EquipmentAllRequest'}
-  />)
-  const acceptedItems = data.filter(item => item.status === "accepted").map(item => <DashboardList
-    key={item.id}
-    first={item.firstname + " " + item.lastname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    fifth={'888'}
-    sixth={item.type}
-    seventh={item.status}
-  />)
-
-  const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashboardList
-    key={item.id}
-    first={item.firstname + " " + item.lastname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    fifth={'888'}
-    sixth={item.type}
-    seventh={item.status}
-  />)
   return (
     <>
       <div className='equipment-container'>
@@ -75,19 +47,19 @@ export default function Equipment() {
           <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
-              numbers={allItems.length}
+              // numbers={allItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
-              numbers={ongoingItems.length}
+              // numbers={h}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Completed"
-              numbers={acceptedItems.length}
+              // numbers={acceptedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Rejected"
-              numbers={rejectedItems.length}
+              // numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Items"
@@ -98,13 +70,32 @@ export default function Equipment() {
         </Container>
 
         <DashboardNavigation setStatus={setStatus} status={status} />
-        <div sx={{ border: '1px solid red', height: '70%' }}>  
-        {status === "default" && <EquipmentAllRequest items={allItems}/>}
-        {status === "second" && ongoingItems}
-        {status === "third" && acceptedItems}
-        {status === "fourth" && rejectedItems}
-        {status === "fifth" && <EquipmentCrud/>}
-        </div>
+
+
+
+        {isLoading ? (
+
+          <Skeleton
+            sx={{
+              bgcolor: '#8B9DC3',
+
+            }}
+            variant="rectangular"
+            width={'100%'}
+
+            height={'70%'}
+          />
+
+        ) : (
+          <div sx={{ border: '1px solid red', minHeight: '70%' }}>
+            <div sx={{ border: '1px solid red', minHeight: '70%' }}>
+              {status === "default" && <EquipmentAllRequest items={allItems} />}
+             
+              {status === "fifth" && <EquipmentCrud />}
+            </div>
+          </div>
+        )}
+
       </div>
     </>
   )

@@ -8,8 +8,8 @@ import RedToast from './RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EquipmentViewInformation from './equipment/EquipmentViewInformation';
 import DashboardHeader from './DashboardHeader';
-export default function DashboardList({ first, second, third, fourth, fifth,
-  sixth, seventh, itemId, status, path }) {
+export default function DashboardList({ first="Offline", second="Offline", third="Offline", fourth="Offline", fifth="Offline",
+  sixth ="Offline", seventh ="Offline", item, status, path }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [openToast, setOpenToast] = useState(false);
@@ -69,33 +69,31 @@ export default function DashboardList({ first, second, third, fourth, fifth,
     console.log(path)
     handleOpen()
     togglePopup()
-    // await useStatusUpdate(path, itemId, 'ongoing')
+    // await useStatusUpdate(path, item.id, 'ongoing')
   }
   const onDecline = async (e) => {
     e.stopPropagation();
     handleOpen()
     togglePopup()
-    // await useStatusUpdate(path, itemId, 'rejected')
-    console.log(itemId)
+    // await useStatusUpdate(path, item.id, 'rejected')
+   
   }
   return (
     <>
 
 
-      <tr>
+      <tr >
         <td >{first}</td>
         <td>{second}</td>
         <td>{third}</td>
         <td>{fourth}</td>
-        <td >{fifth}</td>
-        <td >{sixth}</td>
         <td>{seventh}</td>
-
-        <EquipmentViewInformation open={information} onClose={handleCloseInformation} />
+        <EquipmentViewInformation open={information} onClose={handleCloseInformation} item={item}/>
         {status === "ongoing" || status === "request" ?
           <td >
-            <VisibilityIcon onClick={openInformation} />
-            <MoreHorizIcon onClick={togglePopup} />
+            <VisibilityIcon sx={{cursor:'pointer'}} onClick={openInformation} />
+            
+            <MoreHorizIcon sx={{cursor:'pointer'}} onClick={togglePopup} />
             {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline}
               status={status} open={handleOpenConfirmation} onClose={handleCloseConfirmation} />}
 

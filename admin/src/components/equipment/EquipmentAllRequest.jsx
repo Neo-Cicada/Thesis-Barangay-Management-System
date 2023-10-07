@@ -4,10 +4,9 @@ import ScrollableContainer from '../ScrollableContainer'
 export default function EquipmentAllRequest({ items }) {
   return (
     <>
-    <ScrollableContainer >
-      <table style={{ tableLayout: 'auto', width: '100%', textAlign: 'center'}}>
-        <DashboardHeader />
-
+    <ScrollableContainer sx={{overflowX:'scroll'}} >
+      <table style={{ tableLayout: 'auto', width: '100%', textAlign: 'center', overflowX: 'scroll'}}>
+      {  <DashboardHeader />}
         <tbody>
           {items}
           {items}
@@ -16,8 +15,6 @@ export default function EquipmentAllRequest({ items }) {
           {items}
           {items}
           {items}
-         
-          
         </tbody>
 
 

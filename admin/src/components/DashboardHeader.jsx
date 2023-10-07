@@ -10,9 +10,9 @@ export default function DashboardHeader() {
           <th>Email</th>
           <th>Phone</th>
           <th>Date</th>
-          <th>Quantity</th>
           <th>Status</th>
-          <th></th>
+          <th>Actions</th>
+
         </tr>
       </thead>
     </>

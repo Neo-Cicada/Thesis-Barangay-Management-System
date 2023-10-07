@@ -8,6 +8,22 @@
   font-weight: 400;
 }
 
-/* th, td {
-  border: 1px solid;
-} */
+table{
+  border: 1px solid red;
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow: auto;
+}
+th {
+  /* width: 100%; */
+  background: #8B9DC3;
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+}
+th,td{
+  padding: 1.6rem;
+}
+tr:nth-of-type(2n){
+  background-color: #DFE3EE;
+}
