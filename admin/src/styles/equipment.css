@@ -3,21 +3,49 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    /* border: 1px solid red */
 }
-.nav-equipment{
+.manageEquipment-title > h3{
+    text-align: center;
+    /* border: 1px solid red; */
+}
+/* Styles for the .equipmentDashboardBoxes element */
+.equipmentDashboardBoxes {
+    /* border: 1px solid red; */
+    overflow: auto;
+    white-space: nowrap;
     display: flex;
-    justify-content: center;
+    /* Scrollbar */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #3B5998 #f2f2f2; /* Firefox */
+}
+
+/* Scrollbar for Webkit (Chrome, Safari, etc.) */
+.equipmentDashboardBoxes::-webkit-scrollbar {
+    width: 2px; /* Adjust the width as needed */
+}
+
+/* Track */
+.equipmentDashboardBoxes::-webkit-scrollbar-track {
+    background: #f2f2f2; /* Light gray similar to Facebook */
+}
+
+/* Handle and Handle on hover */
+.equipmentDashboardBoxes::-webkit-scrollbar-thumb {
+    background: #3B5998; /* Facebook's blue color */
+    border-radius: 12px; /* Rounded corners */
+    border: 2px solid #3B5998; /* Border with the same color as the background */
+}
+
+/* Handle on hover */
+.equipmentDashboardBoxes::-webkit-scrollbar-thumb:hover {
+    background: #3B5998;
+}
+.manageEquipmentNavigation{
+    /* border: 1px solid red; */
+    display: flex;
+    overflow: auto;
+    white-space: nowrap;
     gap: 2em;
-}
-.equipment-hero{
-    height: 100%;
-}
-.nav-list{
-    background-color: #1DB954;
-    padding: 1%;
-    border-radius: 0.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20%;
+    
 }

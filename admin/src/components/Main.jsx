@@ -10,13 +10,11 @@ export default function Main({handleSignout}) {
                 <nav className='app-nav'>
                     <SideBar handleSignout={handleSignout}/>
                 </nav>
-                <div className="hero">
-                    <div className='hero-box'>
-                        <div className="hero-line">
+                
+                <div className='hero-box'>
                            <AppRoutes/>
-                        </div>
-                    </div>
                 </div>
+               
             </main>
 
         </>

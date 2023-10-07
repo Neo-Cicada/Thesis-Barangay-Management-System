@@ -4,9 +4,10 @@ export default function DashboardBox({name, numbers, logo}) {
     return (
         <>
             <div style={{
+                border:'1px solid #3B5998',
                 height: '6em',
                 width: '12em',
-                borderRadius: '0.8em',
+                borderRadius: '1',
                 boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
             }}>
                 <div>

@@ -10,20 +10,21 @@ import { useState } from 'react';
 import EquipmentAllRequest from './EquipmentAllRequest';
 import EquipManage from './EquipManage'
 import EquipmentCrud from './EquipmentCrud';
+import DashboardHeader from '../DashboardHeader';
 export default function Equipment() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState("default")
   useRead('EquipmentRequest', setData)
 
-  const allItems = data.filter(item => item.status ==="request").map(item => <DashboardList
+  const allItems = data.filter(item => item.status === "request").map(item => <DashboardList
     key={item.id}
     item={item}
-    first={item.firstname + " " + item.lastname}
+    first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
     fourth={"09/08/23"}
     fifth={'888'}
-    sixth={item.type}
+    sixth={'idont know'}
     seventh={item.status}
     path={'EquipmentAllRequest'}
     status={"request"}
@@ -68,10 +69,10 @@ export default function Equipment() {
       <div className='equipment-container'>
 
         <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div className='manageEquipment-title'>
             <h3>Manage Equipment</h3>
           </div>
-          <Box sx={{ display: 'flex', gap: '1em' }}>
+          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
               numbers={allItems.length}
@@ -95,15 +96,14 @@ export default function Equipment() {
           </Box>
 
         </Container>
+
         <DashboardNavigation setStatus={setStatus} status={status} />
-
-        <div className="equipment-hero">
-          {status === "default" && <EquipmentAllRequest items={allItems} />}
-          {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
-          {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
-          {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
-          {status === "fifth" && <EquipmentCrud/>}
-
+        <div sx={{ border: '1px solid red', height: '70%' }}>  
+        {status === "default" && <EquipmentAllRequest items={allItems}/>}
+        {status === "second" && ongoingItems}
+        {status === "third" && acceptedItems}
+        {status === "fourth" && rejectedItems}
+        {status === "fifth" && <EquipmentCrud/>}
         </div>
       </div>
     </>

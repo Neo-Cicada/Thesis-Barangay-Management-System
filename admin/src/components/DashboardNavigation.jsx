@@ -1,3 +1,4 @@
+import { Container } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
 
@@ -20,13 +21,7 @@ export default function DashboardNavigation({ setStatus, status }) {
     }
     return (
         <>
-            <div style={{
-               borderBottom: '2px solid #868686',
-               display: 'flex',
-               gap: '1.5em',
-               /* Clamp the width to 768px on mobile devices */
-               maxWidth: 'minMax(768px, 100%)'
-            }}>
+            <Container sx={{ display:'flex', gap:'1em', overflow:'auto'}} >
                 <button
                     style={status === 'default' ? activeBtn : btnStyle}
                     onClick={() => setStatus("default")}
@@ -45,7 +40,7 @@ export default function DashboardNavigation({ setStatus, status }) {
                 <button
                     style={status === 'fifth' ? activeBtn : btnStyle}
                     onClick={() => setStatus("fifth")}>Inventory</button>
-            </div>
+            </Container>
         </>
     )
 }

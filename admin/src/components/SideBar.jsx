@@ -25,19 +25,17 @@ import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import HandymanOutlinedIcon from '@mui/icons-material/HandymanOutlined';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import Logo from '../assets/2.png'
-
-
-export default function SideBar({handleSignout}) {
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';export default function SideBar({ handleSignout }) {
   // const loc = useLocation();
   // const path = loc.pathname; scan current location
-  
+
   const [status, setStatus] = useState('equipment')
   const normalStyle = {
     color: 'black',
     width: '100%',
     fontSize: '1rem',
     display: 'flex',
-    flexDirection:'column',
     // border:'1px solid red',
   }
 
@@ -45,7 +43,7 @@ export default function SideBar({handleSignout}) {
     ...normalStyle,
     fontWeight: 'bolder',
     fontSize: '1.1rem',
-    color:'#3b5998',
+    color: '#3b5998',
     // backgroundColor:"#f5f5f5"
 
   }
@@ -53,15 +51,36 @@ export default function SideBar({handleSignout}) {
   return (
     <>
       <div className='nav-container' >
-        <div style={{  height: '9%',
+        <div style={{
+          height: '9%',
           borderBottom: '2px solid black',
-          display:'flex', 
-          justifyContent:'center',
-          alignItems:'center'
-          }}>
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
           <h1>eBarangay</h1>
         </div>
         <ul className='sb-ul-list' >
+          <li className='sb-list'>
+            <Button sx={normalStyle}>
+              <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
+                <DashboardOutlinedIcon fontSize='large' />
+              </div>
+              <div className='sidebar-btn-name' style={{ width: '70%', }}>
+                Dashboard
+              </div>
+            </Button>
+          </li>
+          <li className='sb-list'>
+            <Button sx={normalStyle}>
+              <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
+                <ReportProblemOutlinedIcon fontSize='large' />
+              </div>
+              <div className='sidebar-btn-name' style={{ width: '70%', }}>
+                Report
+              </div>
+            </Button>
+          </li>
           <li className='sb-list'>
             <Button
               to='/'
@@ -69,12 +88,12 @@ export default function SideBar({handleSignout}) {
               sx={status === "equipment" ? activeStyle : normalStyle}
               onClick={() => setStatus("equipment")}
             >
-              <div className='sidebar-logo'>
+              <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
                 {
-                  status === "equipment" ? <HandymanIcon fontSize="medium" /> : <HandymanOutlinedIcon fontSize="medium" />
+                  status === "equipment" ? <HandymanIcon fontSize="large" /> : <HandymanOutlinedIcon fontSize="large" />
                 }
               </div>
-              <div className='sidebar-btn-name'>Equipment</div>
+              <div className='sidebar-btn-name' style={{ width: '70%', }}>Equipment</div>
             </Button>
           </li>
           <li className='sb-list'><Button
@@ -83,14 +102,14 @@ export default function SideBar({handleSignout}) {
             sx={status === "certificate" ? activeStyle : normalStyle}
             onClick={() => setStatus("certificate")}
           >
-            <div className='sidebar-logo'>
+            <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
               {
                 status === "certificate" ? <ReceiptIcon fontSize="large" /> : <ReceiptOutlinedIcon fontSize="large" />
               }
             </div>
-            <div className='sidebar-btn-name'>Certification</div>
+            <div className='sidebar-btn-name' style={{ width: '70%' }}>Certification</div>
           </Button></li>
-          <li  className='sb-list'>
+          <li className='sb-list'>
             <Button
 
               to='announcement'
@@ -98,12 +117,12 @@ export default function SideBar({handleSignout}) {
               sx={status === "announcement" ? activeStyle : normalStyle}
               onClick={() => setStatus("announcement")}
             >
-              <div className='sidebar-logo'>
+              <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
                 {
                   status === "announcement" ? <CampaignIcon fontSize="large" /> : <CampaignOutlinedIcon fontSize="large" />
                 }
               </div>
-              <div className='sidebar-btn-name'>Announcement</div>
+              <div className='sidebar-btn-name' style={{ width: '70%', }}>Announcement</div>
             </Button>
           </li>
           <li className='sb-list'>
@@ -112,11 +131,11 @@ export default function SideBar({handleSignout}) {
               sx={status === "enrollment" ? activeStyle : normalStyle}
               onClick={() => setStatus("enrollment")}
             >
-              <div className='sidebar-logo'>{
+              <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>{
                 status === "enrollment" ?
                   <LocalLibraryIcon fontSize="large" /> :
                   <LocalLibraryOutlinedIcon fontSize="large" />}</div>
-              <div className='sidebar-btn-name'>Enrollment</div>
+              <div className='sidebar-btn-name' style={{ width: '70%', }}>Enrollment</div>
             </Button>
           </li>
           <li className='sb-list'>
@@ -125,10 +144,10 @@ export default function SideBar({handleSignout}) {
               sx={status === "facilities" ? activeStyle : normalStyle}
               onClick={() => setStatus("facilities")}
             >
-              <div className='sidebar-logo'>{status === "facilities" ? 
-              <HouseIcon fontSize="large" /> :
-               <HouseOutlinedIcon fontSize="large" />}</div>
-              <div className='sidebar-btn-name'>Facilities</div>
+              <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>{status === "facilities" ?
+                <HouseIcon fontSize="large" /> :
+                <HouseOutlinedIcon fontSize="large" />}</div>
+              <div className='sidebar-btn-name' style={{ width: '70%', }}>Facilities</div>
             </Button>
           </li>
           <li className='sb-list'>
@@ -137,9 +156,9 @@ export default function SideBar({handleSignout}) {
               sx={status === "medicine" ? activeStyle : normalStyle}
               onClick={() => setStatus("medicine")}
             >
-              <div className='sidebar-logo'>{status === "medicine" ?
-              <LocalHospitalIcon fontSize="large" /> : <LocalHospitalOutlinedIcon fontSize="large"/>}</div>
-              <div className='sidebar-btn-name'>Medicine</div>
+              <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>{status === "medicine" ?
+                <LocalHospitalIcon fontSize="large" /> : <LocalHospitalOutlinedIcon fontSize="large" />}</div>
+              <div className='sidebar-btn-name' style={{ width: '70%', }}>Medicine</div>
             </Button>
           </li>
           <li className='sb-list'>
@@ -149,22 +168,22 @@ export default function SideBar({handleSignout}) {
               sx={status === "profile" ? activeStyle : normalStyle}
               onClick={() => setStatus("profile")}
             >
-              <div className='sidebar-logo'>
+              <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
                 {status === "profile" ?
                   <AccountCircleIcon fontSize='large' />
                   : <AccountCircleOutlinedIcon fontSize="large" />}
               </div>
-              <div className='sidebar-btn-name'>Profile</div>
+              <div className='sidebar-btn-name' style={{ width: '70%' }}>Profile</div>
             </Button>
           </li>
           <li
-           className='sb-list'
-            
-           >
+            className='sb-list'
+
+          >
             <div
               className='logout-btn'
               onClick={handleSignout}
-              >Signout</div>
+            >Signout</div>
           </li>
         </ul>
       </div>

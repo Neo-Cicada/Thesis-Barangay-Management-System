@@ -12,46 +12,47 @@ export default function EquipmentCrud() {
 
     useRead('Equipments', setData)
 
-    const items = data.map((item)=> <DashboardItem path={'Equipments'} data={item} name={item.equipment}/>)
+    const items = data.map((item) => <DashboardItem path={'Equipments'} data={item} name={item.equipment} />)
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
     };
     return (
         <>
-            <Container
-                sx={{
+            <div
+                style={{
                     height: '100%',
                 }}
             >
                 <Container
-                    style={{
-                        borderBottom: '1px solid black',
-                        height: '10%',
-                        display:'flex',
-                        justifyContent:'space-between'
-                    }}
+                    sx={{ display: 'flex',justifyContent: 'end' }}
                 >
-                    <div style={{width:'28em', display:'flex',
-                     justifyContent:'space-between', alignItems:'center', paddingLeft:'0.6em'}}>
-                        <div style={{fontSize:'1.2rem'}}>Name</div>
-                        <div style={{fontSize:'1.2rem'}}>Quantity</div>
-                        <div></div>
-
-                    </div>
                     <div
-                        onClick={() => setIsDialogOpen(true)}
-                        style={{height:'100%',
-                        cursor: 'pointer', width:'10em',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center',
-                        textAlign:'center'}}
-                    > <AddIcon /> Add Inventory</div>
+                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                        onClick={() => setIsDialogOpen(true)}>
+                        <AddIcon /> <span>Add Inventory</span>
+                    </div>
                 </Container>
                 <ScrollableContainer>
+                    <Container style={{ display: 'flex', width: '100%', borderBottom:'1px solid black' }}>
+                        <div style={{
+                            width: '15em',
+                            height: '95%%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between'
+
+                        }}>
+                            <div style={{ fontSize: '1.2rem' }}>Name</div>
+                            <div style={{ fontSize: '1.2rem' }}>Quantity</div>
+                        </div>
+
+
+                        <div></div>
+
+                    </Container>
                     {items}
                 </ScrollableContainer>
-            </Container>
+            </div>
 
 
             <EquipmentAdd
