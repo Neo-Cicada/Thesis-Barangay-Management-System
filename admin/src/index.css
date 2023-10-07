@@ -9,7 +9,7 @@
 }
 
 table{
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 100%;
   border-collapse: collapse;
   display: block;

@@ -69,13 +69,25 @@ export default function DashboardList({ first = "Offline", second = "Offline", t
     console.log(path)
     handleOpen()
     togglePopup()
-    // await useStatusUpdate(path, item.id, 'ongoing')
+    await useStatusUpdate(path, item.id, 'ongoing')
+    setConfirmation(false)
   }
+
+  const onConfirm = async (e) =>{
+    e.stopPropagation();
+    console.log(path)
+    handleOpen()
+    togglePopup()
+    await useStatusUpdate(path, item.id, 'accepted')
+    setConfirmation(false)
+  }
+
   const onDecline = async (e) => {
     e.stopPropagation();
     handleOpen()
     togglePopup()
-    // await useStatusUpdate(path, item.id, 'rejected')
+    await useStatusUpdate(path, item.id, 'rejected')
+    setConfirmation(false)
 
   }
   return (
@@ -91,11 +103,11 @@ export default function DashboardList({ first = "Offline", second = "Offline", t
         <EquipmentViewInformation open={information} onClose={handleCloseInformation} item={item} />
         {status === "ongoing" || status === "request" ?
           <td >
-            <VisibilityIcon sx={{ cursor: 'pointer' }} onClick={openInformation} />
+            <VisibilityIcon color="info" sx={{ cursor: 'pointer' }} onClick={openInformation} />
 
-            <MoreHorizIcon sx={{ cursor: 'pointer' }} onClick={togglePopup} />
-            {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline}
-              status={status} open={handleOpenConfirmation} onClose={handleCloseConfirmation} />}
+            <MoreHorizIcon color="warning" sx={{ cursor: 'pointer' }} onClick={()=>setConfirmation(true)} />
+            <DashboardConfirmation accept={onAccept} confirm={onConfirm} reject={onDecline}
+              status={status} open={confirmation} onClose={handleCloseConfirmation} />
 
           </td> :
           <td><VisibilityIcon  sx={{ cursor: 'pointer' }} onClick={openInformation}/></td>

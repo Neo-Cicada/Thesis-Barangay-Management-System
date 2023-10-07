@@ -34,7 +34,7 @@ export default function EquipmentCrud() {
                     sx={{ display: 'flex', justifyContent: 'end' }}
                 >
                     <div
-                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor:'pointer' }}
                         onClick={() => setIsDialogOpen(true)}>
                         <AddIcon /> <span>Add Inventory</span>
                     </div>

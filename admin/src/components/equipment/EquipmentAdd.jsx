@@ -11,8 +11,14 @@ export default function EquipmentAdd({ handleDialogClose, isDialogOpen, setIsDia
   const handleClickOk = async (e)=>{
     console.log(item)
 
-    await useUploadDirectly('Equipments', item).then(()=> setIsDialogOpen(false))
-    console.log(item)
+    await useUploadDirectly('Equipments', item).then(()=> {
+      setItem({
+        equipment: '',
+        quantity: ''
+      })
+      setIsDialogOpen(false)
+    })
+    
   }
   return (
     <>
