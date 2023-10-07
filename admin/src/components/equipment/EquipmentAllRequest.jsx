@@ -6,16 +6,10 @@ export default function EquipmentAllRequest({ items }) {
     <>
     <ScrollableContainer sx={{overflowX:'scroll'}} >
       <table style={{ tableLayout: 'auto', width: '100%', textAlign: 'center', overflowX: 'scroll'}}>
-      {  <DashboardHeader />}
-        <tbody>
+        <DashboardHeader />
+        
           {items}
-          {items}
-          {items}
-          {items}
-          {items}
-          {items}
-          {items}
-        </tbody>
+        
 
 
       </table>

@@ -8,8 +8,8 @@ import RedToast from './RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EquipmentViewInformation from './equipment/EquipmentViewInformation';
 import DashboardHeader from './DashboardHeader';
-export default function DashboardList({ first="Offline", second="Offline", third="Offline", fourth="Offline", fifth="Offline",
-  sixth ="Offline", seventh ="Offline", item, status, path }) {
+export default function DashboardList({ first = "Offline", second = "Offline", third = "Offline", fourth = "Offline", fifth = "Offline",
+  sixth = "Offline", seventh = "Offline", item, status, path }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [openToast, setOpenToast] = useState(false);
@@ -76,7 +76,7 @@ export default function DashboardList({ first="Offline", second="Offline", third
     handleOpen()
     togglePopup()
     // await useStatusUpdate(path, item.id, 'rejected')
-   
+
   }
   return (
     <>
@@ -88,17 +88,17 @@ export default function DashboardList({ first="Offline", second="Offline", third
         <td>{third}</td>
         <td>{fourth}</td>
         <td>{seventh}</td>
-        <EquipmentViewInformation open={information} onClose={handleCloseInformation} item={item}/>
+        <EquipmentViewInformation open={information} onClose={handleCloseInformation} item={item} />
         {status === "ongoing" || status === "request" ?
           <td >
-            <VisibilityIcon sx={{cursor:'pointer'}} onClick={openInformation} />
-            
-            <MoreHorizIcon sx={{cursor:'pointer'}} onClick={togglePopup} />
+            <VisibilityIcon sx={{ cursor: 'pointer' }} onClick={openInformation} />
+
+            <MoreHorizIcon sx={{ cursor: 'pointer' }} onClick={togglePopup} />
             {isPopupOpen && <DashboardConfirmation accept={onAccept} reject={onDecline}
               status={status} open={handleOpenConfirmation} onClose={handleCloseConfirmation} />}
 
           </td> :
-          <td><VisibilityIcon /></td>
+          <td><VisibilityIcon  sx={{ cursor: 'pointer' }} onClick={openInformation}/></td>
         }
       </tr>
       <ConfirmationDialog

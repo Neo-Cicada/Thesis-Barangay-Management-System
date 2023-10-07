@@ -9,6 +9,7 @@ export default function EquipmentViewInformation({ item, open, onClose, onConfir
 
     }
     const items = item.selectedEquipment.map(item => <Box
+        key={item.id}
         style={styleP}> <p style={{ width: '50%', textAlign: 'center' }}>Name: {item.name}</p>
         <hr />
         <p style={{ width: '50%', textAlign: 'center' }}>Quantity: {item.count}</p>
@@ -28,7 +29,7 @@ export default function EquipmentViewInformation({ item, open, onClose, onConfir
     }
     return (
         <>
-            <Dialog open={open} onClose={onClose} fullWidth>
+            <Dialog open={open} onClose={onClose} fullWidth key={item.id}>
                 <DialogTitle sx={{ textAlign: 'center' }}>
                     {item.fullname} Request Information
                 </DialogTitle>
@@ -42,7 +43,7 @@ export default function EquipmentViewInformation({ item, open, onClose, onConfir
                     <Box sx={boxStyle}><p style={nameStyle}>Return Date:</p> <p style={valueStyle}> {item.returnDate}</p></Box>
                     <Box sx={{width:'100%'}}>
                         <Box sx={{ textAlign: 'center' }}>Selected Items</Box>
-                        <Box style={{ width: '100%' }}>
+                        <Box style={{ width: '100%' }} key={item.id}>
                             {items}
                         </Box>
                     </Box>

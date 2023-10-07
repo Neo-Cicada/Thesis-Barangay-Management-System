@@ -24,7 +24,7 @@ export default function Equipment() {
 
     return () => clearTimeout(timer);
   }, []);
-  const allItems = data.filter(item => item.status === "request").map(item => <DashboardList
+  const allItems = data.filter(item => item.status === 'request').map(item => <DashboardList
     key={item.id}
     item={item}
     first={item.fullname}
@@ -32,10 +32,51 @@ export default function Equipment() {
     third={item.phoneNumber}
     fourth={"09/08/23"}
     seventh={item.status}
-    path={'EquipmentAllRequest'}
+    path={'EquipmentRequest'}
     status={"request"}
   />
+
   )
+  const ongoingItems = data.filter(item => item.status === 'ongoing').map(item => <DashboardList
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'EquipmentRequest'}
+    status={item.status}
+  />
+
+  )
+  const acceptedItems = data.filter(item => item.status === 'accepted').map(item => <DashboardList
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'EquipmentRequest'}
+    status={item.status}
+  />
+
+  )
+  const rejectedItems = data.filter(item => item.status === 'rejected').map(item => <DashboardList
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'EquipmentRequest'}
+    status={item.status}
+  />
+
+  )
+
   return (
     <>
       <div className='equipment-container'>
@@ -47,19 +88,19 @@ export default function Equipment() {
           <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
-              // numbers={allItems.length}
+              numbers={allItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
-              // numbers={h}
+              numbers={ongoingItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Completed"
-              // numbers={acceptedItems.length}
+              numbers={acceptedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Rejected"
-              // numbers={rejectedItems.length}
+              numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Items"
@@ -74,24 +115,29 @@ export default function Equipment() {
 
 
         {isLoading ? (
-
-          <Skeleton
-            sx={{
-              bgcolor: '#8B9DC3',
-
-            }}
-            variant="rectangular"
-            width={'100%'}
-
-            height={'70%'}
-          />
+          <div style={{ width: '100%', }}>
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+          </div>
 
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>
             <div sx={{ border: '1px solid red', minHeight: '70%' }}>
               {status === "default" && <EquipmentAllRequest items={allItems} />}
-             
+              {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
+
+              {status == "third" && <EquipmentAllRequest items={acceptedItems} />}
+              {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
               {status === "fifth" && <EquipmentCrud />}
+
             </div>
           </div>
         )}

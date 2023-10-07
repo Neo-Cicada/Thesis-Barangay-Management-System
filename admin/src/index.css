@@ -14,9 +14,10 @@ table{
   border-collapse: collapse;
   display: block;
   overflow: auto;
+  min-width: 100%;
 }
 th {
-  /* width: 100%; */
+  width: 100%;
   background: #8B9DC3;
   position: sticky;
   top: 0; /* Don't forget this, required for the stickiness */

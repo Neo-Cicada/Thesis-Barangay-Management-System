@@ -1,5 +1,5 @@
-import React from 'react'
-import { Container, Box } from '@mui/material'
+import React, {useEffect} from 'react'
+import { Container, Box, Skeleton } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import EquipmentAdd from './EquipmentAdd';
@@ -9,9 +9,16 @@ import ScrollableContainer from '../ScrollableContainer';
 export default function EquipmentCrud() {
     const [data, setData] = useState([])
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useRead('Equipments', setData)
-
+    useEffect(() => {
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+        }, 1500);
+    
+        return () => clearTimeout(timer);
+      }, []);
     const items = data.map((item) => <DashboardItem path={'Equipments'} data={item} name={item.equipment} />)
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
@@ -24,7 +31,7 @@ export default function EquipmentCrud() {
                 }}
             >
                 <Container
-                    sx={{ display: 'flex',justifyContent: 'end' }}
+                    sx={{ display: 'flex', justifyContent: 'end' }}
                 >
                     <div
                         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
@@ -33,7 +40,7 @@ export default function EquipmentCrud() {
                     </div>
                 </Container>
                 <ScrollableContainer>
-                    <Container style={{ display: 'flex', width: '100%', borderBottom:'1px solid black' }}>
+                    <Container style={{ display: 'flex', width: '100%', borderBottom: '1px solid black' }}>
                         <div style={{
                             width: '15em',
                             height: '95%%',
@@ -50,7 +57,25 @@ export default function EquipmentCrud() {
                         <div></div>
 
                     </Container>
-                    {items}
+                 {isLoading ?(
+                    <div style={{width:'100%'}}>
+                        <Skeleton sx={{width: '100%', bgcolor: '#8B9DC3',}}/>
+                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation="wave" />
+                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation={false} />
+                        <Skeleton sx={{width: '100%', bgcolor: '#8B9DC3',}}/>
+                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation="wave" />
+                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation={false} />
+                        <Skeleton sx={{width: '100%', bgcolor: '#8B9DC3',}}/>
+                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation="wave" />
+                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation={false} />
+                    </div>
+                 ):(
+                    <ScrollableContainer>
+                        {items}
+                    </ScrollableContainer>
+                 ) }
+                   
+                    
                 </ScrollableContainer>
             </div>
 
