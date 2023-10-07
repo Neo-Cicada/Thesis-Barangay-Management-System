@@ -1,20 +1,40 @@
 .nav-container{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 100vh;
     min-width: 37.5px;
 }
 .sb-ul-list{
     border: 1px solid rgb(255, 255, 255);
     min-height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 .sb-list{
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid green;
+    position: relative; /* Add this to make ::after absolute relative to .sb-list */
+}
+.sb-list::after {
+    content: '';
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 100%; 
+    border-bottom: 1px solid grey;
 }
 .sidebar-btn-name{
     display: none;
+}
+.logout-btn{
+    height: 2em;
+    cursor: pointer;
+    border: 1px solid black;
+     width: 4em;
+    color: #3b5998;
+    border-radius:0.8rem;
+    text-align: center;
 }
 
 

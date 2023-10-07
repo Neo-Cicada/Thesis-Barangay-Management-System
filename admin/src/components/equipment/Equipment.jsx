@@ -13,7 +13,7 @@ import EquipmentCrud from './EquipmentCrud';
 export default function Equipment() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState("default")
-  useRead('EquipmentAllRequest', setData)
+  useRead('EquipmentRequest', setData)
 
   const allItems = data.filter(item => item.status ==="request").map(item => <DashboardList
     key={item.id}

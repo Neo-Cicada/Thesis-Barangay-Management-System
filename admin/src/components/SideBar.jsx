@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Button } from '@mui/material'
+import { Button, makeStyles } from '@mui/material'
 import '../styles/sidebar.css'
 import { useState } from 'react'
 
@@ -25,32 +25,41 @@ import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import HandymanOutlinedIcon from '@mui/icons-material/HandymanOutlined';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import Logo from '../assets/2.png'
+
+
 export default function SideBar({handleSignout}) {
   // const loc = useLocation();
   // const path = loc.pathname; scan current location
+  
   const [status, setStatus] = useState('equipment')
   const normalStyle = {
     color: 'black',
     width: '100%',
     fontSize: '1rem',
     display: 'flex',
-    flexDirection:'column'
+    flexDirection:'column',
+    // border:'1px solid red',
   }
 
   const activeStyle = {
     ...normalStyle,
     fontWeight: 'bolder',
     fontSize: '1.1rem',
-    color:'#3b5998'
-
+    color:'#3b5998',
+    // backgroundColor:"#f5f5f5"
 
   }
 
   return (
     <>
       <div className='nav-container' >
-        <div style={{  height: '10%', borderBotton: '2px solid black', display:'flex', justifyContent:'center' }}>
-          <h1>Logo</h1>
+        <div style={{  height: '9%',
+          borderBottom: '2px solid black',
+          display:'flex', 
+          justifyContent:'center',
+          alignItems:'center'
+          }}>
+          <h1>eBarangay</h1>
         </div>
         <ul className='sb-ul-list' >
           <li className='sb-list'>
@@ -149,17 +158,13 @@ export default function SideBar({handleSignout}) {
             </Button>
           </li>
           <li
-          className='sb-list'
+           className='sb-list'
+            
            >
             <div
+              className='logout-btn'
               onClick={handleSignout}
-            style={{
-               cursor:'pointer',
-               border:'1px solid black',
-               width:'6em',
-               color:'#3b5998',
-               borderRadius:'0.8rem',
-               textAlign:'center', }}>Signout</div>
+              >Signout</div>
           </li>
         </ul>
       </div>
