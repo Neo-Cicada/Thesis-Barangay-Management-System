@@ -20,6 +20,8 @@ const heroStyle ={
 export default function Announcement() {
   return (
     <>
+          <div className='equipment-container'>
+
       <nav style={navStyle}>
         <Link to='announcement-management'>Announcement</Link>
         <Link to="announcement-history">History</Link>
@@ -27,6 +29,7 @@ export default function Announcement() {
       <div className='hero-section' style={heroStyle}>
         <Outlet/>
       </div>
+   </div>
     </>
   )
 }

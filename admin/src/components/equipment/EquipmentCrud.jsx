@@ -74,8 +74,7 @@ export default function EquipmentCrud() {
                         {items}
                     </ScrollableContainer>
                  ) }
-                   
-                    
+
                 </ScrollableContainer>
             </div>
 

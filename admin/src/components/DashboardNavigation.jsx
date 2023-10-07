@@ -27,7 +27,7 @@ export default function DashboardNavigation({ setStatus, status }) {
                     onClick={() => setStatus("default")}
 
                 >
-                    All request</button>
+                    Request</button>
                 <button
                     style={status === 'second' ? activeBtn : btnStyle}
                     onClick={() => setStatus("second")}>Ongoing</button>

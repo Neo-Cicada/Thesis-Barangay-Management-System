@@ -65,6 +65,7 @@ export default function Medicine() {
 
   return (
     <>
+    <div className='equipment-container'>
       <Container style={{
         height: '30%', display: 'flex',
         flexDirection: 'column', gap: '1em',
@@ -104,6 +105,7 @@ export default function Medicine() {
           {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
           {status === "fifth" && <MedicineCrud/>}
 
+      </div>
       </div>
     </>
   )

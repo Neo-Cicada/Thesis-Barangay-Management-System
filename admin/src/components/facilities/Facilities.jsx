@@ -26,6 +26,8 @@ export default function Facilities() {
 />)
   return (
     <>
+        <div className='equipment-container'>
+
       <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em',}}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <h3>Manage Facilities</h3>
@@ -58,6 +60,7 @@ export default function Facilities() {
       <div sx={{border:'1px solid red', height:'70%'}}>
         <EquipmentAllRequest items={items}/>
        {status === "fifth" && <FacilityCrud/>}
+      </div>
       </div>
     </>
   )
