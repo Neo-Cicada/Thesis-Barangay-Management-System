@@ -8,6 +8,7 @@ import FacilityItem from './FacilityItem';
 import ScrollableContainer from '../ScrollableContainer';
 export default function FacilityCrud() {
     const [data, setData] = useState([])
+    useRead('Facility', setData)
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const handleDialogClose = () => {
@@ -15,7 +16,6 @@ export default function FacilityCrud() {
     };
     const items = data.map((item)=> <FacilityItem data={item} name={item.type}/>)
 
-    useRead('Facility', setData)
 
 
   return (
