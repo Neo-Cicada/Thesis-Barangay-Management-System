@@ -63,18 +63,18 @@ export default function Equipment() {
   />
 
   )
-  const rejectedItems = data.filter(item => item.status === 'rejected').map(item => 
-  <DashboardList
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    seventh={item.status}
-    path={'EquipmentRequest'}
-    status={item.status}
-  />
+  const rejectedItems = data.filter(item => item.status === 'rejected').map(item =>
+    <DashboardList
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={"09/08/23"}
+      seventh={item.status}
+      path={'EquipmentRequest'}
+      status={item.status}
+    />
 
   )
 

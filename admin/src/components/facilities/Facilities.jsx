@@ -6,12 +6,13 @@ import DashboardNavigation from '../DashboardNavigation'
 import FacilityCrud from './FacilityCrud'
 import useRead from '../../hooks/useRead'
 import DashboardList from '../DashboardList'
+import DashboardListFaci from './DashboardListFaci'
 import EquipmentAllRequest from '../../components/equipment/EquipmentAllRequest'
 export default function Facilities() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
   const [isLoading, setIsLoading] = useState(true)
-  useRead('FacilityAllRequest', setData)
+  useRead('FacilityRequest', setData)
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -19,17 +20,49 @@ export default function Facilities() {
 
     return () => clearTimeout(timer);
   }, []);
-  const items = data.filter(item => item.status === "request").map((item) => <DashboardList
-    first={item.firstname}
+  const items = data.filter(item => item.status === "request").map((item) => <DashboardListFaci
+    key={item.id}
+    item={item}
+    first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={'12/12/12'}
-    fifth={'Time'}
-    sixth={item.facility}
-    seventh={'request'}
-    itemId={item.id}
-    status={'ongoing'}
-    path="FacilityAllRequest"
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'FacilityRequest'}
+    status={"request"}
+  />)
+  const ongoingItems = data.filter(item => item.status === "ongoing").map((item) => <DashboardListFaci
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'FacilityRequest'}
+    status={"ongoing"}
+  />)
+  const acceptdItems = data.filter(item => item.status === "accepted").map((item) => <DashboardListFaci
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'FacilityRequest'}
+    status={"accepted"}
+  />)
+  const rejectedItems = data.filter(item => item.status === "rejected").map((item) => <DashboardListFaci
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'FacilityRequest'}
+    status={"rejected"}
   />)
   return (
     <>
@@ -42,7 +75,7 @@ export default function Facilities() {
           <div style={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
-              numbers={'888'}
+              numbers={data.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
@@ -81,9 +114,11 @@ export default function Facilities() {
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>
             <div sx={{ border: '1px solid red', minHeight: '70%' }}>
-
+              {status === "default" && <EquipmentAllRequest items={items} />}
+              {status === "second" && <EquipmentAllRequest items={ongoingItems}/>}
+              {status === "third" && <EquipmentAllRequest items={acceptdItems}/>}
+              {status === "fourth" && <EquipmentAllRequest items={rejectedItems}/>}
               {status === "fifth" && <FacilityCrud />}
-
             </div>
           </div>
         )}

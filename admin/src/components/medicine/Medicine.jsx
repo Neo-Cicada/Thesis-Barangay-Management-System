@@ -95,6 +95,7 @@ export default function Medicine() {
 
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
+
         <div sx={{ border: '1px solid red', height: '70%' }}>
           {status === "default" && <EquipmentAllRequest items={items} />}
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
