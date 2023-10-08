@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Container, Box, Skeleton } from '@mui/material'
 import '../../styles/certificate.css'
 import DashboardBox from '../DashboardBox'
@@ -9,10 +9,13 @@ import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
 import DashboardList from '../DashboardList'
 import CertificateCrud from './CertificateCrud'
+import DashboardListCert from './DashboardListCert'
 export default function Certificate() {
-  const [status, setStatus] = useState('default')
   const [data, setData] = useState([])
+  const [status, setStatus] = useState('default')
   const [isLoading, setIsLoading] = useState(true);
+
+  useRead('CertificateRequest', setData);
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -21,18 +24,19 @@ export default function Certificate() {
     return () => clearTimeout(timer);
   }, []);
 
-  const rejectedItems = data.filter(item => item.status === "rejected")
-    .map(item => <DashboardList
-      key={item.id}
-      first={item.firstname + " " + item.lastname}
-      second={item.email}
-      third={item.phoneNumber}
-      fourth={"09/08/23"}
-      fifth={'888'}
-      sixth={item.certificate}
-      seventh={item.status}
-      status={item.status} />)
-
+  const items = data.map(item => <DashboardListCert
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'CertificateRequest'}
+    status={"request"}
+  />)
+  
+  // console.log(items)
   return (
     <>
       <div className="certificate-container">
@@ -43,7 +47,7 @@ export default function Certificate() {
           <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
-              // numbers={items.length}
+              // numbers={allItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
@@ -81,8 +85,8 @@ export default function Certificate() {
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>
             <div sx={{ border: '1px solid red', minHeight: '70%' }}>
-              {status === "default" && <EquipmentAllRequest />}
-              {status === "second" && <EquipmentAllRequest />}
+              {status === "default" && <EquipmentAllRequest items={items}/>}
+              {status === "second" && <EquipmentAllRequest  />}
               {status === "third" && <EquipmentAllRequest  />}
               {status === "fourth" && <EquipmentAllRequest  />}
               {status === "fifth" && <CertificateCrud />}

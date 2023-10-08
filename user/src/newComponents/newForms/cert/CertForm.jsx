@@ -1,9 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { TextField, Box, FormControlLabel, Checkbox, Dialog, Button, DialogContent,
-  FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  TextField, Box, FormControlLabel, Checkbox, Dialog, Button, DialogContent,
+  FormControl, InputLabel, Select, MenuItem
+} from '@mui/material';
 import Agreement from '../../../components/dialogs/Agreement';
 import { MyCertContext } from './CertificateDialog';
 import CertSummary from './CertSummary';
+import useUpload from '../../../hooks/useUpload'
 function TermsAndCondition({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose}>
@@ -19,9 +22,10 @@ function TermsAndCondition({ open, onClose }) {
 }
 
 export default function CertForm() {
-  const { details, setDetails } = useContext(MyCertContext)
-  const [showAgreement, setShowAgreement] = useState(false);
+  const { details, setDetails, handleSubmit} = useContext(MyCertContext)
+  const [showAgreement, setShowAgreement, ] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
+
   const handleOpenAgreement = () => {
     setShowAgreement(true);
   };
@@ -29,6 +33,8 @@ export default function CertForm() {
   const handleCloseAgreement = () => {
     setShowAgreement(false);
   };
+  
+
   const Summary = ({ open, onClose }) => {
     const dialogStyle = {
       height: '100vh',
@@ -49,7 +55,9 @@ export default function CertForm() {
   };
   return (
     <>
-      <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ maxWidth: '400px', margin: '0 auto' }}>
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -101,7 +109,8 @@ export default function CertForm() {
             }
           />
         </div>
-      </div>
+        <Button type="submit" fullWidth variant="contained">Submit</Button>
+      </form>
       <TermsAndCondition open={showAgreement} onClose={handleCloseAgreement} />
       <Summary open={showSummary} onClose={() => setShowSummary(false)} />
     </>

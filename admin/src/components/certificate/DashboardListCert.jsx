@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import DashboardConfirmation from './DashboardConfirmation';
-import useStatusUpdate from '../hooks/useStatusUpdate'
-import ConfirmationDialog from './ConfirmationDialog';
-import GreenToast from './GreenToast';
-import RedToast from './RedToast'
+import DashboardConfirmation from '../DashboardConfirmation';
+import useStatusUpdate from '../../hooks/useStatusUpdate'
+import ConfirmationDialog from '../ConfirmationDialog';
+import GreenToast from '../GreenToast';
+import RedToast from '../RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import EquipmentViewInformation from './equipment/EquipmentViewInformation';
-import DashboardHeader from './DashboardHeader';
+import CertificateViewInformation from './CertificateViewInformation'
 export default function DashboardList({
   first ,
   second,
@@ -122,7 +121,7 @@ export default function DashboardList({
       />
       <GreenToast open={openToast} onClose={handleCloseToast} />
       <RedToast open={openRedToast} onClose={handleCloseRedToast} />
-      <EquipmentViewInformation open={information} onClose={handleCloseInformation} item={item} />
+      <CertificateViewInformation open={information} onClose={handleCloseInformation} item={item} />
 
     </>
   );

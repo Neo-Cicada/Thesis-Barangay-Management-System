@@ -12,8 +12,12 @@ export default function CertificateAdd({ handleDialogClose, isDialogOpen, setIsD
                                           im doing this without internet maybe the hook
                                            is not executing
                                           */
-  const handleClickOk = (e) => {
-    useUploadDirectly('Certificates', item)
+  const handleClickOk = async (e) => {
+   await useUploadDirectly('Certificates', item)
+    setItem({
+      type: '',
+      quantity: ''
+    })
     setIsDialogOpen(!isDialogOpen)
     // console.log(item)
   }

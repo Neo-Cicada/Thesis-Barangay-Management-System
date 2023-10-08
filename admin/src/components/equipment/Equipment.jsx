@@ -24,7 +24,6 @@ export default function Equipment() {
 
     return () => clearTimeout(timer);
   }, []);
-
   const allItems = data.filter(item => item.status === 'request').map(item => <DashboardList
     key={item.id}
     item={item}
@@ -64,7 +63,8 @@ export default function Equipment() {
   />
 
   )
-  const rejectedItems = data.filter(item => item.status === 'rejected').map(item => <DashboardList
+  const rejectedItems = data.filter(item => item.status === 'rejected').map(item => 
+  <DashboardList
     key={item.id}
     item={item}
     first={item.fullname}

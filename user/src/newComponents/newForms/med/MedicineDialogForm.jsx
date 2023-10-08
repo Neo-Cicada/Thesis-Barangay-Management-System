@@ -35,6 +35,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
       email: '',
       phoneNumber: '',
       selectedMedicines: [],
+      status: 'requst'
     });
     console.log(selectedMedicines);
   };

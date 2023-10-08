@@ -52,8 +52,6 @@ export default function EquipmentCrud() {
                             <div style={{ fontSize: '1.2rem' }}>Name</div>
                             <div style={{ fontSize: '1.2rem' }}>Quantity</div>
                         </div>
-
-
                         <div></div>
 
                     </Container>

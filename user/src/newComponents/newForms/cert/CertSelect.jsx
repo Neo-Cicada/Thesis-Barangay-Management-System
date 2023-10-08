@@ -2,11 +2,15 @@ import React, { createContext, useContext, useState } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { MyCertContext } from './CertificateDialog';
 import { TextField } from '@mui/material';
+import useRead from '../../../hooks/useRead'
 const Box = ({ name, isSelected, onSelect }) => {
     const boxStyle = {
         height: '5em',
         textAlign: 'center',
         borderRadius: '1em',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         width: '7em',
         cursor: 'pointer',
         backgroundColor: isSelected ? '#8B9DC3' : '#DFE3EE',
@@ -23,13 +27,13 @@ const Box = ({ name, isSelected, onSelect }) => {
 }
 
 export default function CertSelect() {
-    // Replace MyContext with the appropriate context for certificates
+    const [data, setData] = useState([]);
+    useRead('Certificates', setData)
     const { selectedCertificates, handleBoxSelect, setSelectedCertificates } = useContext(MyCertContext);
     const handleMopSelect = (certName, mop) => {
         const updateSelectedCertificates = selectedCertificates.map((item) => {
             if (item.name === certName) {
-                return { ...item, mop: mop }
-            }
+                return { ...item, mop: mop, reference: mop === 'GCASH' ? item.reference : '' };            }
             else {
                 return item
             }
@@ -48,33 +52,15 @@ export default function CertSelect() {
         setSelectedCertificates(updateSelectedCertificates)
 
     }
+    const items = data.map(item => <Box
+        name={item.type}
+        isSelected={selectedCertificates.some((certificate) => certificate.name === String(item.type))}
+        onSelect={handleBoxSelect}
+    />)
     return (
         <>
             <div className='items-certificates-dialog'>
-                <Box
-                    name="Certificate 1"
-                    isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 1")}
-                    onSelect={handleBoxSelect}
-                />
-                <Box
-                    name="Certificate 2"
-                    isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 2")}
-                    onSelect={handleBoxSelect}
-                />
-                <Box
-                    name="Certificate 3"
-                    isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 3")}
-                    onSelect={handleBoxSelect}
-                />
-                <Box
-                    name="Certificate 4"
-                    isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 4")}
-                    onSelect={handleBoxSelect}
-                /> <Box
-                    name="Certificate 5"
-                    isSelected={selectedCertificates.some((certificate) => certificate.name === "Certificate 5")}
-                    onSelect={handleBoxSelect}
-                />
+                {items}
                 {/* Add more boxes with different names */}
             </div>
             <p style={{ textAlign: 'center' }}>Selected Certificates:</p>
@@ -84,7 +70,7 @@ export default function CertSelect() {
                         style={{
                             textAlign: 'center',
                             display: 'flex',
-                            flexDirection: 'column',
+                            flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'center',
                             gap: '1em',
@@ -94,11 +80,14 @@ export default function CertSelect() {
                     >
                         <div>{certificate.name}</div>
 
-                        <label htmlFor={`paymentMethod-${index}`}>Mod of payment:</label>
+
                         <div style={{ width: '60%' }}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth size='small'>
                                 <InputLabel id="paymentMethod-label">Payment Method</InputLabel>
                                 <Select
+                                    value={certificate.mop}
+                                    variant="standard"
+                                    size="small"
                                     label="Payment Method"
                                     id={`paymentMethod-${index}`}
                                     onChange={(e) => handleMopSelect(certificate.name, e.target.value)}
@@ -108,9 +97,10 @@ export default function CertSelect() {
                                 </Select>
                             </FormControl>
                         </div>
-                        <div>Cost: 50</div>
+                        <div>Cost: {certificate.cost}</div>
                         {certificate.mop === "GCASH" && (
                             <TextField
+                            value={certificate.reference}
                                 onChange={(e) => handleReference(certificate.name, e.target.value)}
                                 variant="standard"
                                 size="small"
