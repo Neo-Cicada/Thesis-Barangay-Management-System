@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { MyFacilityContext } from './FacilityDialog';
-
+import useRead from '../../../hooks/useRead'
 export function Box({ name, isSelected, onSelect }) {
   const boxStyle = {
     height: '5em',
@@ -21,6 +21,8 @@ export function Box({ name, isSelected, onSelect }) {
 }
 export default function FacilitySelect() {
   const { selectedFacility, setselectedFacility, handleBoxSelect, } = useContext(MyFacilityContext)
+  const [data, setData] = useState([])
+  useRead('Facility', setData)
   const handleOptionSelect = (facilityName, selectedSlot) => {
     const updatedSelectedFacility = selectedFacility.map((item) => {
       if (item.name === facilityName) {
@@ -30,20 +32,22 @@ export default function FacilitySelect() {
     });
     setselectedFacility(updatedSelectedFacility);
   };
-
+  const items = data.map(item => <Box
+    name={item.type}
+    isSelected={selectedFacility.some((facility) => facility.name === String(item.type))}
+    onSelect={handleBoxSelect}
+  />)
+  const options = data.map((item) => (
+    item.slots.map((slot, index) => (
+      <option key={index} value={`${slot.startTime} - ${slot.endTime}`}>
+        {`${slot.startTime} - ${slot.endTime}`}
+      </option>
+    ))
+  ));
   return (
     <>
       <div className='items-dialog-content'>
-        <Box
-          name="Facility 1"
-          isSelected={selectedFacility.some((facility) => facility.name === "Facility 1")}
-          onSelect={handleBoxSelect}
-        />
-        <Box
-          name="Facility 2"
-          isSelected={selectedFacility.some((facility) => facility.name === "Facility 2")}
-          onSelect={handleBoxSelect}
-        />
+        {items}
       </div>
       <p style={{ textAlign: 'center' }}>Selected Facility</p>
       <div className='selected-certificates-dialog'>
@@ -58,8 +62,7 @@ export default function FacilitySelect() {
                 Select Time Slot
               </option>
               {/* Populate these options with your time slot data */}
-              <option value="Slot 1">Slot 1 - 1pm to 5pm</option>
-              <option value="Slot 2">Slot 2 - 2pm to 6pm</option>
+              {options}
               {/* Add more time slot options as needed */}
             </select>
           </div>
