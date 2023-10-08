@@ -6,9 +6,9 @@ const useUpdate = async (path,id, item) => {
         const data = doc(db, path, id)
         console.log(id)
         try {
-            await updateDoc(data, {
-                quantity: item
-            }).then(
+            await updateDoc(data, 
+                item
+            ).then(
                 console.log('Updated!!!')
                 )
         } catch (error) {
