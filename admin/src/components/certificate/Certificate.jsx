@@ -24,7 +24,7 @@ export default function Certificate() {
     return () => clearTimeout(timer);
   }, []);
 
-  const items = data.map(item => <DashboardListCert
+  const AllItems = data.filter(item => item.status === "request").map(item => <DashboardListCert
     key={item.id}
     item={item}
     first={item.fullname}
@@ -35,7 +35,39 @@ export default function Certificate() {
     path={'CertificateRequest'}
     status={"request"}
   />)
-  
+  const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashboardListCert
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'CertificateRequest'}
+    status={"ongoing"}
+  />)
+  const acceptedItems = data.filter(item => item.status === "accepted").map(item => <DashboardListCert
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'CertificateRequest'}
+    status={"ongoing"}
+  />)
+  const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashboardListCert
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'CertificateRequest'}
+    status={"ongoing"}
+  />)
   // console.log(items)
   return (
     <>
@@ -85,10 +117,10 @@ export default function Certificate() {
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>
             <div sx={{ border: '1px solid red', minHeight: '70%' }}>
-              {status === "default" && <EquipmentAllRequest items={items}/>}
-              {status === "second" && <EquipmentAllRequest  />}
-              {status === "third" && <EquipmentAllRequest  />}
-              {status === "fourth" && <EquipmentAllRequest  />}
+              {status === "default" && <EquipmentAllRequest items={AllItems}/>}
+              {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
+              {status === "third" && <EquipmentAllRequest  items={acceptedItems}/>}
+              {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
               {status === "fifth" && <CertificateCrud />}
             </div>
           </div>)

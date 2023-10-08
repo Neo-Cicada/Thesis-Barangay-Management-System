@@ -7,105 +7,102 @@ import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
 import DashboardList from '../DashboardList'
 import MedicineCrud from './MedicineCrud'
+import DashBoardListMed from './DashBoardListMed'
 export default function Medicine() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
 
-  useRead('MedicineAllRequest', setData)
+  useRead('MedicineRequest', setData)
 
-  const items = data.filter(item => item.status === "request").map(item => <DashboardList
-    first={item.firstName}
+  const items = data.filter(item => item.status === "request").map(item => <DashBoardListMed
+    key={item.id}
+    item={item}
+    first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={'12/12/12'}
-    fifth={'999'}
-    sixth={item.medicine}
+    fourth={"09/08/23"}
     seventh={item.status}
-    itemId={item.id}
-    status={item.status}
-    path="MedicineAllRequest"
+    path={'MedicineRequest'}
+    status={"request"}
   />)
 
   const acceptedItems = data.filter(item => item.status === "accepted").map(item =>
-    <DashboardList
-      first={item.firstName}
-      second={item.email}
-      third={item.phoneNumber}
-      fourth={'12/12/12'}
-      fifth={'999'}
-      sixth={item.medicine}
-      seventh={item.status}
-      itemId={item.id}
-      status={item.status}
-      path="MedicineAllRequest" />)
-
-  const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashboardList
-    first={item.firstName}
+    <DashBoardListMed
+    key={item.id}
+    item={item}
+    first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={'12/12/12'}
-    fifth={'999'}
-    sixth={item.medicine}
+    fourth={"09/08/23"}
     seventh={item.status}
-    itemId={item.id}
-    status={item.status}
-    path="MedicineAllRequest" />)
+    path={'MedicineRequest'}
+    status={"accepted"}/>)
 
-  const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashboardList
-    first={item.firstName}
+  const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashBoardListMed
+    key={item.id}
+    item={item}
+    first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={'12/12/12'}
-    fifth={'999'}
-    sixth={item.medicine}
+    fourth={"09/08/23"}
     seventh={item.status}
-    itemId={item.id}
-    status={item.status}
-    path="MedicineAllRequest" />)
+    path={'MedicineRequest'}
+    status={"rejected"}/>)
+
+  const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashBoardListMed
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'MedicineRequest'}
+    status={"ongoing"}/>)
 
   return (
     <>
-    <div className='equipment-container'>
-      <Container style={{
-        height: '30%', display: 'flex',
-        flexDirection: 'column', gap: '1em',
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <h3>Manage Medicine</h3>
-        </div>
-        <div style={{ display: 'flex', gap: '1em' }}>
-          <DashboardBox
-            name="Total"
-            numbers={items.length}
-            logo={<ChecklistIcon />} />
-          <DashboardBox
-            name="Ongoing"
-            numbers={ongoingItems.length}
-            logo={<ChecklistIcon />} />
-          <DashboardBox
-            name="Completed"
-            numbers={acceptedItems.length}
-            logo={<ChecklistIcon />} />
-          <DashboardBox
-            name="Rejected"
-            numbers={rejectedItems.length}
-            logo={<ChecklistIcon />} />
-          <DashboardBox
-            name="Medicine"
-            numbers={'888'}
-            logo={<ChecklistIcon />} />
-        </div>
+      <div className='equipment-container'>
+        <Container style={{
+          height: '30%', display: 'flex',
+          flexDirection: 'column', gap: '1em',
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <h3>Manage Medicine</h3>
+          </div>
+          <div style={{ display: 'flex', gap: '1em' }}>
+            <DashboardBox
+              name="Total"
+              numbers={items.length}
+              logo={<ChecklistIcon />} />
+            <DashboardBox
+              name="Ongoing"
+              numbers={ongoingItems.length}
+              logo={<ChecklistIcon />} />
+            <DashboardBox
+              name="Completed"
+              numbers={acceptedItems.length}
+              logo={<ChecklistIcon />} />
+            <DashboardBox
+              name="Rejected"
+              numbers={rejectedItems.length}
+              logo={<ChecklistIcon />} />
+            <DashboardBox
+              name="Medicine"
+              numbers={'888'}
+              logo={<ChecklistIcon />} />
+          </div>
 
-      </Container>
-      <DashboardNavigation setStatus={setStatus} status={status} />
-      <div sx={{ border: '1px solid red', height: '70%' }}>
+        </Container>
+        <DashboardNavigation setStatus={setStatus} status={status} />
+        <div sx={{ border: '1px solid red', height: '70%' }}>
           {status === "default" && <EquipmentAllRequest items={items} />}
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
           {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
           {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
-          {status === "fifth" && <MedicineCrud/>}
+          {status === "fifth" && <MedicineCrud />}
 
-      </div>
+        </div>
       </div>
     </>
   )
