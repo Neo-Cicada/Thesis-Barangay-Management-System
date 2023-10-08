@@ -67,7 +67,7 @@ export default function Medicine() {
           height: '30%', display: 'flex',
           flexDirection: 'column', gap: '1em',
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <h3>Manage Medicine</h3>
           </div>
           <div style={{ display: 'flex', gap: '1em' }}>
