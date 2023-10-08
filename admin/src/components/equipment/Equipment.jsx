@@ -24,6 +24,7 @@ export default function Equipment() {
 
     return () => clearTimeout(timer);
   }, []);
+
   const allItems = data.filter(item => item.status === 'request').map(item => <DashboardList
     key={item.id}
     item={item}
@@ -115,7 +116,7 @@ export default function Equipment() {
 
 
         {isLoading ? (
-          <div style={{ width: '100%', }}>
+          <Container style={{ width: '100%', }}>
             <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
             <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
             <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
@@ -126,7 +127,7 @@ export default function Equipment() {
             <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
             <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
             <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-          </div>
+          </Container>
 
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>

@@ -8,9 +8,11 @@ main{
     display: flex;
 }
 .app-nav{
+    /* z-index: 2; */
+    /* display: none; */
     height: 100%;
     width: 20%;
-    background-color: #ffffff;
+    background-color: #DFE3EE;
     min-width: 6em;
     /* border: 1px solid red; */
 }

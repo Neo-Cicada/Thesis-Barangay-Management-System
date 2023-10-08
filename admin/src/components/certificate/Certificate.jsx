@@ -1,5 +1,5 @@
-import React from 'react'
-import { Container } from '@mui/material'
+import React, {useEffect} from 'react'
+import { Container, Box, Skeleton } from '@mui/material'
 import '../../styles/certificate.css'
 import DashboardBox from '../DashboardBox'
 import ChecklistIcon from '@mui/icons-material/Checklist'
@@ -12,54 +12,14 @@ import CertificateCrud from './CertificateCrud'
 export default function Certificate() {
   const [status, setStatus] = useState('default')
   const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
 
-  useRead('CertificateAllRequest', setData)
-  const items = data.filter(item => item.status === "request").map(item => <DashboardList
-    key={item.id}
-    first={item.firstname + " " + item.lastname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    fifth={'888'}
-    sixth={item.certificate}
-    seventh={item.status}
-    status={item.status}
-    itemId={item.id}
-
-    path={'CertificateAllRequest'}
-
-  />)
-  const acceptedItems = data.filter(item => item.status === "accepted")
-    .map(item => <DashboardList
-      key={item.id}
-      first={item.firstname + " " + item.lastname}
-      second={item.email}
-      third={item.phoneNumber}
-      fourth={"09/08/23"}
-      fifth={'888'}
-      sixth={item.certificate}
-      seventh={item.status}
-      status={item.status}
-      itemId={item.id}
-      path={'CertificateAllRequest'}
-
-    />)
-
-  const ongoingItems = data.filter(item => item.status === "ongoing")
-    .map(item => <DashboardList
-      key={item.id}
-      first={item.firstname + " " + item.lastname}
-      second={item.email}
-      third={item.phoneNumber}
-      fourth={"09/08/23"}
-      fifth={'888'}
-      sixth={item.certificate}
-      seventh={item.status}
-      status={item.status}
-      itemId={item.id}
-      path='CertificateAllRequest'
-
-    />)
+    return () => clearTimeout(timer);
+  }, []);
 
   const rejectedItems = data.filter(item => item.status === "rejected")
     .map(item => <DashboardList
@@ -77,41 +37,58 @@ export default function Certificate() {
     <>
       <div className="certificate-container">
         <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em', }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div className='manageEquipment-title'>
             <h3>Manage Certificate</h3>
           </div>
-          <div style={{ display: 'flex', gap: '1em' }}>
+          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
-              numbers={items.length}
+              // numbers={items.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
-              numbers={ongoingItems.length}
+              // numbers={ongoingItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Completed"
-              numbers={acceptedItems.length}
+              // numbers={acceptedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Rejected"
-              numbers={rejectedItems.length}
+              // numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Certificates"
               numbers={'11'}
               logo={<ChecklistIcon />} />
-          </div>
+          </Box>
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
-        <div className="certificate-hero" style={{border:'none'}}>
-          {status === "default" && <EquipmentAllRequest items={items} />}
-          {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
-          {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
-          {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
-          {status === "fifth" && <CertificateCrud/>}
-        </div>
+        {isLoading ? (
+          <Container style={{ width: '100%', }}>
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+          </Container>
 
+        ) : (
+          <div sx={{ border: '1px solid red', minHeight: '70%' }}>
+            <div sx={{ border: '1px solid red', minHeight: '70%' }}>
+              {status === "default" && <EquipmentAllRequest />}
+              {status === "second" && <EquipmentAllRequest />}
+              {status === "third" && <EquipmentAllRequest  />}
+              {status === "fourth" && <EquipmentAllRequest  />}
+              {status === "fifth" && <CertificateCrud />}
+            </div>
+          </div>)
+        }
       </div>
     </>
   )

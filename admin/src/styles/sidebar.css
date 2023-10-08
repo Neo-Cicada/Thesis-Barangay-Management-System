@@ -16,14 +16,14 @@
     justify-content: center;
     position: relative; /* Add this to make ::after absolute relative to .sb-list */
 }
-.sb-list::after {
+/* .sb-list::after {
     content: '';
     position: absolute;
     bottom: 0; 
     left: 0;
     width: 100%; 
     border-bottom: 1px solid grey;
-}
+} */
 .sidebar-btn-name{
     display: none;
 }
