@@ -68,7 +68,7 @@ export default function DashboardList({
     console.log(path)
     handleOpen()
     togglePopup()
-    await useStatusUpdate(path, item.id, 'ongoing')
+    // await useStatusUpdate(path, item.id, 'ongoing')
     setConfirmation(false)
   }
 
@@ -77,7 +77,7 @@ export default function DashboardList({
     console.log(path)
     handleOpen()
     togglePopup()
-    await useStatusUpdate(path, item.id, 'accepted')
+    // await useStatusUpdate(path, item.id, 'accepted')
     setConfirmation(false)
   }
 
@@ -85,7 +85,7 @@ export default function DashboardList({
     e.stopPropagation();
     handleOpen()
     togglePopup()
-    await useStatusUpdate(path, item.id, 'rejected')
+    // await useStatusUpdate(path, item.id, 'rejected')
     setConfirmation(false)
 
   }
