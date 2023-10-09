@@ -6,6 +6,8 @@ import DashboardNavigation from '../DashboardNavigation'
 import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
 export default function Report() {
+  const [data, setData] = useState([])
+  const [status, setStatus] = useState('default')
   return (
       <div className='equipment-container'>
         <Container style={{
@@ -39,7 +41,15 @@ export default function Report() {
           </div>
 
         </Container>
+        <DashboardNavigation setStatus={setStatus} status={status} />
+        <div sx={{ border: '1px solid red', height: '70%' }}>
+          {/* {status === "default" && <EquipmentAllRequest items={items} />}
+          {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
+          {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
+          {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
+          {status === "fifth" && <MedicineCrud />} */}
 
+        </div>
     </div>
   )
 }
