@@ -18,10 +18,10 @@ export default function ReportDialog({ open, handleClose }) {
   useEffect(() => {
     setDetails((prevDetails) => ({
       ...prevDetails,
+      status: 'request',
       selectedReport: selectedReport,
     }));
   }, [selectedReport]);
-
   const handleBoxSelect = (name, badGuy) => {
     const index = selectedReport.findIndex((report) => report.name === name);
 
@@ -36,15 +36,18 @@ export default function ReportDialog({ open, handleClose }) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log({ ...details })
-    // await useUpload({ ...details }, 'ReportRequest')
+    console.log(details)
+    await useUpload(details , 'ReportRequest')
+    setSelectReportDalog([])
     setDetails({
       fullname: '',
       email: '',
       phoneNumber: '',
-      selectedReport: [], // spread the array elements
-      summon: false
+      selectedReport: [],
+      summon: false,
+      status:'request'
     });
+   
     handleClose()
 
   }
