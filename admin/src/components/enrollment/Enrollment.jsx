@@ -9,6 +9,7 @@ import EnrollDashList from './EnrollmentDashList'
 import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
 import Loading from '../Loading'
+import Enrolled from './Enrolled'
 export default function Enrollment() {
   const [status, setStatus] = useState('default')
   const [isLoading, setIsLoading] = useState(true)
@@ -114,7 +115,7 @@ export default function Enrollment() {
               {status === "second" && <EquipmentAllRequest items={ongoingItems}/>}
               {status === "third" && <EquipmentAllRequest items={acceptedItems}/>}
               {status === "fourth" && <EquipmentAllRequest items={rejectedItems}/>}
-
+              {status === "fifth" && <Enrolled/>}
             </div>
           </div>)
         }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container } from '@mui/material'
 import ChecklistIcon from '@mui/icons-material/Checklist'
 import DashboardBox from '../DashboardBox'
@@ -8,11 +8,19 @@ import useRead from '../../hooks/useRead'
 import DashboardList from '../DashboardList'
 import MedicineCrud from './MedicineCrud'
 import DashBoardListMed from './DashBoardListMed'
+import Loading from '../Loading'
 export default function Medicine() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
+  const [isLoading, setIsLoading] = useState(true)
   useRead('MedicineRequest', setData)
-  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
   const items = data.filter(item => item.status === "request").map(item => <DashBoardListMed
     key={item.id}
     item={item}
@@ -95,7 +103,10 @@ export default function Medicine() {
 
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
+        {isLoading ? (
+         <Loading/>
 
+        ) : (
         <div sx={{ border: '1px solid red', height: '70%' }}>
           {status === "default" && <EquipmentAllRequest items={items} />}
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
@@ -104,6 +115,7 @@ export default function Medicine() {
           {status === "fifth" && <MedicineCrud />}
 
         </div>
+        )}
       </div>
     </>
   )

@@ -7,6 +7,7 @@ import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
 import Loading from '../Loading'
 import DashboardListRep from './DashboardListRep'
+import DashRepNav from './DashRepNav'
 export default function Report() {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true);
@@ -97,7 +98,7 @@ export default function Report() {
         </div>
 
       </Container>
-      <DashboardNavigation setStatus={setStatus} status={status} />
+      <DashRepNav setStatus={setStatus} status={status} />
       {isLoading ? (
         <Loading />
 
@@ -107,7 +108,6 @@ export default function Report() {
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
           {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
           {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
-          {status === "fifth" && <EquipmentAllRequest />}
         </div>)}
 
     </div>
