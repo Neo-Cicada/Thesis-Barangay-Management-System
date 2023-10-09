@@ -81,27 +81,24 @@ export default function Enrollment() {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <h3 style={{textAlign:'center'}}>Manage Enrollments</h3>
           </div>
-          <div style={{ display: 'flex', gap: '1em' }}>
+          <div style={{ display: 'flex', gap: '1em', justifyContent:'space-around' }}>
             <DashboardBox
               name="Total Request"
-              numbers={'1'}
+              numbers={items.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
-              numbers={'2'}
-              logo={<ChecklistIcon />} />
-            <DashboardBox
-              name="Completed"
-              numbers={'3'}
-              logo={<ChecklistIcon />} />
-            <DashboardBox
-              name="Rejected"
-              numbers={'4'}
+              numbers={ongoingItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Enrolled"
-              numbers={'888'}
+              numbers={acceptedItems.length}
               logo={<ChecklistIcon />} />
+            <DashboardBox
+              name="Rejected"
+              numbers={rejectedItems.length}
+              logo={<ChecklistIcon />} />
+            
           </div>
         </Container>
         <EnrollmentDashNav setStatus={setStatus} status={status} />

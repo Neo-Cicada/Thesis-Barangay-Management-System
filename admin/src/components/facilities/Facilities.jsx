@@ -76,23 +76,23 @@ export default function Facilities() {
           <div style={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
-              numbers={data.length}
+              numbers={items.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
-              numbers={'888'}
+              numbers={ongoingItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Completed"
-              numbers={'888'}
+              numbers={acceptdItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Rejected"
-              numbers={'888'}
+              numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Facilities"
-              numbers={'888'}
+              numbers={'1'}
               logo={<ChecklistIcon />} />
           </div>
         </Container>

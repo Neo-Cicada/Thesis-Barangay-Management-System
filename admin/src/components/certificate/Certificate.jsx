@@ -80,19 +80,19 @@ export default function Certificate() {
           <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
               name="Total"
-              // numbers={allItems.length}
+              numbers={AllItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Ongoing"
-              // numbers={ongoingItems.length}
+              numbers={ongoingItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Completed"
-              // numbers={acceptedItems.length}
+              numbers={acceptedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Rejected"
-              // numbers={rejectedItems.length}
+              numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
               name="Certificates"

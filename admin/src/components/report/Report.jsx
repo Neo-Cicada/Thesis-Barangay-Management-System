@@ -77,19 +77,19 @@ export default function Report() {
         <div style={{ display: 'flex', gap: '1em' }}>
           <DashboardBox
             name="Total"
-            // numbers={items.length}
+            numbers={items.length}
             logo={<ChecklistIcon />} />
           <DashboardBox
             name="Ongoing"
-            // numbers={ongoingItems.length}
+            numbers={ongoingItems.length}
             logo={<ChecklistIcon />} />
           <DashboardBox
             name="Completed"
-            // numbers={acceptedItems.length}
+            numbers={acceptedItems.length}
             logo={<ChecklistIcon />} />
           <DashboardBox
             name="Rejected"
-            // numbers={rejectedItems.length}
+            numbers={rejectedItems.length}
             logo={<ChecklistIcon />} />
           <DashboardBox
             name="Medicine"
