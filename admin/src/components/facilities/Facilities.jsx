@@ -7,6 +7,7 @@ import FacilityCrud from './FacilityCrud'
 import useRead from '../../hooks/useRead'
 import DashboardList from '../DashboardList'
 import DashboardListFaci from './DashboardListFaci'
+import Loading from '../Loading'
 import EquipmentAllRequest from '../../components/equipment/EquipmentAllRequest'
 export default function Facilities() {
   const [data, setData] = useState([])
@@ -98,18 +99,7 @@ export default function Facilities() {
         <DashboardNavigation setStatus={setStatus} status={status} />
 
         {isLoading ? (
-          <Container style={{ width: '100%', }}>
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-          </Container>
+         <Loading/>
 
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>

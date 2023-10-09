@@ -11,6 +11,7 @@ import EquipmentAllRequest from './EquipmentAllRequest';
 import EquipManage from './EquipManage'
 import EquipmentCrud from './EquipmentCrud';
 import DashboardHeader from '../DashboardHeader';
+import Loading from '../Loading'
 export default function Equipment() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState("default")
@@ -116,18 +117,7 @@ export default function Equipment() {
 
 
         {isLoading ? (
-          <Container style={{ width: '100%', }}>
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-          </Container>
+          <Loading/>
 
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>

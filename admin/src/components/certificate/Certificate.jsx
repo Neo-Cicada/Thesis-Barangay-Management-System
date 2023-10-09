@@ -10,6 +10,7 @@ import useRead from '../../hooks/useRead'
 import DashboardList from '../DashboardList'
 import CertificateCrud from './CertificateCrud'
 import DashboardListCert from './DashboardListCert'
+import Loading from '../Loading'
 export default function Certificate() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
@@ -101,19 +102,7 @@ export default function Certificate() {
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
         {isLoading ? (
-          <Container style={{ width: '100%', }}>
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-          </Container>
-
+          <Loading/>
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>
             <div sx={{ border: '1px solid red', minHeight: '70%' }}>

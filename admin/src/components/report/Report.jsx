@@ -1,13 +1,68 @@
-import React, { useState } from 'react'
-import { Container } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import { Container, Skeleton } from '@mui/material'
 import ChecklistIcon from '@mui/icons-material/Checklist'
 import DashboardBox from '../DashboardBox'
 import DashboardNavigation from '../DashboardNavigation'
 import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
+import Loading from '../Loading'
+import DashboardListRep from './DashboardListRep'
 export default function Report() {
   const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState('default')
+  useRead('ReportRequest', setData)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+  const items = data.filter(item => item.status === "request").map(item => <DashboardListRep
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'ReportRequest'}
+    status={"request"}
+  />)
+  const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashboardListRep
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'ReportRequest'}
+    status={"ongoing"}
+  />)
+  const acceptedItems = data.filter(item => item.status === "accepted").map(item => <DashboardListRep
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'ReportRequest'}
+    status={"accepted"}
+  />)
+  const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashboardListRep
+    key={item.id}
+    item={item}
+    first={item.fullname}
+    second={item.email}
+    third={item.phoneNumber}
+    fourth={"09/08/23"}
+    seventh={item.status}
+    path={'ReportRequest'}
+    status={"rejected"}
+  />)
   return (
 
     <div className='equipment-container'>
@@ -43,14 +98,17 @@ export default function Report() {
 
       </Container>
       <DashboardNavigation setStatus={setStatus} status={status} />
-      <div sx={{ border: '1px solid red', height: '70%' }}>
-        {/* {status === "default" && <EquipmentAllRequest items={items} />}
+      {isLoading ? (
+        <Loading />
+
+      ) : (
+        <div sx={{ border: '1px solid red', height: '70%' }}>
+          {status === "default" && <EquipmentAllRequest items={items} />}
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
           {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
           {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
-          {status === "fifth" && <MedicineCrud />} */}
-
-      </div>
+          {status === "fifth" && <EquipmentAllRequest />}
+        </div>)}
 
     </div>
   )

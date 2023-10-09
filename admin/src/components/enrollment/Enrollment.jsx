@@ -8,6 +8,7 @@ import EnrollmentDashNav from './EnrollmentDashNav'
 import EnrollDashList from './EnrollmentDashList'
 import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
+import Loading from '../Loading'
 export default function Enrollment() {
   const [status, setStatus] = useState('default')
   const [isLoading, setIsLoading] = useState(true)
@@ -104,18 +105,7 @@ export default function Enrollment() {
         </Container>
         <EnrollmentDashNav setStatus={setStatus} status={status} />
         {isLoading ? (
-          <Container style={{ width: '100%', }}>
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
-          </Container>
+          <Loading/>
 
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>

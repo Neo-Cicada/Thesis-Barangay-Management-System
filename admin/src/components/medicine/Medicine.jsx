@@ -11,9 +11,8 @@ import DashBoardListMed from './DashBoardListMed'
 export default function Medicine() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
-
   useRead('MedicineRequest', setData)
-
+  
   const items = data.filter(item => item.status === "request").map(item => <DashBoardListMed
     key={item.id}
     item={item}
@@ -38,7 +37,8 @@ export default function Medicine() {
     path={'MedicineRequest'}
     status={"accepted"}/>)
 
-  const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashBoardListMed
+  const rejectedItems = data.filter(item => item.status === "rejected").map(item => 
+  <DashBoardListMed
     key={item.id}
     item={item}
     first={item.fullname}
