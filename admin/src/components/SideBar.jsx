@@ -26,18 +26,18 @@ import HandymanOutlinedIcon from '@mui/icons-material/HandymanOutlined';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import Logo from '../assets/2.png'
 import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';export default function SideBar({ handleSignout }) {
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; export default function SideBar({ handleSignout }) {
   // const loc = useLocation();
   // const path = loc.pathname; scan current location
 
-  const [status, setStatus] = useState('equipment')
+  const [status, setStatus] = useState('default')
   const normalStyle = {
     color: 'black',
     width: '100%',
     fontSize: '1rem',
     display: 'flex',
   }
-  
+
   const activeStyle = {
     ...normalStyle,
     fontWeight: 'bolder',
@@ -61,7 +61,11 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';export
         </div>
         <ul className='sb-ul-list' >
           <li className='sb-list'>
-            <Button sx={normalStyle}>
+            <Button 
+              to='/'
+              component={Link}
+              sx={status === "default" ? activeStyle : normalStyle}
+              onClick={() => setStatus("default")}>
               <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
                 <DashboardOutlinedIcon fontSize='large' />
               </div>
@@ -71,7 +75,11 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';export
             </Button>
           </li>
           <li className='sb-list'>
-            <Button sx={normalStyle}>
+            <Button
+              to='report'
+              component={Link}
+              sx={status === "report" ? activeStyle : normalStyle}
+              onClick={() => setStatus("report")}>
               <div className='sidebar-logo' style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
                 <ReportProblemOutlinedIcon fontSize='large' />
               </div>
@@ -82,7 +90,7 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';export
           </li>
           <li className='sb-list'>
             <Button
-              to='/'
+              to='equipment'
               component={Link}
               sx={status === "equipment" ? activeStyle : normalStyle}
               onClick={() => setStatus("equipment")}
