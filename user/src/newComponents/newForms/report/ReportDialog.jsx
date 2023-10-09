@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogActions, Button } from '@mui/material';
 import ReportSelect from './ReportSelect';
 import ReportForm from './ReportForm';
+import useUpload from '../../../hooks/useUpload'
 export const MyReportContext = createContext();
 export default function ReportDialog({ open, handleClose }) {
   const [selectedReport, setSelectReportDalog] = useState([]);
@@ -10,6 +11,7 @@ export default function ReportDialog({ open, handleClose }) {
     fullname: '',
     email: '',
     phoneNumber: '',
+    status: 'request',
     selectedReport: [...selectedReport], // spread the array elements
     summon: false
   });
@@ -32,9 +34,23 @@ export default function ReportDialog({ open, handleClose }) {
       setSelectReportDalog([...selectedReport, { name: name, person: badGuy }]);
     }
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log({ ...details })
+    // await useUpload({ ...details }, 'ReportRequest')
+    setDetails({
+      fullname: '',
+      email: '',
+      phoneNumber: '',
+      selectedReport: [], // spread the array elements
+      summon: false
+    });
+    handleClose()
+
+  }
   return (
     <>
-      <MyReportContext.Provider value={{ selectedReport, setSelectReportDalog, handleBoxSelect, details, setDetails }}>
+      <MyReportContext.Provider value={{ handleSubmit, selectedReport, setSelectReportDalog, handleBoxSelect, details, setDetails }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle sx={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>{proceed ? 'Report Form' : 'Report Someone'}</DialogTitle>
           <DialogContent style={{ height: '100vh', borderBottom: '2px dashed grey' }}>

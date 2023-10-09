@@ -50,6 +50,7 @@ export default function ReportSelect() {
             <p>{report.name}</p>
             <label htmlFor={`report-input-${index}`}>Who's the person you're reporting?</label>
             <input
+              value={report.person}
               onChange={(e)=>handleReport(report.name, e.target.value)}
               type="text"
               id={`report-input-${index}`}

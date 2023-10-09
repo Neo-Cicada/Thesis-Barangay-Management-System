@@ -36,7 +36,7 @@ const Summary = ({ open, onClose }) => {
   );
 };
 export default function ReportForm() {
-  const { details, setDetails } = useContext(MyReportContext)
+  const { details, setDetails, handleSubmit } = useContext(MyReportContext)
   const [reportType, setReportType] = useState('anonymous');
   const [showSummary, setShowSummary] = useState(false);
   const [showCondition, setShowCondition] = useState(false);
@@ -68,11 +68,7 @@ export default function ReportForm() {
 
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle form submission, you can access formData here
-    console.log('Form Data:', details);
-  };
+
 
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto' }}>

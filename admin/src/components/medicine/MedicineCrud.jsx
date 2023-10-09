@@ -35,19 +35,17 @@ export default function MedicineCrud() {
             justifyContent: 'end'
           }}
         >
-          
           <div
             onClick={() => setIsDialogOpen(true)}
             style={{
               width:'100%',
               height: '100%',
-              cursor: 'pointer', width: '10em',
+              cursor: 'pointer',
               display: 'flex',
               justifyContent: 'flex-end',
               textAlign: 'center'
             }}
           > <AddIcon /> Add Inventory</div>
-          
         </Container>
         <ScrollableContainer>
           <Container style={{ display: 'flex', width: '100%', borderBottom: '1px solid black' }}>
