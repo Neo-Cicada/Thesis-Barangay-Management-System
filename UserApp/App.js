@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext, createContext, useState } from 'react';
 import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
 import HeaderApp from './components/HeaderApp';
 import BodyApp from './components/BodyApp';
-
+export const myAppContext = createContext()
 export default function App() {
+const [nav,setNav] = useState(true)
   return (
-    <View style={styles.container}>
-      <StatusBar translucent  />
-      <HeaderApp />
-      <ScrollView contentContainerStyle={styles.bodyContainer}>
-        <BodyApp />
-      </ScrollView>
-    </View>
+    <myAppContext.Provider value={{nav, setNav}}>
+      <View style={styles.container}>
+        <StatusBar translucent />
+        <HeaderApp />
+        <ScrollView contentContainerStyle={styles.bodyContainer}>
+          <BodyApp />
+        </ScrollView>
+      </View>
+    </myAppContext.Provider>
   );
 }
 

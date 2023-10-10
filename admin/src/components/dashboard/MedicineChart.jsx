@@ -1,12 +1,12 @@
 
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut,Pie } from 'react-chartjs-2';
+import { Doughnut, Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 var doughnutData = [55, 19, 3, 5, 2, 3]; // Data values
-var doughnutlabel = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']; // Labels
+var doughnutlabel = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', ]; // Labels
 
 // Create custom labels by combining labels and data
 var customLabels = doughnutlabel.map((label, index) => `${label} (${doughnutData[index]})`);
@@ -40,9 +40,24 @@ export const data = {
 
 export default function MedicineChart() {
   return (
-    <div style={{ width: '100%', height: '100%' }}>
-      <p style={{textAlign:'center'}}>Medicine Chart</p>
-      <Doughnut data={data} options={{ maintainAspectRatio: true }} />
-    </div>
+    <>
+
+      <Doughnut
+        width={100}
+        height={50}
+
+        data={data} options={{
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Chart.js Bar Chart',
+            },
+          },
+        }} />
+    </>
   )
 }

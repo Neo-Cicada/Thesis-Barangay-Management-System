@@ -10,10 +10,14 @@ export default function Dashboard() {
       <Container className='dashboard-container'>
         <h2 style={{height:'10%', display:'flex', alignItems:'center', justifyContent:'center'}}>Dashboard</h2>
         <div className='dashbox'>
-          <div className='grap-one'><BigChart/></div>
-          <div className='grap-two'><MedicineChart/></div>
+          <div className='grap-one'>
+            <BigChart/>
+          </div>
+          <div className='grap-two'>
+            <MedicineChart/>
+          </div>
 
-          <div className='grap-three'><FacilityChart/></div>
+          <div className='grap-three'> <MedicineChart/></div>
           <div className='grap-forth'>4boxes of all accepted, rejected,ongoing,rejeted</div>
 
 

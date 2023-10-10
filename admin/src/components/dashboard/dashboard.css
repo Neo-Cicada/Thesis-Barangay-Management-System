@@ -11,22 +11,35 @@
     grid-template-rows: repeat(2, 1fr);
 }
 .dashbox > * {
-    border: 1px solid red;
+    border: 2px solid #3B5998;
+    overflow: hidden; /* Hide overflowing content */
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
 }
 
 
 .grap-one {
     grid-column: span 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grap-two {
+    overflow-y: auto;
     grid-row: 2;
     grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grap-three {
     grid-row: 2;
     grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grap-forth {

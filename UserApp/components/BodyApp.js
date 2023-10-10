@@ -1,25 +1,16 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import SectionOne from './SectionOne';
 import SectionTwo from './SectionTwo';
+import { myAppContext } from '../App';
 export default function BodyApp() {
+    const {nav, setNav} = useContext(myAppContext);
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <View style={styles.section}>
-                    <SectionOne />
-                </View>
-                <View style={styles.section}>
                     {/* Content for section 2 */}
-                    <SectionTwo />
-                </View>
-                <View style={styles.section}>
-                    {/* Content for section 3 */}
-                    <Text>Section 3</Text>
-                </View>
-                <View style={styles.section}>
-                    {/* Content for section 4 */}
-                    <Text>Section 4</Text>
+                   { nav ? <SectionTwo /> : <SectionOne/>}
                 </View>
             </ScrollView>
         </View>
@@ -31,8 +22,6 @@ const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderWidth: 1,
-        borderColor: 'red',
     },
     scrollContent: {
         flexGrow: 1,
