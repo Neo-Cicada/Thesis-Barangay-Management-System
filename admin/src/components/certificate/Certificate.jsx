@@ -75,7 +75,7 @@ export default function Certificate() {
       <div className="certificate-container">
         <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em', }}>
           <div className='manageEquipment-title'>
-            <h3>Manage Certificate</h3>
+            <h3 style={{fontSize:'2rem', fontWeight:"bold", color:'#3B5998'}}>Manage Certificate</h3>
           </div>
           <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
             <DashboardBox

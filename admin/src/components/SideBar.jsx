@@ -26,6 +26,7 @@ import HandymanOutlinedIcon from '@mui/icons-material/HandymanOutlined';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import Logo from '../assets/2.png'
 import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; export default function SideBar({ handleSignout }) {
   // const loc = useLocation();
   // const path = loc.pathname; scan current location
@@ -188,9 +189,10 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; expor
 
           >
             <div
+              style={{display:'flex', justifyContent:'center', alignItems:'center', color:'black'}}
               className='logout-btn'
               onClick={handleSignout}
-            >Signout</div>
+            ><ExitToAppOutlinedIcon/></div>
           </li>
         </ul>
       </div>

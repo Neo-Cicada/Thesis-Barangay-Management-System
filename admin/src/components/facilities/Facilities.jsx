@@ -70,8 +70,8 @@ export default function Facilities() {
       <div className='equipment-container'>
 
         <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em', }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h3>Manage Facilities</h3>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems:'center' }}>
+            <h3 style={{fontSize:'2rem', fontWeight:"bold", color:'#3B5998'}}>Manage Facilities</h3>
           </div>
           <div style={{ display: 'flex', gap: '1em' }}>
             <DashboardBox
