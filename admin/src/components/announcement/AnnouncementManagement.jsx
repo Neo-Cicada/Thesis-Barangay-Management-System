@@ -8,7 +8,7 @@ import AnnouncementTitle from './AnnouncementTitle';
 import AnnouncementImage from './AnnouncementImage';
 
 const boxStyle = {
-  border: '1px solid white',
+  border: '4px solid #3B5998',
   height: '80%',
   width: '80%',
   borderRadius: '0.5em',
@@ -74,10 +74,11 @@ export default function AnnouncementManagement() {
       <AnnouncementNav />
       <AnnouncementTitle title={title} setTitle={setTitle} />
       <div className='announcement-body'>
-
+      
         <AnnouncementImage  setFile={setFile}/>
         <div className='announcement-text'>
           <textarea
+            style={{border:'1px solid #3B5998'}}
             className="dynamic-textarea"
             placeholder='Text (optional)'
             value={message}

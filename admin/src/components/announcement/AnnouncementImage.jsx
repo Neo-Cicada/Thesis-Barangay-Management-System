@@ -22,9 +22,9 @@ export default function AnnouncementImage({ setFile }) {
 
                 {selectedImage ? <img src={selectedImage} alt='Selected' height={'100%'} width="50%" /> :
                     <label style={{
-                        height: '100%', width: '50%',
+                        height: '100%', width: '100%',
                         cursor: 'pointer',
-                        border: '1px dashed black',
+                        border: '2px dashed #3B5998',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center'
@@ -41,8 +41,9 @@ export default function AnnouncementImage({ setFile }) {
 
 
             </div>
-            {selectedImage && <div style={{ display: 'flex', justifyContent: 'end' }}>
+            {selectedImage && <div style={{ display: 'flex', justifyContent: 'end', }}>
                 <Button
+                    sx={{backgroundColor:'#3B5998'}}
                      variant="contained"
                 onClick={() => {
                     setSelectedImage(null);

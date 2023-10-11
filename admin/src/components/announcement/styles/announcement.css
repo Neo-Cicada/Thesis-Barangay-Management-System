@@ -18,7 +18,7 @@
 }
 .announcement-body-head{
     /* border: 1px solid red; */
-    height: 10em;
+    height: 12em;
 }
 
 
@@ -74,7 +74,7 @@
     cursor: pointer;
     height: 2.5em;
     width: 4em;
-    background-color: rgb(119, 117, 117);
+    background-color: #3B5998;
     border: none;
     color: white;
     font-weight: bold;
