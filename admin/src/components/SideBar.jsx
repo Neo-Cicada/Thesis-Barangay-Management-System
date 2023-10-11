@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Button, makeStyles } from '@mui/material'
 import '../styles/sidebar.css'
 import { useState } from 'react'
-
+import One from '../assets/oiweo.png'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
@@ -58,11 +58,11 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; expor
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          <h1>eBarangay</h1>
+          <img src={One} height={'150%'} width={'1000%'}/>
         </div>
         <ul className='sb-ul-list' >
           <li className='sb-list'>
-            <Button 
+            <Button
               to='/'
               component={Link}
               sx={status === "default" ? activeStyle : normalStyle}

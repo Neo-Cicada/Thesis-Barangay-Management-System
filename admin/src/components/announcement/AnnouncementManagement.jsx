@@ -74,7 +74,6 @@ export default function AnnouncementManagement() {
       <AnnouncementNav />
       <AnnouncementTitle title={title} setTitle={setTitle} />
       <div className='announcement-body'>
-      
         <AnnouncementImage  setFile={setFile}/>
         <div className='announcement-text'>
           <textarea
