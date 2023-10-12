@@ -85,7 +85,7 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; expor
                 <ReportProblemOutlinedIcon fontSize='large' />
               </div>
               <div className='sidebar-btn-name' style={{ width: '70%', }}>
-                Report
+                Complaints
               </div>
             </Button>
           </li>
@@ -115,7 +115,7 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; expor
                 status === "certificate" ? <ReceiptIcon fontSize="large" /> : <ReceiptOutlinedIcon fontSize="large" />
               }
             </div>
-            <div className='sidebar-btn-name' style={{ width: '70%' }}>Certification</div>
+            <div className='sidebar-btn-name' style={{ width: '70%' }}>Documents</div>
           </Button></li>
           <li className='sb-list'>
             <Button

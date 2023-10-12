@@ -45,6 +45,20 @@
 .grap-forth {
     grid-column: 5;
     grid-row: 1/span 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.graph-nav{
+    /* border: 1px solid red; */
+    text-align: center;
+    color: #3B5998;
+    font-weight: 500;
+    border-radius: 1em;
+    cursor: pointer;
+    margin-left: 1em;
+    margin-right: 1em;
+    background-color:#DFE3EE;
 }
 
 /* Media query for smaller screens (e.g., mobile phones) */

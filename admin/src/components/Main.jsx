@@ -8,14 +8,14 @@ export default function Main({ handleSignout }) {
         <>
 
             <main style={{}}>
-                {/* <nav className='app-nav'>
+                <nav className='app-nav'>
                     <SideBar handleSignout={handleSignout} />
                 </nav>
 
                 <div className='hero-box'>
                     <AppRoutes />
-                </div> */}
-                <SendSms/>
+                </div>
+                {/* <SendSms/> */}
             </main>
 
         </>
