@@ -7,9 +7,9 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 
 
-export default function FacilityChart() {
+export default function EquipmentChart() {
   const [reData, setReData] = useState([])
-  useRead('FacilityRequest', setReData)
+  useRead('EquipmentRequest', setReData)
   const [doughnutData, setDoughnutData] = useState([]); // State for data values
   const [doughnutlabel, setDoughnutLabel] = useState([]); // State for labels
 
@@ -17,8 +17,8 @@ export default function FacilityChart() {
     const reportCounts = {};
 
     reData.forEach(item => {
-      if (item.selectedFacility) {
-        item.selectedFacility.forEach(report => {
+      if (item.selectedEquipment) {
+        item.selectedEquipment.forEach(report => {
           const name = report.name;
           reportCounts[name] = (reportCounts[name] || 0) + 1;
         });
@@ -44,7 +44,7 @@ export default function FacilityChart() {
     labels: customLabels, // Use custom labels here
     datasets: [
       {
-        label: '# of Request',
+        label: '# of Requested Equipmetns',
         data: doughnutData, // Use data values here
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -81,7 +81,7 @@ export default function FacilityChart() {
             },
             title: {
               display: true,
-              text: 'Most Requested Facility',
+              text: 'Most Requested Equipments',
             },
           },
         }} />

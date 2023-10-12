@@ -1,44 +1,71 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut, Pie } from 'react-chartjs-2';
-
+import useRead from '../../hooks/useRead';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-var doughnutData = [55, 19, 3, 5, 2, 3]; // Data values
-var doughnutlabel = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', ]; // Labels
 
-// Create custom labels by combining labels and data
-var customLabels = doughnutlabel.map((label, index) => `${label} (${doughnutData[index]})`);
-
-export const data = {
-  labels: customLabels, // Use custom labels here
-  datasets: [
-    {
-      label: '# of Votes',
-      data: doughnutData, // Use data values here
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 
 export default function MedicineChart() {
+  const [reData, setReData] = useState([])
+  useRead('MedicineRequest', setReData)
+  const [doughnutData, setDoughnutData] = useState([]); // State for data values
+  const [doughnutlabel, setDoughnutLabel] = useState([]); // State for labels
+
+  useEffect(() => {
+    const reportCounts = {};
+
+    reData.forEach(item => {
+      if (item.selectedMedicines) {
+        item.selectedMedicines.forEach(report => {
+          const name = report.name;
+          reportCounts[name] = (reportCounts[name] || 0) + 1;
+        });
+      }
+    });
+
+    // Extract names and counts from reportCounts
+    const names = Object.keys(reportCounts);
+    const counts = Object.values(reportCounts);
+
+    // Update the state with the data for the doughnut chart
+    setDoughnutData(counts);
+    setDoughnutLabel(names);
+  }, [reData]);
+
+  console.log(doughnutData);
+  console.log(doughnutlabel);
+  // Create custom labels by combining labels and data
+  let customLabels = doughnutlabel.map((label, index) => `${label} (${doughnutData[index]})`);
+
+  const data = {
+
+    labels: customLabels, // Use custom labels here
+    datasets: [
+      {
+        label: '# of Requested Medicine',
+        data: doughnutData, // Use data values here
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
   return (
     <>
 
@@ -54,7 +81,7 @@ export default function MedicineChart() {
             },
             title: {
               display: true,
-              text: 'Chart.js Bar Chart',
+              text: 'Most Requested Medicines',
             },
           },
         }} />

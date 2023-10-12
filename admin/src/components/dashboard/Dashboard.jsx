@@ -4,6 +4,10 @@ import { Container } from '@mui/material'
 import './dashboard.css'
 import FacilityChart from './FacilityChart'
 import { BigChart } from './BigChart'
+import ReportCharts from './ReportChart'
+import EnrollmentChart from './EnrollmentChart'
+import EquipmentChart from './EquipmentChart'
+import CertificateChart from './CertificateChart'
 export default function Dashboard() {
   const [nav, setNav] = useState('C')
   const activeStyle = {
@@ -24,22 +28,22 @@ export default function Dashboard() {
             <BigChart />
           </div>
           <div className='grap-two'>
-            {nav === 'C' && <MedicineChart />}
-            {nav === 'Eq' && <MedicineChart />}
-            {nav === 'D' && <MedicineChart />}
-            {nav === 'E' && <MedicineChart />}
-            {nav === 'F' && <MedicineChart />}
+            {nav === 'C' && <ReportCharts />}
+            {nav === 'Eq' && <EquipmentChart />}
+            {nav === 'D' && <CertificateChart />}
+            {nav === 'E' && <EnrollmentChart />}
+            {nav === 'F' && <FacilityChart />}
             {nav === 'M' && <MedicineChart />}
           </div>
 
           <div className='grap-three'>
-          {nav === 'C' && <MedicineChart />}
-            {nav === 'Eq' && <MedicineChart />}
-            {nav === 'D' && <MedicineChart />}
-            {nav === 'E' && <MedicineChart />}
-            {nav === 'F' && <MedicineChart />}
-            {nav === 'M' && <MedicineChart />}
-            </div>
+            {nav === 'C' && 'Recent activites'}
+            {nav === 'Eq' && 'Recent activites'}
+            {nav === 'D' && 'Recent activites'}
+            {nav === 'E' && 'Recent activites'}
+            {nav === 'F' && 'Recent activites'}
+            {nav === 'M' && 'Recent activites'}
+          </div>
           <div className='grap-forth'>
             <div
 
