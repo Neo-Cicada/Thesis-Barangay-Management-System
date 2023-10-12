@@ -8,7 +8,14 @@ import ReportCharts from './ReportChart'
 import EnrollmentChart from './EnrollmentChart'
 import EquipmentChart from './EquipmentChart'
 import CertificateChart from './CertificateChart'
+import RecentReport from './recentActivities/RecentReport'
+import RecentMedicines from './recentActivities/RecentMedicines'
+import RecentFacilities from './recentActivities/RecentFacilities'
+import RecentEquipment from './recentActivities/RecentEquipment'
+import RecentEnrollments from './recentActivities/RecentEnrollments'
+import RecentCertificate from './recentActivities/RecentCertificate'
 export default function Dashboard() {
+
   const [nav, setNav] = useState('C')
   const activeStyle = {
     color: '#DFE3EE',
@@ -37,16 +44,15 @@ export default function Dashboard() {
           </div>
 
           <div className='grap-three'>
-            {nav === 'C' && 'Recent activites'}
-            {nav === 'Eq' && 'Recent activites'}
-            {nav === 'D' && 'Recent activites'}
-            {nav === 'E' && 'Recent activites'}
-            {nav === 'F' && 'Recent activites'}
-            {nav === 'M' && 'Recent activites'}
+            {nav === 'C' && <RecentReport/>}
+            {nav === 'Eq' && <RecentEquipment/>}
+            {nav === 'D' && <RecentCertificate/>}
+            {nav === 'E' && <RecentEnrollments/>}
+            {nav === 'F' && <RecentFacilities/>}
+            {nav === 'M' && <RecentMedicines/>}
           </div>
           <div className='grap-forth'>
             <div
-
               className='graph-nav'
               onClick={() => setNav('C')}
               style={nav === 'C' ? activeStyle : {}}>
