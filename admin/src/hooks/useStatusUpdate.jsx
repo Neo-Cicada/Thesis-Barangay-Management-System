@@ -1,5 +1,5 @@
 import React from 'react';
-import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { doc, updateDoc, getDoc,serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const useStatusUpdate = async (path, id, status) => {
@@ -16,6 +16,7 @@ const useStatusUpdate = async (path, id, status) => {
       const updatedData = {
             ...existingData.data,
             status: status,
+            timestamp: serverTimestamp()
 
       };
 

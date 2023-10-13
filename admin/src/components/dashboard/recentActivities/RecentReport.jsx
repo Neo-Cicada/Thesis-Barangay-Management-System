@@ -9,20 +9,20 @@ const RecentReport = () => {
     console.log(data)
 
     return (
-        <div>
+        <>
             <h2>Most Recent Activities</h2>
-            <ul>
+            <ul style={{ display:'flex', flexDirection:'column', gap:'1em'}}>
                 {data.length > 0 ? (
                     data.map((activity, index) => (
                         <li key={index}>
-                            {activity.status} - {activity.timestamp.toDate().toLocaleString()}
+                           <span className='recent-status'>{activity.status} </span>- {activity.timestamp.toDate().toLocaleString()}
                         </li>
                     ))
                 ) : (
                     <li>No activities found.</li>
                 )}
             </ul>
-        </div>
+        </>
     );
 }
 

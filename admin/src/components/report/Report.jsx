@@ -37,7 +37,7 @@ export default function Report() {
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'ReportRequest'}
     status={"ongoing"}
@@ -48,7 +48,7 @@ export default function Report() {
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'ReportRequest'}
     status={"accepted"}
@@ -59,7 +59,7 @@ export default function Report() {
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'ReportRequest'}
     status={"rejected"}

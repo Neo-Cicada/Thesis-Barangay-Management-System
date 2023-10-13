@@ -15,7 +15,7 @@ const RecentEquipment = () => {
                 {data.length > 0 ? (
                     data.map((activity, index) => (
                         <li key={index}>
-                            {activity.status} - {activity.timestamp.toDate().toLocaleString()}
+                           <span className='recent-status'>{activity.status}</span> - {activity.timestamp.toDate().toLocaleString()}
                         </li>
                     ))
                 ) : (
