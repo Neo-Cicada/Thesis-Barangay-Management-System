@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-
-export default function SendMessage() {
+import { TextField, Button, Snackbar } from '@mui/material';
+export default function SendMessage({ number, setSms, setOpenSnack }) {
   const [response, setResponse] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [message, setMessage] = useState('');
 
   const sendMessage = async () => {
     const apiUrl = 'http://localhost:3001/send-sms'; // Replace with your server URL
-
     const messageData = {
-      number: phoneNumber,
+      number: number,
       message: message,
     };
 
@@ -24,36 +22,29 @@ export default function SendMessage() {
 
       const responseData = await response.json();
       setResponse(responseData);
+      setMessage('')
+      setOpenSnack(true)
+      setSms(false)
+
     } catch (error) {
       console.error('Error sending SMS:', error);
     }
   };
 
   return (
-    <div>
-      <h2>Send SMS</h2>
-      <label>
-        Recipient's Phone Number:
-        <input
-          type="text"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-      </label>
-      <label>
-        Message:
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-      </label>
-      <button onClick={sendMessage}>Send SMS</button>
-      {response && (
-        <div>
-          <h2>Response:</h2>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
-        </div>
-      )}
-    </div>
+    <>
+      <TextField
+        label="Type your message"
+        variant="outlined"
+        fullWidth
+        multiline
+        rows={4}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+
+      <Button variant='contained' onClick={sendMessage}>Send SMS</Button>
+      
+    </>
   );
 }

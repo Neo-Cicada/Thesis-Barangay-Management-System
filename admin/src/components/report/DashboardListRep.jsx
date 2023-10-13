@@ -8,10 +8,10 @@ import RedToast from '../RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ReportViewInformation from './ReportViewInformation';
 export default function DashboardListRep({
-  first ,
+  first,
   second,
-  third ,
-  fourth ="01/01/01" ,
+  third,
+  fourth = "01/01/01",
   seventh, item, status, path }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -94,11 +94,11 @@ export default function DashboardListRep({
 
 
       <tr >
-        <td >{first}</td>
-        <td>{second}</td>
-        <td>{third}</td>
-        <td>{fourth}</td>
-        <td>{seventh}</td>
+        <td style={{ textTransform: 'capitalize' }}>{first}</td>
+        <td >{second}</td>
+        <td style={{ textTransform: 'capitalize' }}>{third}</td>
+        <td style={{ textTransform: 'capitalize' }}>{fourth}</td>
+        <td style={{ textTransform: 'capitalize' }}>{seventh}</td>
         {status === "ongoing" || status === "request" ?
           <td >
             <VisibilityIcon color="info" sx={{ cursor: 'pointer' }} onClick={openInformation} />
@@ -108,9 +108,9 @@ export default function DashboardListRep({
               status={status} open={confirmation} onClose={handleCloseConfirmation} />
 
           </td> :
-          <td><VisibilityIcon color="info"  sx={{ cursor: 'pointer' }} onClick={openInformation} /></td>
+          <td><VisibilityIcon color="info" sx={{ cursor: 'pointer' }} onClick={openInformation} /></td>
         }
-      </tr>
+      </tr >
       <ConfirmationDialog
         showToast={setOpenToast}
         open={open}

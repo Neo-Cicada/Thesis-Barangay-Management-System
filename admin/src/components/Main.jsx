@@ -2,6 +2,7 @@ import '.././styles/app.css'
 import SideBar from './SideBar'
 import AppRoutes from '../routes/AppRoutes'
 import SendSms from '../components/SendSms'
+import SendEmail  from '../components/SendEmail'
 export default function Main({ handleSignout }) {
 
     return (
@@ -15,7 +16,7 @@ export default function Main({ handleSignout }) {
                 <div className='hero-box'>
                     <AppRoutes />
                 </div>
-                {/* <SendSms/> */}
+                {/* <SendEmail/> */}
             </main>
 
         </>

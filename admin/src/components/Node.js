@@ -21,10 +21,13 @@ admin.initializeApp();
 
 // Initialize Nodemailer transporter for email
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
-    user: 'yourgmailaccount@gmail.com',
-    pass: 'yourgmailaccpassword',
+    user: "amamperez858@gmail.com",
+    pass: "yjxb runx apfj nsex",
+    //  Use environment variables set on the server for these values when deploying
   },
 });
 
@@ -72,21 +75,14 @@ app.post('/send-email', async (req, res) => {
   const { dest, subject, html } = req.body;
 
   const mailOptions = {
-    from: 'Your Account Name <yourgmailaccount@gmail.com>',
+    from: 'amamperez858@gmail.com',
     to: dest,
     subject: subject,
     html: html,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-      res.status(500).json({ success: false, message: 'Failed to send email' });
-    } else {
-      console.log('Email Sent:', info.response);
-      res.status(200).json({ success: true, message: 'Email Sent' });
-    }
-  });
+  transporter.sendMail(mailOptions);
+  console.log('logers')
 });
 
 app.listen(port, () => {
