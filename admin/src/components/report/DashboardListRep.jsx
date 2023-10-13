@@ -108,7 +108,7 @@ export default function DashboardListRep({
               status={status} open={confirmation} onClose={handleCloseConfirmation} />
 
           </td> :
-          <td><VisibilityIcon sx={{ cursor: 'pointer' }} onClick={openInformation} /></td>
+          <td><VisibilityIcon color="info"  sx={{ cursor: 'pointer' }} onClick={openInformation} /></td>
         }
       </tr>
       <ConfirmationDialog

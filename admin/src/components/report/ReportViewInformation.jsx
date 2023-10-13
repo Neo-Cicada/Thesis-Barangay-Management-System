@@ -39,34 +39,34 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
         <p style={{ width: '50%', textAlign: 'center' }}>Who: {item.person}</p>
     </Box>)
     const boxStyle = {
-        width: '100%', display: 'flex', justifyContent: 'center', gap: '1em'
+        width: 'auto',
+        display: 'flex',
+        justifyContent: 'center', gap: '1em',
     }
     const nameStyle = {
-        width: '40%',
-        display: 'flex',
-        justifyContent: 'end',
-    }
-    const valueStyle = {
-        width: '60%',
         display: 'flex',
         justifyContent: 'start',
     }
+
     return (
         <>
             <Dialog open={open} onClose={onClose} fullWidth key={item.id}>
                 <DialogTitle sx={{ textAlign: 'center' }}>
                     {item.fullname} Request Information
                 </DialogTitle>
-                <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
+                <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', }}>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Fullname: </p>
-                        <p style={valueStyle}>{item.fullname}</p>  </Box>
-                    <Box sx={boxStyle}> <p style={nameStyle}>Email: </p><p style={valueStyle}>{item.email}</p></Box>
-                    <Box sx={boxStyle}><p style={nameStyle}>Phone Number:</p> <p style={valueStyle}>{item.phoneNumber} </p></Box>
+                        <p style={nameStyle}>Fullname — {item.fullname} </p>
+                    </Box>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Email — {item.email}</p></Box>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Phone Number — {item.phoneNumber}</p> </Box>
 
-                    <Box sx={boxStyle}><p style={nameStyle}>Summon the person: </p>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Summon the person — {item.summon === true ? 'Yes' : 'No'} </p>
 
-                        <p style={valueStyle}>{item.summon === true ? 'Yes' : 'No'}</p></Box>
+                    </Box>
 
                     <Box sx={{ width: '100%' }}>
                         {item.summon &&

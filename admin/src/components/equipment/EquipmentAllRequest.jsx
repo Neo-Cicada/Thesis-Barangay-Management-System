@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DashboardHeader from '../DashboardHeader';
 import ScrollableContainer from '../ScrollableContainer';
 import { Pagination, PaginationItem } from '@mui/material';
+import {Container} from '@mui/material'
 
 export default function EquipmentAllRequest({ items }) {
   // Define the number of items per page
@@ -32,8 +33,9 @@ export default function EquipmentAllRequest({ items }) {
           </tbody>
         </table>
       </ScrollableContainer>
-      {items.length > 3 && <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', }}>
+      {items.length > 3 && <div style={{ display: 'flex', justifyContent:'center',  }}>
         <Pagination
+          size='small'
           color='primary'
           count={Math.ceil(items.length / itemsPerPage)}
           page={currentPage}
