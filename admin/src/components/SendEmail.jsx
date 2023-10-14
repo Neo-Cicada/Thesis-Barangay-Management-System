@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
-function SendEmail({ to }) {
+function SendEmail({ to, setEmail }) {
 
   const [subject, setSubject] = useState('')
   const [html, setHtml] = useState('')
@@ -32,6 +32,9 @@ function SendEmail({ to }) {
     } catch (error) {
       console.error('Error sending email:', error);
     }
+    setSubject('');
+    setHtml('');
+    setEmail(false)
   };
 
   return (

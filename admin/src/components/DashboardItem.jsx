@@ -48,7 +48,7 @@ export default function DashboardItem({ data, path, name }) {
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          <div style={{ fontSize: '1.2rem' }}>{name}</div>
+          <div style={{ fontSize: '1.2rem', textTransform: 'capitalize' }}>{name}</div>
           {quantityValue === false ? <div style={{ fontSize: '1.2rem' }}>{data.quantity}</div>
             : <input
               value={newValue}
@@ -69,13 +69,13 @@ export default function DashboardItem({ data, path, name }) {
         <div style={{ height: '2em', display: 'flex', gap: '1em' }}>
 
           <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={handleEdit}>
-            <EditIcon />{quantityValue === false ? 'Edit' : 'Save'}
+            <EditIcon color="info" />{quantityValue === false ? 'Edit' : 'Save'}
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }
           }
             onClick={handleDelete}
-          ><DeleteIcon />Delete</div>
+          ><DeleteIcon color="error" />Delete</div>
         </div>
       </Container>
       <ConfirmationDialog

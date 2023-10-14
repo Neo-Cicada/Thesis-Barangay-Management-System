@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Container, Box, Skeleton } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
@@ -14,12 +14,13 @@ export default function EquipmentCrud() {
     useRead('Equipments', setData)
     useEffect(() => {
         const timer = setTimeout(() => {
-          setIsLoading(false);
+            setIsLoading(false);
         }, 1500);
-    
+
         return () => clearTimeout(timer);
-      }, []);
-    const items = data.map((item) => <DashboardItem path={'Equipments'} data={item} name={item.equipment} />)
+    }, []);
+    const items = data.map((item) =>
+        <DashboardItem path={'Equipments'} data={item} name={item.equipment} />)
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
     };
@@ -31,47 +32,53 @@ export default function EquipmentCrud() {
                 }}
             >
                 <Container
-                    sx={{ display: 'flex', justifyContent: 'end' }}
+                    sx={{ display: 'flex', justifyContent: 'flex-end' }}
                 >
                     <div
-                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor:'pointer' }}
+                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}
                         onClick={() => setIsDialogOpen(true)}>
-                        <AddIcon /> <span>Add Inventory</span>
+                        <AddIcon color='info' fontSize='large' /> <span style={{ fontWeight: 500 }}>Add Inventory</span>
                     </div>
                 </Container>
                 <ScrollableContainer>
-                    <Container style={{ display: 'flex', width: '100%', borderBottom: '1px solid black' }}>
-                        <div style={{
-                            width: '15em',
-                            height: '95%%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between'
-
-                        }}>
-                            <div style={{ fontSize: '1.2rem' }}>Name</div>
-                            <div style={{ fontSize: '1.2rem' }}>Quantity</div>
+                    {isLoading ? (
+                        <div style={{ width: '100%' }}>
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation="wave" />
+                            <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} animation={false} />
                         </div>
-                        <div></div>
-
-                    </Container>
-                 {isLoading ?(
-                    <div style={{width:'100%'}}>
-                        <Skeleton sx={{width: '100%', bgcolor: '#8B9DC3',}}/>
-                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation="wave" />
-                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation={false} />
-                        <Skeleton sx={{width: '100%', bgcolor: '#8B9DC3',}}/>
-                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation="wave" />
-                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation={false} />
-                        <Skeleton sx={{width: '100%', bgcolor: '#8B9DC3',}}/>
-                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation="wave" />
-                        <Skeleton  sx={{width: '100%', bgcolor: '#8B9DC3',}} animation={false} />
-                    </div>
-                 ):(
-                    <ScrollableContainer>
-                        {items}
-                    </ScrollableContainer>
-                 ) }
+                    ) : (
+                        <ScrollableContainer>
+                            <Container sx={{ height: '2em', width: '100%', borderBottom: '1px solid black', display: 'flex', justifyContent: 'space-between' }}>
+                                <div style={{
+                                    // border:'1px solid red',
+                                    width: '15em',
+                                    height: '95%%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between'
+                                }}>
+                                    <div style={{
+                                        fontSize: '1.2rem',
+                                        fontSize: '1.4rem',
+                                        textTransform: 'capitalize',
+                                        fontWeight: 600
+                                    }}>Name</div>
+                                    <div style={{
+                                        fontSize: '1.2rem',
+                                        fontSize: '1.4rem', fontWeight: 600
+                                    }}>Quantity</div>
+                                </div>
+                            </Container>
+                            {items}
+                        </ScrollableContainer>
+                    )}
 
                 </ScrollableContainer>
             </div>

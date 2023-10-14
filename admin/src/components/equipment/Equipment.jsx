@@ -31,7 +31,7 @@ export default function Equipment() {
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'EquipmentRequest'}
     status={"request"}
@@ -44,7 +44,7 @@ export default function Equipment() {
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'EquipmentRequest'}
     status={item.status}
@@ -57,7 +57,7 @@ export default function Equipment() {
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'EquipmentRequest'}
     status={item.status}
@@ -71,7 +71,7 @@ export default function Equipment() {
       first={item.fullname}
       second={item.email}
       third={item.phoneNumber}
-      fourth={"09/08/23"}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
       seventh={item.status}
       path={'EquipmentRequest'}
       status={item.status}
@@ -85,9 +85,9 @@ export default function Equipment() {
 
         <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em' }}>
           <div className='manageEquipment-title'>
-            <h3 style={{fontSize:'2rem', fontWeight:"bold", color:'#3B5998'}}>Manage Equipment</h3>
+            <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Equipment</h3>
           </div>
-          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
+          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent:'space-around' }}>
             <DashboardBox
               name="Total"
               numbers={allItems.length}
@@ -104,10 +104,6 @@ export default function Equipment() {
               name="Rejected"
               numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
-            <DashboardBox
-              name="Items"
-              numbers={'11'}
-              logo={<ChecklistIcon />} />
           </Box>
 
         </Container>
@@ -117,7 +113,7 @@ export default function Equipment() {
 
 
         {isLoading ? (
-          <Loading/>
+          <Loading />
 
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>

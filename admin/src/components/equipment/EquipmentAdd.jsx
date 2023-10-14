@@ -17,7 +17,7 @@ export default function EquipmentAdd({ handleDialogClose, isDialogOpen, setIsDia
         quantity: ''
       })
       setIsDialogOpen(false)
-    })
+  })
     
   }
   return (
@@ -47,7 +47,7 @@ export default function EquipmentAdd({ handleDialogClose, isDialogOpen, setIsDia
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClickOk}>OK</Button>
+          <Button variant='contained' onClick={handleClickOk}>OK</Button>
         </DialogActions>
       </Dialog>
     </>

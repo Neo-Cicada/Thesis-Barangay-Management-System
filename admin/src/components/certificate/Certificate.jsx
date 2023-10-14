@@ -94,10 +94,6 @@ export default function Certificate() {
               name="Rejected"
               numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
-            <DashboardBox
-              name="Certificates"
-              numbers={'11'}
-              logo={<ChecklistIcon />} />
           </Box>
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
