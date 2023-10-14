@@ -47,8 +47,10 @@ export default function FacilityCrud() {
                         display:'flex',
                         justifyContent:'center',
                         alignItems:'center',
-                        textAlign:'center'}}
-                    > <AddIcon /> Add Facility</div>
+                        textAlign:'center',
+                        fontWeight: 500
+                    }}
+                    > <AddIcon color='info' fontSize='medium'/> Add Facility</div>
                 </Container>
                 <ScrollableContainer>
                     {items}

@@ -70,10 +70,10 @@ export default function Facilities() {
       <div className='equipment-container'>
 
         <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em', }}>
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems:'center' }}>
-            <h3 style={{fontSize:'2rem', fontWeight:"bold", color:'#3B5998'}}>Manage Facilities</h3>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Facilities</h3>
           </div>
-          <div style={{ display: 'flex', gap: '1em' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <DashboardBox
               name="Total"
               numbers={items.length}
@@ -90,24 +90,21 @@ export default function Facilities() {
               name="Rejected"
               numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
-            <DashboardBox
-              name="Facilities"
-              numbers={'1'}
-              logo={<ChecklistIcon />} />
+
           </div>
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
 
         {isLoading ? (
-         <Loading/>
+          <Loading />
 
         ) : (
           <div sx={{ border: '1px solid red', minHeight: '70%' }}>
             <div sx={{ border: '1px solid red', minHeight: '70%' }}>
               {status === "default" && <EquipmentAllRequest items={items} />}
-              {status === "second" && <EquipmentAllRequest items={ongoingItems}/>}
-              {status === "third" && <EquipmentAllRequest items={acceptdItems}/>}
-              {status === "fourth" && <EquipmentAllRequest items={rejectedItems}/>}
+              {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
+              {status === "third" && <EquipmentAllRequest items={acceptdItems} />}
+              {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
               {status === "fifth" && <FacilityCrud />}
             </div>
           </div>

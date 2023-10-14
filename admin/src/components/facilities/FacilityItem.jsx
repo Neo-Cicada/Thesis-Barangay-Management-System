@@ -34,7 +34,7 @@ export default function FacilityItem({ data, name }) {
   }
   const options = data.slots.map(item => <MenuItem key={item.id}>{item.startTime} - {item.endTime}</MenuItem>)
   const slotsDisplay = editedSlots.map((slot, index) => (
-    <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
+    <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop:'1em' }}>
       <TextField
         label="Start Time"
         value={slot.startTime}
@@ -49,7 +49,7 @@ export default function FacilityItem({ data, name }) {
         variant="outlined"
         size="small"
       />
-      <DeleteIcon onClick={() => handleDeleteSlot(index)} style={{ cursor: 'pointer' }} />
+      <DeleteIcon color='error' onClick={() => handleDeleteSlot(index)} style={{ cursor: 'pointer' }} />
     </div>
   ));
 
@@ -78,7 +78,7 @@ export default function FacilityItem({ data, name }) {
               variant='standard'
               label="Slots"
             >
-              {quantityValue ? options : slotsDisplay}
+              {quantityValue ? slotsDisplay : options}
 
             </Select>
           </FormControl>
@@ -87,11 +87,11 @@ export default function FacilityItem({ data, name }) {
 
         <div style={{ height: '2em', display: 'flex', gap: '1em' }}>
           <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={handleEdit}>
-            <EditIcon />{quantityValue === false ? 'Save' : 'Edit'}
+            <EditIcon color='info'/>{quantityValue === false ? 'Edit' : 'Save'}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
             onClick={handleDelete}
-          ><DeleteIcon />Delete</div>
+          ><DeleteIcon color='error'/>Delete</div>
         </div>
       </div>
     </>

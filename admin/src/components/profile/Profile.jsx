@@ -1,42 +1,61 @@
-import React from 'react'
-import { Box, Button, Container, TextField } from '@mui/material'
-import { useState } from 'react'
-import DashboardBox from '../DashboardBox';
-import ChecklistIcon from '@mui/icons-material/Checklist';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import ProfileNavigation from './ProfileNavigation';
-import ProfileInformation from './ProfileInformation';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-export default function Profile() {
-  const [profile, setProfile] = useState("profile");
-  const [status, setStatus] = useState("default")
+function Profile() {
+  const [users, setUsers] = useState([]);
 
- 
+  useEffect(() => {
+    console.log('executing');
+    axios.get('http://localhost:3001/api/listUsers')
+      .then(response => {
+        setUsers(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []);
 
+  const handleUpdateUser = (uid) => {
+    const updatedUserData = {
+      displayName: 'New Display Name', // Replace with the updated data
+      email: 'newemail@example.com',    // Replace with the updated data
+    };
+
+    axios.put(`http://localhost:3001/api/updateUser/${uid}`, updatedUserData)
+      .then(response => {
+        // Handle the response, e.g., show a success message
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Error updating user:', error);
+      });
+  };
+
+  const handleDeleteUser = (uid) => {
+    axios.delete(`http://localhost:3001/api/deleteUser/${uid}`)
+      .then(response => {
+        // Handle the response, e.g., show a success message
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Error deleting user:', error);
+      });
+  };
 
   return (
-    <>
-      <div style={{ height: '100%', width: '100%', }}>
-        <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h3>Manage Profile</h3>
-          </div>
-          <Box sx={{ display: 'flex', gap: '1em' }}>
-            <DashboardBox
-              name="Current Admin"
-
-              logo={<ChecklistIcon />} />
-          </Box>
-        </Container>
-        <ProfileNavigation setStatus={setStatus} status={status} />
-        <div style={{height:'65%', display:'flex', justifyContent:'center'}}>
-
-
-          <ProfileInformation/>
-
-
-        </div>
-      </div>
-    </>
-  )
+    <div>
+      <h2>User List:</h2>
+      <ul>
+        {users.map(user => (
+          <li key={user.uid}>
+            {user.email}
+            <button onClick={() => handleUpdateUser(user.uid)}>Update</button>
+            <button onClick={() => handleDeleteUser(user.uid)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
+
+export default Profile;

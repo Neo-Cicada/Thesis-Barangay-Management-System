@@ -45,7 +45,7 @@ export default function DashboardList({
 
 
       <tr >
-        <td style={{ textTransform: 'capitalize' }}>{'tests'}</td>
+        <td style={{ textTransform: 'capitalize' }}>{first}</td>
         <td style={{ textTransform: 'capitalize' }}>{second}</td>
         <td style={{ textTransform: 'capitalize' }}>{third}</td>
         <td style={{ textTransform: 'capitalize' }}>{fourth}</td>

@@ -71,7 +71,7 @@ export default function EnrollmentDashList({
               status={status} />
 
           </td> :
-          <td><VisibilityIcon sx={{ cursor: 'pointer' }} onClick={() => setShowInformation(true)} /></td>
+          <td><VisibilityIcon color="info" sx={{ cursor: 'pointer' }} onClick={() => setShowInformation(true)} /></td>
         }
       </tr>
 
