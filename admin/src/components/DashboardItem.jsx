@@ -38,7 +38,7 @@ export default function DashboardItem({ data, path, name }) {
   return (
     <>
 
-      <Container sx={{ height: '2em', width: '100%', borderBottom: '1px solid black', display: 'flex', justifyContent: 'space-between' }}>
+      <Container sx={{ height: '2.5em', width: '100%', borderBottom: '1px solid black', display: 'flex', justifyContent: 'space-between' }}>
 
         <div style={{
           // border:'1px solid red',
@@ -49,7 +49,7 @@ export default function DashboardItem({ data, path, name }) {
           justifyContent: 'space-between'
         }}>
           <div style={{ fontSize: '1.2rem', textTransform: 'capitalize' }}>{name}</div>
-          {quantityValue === false ? <div style={{ fontSize: '1.2rem' }}>{data.quantity}</div>
+          {quantityValue === false ? <div style={{ fontSize: '1.2rem', }}>{data.quantity}</div>
             : <input
               value={newValue}
               type="number"

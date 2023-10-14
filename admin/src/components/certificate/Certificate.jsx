@@ -56,7 +56,7 @@ export default function Certificate() {
     fourth={"09/08/23"}
     seventh={item.status}
     path={'CertificateRequest'}
-    status={"ongoing"}
+    status={"accepted"}
   />)
   const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashboardListCert
     key={item.id}
@@ -67,7 +67,7 @@ export default function Certificate() {
     fourth={"09/08/23"}
     seventh={item.status}
     path={'CertificateRequest'}
-    status={"ongoing"}
+    status={"rejected"}
   />)
   // console.log(items)
   return (
@@ -75,9 +75,9 @@ export default function Certificate() {
       <div className="certificate-container">
         <Container style={{ height: '30%', display: 'flex', flexDirection: 'column', gap: '1em', }}>
           <div className='manageEquipment-title'>
-            <h3 style={{fontSize:'2rem', fontWeight:"bold", color:'#3B5998'}}>Manage Certificate</h3>
+            <h3 style={{fontSize:'2rem', fontWeight:"bold", color:'#3B5998'}}>Manage Documents</h3>
           </div>
-          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', gap: '1em' }}>
+          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent:'space-around'}}>
             <DashboardBox
               name="Total"
               numbers={AllItems.length}

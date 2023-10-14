@@ -25,7 +25,7 @@ export default function DashboardListRep({
       await useStatusUpdate(path, item.id, 'ongoing');
     } catch (error) {
       console.error('An error occurred:', error);
-    }  // setIsOpenProceed(false);
+    }   setIsOpenProceed(false);
   }
 
   const onConfirm = async (e) => {

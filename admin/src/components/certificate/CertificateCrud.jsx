@@ -26,7 +26,6 @@ export default function CertificateCrud() {
       <Container sx={{ height: '100%' }}>
         <Container
           style={{
-            borderBottom: '1px solid black',
             height: '10%',
             display: 'flex',
             justifyContent: 'space-between'
@@ -43,28 +42,13 @@ export default function CertificateCrud() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              textAlign: 'center'
+              textAlign: 'center',
+              fontWeight: 500
             }}
-          > <AddIcon /> Add Inventory</div>
+          > <AddIcon color={'info'} fontSize='medium' /> Add Inventory</div>
         </Container>
         <ScrollableContainer>
-          <Container style={{ display: 'flex', width: '100%', borderBottom: '1px solid black' }}>
-            <div style={{
-              width: '15em',
-              height: '95%%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between'
 
-            }}>
-              <div style={{ fontSize: '1.2rem' }}>Name</div>
-              <div style={{ fontSize: '1.2rem' }}>Quantity</div>
-            </div>
-
-
-            <div></div>
-
-          </Container>
           {isLoading ? (
             <div style={{ width: '100%' }}>
               <Skeleton sx={{ width: '100%', bgcolor: '#8B9DC3', }} />
@@ -79,6 +63,29 @@ export default function CertificateCrud() {
             </div>
           ) : (
             <ScrollableContainer>
+              <Container sx={{ height: '2em', width: '100%', borderBottom: '1px solid black',
+             
+              display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{
+                  // border:'1px solid red',
+                  width: '15em',
+                  height: '95%%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}>
+                  <div style={{
+                    fontSize: '1.2rem',
+                    fontSize: '1.4rem',
+                    textTransform: 'capitalize',
+                    fontWeight: 600
+                  }}>Name</div>
+                  <div style={{
+                    fontSize: '1.2rem',
+                    fontSize: '1.4rem', fontWeight: 600
+                  }}>Price</div>
+                </div>
+              </Container>
               {items}
             </ScrollableContainer>
           )}

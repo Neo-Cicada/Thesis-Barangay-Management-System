@@ -13,7 +13,7 @@ export default function CertificateAdd({ handleDialogClose, isDialogOpen, setIsD
                                            is not executing
                                           */
   const handleClickOk = async (e) => {
-   await useUploadDirectly('Certificates', item)
+    await useUploadDirectly('Certificates', item)
     setItem({
       type: '',
       quantity: ''
