@@ -14,6 +14,7 @@ export default function FacilityDialog({ open, handleClose }) {
     fullname: '',
     email: '',
     phoneNumber: '',
+    status:'request',
     selectedFacility: [...selectedFacility] // spread the array elements
   });
   useEffect(() => {
