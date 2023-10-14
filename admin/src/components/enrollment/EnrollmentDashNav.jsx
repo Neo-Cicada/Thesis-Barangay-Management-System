@@ -33,13 +33,11 @@ export default function EnrollmentDashNav({ setStatus, status }) {
                     onClick={() => setStatus("second")}>Ongoing</button>
                 <button
                     style={status === 'third' ? activeBtn : btnStyle}
-                    onClick={() => setStatus("third")}>Accepted</button>
+                    onClick={() => setStatus("third")}>Enrolled</button>
                 <button
                     style={status === 'fourth' ? activeBtn : btnStyle}
                     onClick={() => setStatus("fourth")}>Rejected</button>
-                <button
-                    style={status === 'fifth' ? activeBtn : btnStyle}
-                    onClick={() => setStatus("fifth")}>Enrollment</button>
+                
             </Container>
         </>
     )

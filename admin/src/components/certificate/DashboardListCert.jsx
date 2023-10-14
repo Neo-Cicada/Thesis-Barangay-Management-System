@@ -44,11 +44,11 @@ export default function DashboardList({
 
 
       <tr >
-        <td >{first}</td>
+        <td style={{textTransform:'capitalize'}}>{first}</td>
         <td>{second}</td>
-        <td>{third}</td>
-        <td>{fourth}</td>
-        <td>{seventh}</td>
+        <td style={{textTransform:'capitalize'}}>{third}</td>
+        <td style={{textTransform:'capitalize'}}>{fourth}</td>
+        <td style={{textTransform:'capitalize'}}>{seventh}</td>
         {status === "ongoing" || status === "request" ?
           <td >
             <VisibilityIcon color="info" sx={{ cursor: 'pointer' }}
