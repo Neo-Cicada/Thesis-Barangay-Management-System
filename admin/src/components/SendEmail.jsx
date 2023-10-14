@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+function SendEmail() {
 
-export default function SendEmail() {
-  const [emailData, setEmailData] = useState({
-    dest: '',
-    subject: '',
-    html: '',
-  });
+  const [to, setTo] = useState('')
+  const [subject, setSubject] = useState('')
+  const [html, setHtml] = useState('')
 
-  const handleEmailChange = (e) => {
-    const { name, value } = e.target;
-    setEmailData({ ...emailData, [name]: value });
-  };
+
+
 
   const sendEmail = async () => {
-    // Define the endpoint URL for sending emails (replace with your server URL)
-    const emailEndpoint = '/send-email';
-
+    const emailData = {
+      to : to,
+      subject: subject,
+      html: html
+    }
     try {
-      // Make an HTTP POST request to your server
-      const response = await fetch(emailEndpoint, {
+      const response = await fetch('http://localhost:3001/send-email', {
+        // mode: 'no-cors',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,49 +24,56 @@ export default function SendEmail() {
         body: JSON.stringify(emailData),
       });
 
-      if (response.ok) {
-        // Email request was sent successfully
-        console.log('Email request sent successfully');
+      if (response.status === 200) {
+          console.log('sucess')
       } else {
-        // Handle the error when the email request fails
-        console.error('Error sending email request');
+        console.error('Email sending failed');
       }
     } catch (error) {
-      // Handle network or request-related errors
-      console.error('Error:', error);
+      console.error('Error sending email:', error);
     }
   };
 
   return (
     <div>
-      <h2>Send Email</h2>
       <div>
-        <label>Recipient Email:</label>
-        <input
-          type="text"
-          name="dest"
-          value={emailData.dest}
-          onChange={handleEmailChange}
-        />
+        <label>
+          To:
+          <input
+            type="text"
+            name="to"
+            value={to}
+            onChange={(e)=>setTo(e.target.value)}
+          />
+        </label>
       </div>
       <div>
-        <label>Subject:</label>
-        <input
-          type="text"
-          name="subject"
-          value={emailData.subject}
-          onChange={handleEmailChange}
-        />
+        <label>
+          Subject:
+          <input
+            type="text"
+            name="subject"
+            value={subject}
+            onChange={(e)=>setSubject(e.target.value)}
+          />
+        </label>
       </div>
       <div>
-        <label>HTML Content:</label>
-        <textarea
-          name="html"
-          value={emailData.html}
-          onChange={handleEmailChange}
-        />
+        <label>
+          HTML:
+          <textarea
+            name="html"
+            value={html}
+            onChange={(e)=>setHtml(e.target.value)}
+          />
+        </label>
       </div>
-      <button onClick={sendEmail}>Send Email</button>
+      <div>
+        <button onClick={sendEmail}>Send Email</button>
+      </div>
+     
     </div>
   );
 }
+
+export default SendEmail;
