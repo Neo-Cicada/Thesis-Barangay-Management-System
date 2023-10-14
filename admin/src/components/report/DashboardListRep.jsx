@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardConfirmation from '../DashboardConfirmation';
 import useStatusUpdate from '../../hooks/useStatusUpdate'
@@ -13,82 +13,38 @@ export default function DashboardListRep({
   third,
   fourth = "01/01/01",
   seventh, item, status, path }) {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [openToast, setOpenToast] = useState(false);
-  const [openRedToast, setRedToast] = useState(false);
-  const [confirmation, setConfirmation] = useState(false)
-  const [information, setInformation] = useState(false)
-  const openInformation = () => {
-    setInformation(true)
-  }
-  const handleCloseInformation = () => {
-    setInformation(false)
-  }
-  const handleOpenConfirmation = () => {
-    setConfirmation(true)
-  }
-  const handleCloseConfirmation = () => {
-    setConfirmation(false)
+  const [showInformation, setShowInformation] = useState(false)
+  const [isOpenProceed, setIsOpenProceed] = useState(false)
+  const [isGreenOpen, setIsGreenOpen] = useState(false)
+  const [isRedOpen, setIsRedOpen] = useState(false)
 
-  }
-  const handleOpenRedToast = () => {
-    setRedToast(true)
-  }
-  const handleCloseRedToast = () => {
-    setRedToast(false)
-  }
-  const handleOpenToast = () => {
-    setOpenToast(true);
-  };
 
-  const handleCloseToast = () => {
-    setOpenToast(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    handleOpenRedToast()
-  };
-
-  const handleConfirm = () => {
-    setOpen(false);
-    handleOpenToast();
-  };
-
-  const togglePopup = () => {
-    setIsPopupOpen(!isPopupOpen);
-  };
   const onAccept = async (e) => {
-    e.stopPropagation();
-    console.log(path)
-    handleOpen()
-    togglePopup()
-    await useStatusUpdate(path, item.id, 'ongoing')
-    setConfirmation(false)
+    try {
+      setIsGreenOpen(true)
+      await useStatusUpdate(path, item.id, 'ongoing');
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }  // setIsOpenProceed(false);
   }
 
   const onConfirm = async (e) => {
-    e.stopPropagation();
-    console.log(path)
-    handleOpen()
-    togglePopup()
-    await useStatusUpdate(path, item.id, 'accepted')
-    setConfirmation(false)
+    try {
+      setIsGreenOpen(true)
+      await useStatusUpdate(path, item.id, 'accepted');
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+    setIsOpenProceed(false)
   }
 
   const onDecline = async (e) => {
     e.stopPropagation();
-    handleOpen()
-    togglePopup()
-    await useStatusUpdate(path, item.id, 'rejected')
-    setConfirmation(false)
-
+    setIsRedOpen(true)
+    await useStatusUpdate(path, item.id, 'rejected');
+    setIsOpenProceed(false)
   }
+
   return (
     <>
 
@@ -101,27 +57,40 @@ export default function DashboardListRep({
         <td style={{ textTransform: 'capitalize' }}>{seventh}</td>
         {status === "ongoing" || status === "request" ?
           <td >
-            <VisibilityIcon color="info" sx={{ cursor: 'pointer' }} onClick={openInformation} />
+            <VisibilityIcon
+              color="info"
+              sx={{ cursor: 'pointer' }}
+              onClick={() => setShowInformation(true)} />
 
-            <MoreHorizIcon color="warning" sx={{ cursor: 'pointer' }} onClick={() => setConfirmation(true)} />
-            <DashboardConfirmation accept={onAccept} confirm={onConfirm} reject={onDecline}
-              status={status} open={confirmation} onClose={handleCloseConfirmation} />
+            <MoreHorizIcon
+              color="warning"
+              sx={{ cursor: 'pointer' }}
+              onClick={() => setIsOpenProceed(true)} />
+            <DashboardConfirmation
+              open={isOpenProceed}
+              onClose={() => setIsOpenProceed(false)}
+              accept={onAccept}
+              confirm={onConfirm}
+              reject={onDecline}
+              status={status} />
 
           </td> :
-          <td><VisibilityIcon color="info" sx={{ cursor: 'pointer' }} onClick={openInformation} /></td>
+          <td><VisibilityIcon
+            color="info" sx={{ cursor: 'pointer' }}
+            onClick={() => setShowInformation(true)}
+          /></td>
         }
       </tr >
-      <ConfirmationDialog
-        showToast={setOpenToast}
-        open={open}
-        onClose={handleClose}
-        onConfirm={handleConfirm}
-        title="Confirmation"
-        message="Are you sure you want to proceed?"
+
+
+      <GreenToast delay={isGreenOpen} onClose={() => setIsGreenOpen(false)} />
+      <RedToast open={isRedOpen} onClose={() => setIsRedOpen(false)} />
+
+      <ReportViewInformation
+        open={showInformation}
+        item={item}
+        onClose={() => setShowInformation(false)}
       />
-      <GreenToast open={openToast} onClose={handleCloseToast} />
-      <RedToast open={openRedToast} onClose={handleCloseRedToast} />
-      <ReportViewInformation open={information} onClose={handleCloseInformation} item={item} />
 
     </>
   );

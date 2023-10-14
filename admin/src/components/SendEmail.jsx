@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-function SendEmail() {
+import { Button, TextField } from "@mui/material";
+function SendEmail({ to }) {
 
-  const [to, setTo] = useState('')
   const [subject, setSubject] = useState('')
   const [html, setHtml] = useState('')
 
@@ -10,7 +10,7 @@ function SendEmail() {
 
   const sendEmail = async () => {
     const emailData = {
-      to : to,
+      to: to,
       subject: subject,
       html: html
     }
@@ -25,7 +25,7 @@ function SendEmail() {
       });
 
       if (response.status === 200) {
-          console.log('sucess')
+        console.log('sucess')
       } else {
         console.error('Email sending failed');
       }
@@ -35,44 +35,33 @@ function SendEmail() {
   };
 
   return (
-    <div>
-      <div>
-        <label>
-          To:
-          <input
-            type="text"
-            name="to"
-            value={to}
-            onChange={(e)=>setTo(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Subject:
-          <input
-            type="text"
-            name="subject"
-            value={subject}
-            onChange={(e)=>setSubject(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          HTML:
-          <textarea
-            name="html"
-            value={html}
-            onChange={(e)=>setHtml(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <button onClick={sendEmail}>Send Email</button>
-      </div>
-     
-    </div>
+    <>
+
+
+      <TextField
+        fullWidth
+        label="Email Subject"
+        type="text"
+        name="subject"
+        value={subject}
+        onChange={(e) => setSubject(e.target.value)}
+      />
+
+
+      <TextField
+        fullWidth
+        multiline
+        rows={4}
+        label="Email Body"
+        value={html}
+        onChange={(e) => setHtml(e.target.value)}
+      />
+
+
+      <Button variant="contained" onClick={sendEmail}>Send Email</Button>
+
+
+    </>
   );
 }
 

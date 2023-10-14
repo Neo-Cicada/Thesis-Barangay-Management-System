@@ -4,13 +4,24 @@ import IconButton from '@mui/material/IconButton';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
 
-function GreenToast({ open, onClose }) {
+function GreenToast({ delay, onClose }) {
+  const [open, setOpen] = useState(false);
   const [autoHideDuration, setAutoHideDuration] = useState(2500);
+
+  useEffect(() => {
+    if (delay) {
+      const timer = setTimeout(() => {
+        setOpen(true);
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [delay]);
 
   useEffect(() => {
     if (open) {
       const timer = setTimeout(() => {
         onClose();
+        setOpen(false); // Close the toast after a certain time
       }, autoHideDuration);
       return () => clearTimeout(timer);
     }

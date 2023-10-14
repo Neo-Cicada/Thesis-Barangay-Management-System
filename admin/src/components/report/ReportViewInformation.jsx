@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, DialogContent, Snackbar, TextField, Alert, Box, Ty
 import SmsIcon from '@mui/icons-material/Sms';
 import EmailIcon from '@mui/icons-material/Email';
 import SendSms from '../SendSms';
+import SendEmail from '../SendEmail';
 export default function ReportViewInformation({ item, open, onClose, onConfirm, title, message }) {
     const [sms, setSms] = useState(false)
     const [messageInput, setMessageInput] = useState('');
@@ -85,10 +86,15 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
             </Dialog>
 
             <Dialog open={sms} onClose={() => setSms(false)}>
-                <DialogTitle sx={{ textAlign: 'center' }}>Send Message</DialogTitle>
+                <DialogTitle sx={{
+                    textAlign: 'center',
+                    color: '#3B5998',
+                    fontSize: '2rem',
+                    fontWeight: 500
+                }}>Send Message</DialogTitle>
                 <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', }}>
 
-                    <Typography variant="subtitle1">To: {item.phoneNumber}</Typography>
+                    <Typography variant="subtitle1" sx={{ fontSize: '1.5rem' }} >To: {item.phoneNumber}</Typography>
 
                     <SendSms number={item.phoneNumber} setSms={setSms} setOpenSnack={setOpenSnack} />
 
@@ -105,19 +111,23 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
                 </Alert>
             </Snackbar>
             <Dialog open={email} onClose={() => setEmail(false)}>
-                <DialogTitle sx={{ textAlign: 'center' }}>Send Email</DialogTitle>
-                <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', }}>
+                <DialogTitle sx={{
+                    textAlign: 'center',
+                    color: '#3B5998',
+                    fontSize: '2rem',
+                    fontWeight: 500
+                }}>Send Email</DialogTitle>
+                <DialogContent sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em',
+                    alignItems: 'center',
+                }}>
 
-                    <Typography variant="subtitle1">To: {item.email}</Typography>
+                    <Typography variant="subtitle1"
+                        sx={{ fontSize: '1.5rem' }} >To: {item.email}</Typography>
 
-                    <TextField
-                        label="Type your email"
-                        variant="outlined"
-                        fullWidth
-                        multiline
-                        rows={4}
-
-                    />
+                    <SendEmail to={item.email} />
                 </DialogContent>
             </Dialog>
         </>
