@@ -34,7 +34,7 @@ export default function MedicineAdd({ handleDialogClose, isDialogOpen, setIsDial
               />
             <TextField
               value={item.quantity}
-              label="quantity"
+              label="Quantity"
               onChange={(e)=> setItem({...item, quantity:(e.target.value)})}
               />
           </div>

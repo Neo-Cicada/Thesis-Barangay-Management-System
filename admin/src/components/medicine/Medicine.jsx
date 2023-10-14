@@ -35,27 +35,27 @@ export default function Medicine() {
 
   const acceptedItems = data.filter(item => item.status === "accepted").map(item =>
     <DashBoardListMed
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    seventh={item.status}
-    path={'MedicineRequest'}
-    status={"accepted"}/>)
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={"09/08/23"}
+      seventh={item.status}
+      path={'MedicineRequest'}
+      status={"accepted"} />)
 
-  const rejectedItems = data.filter(item => item.status === "rejected").map(item => 
-  <DashBoardListMed
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    seventh={item.status}
-    path={'MedicineRequest'}
-    status={"rejected"}/>)
+  const rejectedItems = data.filter(item => item.status === "rejected").map(item =>
+    <DashBoardListMed
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={"09/08/23"}
+      seventh={item.status}
+      path={'MedicineRequest'}
+      status={"rejected"} />)
 
   const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashBoardListMed
     key={item.id}
@@ -66,7 +66,7 @@ export default function Medicine() {
     fourth={"09/08/23"}
     seventh={item.status}
     path={'MedicineRequest'}
-    status={"ongoing"}/>)
+    status={"ongoing"} />)
 
   return (
     <>
@@ -76,9 +76,9 @@ export default function Medicine() {
           flexDirection: 'column', gap: '1em',
         }}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <h3 style={{fontSize:'2rem', fontWeight:"bold", color:'#3B5998'}}>Manage Medicine</h3>
+            <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Medicine</h3>
           </div>
-          <div style={{ display: 'flex', gap: '1em' }}>
+          <div style={{ display: 'flex', justifyContent:'space-around' }}>
             <DashboardBox
               name="Total"
               numbers={items.length}
@@ -95,26 +95,23 @@ export default function Medicine() {
               name="Rejected"
               numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
-            <DashboardBox
-              name="Medicine"
-              numbers={'888'}
-              logo={<ChecklistIcon />} />
+
           </div>
 
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
         {isLoading ? (
-         <Loading/>
+          <Loading />
 
         ) : (
-        <div sx={{ border: '1px solid red', height: '70%' }}>
-          {status === "default" && <EquipmentAllRequest items={items} />}
-          {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
-          {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
-          {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
-          {status === "fifth" && <MedicineCrud />}
+          <div sx={{ border: '1px solid red', height: '70%' }}>
+            {status === "default" && <EquipmentAllRequest items={items} />}
+            {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
+            {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
+            {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
+            {status === "fifth" && <MedicineCrud />}
 
-        </div>
+          </div>
         )}
       </div>
     </>

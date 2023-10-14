@@ -75,13 +75,11 @@ export default function CertificateCrud() {
                   justifyContent: 'space-between'
                 }}>
                   <div style={{
-                    fontSize: '1.2rem',
                     fontSize: '1.4rem',
                     textTransform: 'capitalize',
                     fontWeight: 600
                   }}>Name</div>
                   <div style={{
-                    fontSize: '1.2rem',
                     fontSize: '1.4rem', fontWeight: 600
                   }}>Price</div>
                 </div>
