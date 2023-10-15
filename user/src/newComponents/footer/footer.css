@@ -4,8 +4,9 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     background-color: #8B9DC3;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
+
 .foot{
     /* border: 1px solid red; */
     display: flex;
@@ -15,14 +16,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
     border-bottom: 2px solid gray;
 }
 .site-map > ul{
     list-style: none;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1em;
+}
+.site-map > ul > li:hover{
+    color: white;
+}
+.site-map > ul > li{
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 .copyright{
     display: flex;

@@ -1,6 +1,8 @@
 import React from 'react'
 import './footer.css'
 import LOGO from '../../assets/eBarangay.png'
+import { HashLink as Link } from 'react-router-hash-link'
+import { Button } from '@mui/material'
 export default function Footer() {
   return (
     <>
@@ -8,11 +10,56 @@ export default function Footer() {
         <div className='foot site-map'>
           <p>SITEMAP</p>
           <ul>
-            <li>Home</li>
-            <li>Announcement</li>
-            <li>Services</li>
-            <li>About</li>
-            <li>Guide</li>
+            < Button
+              sx={{
+                color: 'black',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                '&:hover': {
+                  color: 'white'
+                }
+              }}
+              component={Link}
+              className='nav-menu'
+              to="#home"
+              smooth>Home</Button>
+            < Button
+              sx={{
+                color: 'black',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                '&:hover': {
+                  color: 'white'
+                }
+              }}
+              component={Link}
+              className='nav-menu'
+              to="#announcement"
+              smooth>Announcement</Button>< Button
+              sx={{
+                color: 'black',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                '&:hover': {
+                  color: 'white'
+                }
+              }}
+              component={Link}
+              className='nav-menu'
+              to="#services"
+              smooth>Services</Button>< Button
+              sx={{
+                color: 'black',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                '&:hover': {
+                  color: 'white'
+                }
+              }}
+              component={Link}
+              className='nav-menu'
+              to="#about"
+              smooth>About</Button>
           </ul>
         </div>
         <div className='foot copyright'>
