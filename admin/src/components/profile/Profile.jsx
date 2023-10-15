@@ -3,6 +3,7 @@ import axios from 'axios';
 import './profile.css'
 import { Container } from '@mui/material'
 import DashboardBox from '../DashboardBox'
+import EditIcon from '@mui/icons-material/Edit';
 import ChecklistIcon from '@mui/icons-material/Checklist'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ProfileNavigation from './ProfileNavigation';
@@ -20,10 +21,9 @@ function Profile() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
+
         const uid = user.email;
-        // ...
+
         setCurrentUser(uid)
       } else {
         // User is signed out
@@ -64,7 +64,7 @@ function Profile() {
         flexDirection: 'column',
         alignItems: 'center'
       }}>
-        <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Admin List</h3>
+        <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}> Admin List</h3>
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
           <DashboardBox
             name="Total Admins"
@@ -77,7 +77,10 @@ function Profile() {
             alignItems: 'center',
             justifyContent: 'center',
             height: '6em',
-            width: '14em',
+            paddingLeft: '1em',
+            paddingRight: '1em',
+
+            width: 'auto',
             borderRadius: '1',
             boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
           }}>
@@ -94,8 +97,10 @@ function Profile() {
               <li className='admin-list' key={user.uid}>
                 <p style={{ fontWeight: 500, fontSize: '1.2rem' }}> {user.email}</p>
                 <div className='list-action'>
-                  {(currentUser === "test@gmail.com" || currentUser === user.email) && (
-                    <button onClick={()=>{setIsUpdateOpen(true), setUpdateUser(user.uid)}}>Update</button>
+                  {(currentUser === user.email) && (
+                    <div style={{ display: 'flex', gap: '2px', cursor: 'pointer' }}
+                      onClick={() => { setIsUpdateOpen(true), setUpdateUser(user.uid) }}>
+                      <EditIcon color="info" /> <span>Update</span></div>
                   )}
 
                   {
@@ -111,7 +116,7 @@ function Profile() {
         </ul>}
         {status === "second" && currentUser === "test@gmail.com" && <CreateAdmin />}
       </Container>
-      <UpdateProfile open={isUpdateOpen} onClose={()=>setIsUpdateOpen(false)} user={updateUser}/>
+      <UpdateProfile open={isUpdateOpen} onClose={() => setIsUpdateOpen(false)} user={updateUser} />
     </>
   );
 }
