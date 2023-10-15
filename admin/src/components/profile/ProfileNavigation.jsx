@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProfileNavigation({ setStatus, status }) {
+export default function ProfileNavigation({ setStatus, status, currentUser }) {
     const btnStyle = {
         border: '0',
         background: 'none',
@@ -17,15 +17,14 @@ export default function ProfileNavigation({ setStatus, status }) {
         cursor: 'pointer',
         borderBottom: '5px solid #3b5998'
     }
-  return (
-    <>
-       <div style={{
-                height:'5%',
-               borderBottom: '2px solid #868686',
-               display: 'flex',
-               gap: '1.5em',
-               /* Clamp the width to 768px on mobile devices */
-               maxWidth: 'minMax(768px, 100%)'
+    return (
+        <>
+            <div style={{
+                height: '5%',
+                display: 'flex',
+                gap: '1.5em',
+                /* Clamp the width to 768px on mobile devices */
+                maxWidth: 'minMax(768px, 100%)'
             }}>
                 <button
                     style={status === 'default' ? activeBtn : btnStyle}
@@ -33,11 +32,11 @@ export default function ProfileNavigation({ setStatus, status }) {
 
                 >
                     Profile Information</button>
-                <button
+                {currentUser === "test@gmail.com" && <button
                     style={status === 'second' ? activeBtn : btnStyle}
-                    onClick={() => setStatus("second")}>Manage Admins</button>
-                
+                    onClick={() => setStatus("second")}>Manage Admins</button>}
+
             </div>
-    </>
-  )
+        </>
+    )
 }

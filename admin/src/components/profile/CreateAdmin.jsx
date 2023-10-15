@@ -31,6 +31,9 @@ export default function CreateAdmin() {
             // Handle error
             console.error(errorCode, errorMessage);
         }
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
     }
 
     return (
@@ -38,21 +41,13 @@ export default function CreateAdmin() {
             <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1em' }}>
                 <h3>Create New Administrator</h3>
                 <form onSubmit={onCreateAdmin} style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-                    <Box sx={{ display: 'flex' }}>
-                        <Box>
-                            <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                        </Box>
-                    </Box>
+                   
                     <Box sx={{ display: 'flex' }}>
                         <Box>
                             <TextField label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </Box>
                     </Box>
-                    <Box sx={{ display: 'flex' }}>
-                        <Box>
-                            <TextField label="Number" value={number} onChange={(e) => setNumber(e.target.value)} />
-                        </Box>
-                    </Box>
+                    
                     <Box sx={{ display: 'flex' }}>
                         <Box>
                             <TextField label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -63,7 +58,7 @@ export default function CreateAdmin() {
                             <TextField label="Confirm Password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                         </Box>
                     </Box>
-                    <Button type='submit'>Submit</Button>
+                    <Button variant='contained' type='submit'>Submit</Button>
                 </form>
             </Container>
         </>

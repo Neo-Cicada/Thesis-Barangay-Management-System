@@ -35,6 +35,7 @@ app.get('/api/listUsers', async (req, res) => {
         res.status(500).json({ error: 'Error listing users' });
     }
 });
+
 app.put('/api/updateUser/:uid', async (req, res) => {
     try {
         const { uid } = req.params;
