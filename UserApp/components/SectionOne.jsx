@@ -1,63 +1,96 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import React from 'react'
+import { View, Text, StyleSheet, Dimensions, ScrollView, Pressable } from 'react-native';
 
-export default function SectionOne() {
+export default function SectionOne({navigation}) {
     return (
         <>
-            <Text style={styles.title}>BARANGAY AMAMPEREZ</Text>
+            <ScrollView style={styles.container}>
+                <View style={styles.containerTwo}>
+                    <Pressable onPress={()=> navigation.navigate('Medicine')}>
+                        <View style={styles.items}>
 
-            <Text style={styles.subTitle}>Villasis Pangasinan</Text>
+                        </View>
+                        <Text style={styles.textItems}>Medicines</Text>
+                    </Pressable>
+                    <Pressable onPress={()=> navigation.navigate('Document')}>
+                        <View style={styles.items}>
 
-            <Text style={styles.welcome}>Welcome to EBarangay</Text>
+                        </View>
+                        <Text style={styles.textItems}>Documents</Text>
+                    </Pressable>
+                    <Pressable onPress={()=> navigation.navigate('Facility')}>
+                        <View style={styles.items}>
 
-            {/* Create a circular container below the text */}
-            <Text style={styles.centeredText}>
-                EBarangay is the ultimate solution
-                for streamlined and efficient barangay management.
-                Say goodbye to paperwork and long queues. With EBarangay,
-                you can access a wide range of online services and stay informed with ease.
-            </Text>
-            <View style={styles.circle}>
-                <Text style={styles.circleText}>About</Text>
-            </View>
+                        </View>
+                        <Text style={styles.textItems}>Facility</Text>
+                    </Pressable>
+                </View>
+
+                <View style={styles.containerTwo}>
+                <Pressable onPress={()=> navigation.navigate('Enrollment')}>
+                        <View style={styles.items}>
+
+                        </View>
+                        <Text style={styles.textItems}>Enrollment</Text>
+                    </Pressable>
+                    <Pressable onPress={()=> navigation.navigate('Complain')}>
+                        <View style={styles.items}>
+
+                        </View>
+                        <Text style={styles.textItems}>Complain</Text>
+                    </Pressable>
+                    <Pressable onPress={()=> navigation.navigate('Equipment')}>
+                        <View style={styles.items}>
+
+                        </View>
+                        <Text style={styles.textItems}>Equipment</Text>
+                    </Pressable>
+                </View>
+            </ScrollView>
         </>
     )
 }
-
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 25,
-        textAlign:'center'
-    },
-    subTitle: {
-        fontSize: 20,
-        textAlign:'center'
+    container: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: 'red',
 
     },
-    welcome: {
-        fontSize: 30,
-        color: '#3B5998',
-        fontWeight: 'bold',
-        textAlign:'center'
+    containerTwo: {
+        marginTop: 30,
+        display: 'flex',
+        flexDirection: 'row',
+        marginHorizontal: 20,
+        gap: 5
     },
-    centeredText: {
-        textAlign: 'center', // Center-align the text content
-        fontSize: 16, // Adjust the font size as needed
+    items: {
         marginTop: 10,
+        backgroundColor: '#DFE3EE',
+        borderWidth: 1,
+        borderColor: 'red',
+        height: 100,
+        width: 100,
+        display: 'flex',
+        alignItems: 'center',
+        borderRadius: 1000
     },
-    circle: {
-        width: 200,
-        height: 200,
-        backgroundColor: '#3B5998',
-        borderRadius: 100,
-        alignSelf: 'center',
-        marginTop: 10,
+    titleContainer: {
+        borderWidth: 1,
+        borderColor: 'red',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: 50
     },
-    circleText: {
-        fontSize: 24,
-        color: 'white',
+    title: {
+        fontSize: 35,
+        color: '#3B5998',
+        fontWeight: '500'
+    },
+    textItems: {
+        borderWidth: 1,
+        borderColor: 'red',
+        textAlign: 'center'
     }
 })

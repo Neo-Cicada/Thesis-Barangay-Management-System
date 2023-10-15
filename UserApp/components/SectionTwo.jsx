@@ -1,16 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 
-export default function SectionTwo() {
+export default function SectionTwo({ title, img, time, description }) {
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
   const boxWidth = (screenWidth * 0.8); // 80% of the screen width
-  const boxHeight = (screenHeight * 0.4); // 40% of the screen height
+  const boxHeight = (screenHeight * 0.6); // 40% of the screen height
 
   return (
     <>
-      <View style={[box.box, { width: boxWidth, height: boxHeight }]}></View>
-      <View style={[box.box, { width: boxWidth, height: boxHeight }]}></View>
+      <View style={[box.box, { width: boxWidth, height: boxHeight }]}>
+        <View></View>
+        <View></View>
+        <View></View>
+        <View></View>
+      </View>
 
 
     </>
@@ -22,5 +26,17 @@ const box = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 1,
     borderRadius: 12
+  },
+  image: {
+
+  },
+  title: {
+
+  },
+  description: {
+
+  },
+  time: {
+
   }
 })
