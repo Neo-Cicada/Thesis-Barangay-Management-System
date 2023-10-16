@@ -32,7 +32,10 @@
   cursor: pointer;
 
 }
-
+.service-image{
+  padding-top: minmax(0.2em, 1em);
+  filter: invert(30%) sepia(80%) saturate(410%) hue-rotate(180deg) brightness(96%) contrast(92%);
+}
 .service-box::before {
   content: ''; /* Create a pseudo-element */
   position: absolute;

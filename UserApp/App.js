@@ -56,13 +56,36 @@ export default function App() {
         >
           <Stack.Screen name="eBarangay"
             options={{ headerShown: false }}
-            component={BottomTab} />
-          <Stack.Screen name="Medicine" component={Medicine} />
-          <Stack.Screen name="Document" component={Document} />
-          <Stack.Screen name="Facility" component={Facility} />
-          <Stack.Screen name="Enrollment" component={Enrollment} />
-          <Stack.Screen name="Complain" component={Complain} />
-          <Stack.Screen name="Equipment" component={Equipment} />
+            component={BottomTab}
+
+          />
+          <Stack.Screen
+            name="Medicine"
+            component={Medicine}
+            options={{ title: "Medicine Request Form" }}
+          />
+
+          <Stack.Screen
+            name="Document"
+            component={Document}
+            options={{ title: "Document Request Form" }}
+          />
+          <Stack.Screen
+            name="Facility"
+            options={{ title: "Facility Request Form" }}
+            component={Facility} />
+          <Stack.Screen
+            name="Enrollment"
+            options={{ title: "Enrollmnt Form" }}
+            component={Enrollment} />
+          <Stack.Screen
+            options={{ title: "Complain Form" }}
+            name="Complain"
+            component={Complain} />
+          <Stack.Screen
+            name="Equipment"
+            options={{ title: "Equipment Request Form" }}
+            component={Equipment} />
 
         </Stack.Navigator>
       </NavigationContainer>
