@@ -30,25 +30,39 @@ export default function DashboardList({
         } else {
           console.error('Email sending failed');
         }
-      })
+      }).then(
+        async () => {
+          setIsOpenProceed(false)
+        }
+      )
       .catch((error) => {
         console.error('Error updating status:', error);
-      });
-    // await sendEmailFunction(item.email,
-    //   "Request Status",
-    //   "Your request is ongoing. We will contact you again ")
-    setIsOpenProceed(false)
+      })
+
+
   }
 
   const onConfirm = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
-    await sendEmailFunction(item.email,
-      "Request Status",
-      "Your request is accepted.")
-    // await useStatusUpdate(path, item.id, 'accepted')
 
-    // setIsOpenProceed(false)
+    await useStatusUpdate(path, item.id, 'accepted')
+      .then(async () => {
+        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        if (success) {
+          console.log('Email sent successfully');
+        } else {
+          console.error('Email sending failed');
+        }
+      }).then(
+        async () => {
+          setIsOpenProceed(false)
+        }
+      )
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      })
+
 
   }
 
@@ -56,10 +70,21 @@ export default function DashboardList({
     e.stopPropagation();
     setIsRedOpen(true)
     await useStatusUpdate(path, item.id, 'rejected')
-    await sendEmailFunction(item.email,
-      "Request Status",
-      "Your request is rejected.")
-    setIsOpenProceed(false)
+      .then(async () => {
+        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        if (success) {
+          console.log('Email sent successfully');
+        } else {
+          console.error('Email sending failed');
+        }
+      }).then(
+        async () => {
+          setIsOpenProceed(false)
+        }
+      )
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      })
 
   }
   return (

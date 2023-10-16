@@ -9,6 +9,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import EquipmentViewInformation from '../equipment/EquipmentViewInformation';
 import DashboardHeader from '../DashboardHeader';
 import EnrollmentViewInformation from './EnrollmentViewInformation';
+import sendEmailFunction from '../../functions/sendEmailFunction';
 export default function EnrollmentDashList({
   first,
   second,
@@ -23,21 +24,64 @@ export default function EnrollmentDashList({
   const onAccept = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
-    await useStatusUpdate(path, item.id, 'ongoing')
-    setIsOpenProceed(false);
+    await useStatusUpdate(path, item.id, 'ongoing').then(async () => {
+      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      if (success) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Email sending failed');
+      }
+    }).then(
+      async () => {
+        setIsOpenProceed(false)
+      }
+    )
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      })
+
+
   }
 
   const onConfirm = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
-    await useStatusUpdate(path, item.id, 'accepted')
+    await useStatusUpdate(path, item.id, 'accepted').then(async () => {
+      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      if (success) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Email sending failed');
+      }
+    }).then(
+      async () => {
+        setIsOpenProceed(false)
+      }
+    )
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      })
     setIsOpenProceed(false);
   }
 
   const onDecline = async (e) => {
     e.stopPropagation();
     setIsRedOpen(true)
-    await useStatusUpdate(path, item.id, 'rejected')
+    await useStatusUpdate(path, item.id, 'rejected').then(async () => {
+      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      if (success) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Email sending failed');
+      }
+    }).then(
+      async () => {
+        setIsOpenProceed(false)
+      }
+    )
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      })
     setIsOpenProceed(false);
 
   }

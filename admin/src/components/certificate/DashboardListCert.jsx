@@ -21,22 +21,61 @@ export default function DashboardList({
   const onAccept = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
-    await useStatusUpdate(path, item.id, 'ongoing')
-    setIsOpenProceed(false)
+    await useStatusUpdate(path, item.id, 'ongoing').then(async () => {
+      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      if (success) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Email sending failed');
+      }
+    }).then(
+      async () => {
+        setIsOpenProceed(false)
+      }
+    )
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      })
   }
 
   const onConfirm = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
-    await useStatusUpdate(path, item.id, 'accepted')
-    setIsOpenProceed(false)
+    await useStatusUpdate(path, item.id, 'accepted').then(async () => {
+      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      if (success) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Email sending failed');
+      }
+    }).then(
+      async () => {
+        setIsOpenProceed(false)
+      }
+    )
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      })
   }
 
   const onDecline = async (e) => {
     e.stopPropagation();
     setIsRedOpen(true)
-    await useStatusUpdate(path, item.id, 'rejected')
-    setIsOpenProceed(false)
+    await useStatusUpdate(path, item.id, 'rejected').then(async () => {
+      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      if (success) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Email sending failed');
+      }
+    }).then(
+      async () => {
+        setIsOpenProceed(false)
+      }
+    )
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      })
 
   }
   return (
@@ -44,11 +83,11 @@ export default function DashboardList({
 
 
       <tr >
-        <td style={{textTransform:'capitalize'}}>{first}</td>
+        <td style={{ textTransform: 'capitalize' }}>{first}</td>
         <td>{second}</td>
-        <td style={{textTransform:'capitalize'}}>{third}</td>
-        <td style={{textTransform:'capitalize'}}>{fourth}</td>
-        <td style={{textTransform:'capitalize'}}>{seventh}</td>
+        <td style={{ textTransform: 'capitalize' }}>{third}</td>
+        <td style={{ textTransform: 'capitalize' }}>{fourth}</td>
+        <td style={{ textTransform: 'capitalize' }}>{seventh}</td>
         {status === "ongoing" || status === "request" ?
           <td >
             <VisibilityIcon color="info" sx={{ cursor: 'pointer' }}
@@ -73,7 +112,7 @@ export default function DashboardList({
           /></td>
         }
       </tr>
-    
+
       <GreenToast delay={isGreenOpen} onClose={() => setIsGreenOpen(false)} />
       <RedToast open={isRedOpen} onClose={() => setIsRedOpen(false)} />
       <CertificateViewInformation
