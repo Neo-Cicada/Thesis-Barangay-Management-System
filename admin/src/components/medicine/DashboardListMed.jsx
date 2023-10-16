@@ -7,29 +7,48 @@ import GreenToast from '../GreenToast';
 import RedToast from '../RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import MedicineViewInformation from './MedicineViewInformation'
+import sendSmsFunction from '../../functions/sendSmsFunction';
+import sendEmailFunction from '../../functions/sendEmailFunction';
 export default function DashboardList({
   first,
   second,
   third,
   fourth,
   seventh, item, status, path }) {
-    const [showInformation, setShowInformation] = useState(false)
-    const [isOpenProceed, setIsOpenProceed] = useState(false)
-    const [isGreenOpen, setIsGreenOpen] = useState(false)
-    const [isRedOpen, setIsRedOpen] = useState(false)
+  const [showInformation, setShowInformation] = useState(false)
+  const [isOpenProceed, setIsOpenProceed] = useState(false)
+  const [isGreenOpen, setIsGreenOpen] = useState(false)
+  const [isRedOpen, setIsRedOpen] = useState(false)
   const onAccept = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'ongoing')
+      .then(async () => {
+        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        if (success) {
+          console.log('Email sent successfully');
+        } else {
+          console.error('Email sending failed');
+        }
+      })
+      .catch((error) => {
+        console.error('Error updating status:', error);
+      });
+    // await sendEmailFunction(item.email,
+    //   "Request Status",
+    //   "Your request is ongoing. We will contact you again ")
     setIsOpenProceed(false)
   }
 
   const onConfirm = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
+    await sendEmailFunction(item.email,
+      "Request Status",
+      "Your request is accepted.")
+    // await useStatusUpdate(path, item.id, 'accepted')
 
-    await useStatusUpdate(path, item.id, 'accepted')
-    setIsOpenProceed(false)
+    // setIsOpenProceed(false)
 
   }
 
@@ -37,6 +56,9 @@ export default function DashboardList({
     e.stopPropagation();
     setIsRedOpen(true)
     await useStatusUpdate(path, item.id, 'rejected')
+    await sendEmailFunction(item.email,
+      "Request Status",
+      "Your request is rejected.")
     setIsOpenProceed(false)
 
   }

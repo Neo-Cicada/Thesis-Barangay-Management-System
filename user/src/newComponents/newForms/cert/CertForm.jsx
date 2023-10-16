@@ -22,8 +22,8 @@ function TermsAndCondition({ open, onClose }) {
 }
 
 export default function CertForm() {
-  const { details, setDetails, handleSubmit} = useContext(MyCertContext)
-  const [showAgreement, setShowAgreement, ] = useState(false);
+  const { details, setDetails, handleSubmit } = useContext(MyCertContext)
+  const [showAgreement, setShowAgreement,] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
 
   const handleOpenAgreement = () => {
@@ -33,7 +33,7 @@ export default function CertForm() {
   const handleCloseAgreement = () => {
     setShowAgreement(false);
   };
-  
+
 
   const Summary = ({ open, onClose }) => {
     const dialogStyle = {
@@ -81,7 +81,6 @@ export default function CertForm() {
           />
           <TextField
             fullWidth
-
             label="Email"
             value={details.email}
             onChange={(e) => setDetails({ ...details, email: e.target.value })}
