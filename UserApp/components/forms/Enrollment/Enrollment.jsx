@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, View, ScrollView } from 'react-native'
 export default function Enrollment() {
   return (
     <>
