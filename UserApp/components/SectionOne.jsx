@@ -1,24 +1,37 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions, ScrollView, Pressable } from 'react-native';
+import {
+    View, Text, StyleSheet,
+    Dimensions, ScrollView, Pressable,
+    ImageBackground
 
-export default function SectionOne({navigation}) {
+} from 'react-native';
+
+export default function SectionOne({ navigation }) {
     return (
         <>
             <ScrollView style={styles.container}>
                 <View style={styles.containerTwo}>
-                    <Pressable onPress={()=> navigation.navigate('Medicine')}>
+                    <ImageBackground
+                        source={require('../assets/zyro-image.png')} // Replace with the path to your image
+                        style={styles.imageBackground}
+                    >
+                        <Text style={{ textAlign: 'center' }}>Amamprez Villasis Pangasinan</Text>
+                    </ImageBackground>
+                </View>
+                <View style={styles.containerTwo}>
+                    <Pressable onPress={() => navigation.navigate('Medicine')}>
                         <View style={styles.items}>
 
                         </View>
                         <Text style={styles.textItems}>Medicines</Text>
                     </Pressable>
-                    <Pressable onPress={()=> navigation.navigate('Document')}>
+                    <Pressable onPress={() => navigation.navigate('Document')}>
                         <View style={styles.items}>
 
                         </View>
                         <Text style={styles.textItems}>Documents</Text>
                     </Pressable>
-                    <Pressable onPress={()=> navigation.navigate('Facility')}>
+                    <Pressable onPress={() => navigation.navigate('Facility')}>
                         <View style={styles.items}>
 
                         </View>
@@ -27,25 +40,26 @@ export default function SectionOne({navigation}) {
                 </View>
 
                 <View style={styles.containerTwo}>
-                <Pressable onPress={()=> navigation.navigate('Enrollment')}>
+                    <Pressable onPress={() => navigation.navigate('Enrollment')}>
                         <View style={styles.items}>
 
                         </View>
                         <Text style={styles.textItems}>Enrollment</Text>
                     </Pressable>
-                    <Pressable onPress={()=> navigation.navigate('Complain')}>
+                    <Pressable onPress={() => navigation.navigate('Complain')}>
                         <View style={styles.items}>
 
                         </View>
                         <Text style={styles.textItems}>Complain</Text>
                     </Pressable>
-                    <Pressable onPress={()=> navigation.navigate('Equipment')}>
+                    <Pressable onPress={() => navigation.navigate('Equipment')}>
                         <View style={styles.items}>
 
                         </View>
                         <Text style={styles.textItems}>Equipment</Text>
                     </Pressable>
                 </View>
+
             </ScrollView>
         </>
     )
@@ -62,7 +76,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         marginHorizontal: 20,
-        gap: 5
+        gap: 5,
+        borderWidth: 1,
+        borderColor: 'red'
     },
     items: {
         marginTop: 10,
@@ -92,5 +108,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'red',
         textAlign: 'center'
-    }
+    },
+    imageBackground: {
+        height: 100,
+        borderRadius: 20,
+        flex: 1
+    },
 })

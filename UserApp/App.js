@@ -2,6 +2,7 @@ import React, { useContext, createContext, useState } from 'react';
 import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HeaderApp from './components/HeaderApp';
 import BodyApp from './components/BodyApp';
 import SectionOne from './components/SectionOne';
@@ -13,6 +14,33 @@ import Enrollment from './components/forms/Enrollment/Enrollment'
 import Complain from './components/forms/complain/Complain'
 import Equipment from './components/forms/Equipment/Equipment'
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+function BottomTab() {
+  return (
+    <Tab.Navigator
+      tabBarOptions={{
+        labelStyle: {
+          fontSize: 14,
+          fontWeight: "bold",
+        },
+        activeTintColor: "#ffffff",
+        inactiveTintColor: "#000000",
+        pressOpacity: 1,
+        indicatorStyle: {
+          backgroundColor: "black",
+          height: 30,
+          borderRadius: 30,
+          top: 9,
+        },
+        tabStyle: {
+          width: "auto",
+        },
+      }}>
+      <Tab.Screen name="eBarangay" component={SectionOne} />
+      <Tab.Screen name="Announcement" component={SectionTwo} />
+    </Tab.Navigator>
+  )
+}
 export default function App() {
   return (
     <>
@@ -21,15 +49,15 @@ export default function App() {
         <StatusBar translucent />
         {/* <HeaderApp/> */}
         <Stack.Navigator
-          initialRouteName="Services"
           screenOptions={{
             headerStyle: { backgroundColor: '#DFE3EE' },
             headerTintColor: '#3B5998', // Set the text color here
           }}
         >
-          <Stack.Screen name="Services"  component={SectionOne} />
-          <Stack.Screen name="Announcement" component={SectionTwo} />
-          <Stack.Screen name="Medicine"  component={Medicine} />
+          <Stack.Screen name="eBarangay"
+            options={{ headerShown: false }}
+            component={BottomTab} />
+          <Stack.Screen name="Medicine" component={Medicine} />
           <Stack.Screen name="Document" component={Document} />
           <Stack.Screen name="Facility" component={Facility} />
           <Stack.Screen name="Enrollment" component={Enrollment} />
