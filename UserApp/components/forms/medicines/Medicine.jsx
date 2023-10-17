@@ -1,6 +1,7 @@
 import React, { useState, useContext, createContext, useEffect } from 'react'
 import { ScrollView, Text, View, StyleSheet, Pressable, TextInput } from 'react-native'
 import Box from './Box';
+import MedicineForm from './MedicineForm';
 
 export const MyMedicineContext = createContext();
 
@@ -12,13 +13,13 @@ export default function Medicine() {
       setSelectedItems(selectedItems.filter(item => item.name !== name));
     } else {
       // If the item is not selected, select it with an initial quantity of 0
-      setSelectedItems([...selectedItems, { name, count: 0 }]);
+      setSelectedItems([...selectedItems, { name, count: 1 }]);
     }
   };
   const handleQuantityChange = (name, newCount) => {
     const updatedSelectedItems = selectedItems.map((item) => {
       if (item.name === name) {
-        return { ...item, count: parseInt(newCount) || 0 };
+        return { ...item, count: parseInt(newCount) || 1 };
       }
       return item;
     });
@@ -26,7 +27,7 @@ export default function Medicine() {
   };
   return (
     <>
-      <MyMedicineContext.Provider>
+      <MyMedicineContext.Provider value={{selectedItems, setSelectedItems}}>
         <ScrollView>
           <View style={{ borderWidth: 1, borderColor: 'red', height: 500 }}>
             <ScrollView nestedScrollEnabled={true} style={{ flex: 0.5, height: 300, borderWidth: 1, borderColor: 'red' }}>
@@ -65,7 +66,13 @@ export default function Medicine() {
                   <Text style={{ textAlign: 'center' }}>{medicine.name}</Text>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <TextInput
-                      // style={styles.quantityInput}
+                      style={{ height: 40,
+                        borderColor: 'gray',
+                        borderWidth: 1,
+                        padding: 10,
+                        borderRadius: 5,
+                        fontSize: 16,
+                        marginBottom: 10,}}
                       placeholder="Enter quantity"
                       keyboardType="numeric"
                       value={medicine.count.toString()} onChangeText={(text) => handleQuantityChange(medicine.name, text)}
@@ -75,12 +82,8 @@ export default function Medicine() {
               ))}
             </ScrollView>
           </View>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 550 }}>
-            {/* information */}
-            {/* review summary of information provided*/}
-            {/* agree to the terms and conditions */}
-            {/* Submit button */}
-          </View>
+          {/* form down here */}
+          <MedicineForm/>
         </ScrollView>
       </MyMedicineContext.Provider>
     </>
