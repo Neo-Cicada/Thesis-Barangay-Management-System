@@ -2,9 +2,7 @@ import React, {useContext, useState} from 'react';
 import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import SectionOne from './SectionOne';
 import SectionTwo from './SectionTwo';
-import { myAppContext } from '../App';
 export default function BodyApp() {
-    const {nav, setNav} = useContext(myAppContext);
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContent}>

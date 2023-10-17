@@ -51,7 +51,8 @@ export default function MedForm() {
   };
   return (
     <>
-<div style={{ maxWidth: '400px', margin: '0 auto' }}>        <form onSubmit={handleSubmit} style={{
+      <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+        <form onSubmit={handleSubmit} style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '1em',

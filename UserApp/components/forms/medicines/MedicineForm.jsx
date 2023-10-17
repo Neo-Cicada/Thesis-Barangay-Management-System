@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, Button, Pressable, TextInput, StyleSheet, Modal } from 'react-native';
-
+import { MyMedicineContext } from './Medicine'
+import MedicineSummary from './MedicineSummary';
+import useUpload from '../../../hooks/useUpload'
 const MedicineForm = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const {details, setDetails} = useContext(MyMedicineContext)
+  const handleMedicineSubmit = async () =>{
+    await useUpload(details, 'MedicineRequest').then(()=>{
+
+      console.log('success')
+    })
+  }
   return (
     <View style={styles.container}>
       {/* Information */}
       <TextInput
         style={styles.input}
         placeholder="Full Name"
+        onChangeText={(text)=>setDetails({...details, fullname: text})}
       />
       <TextInput
         style={styles.input}
         placeholder="Phone Number"
         keyboardType="numeric"
+        onChangeText={(text)=>setDetails({...details, phoneNumber: text})}
+
       />
       <TextInput
         style={styles.input}
         placeholder="Email Address"
         keyboardType="email-address"
+        onChangeText={(text)=>setDetails({...details, email: text})}
+
       />
 
       {/* Review Summary of Information Provided */}
@@ -35,19 +49,10 @@ const MedicineForm = () => {
       </View>
 
       {/* Submit Button */}
-      <Button title="Submit" />
-      <Modal visible={modalVisible} transparent animationType="slide">
-        <View style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        }}>
-          {/* Modal content */}
-          <Text>Modal Content</Text>
-          <Button title="Close" onPress={() => setModalVisible(false)} />
-        </View>
-      </Modal>
+      <Button title="Submit" onPress={handleMedicineSubmit}/>
+      <MedicineSummary
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible} />
     </View>
   );
 };
