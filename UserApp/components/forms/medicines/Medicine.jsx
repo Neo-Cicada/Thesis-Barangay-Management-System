@@ -74,7 +74,9 @@ export default function Medicine() {
 
 
             </ScrollView>
-            <ScrollView style={{ flex: 0.5, borderWidth: 1, borderColor: 'black', }}>
+            <ScrollView  
+              nestedScrollEnabled={true} 
+              style={{ flex: 0.5, borderWidth: 1, borderColor: 'black', }}>
               {/* selected options */}
               {selectedMedicines.map((medicine, index) => (
                 <View key={index} style={{
