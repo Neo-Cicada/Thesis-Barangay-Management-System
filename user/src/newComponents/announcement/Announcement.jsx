@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button } from '@mui/material'
+import { Button, Container } from '@mui/material'
 import './announcement.css'
 import AnnouncementBox from './AnnouncementBox'
 import useRead from '../../hooks/useRead'
@@ -8,7 +8,7 @@ export default function Announcement() {
   const [isExpand, setIsExpand] = useState(false)
   useRead('images', setData)
   console.log(data)
-  const items = data.map(item=><AnnouncementBox image={item.imageUrl} title={item.title} date={item.date} description={item.description}/>)
+  const items = data.map(item => <AnnouncementBox image={item.imageUrl} title={item.title} date={item.date} description={item.description} />)
   const scrollable = {
     overflow: 'auto'
   }
@@ -16,16 +16,19 @@ export default function Announcement() {
   return (
     <>
       <div className='announcement' id='announcement'>
-        <p className='announcement-title'>Announcements</p>
+        <Container >
+          <p className='announcement-title' >Announcements</p>
+        </Container>
+
         <div className='announcement-body' style={style}>
-           {items}
+          {items}
 
 
         </div>
         <div className='announcement-btn'>
-            <Button
-              variant='contained'
-            onClick={()=>setIsExpand(!isExpand)}>{isExpand ? 'See less': 'See more'}</Button>
+          <Button
+            variant='contained'
+            onClick={() => setIsExpand(!isExpand)}>{isExpand ? 'See less' : 'See more'}</Button>
         </div>
       </div>
     </>

@@ -24,7 +24,7 @@ export default function NewHeader() {
             color: '#3B5998',
             textShadow: '0px 1px 1px rgba(0.5,0.5,0.5,0.5)',  // Optional text shadow
           }}>
-            e<span style={{ color: '#3B5998' }}>Barangay</span>
+            e<span style={{ color: '#3B5998', fontWeight:'750' }}>Barangay</span>
           </div>          {/* for mobile */}
           <div className='burger-icon' onClick={onClickMenu}>
             {isMenuClicked ? <CloseIcon fontSize='large' /> : <MenuIcon fontSize='large' />}
@@ -37,7 +37,7 @@ export default function NewHeader() {
                 sx={{
                   color: 'black',
                   fontSize: '1.2rem',
-                  fontWeight: '1em',
+                  fontWeight: '700',
                   '&:hover': {
                     border: '1px dashed black',
                     color: 'white'
@@ -51,7 +51,7 @@ export default function NewHeader() {
                 sx={{
                   color: 'black',
                   fontSize: '1.2rem',
-                  fontWeight: '1em',
+                  fontWeight: '700',
                   '&:hover': {
                     color: 'white',
                     border: '1px dashed black'
@@ -65,7 +65,7 @@ export default function NewHeader() {
                 sx={{
                   color: 'black',
                   fontSize: '1.2rem',
-                  fontWeight: '1em',
+                  fontWeight: '700',
                   '&:hover': {
                     color: 'white',
                     border: '1px dashed black'
@@ -76,7 +76,7 @@ export default function NewHeader() {
                 sx={{
                   color: 'black',
                   fontSize: '1.2rem',
-                  fontWeight: '1em',
+                  fontWeight: '700',
                   '&:hover': {
                     color: 'white',
                     border: '1px dashed black'
@@ -135,7 +135,7 @@ export default function NewHeader() {
                   border: '1px dashed black'
                 }
               }}
-              className='nav-menu' component={Link} to="#about">Abou</Button>
+              className='nav-menu' component={Link} to="#about">About</Button>
           </ul>
         </div>}
 

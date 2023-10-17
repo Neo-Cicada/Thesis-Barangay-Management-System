@@ -10,7 +10,7 @@ header{
     width: 100%;
     min-width: 174px;
     opacity: 0.9;
-}
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;}
 .header-div{
     display: flex;
     height: 100%;
@@ -21,6 +21,7 @@ header{
 }
 .nav-menu
 {
+    font-weight: 700;
    color: black;
 }
 /* for mobile design */
@@ -58,7 +59,7 @@ header{
         font-size: clamp(14px, 4vw, 20px);
 
     }
-    
+
     .nav-menu:hover{
         color: white;
     }

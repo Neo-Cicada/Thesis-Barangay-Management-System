@@ -5,11 +5,16 @@ export default function Introduction() {
     <>
       <div className='introduction' id='home'>
         <div className='intro-discription-box'>
-          <p className='intro-title' style={{ fontSize: '3rem', fontWeight: 'bolder' }}>
+          <p className='intro-title' >
             BARANGAY AMAMPEREZ
           </p>
-          <p style={{ fontWeight: 'bolder', }} className='intro-location'>Villasis Pangasinan</p>
-          <p className='intro-description' style={{ fontWeight: 'bolder', fontSize: '1.6rem' }}><span style={{ color: 'white', fontSize: '2rem', borderBottom: '8px solid #3B5998' }}>
+          <p className='intro-location'>Villasis Pangasinan</p>
+          <p className='intro-description' style={{ fontSize: '1.6rem' }}><span style={{
+            fontWeight: '900',
+            color: 'white',
+            fontSize: '2rem',
+            borderBottom: '8px solid #3B5998'
+          }}>
             <b>Welcome to eBarangay</b>
           </span>
             <br />

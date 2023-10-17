@@ -4,15 +4,20 @@
     height: clamp(500px, 100vh, 100vh);
 }
 .services-title{
-    text-align: center;
-    font-size: clamp(20px, 5vw, 40px);
-    height: clamp(3%, 5%, 10%);
+     /* border: 1px solid red; */
+    border-bottom: 5px solid #3B5998;
+    font-size: clamp(25px, 5vw, 40px);
+    height: 10%;
+    padding-top: 4%;
+    /* border-bottom: 1px solid red; */
+    font-weight: 900;
+    word-spacing: 30px;
 }
 
 .service-body{
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
-    height: 80%;
+    height: 74%;
     padding-top: clamp(1em, 2em,3em);
     padding-bottom: clamp(1em, 2em,3em);
     grid-gap: 1em;

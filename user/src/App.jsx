@@ -13,15 +13,14 @@ function App() {
 
   return (
     <>
-      <NewHeader/>
-      <Introduction/>
-      <hr style={{ border: 'none', borderTop: '2px solid black' }} />
-      <Announcement/>
+      <NewHeader />
+      <Introduction />
+      <Announcement />
 
-      <Services/>
+      <Services />
 
-      <About/>
-      <Footer/>
+      <About />
+      <Footer />
 
     </>
   )

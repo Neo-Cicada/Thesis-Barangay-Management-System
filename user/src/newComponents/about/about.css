@@ -6,14 +6,18 @@
 
 }
 .about-title{
-    height: 10%;
     /* border: 1px solid red; */
-    font-size: clamp(1.5rem, 2rem, 2.2rem);
-    text-align: center;
+    border-bottom: 5px solid #3B5998;
+    font-size: clamp(25px, 5vw, 40px);
+    height: 10%;
+    /* border-bottom: 1px solid red; */
+    font-weight: 900;
+    padding-top: 5%;
+    word-spacing: 30px;
 }
 .about-body{
     /* border: 1px solid black; */
-    height: 86%;
+    height: 80%;
 }
 .about-body > .body-content{
     height: 90%;

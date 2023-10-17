@@ -13,6 +13,7 @@ import EnrollmentDialog from '../newForms/enroll/EnrollmentDialog'
 import FacilityDialog from '../newForms/faci/FacilityDialog'
 import ReportDialog from '../newForms/report/ReportDialog'
 import EquipmentDialog from '../newForms/equip/EquipmentDialog';
+import { Container } from '@mui/material';
 export default function Services() {
   const [isMedicineOpen, setIsMedicineOpen] = useState(false); // Initialize to false
   const [isCertificateOpen, setIsCertificateOpen] = useState(false);
@@ -29,7 +30,10 @@ export default function Services() {
   return (
     <>
       <div className='services' id='services'>
-        <p className='services-title'>Services</p>
+        <Container>
+          <p className='services-title'>Services</p>
+        </Container>
+
         <div className='service-body'>
           <ServiceBox
             title={'Medicines'}

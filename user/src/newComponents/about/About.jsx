@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './about.css'
+import {Container} from '@mui/material'
 import AboutEB from './AboutEB'
 import Location from './Location'
 import Officials from './Officials'
@@ -26,7 +27,8 @@ export default function About() {
   return (
     <>
       <div className='about-new' id='about'>
-        <p className='about-title'>About</p>
+        <Container><p className='about-title'>About</p></Container>
+        
         <div className='about-body'>
           <div className='body-content'>
             {state === "default" && <AboutEB

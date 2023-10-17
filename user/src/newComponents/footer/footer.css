@@ -1,5 +1,5 @@
 .footer{
-    height: 70vh;
+    height: 75vh;
     /* border: 1px solid red; */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
