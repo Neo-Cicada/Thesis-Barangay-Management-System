@@ -14,7 +14,10 @@ export default function DashboardList({
   second,
   third,
   fourth,
-  seventh, item, status, path }) {
+  seventh,
+  item,
+  status,
+  path }) {
   const [showInformation, setShowInformation] = useState(false)
   const [isOpenProceed, setIsOpenProceed] = useState(false)
   const [isGreenOpen, setIsGreenOpen] = useState(false)
@@ -24,7 +27,9 @@ export default function DashboardList({
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'ongoing')
       .then(async () => {
-        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        const success = await sendEmailFunction(item.email,
+          'Medicine Request Status',
+          'Your request has been accepted please procceed to our Barangay Clinic to claim your requested medicines');
         if (success) {
           console.log('Email sent successfully');
         } else {
@@ -48,7 +53,9 @@ export default function DashboardList({
 
     await useStatusUpdate(path, item.id, 'accepted')
       .then(async () => {
-        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        const success = await sendEmailFunction(item.email,
+          'Medicine Request Status',
+          'You have claimed your requested medicines. Please provide a feedback by emailing us at amamperez@858gmail.com');
         if (success) {
           console.log('Email sent successfully');
         } else {
@@ -71,7 +78,9 @@ export default function DashboardList({
     setIsRedOpen(true)
     await useStatusUpdate(path, item.id, 'rejected')
       .then(async () => {
-        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        const success = await sendEmailFunction(item.email,
+          'Medicine Request Status',
+          'Your request has been declined. If you have question email us at amamperez858@gmail.com');
         if (success) {
           console.log('Email sent successfully');
         } else {
@@ -93,7 +102,7 @@ export default function DashboardList({
 
       <tr >
         <td style={{ textTransform: 'capitalize' }}>{first}</td>
-        <td style={{ textTransform: 'capitalize' }}>{second}</td>
+        <td>{second}</td>
         <td style={{ textTransform: 'capitalize' }}>{third}</td>
         <td style={{ textTransform: 'capitalize' }}>{fourth}</td>
         <td style={{ textTransform: 'capitalize' }}>{seventh}</td>

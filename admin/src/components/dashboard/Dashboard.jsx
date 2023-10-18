@@ -52,6 +52,10 @@ export default function Dashboard() {
             {nav === 'M' && <RecentMedicines/>}
           </div>
           <div className='grap-forth'>
+            <div>
+              <h2 style={{textAlign:'center', fontWeight: 600}}>Dashboard</h2>
+              <h2 style={{textAlign:'center', fontWeight: 600}}>Navigation</h2>
+            </div>
             <div
               className='graph-nav'
               onClick={() => setNav('C')}

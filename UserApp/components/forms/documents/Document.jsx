@@ -38,6 +38,29 @@ export default function Document() {
       }]);
     }
   };
+  const handleMopSelect = (certName, mop) => {
+    const updateSelectedCertificates = selectedCertificates.map((item) => {
+      if (item.name === certName) {
+        return { ...item, mop: mop, reference: mop === 'GCASH' ? item.reference : '' };
+      }
+      else {
+        return item
+      }
+    });
+    setSelectedCertificates(updateSelectedCertificates)
+  }
+  const handleReference = (certName, reference) => {
+    const updateSelectedCertificates = selectedCertificates.map((item) => {
+      if (item.name === certName) {
+        return { ...item, reference: reference }
+      }
+      else {
+        return item
+      }
+    });
+    setSelectedCertificates(updateSelectedCertificates)
+
+  }
   return (
     <>
       <myDocumentContext.Provider value={{ selectedCertificates, handleBoxSelect, setSelectedCertificates, details, setDetails }}>
@@ -50,9 +73,38 @@ export default function Document() {
               nestedScrollEnabled={true}
               style={{ flex: 0.5, borderWidth: 1, borderColor: 'black', }}>
 
-              {selectedCertificates.map((certificate, index) => {
-                return <Text key={index}>{certificate.name}</Text>;
-              })}
+              {selectedCertificates.map((certificate, index) => (
+                <View
+                  key={index}
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    borderBottomWidth: 1,
+                    borderBottomColor: 'grey',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Text>{certificate.name}</Text>
+                  <View style={{ width: '60%' }}>
+                    <Picker
+                      selectedValue={certificate.mop}
+                      onValueChange={(itemValue) => handleMopSelect(certificate.name, itemValue)}
+                    >
+                      <Picker.Item  label="Cash" value="CASH" />
+                      <Picker.Item label="GCASH" value="GCASH" />
+                    </Picker>
+                  </View>
+                  <Text>Cost: {certificate.cost}</Text>
+                  {certificate.mop === 'GCASH' && (
+                    <TextInput
+                      value={certificate.reference}
+                      onChangeText={(text) => handleReference(certificate.name, text)}
+                      style={{ width: '60%' }}
+                      placeholder="Reference"
+                    />
+                  )}
+                </View>
+              ))}
             </ScrollView>
           </View>
           <DocumentForm />

@@ -25,7 +25,9 @@ export default function DashboardListRep({
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'ongoing')
       .then(async () => {
-        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        const success = await sendEmailFunction(item.email,
+          'Complain Status',
+          'Your complain is now ongoing, we will contact you again for further instructions.');
         if (success) {
           console.log('Email sent successfully');
         } else {
@@ -46,7 +48,8 @@ export default function DashboardListRep({
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'accepted')
       .then(async () => {
-        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        const success = await sendEmailFunction(item.email, 'Complain Status',
+          'Your complain has been setteled. Please email us your feedback amamperez at amamperez858@gmail.com ');
         if (success) {
           console.log('Email sent successfully');
         } else {
@@ -68,7 +71,10 @@ export default function DashboardListRep({
     setIsRedOpen(true)
     await useStatusUpdate(path, item.id, 'rejected')
       .then(async () => {
-        const success = await sendEmailFunction(item.email, 'subject', 'html');
+        const success = await sendEmailFunction(
+          item.email,
+          'Complain Status',
+          'Your request has been rejected. Please email us for further questions at amamperez858@gmail.com');
         if (success) {
           console.log('Email sent successfully');
         } else {

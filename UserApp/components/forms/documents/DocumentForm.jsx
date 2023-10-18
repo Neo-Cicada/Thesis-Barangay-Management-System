@@ -1,8 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, Button, Pressable, TextInput, StyleSheet, Modal } from 'react-native';
 import useUpload from '../../../hooks/useUpload'
-const DocumnetForm = () => {
+import DocumentSummary from './DocumentSummary'
+import { myDocumentContext } from './Document';
+const DocumentForm = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const {details, setDetails} = useContext(myDocumentContext)
   const handleMedicineSubmit = async () =>{
     // await useUpload(details, 'MedicineRequest').then(()=>{
 
@@ -15,20 +18,20 @@ const DocumnetForm = () => {
       <TextInput
         style={styles.input}
         placeholder="Full Name"
-        // onChangeText={(text)=>setDetails({...details, fullname: text})}
+        onChangeText={(text)=>setDetails({...details, fullname: text})}
       />
       <TextInput
         style={styles.input}
         placeholder="Phone Number"
         keyboardType="numeric"
-        // onChangeText={(text)=>setDetails({...details, phoneNumber: text})}
+        onChangeText={(text)=>setDetails({...details, phoneNumber: text})}
 
       />
       <TextInput
         style={styles.input}
         placeholder="Email Address"
         keyboardType="email-address"
-        // onChangeText={(text)=>setDetails({...details, email: text})}
+        onChangeText={(text)=>setDetails({...details, email: text})}
 
       />
 
@@ -47,9 +50,9 @@ const DocumnetForm = () => {
 
       {/* Submit Button */}
       <Button title="Submit" onPress={handleMedicineSubmit}/>
-      {/* <MedicineSummary
+      <DocumentSummary
         modalVisible={modalVisible}
-        setModalVisible={setModalVisible} /> */}
+        setModalVisible={setModalVisible} />
     </View>
   );
 };
@@ -87,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DocumnetForm;
+export default DocumentForm;
