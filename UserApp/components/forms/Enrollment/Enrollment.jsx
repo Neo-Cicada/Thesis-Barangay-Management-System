@@ -6,6 +6,7 @@ import * as DocumentPicker from 'expo-document-picker';
 
 export default function Enrollment() {
   const [selectedBirthCert, setSelectedBirthCert] = useState();
+  const [birthCert, setBirthCert] = useState()
   const [selectedMedical, setSelectedMedical] = useState();
   const [selectedMarriage, setSelectedMarriage] = useState();
   const [filePaths, setFilePaths] = useState({
@@ -15,13 +16,12 @@ export default function Enrollment() {
     marriageCertificatePath: '',
   })
 
-  const handleFileUpload = async (fieldName, file) => {
+  const handleFileUpload = async (fieldName, file, img) => {
     const storageRef = ref(storage, `enroll-form-files/${file.name}`);
-    // const photoData = await fetch(file.uri)       
-    // const blob = await photoData.blob()       
-  
+
+
     try {
-      const snapshot = await uploadBytes(storageRef, file, );
+      const snapshot = await uploadBytes(storageRef, img,);
 
       const downloadURL = await getDownloadURL(snapshot.ref);
 
@@ -36,13 +36,18 @@ export default function Enrollment() {
     }
   };
   const pickDocument = async () => {
-    let result = await DocumentPicker.getDocumentAsync({});
+    let result = await DocumentPicker.getDocumentAsync({
+
+      allowsEditing: true,
+    });
     const selectedDocument = result.assets[0];
-    if (result.canceled === false) {
-      console.log(selectedDocument.uri);
-      console.log(result);
-      console.log(result.canceled)
+    if (!result.canceled) {
+      const img = await fetch(result.assets[0].uri)
+      const bytes = await img.blob();
+      console.log(bytes)
+      setBirthCert(bytes)
       setSelectedBirthCert(selectedDocument)
+
     }
 
   }
@@ -408,8 +413,8 @@ export default function Enrollment() {
 
       <Pressable
         onPress={() => {
-          handleFileUpload('birthCertificatePath', selectedBirthCert),
-          console.log(filePaths.birthCertificatePath)
+          handleFileUpload('birthCertificatePath', selectedBirthCert, birthCert),
+            console.log(filePaths.birthCertificatePath)
         }}
         style={{
           alignItems: 'center',
