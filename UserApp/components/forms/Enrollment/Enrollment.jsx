@@ -1,8 +1,52 @@
 import React, { useState } from 'react'
-import { Text, View, ScrollView, TextInput, Pressable } from 'react-native'
+import { Text, View, ScrollView, TextInput, Pressable, Button } from 'react-native'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage, db } from '../../../firebase'
+import * as DocumentPicker from 'expo-document-picker';
+
 export default function Enrollment() {
+  const [selectedBirthCert, setSelectedBirthCert] = useState();
+  const [selectedMedical, setSelectedMedical] = useState();
+  const [selectedMarriage, setSelectedMarriage] = useState();
+  const [filePaths, setFilePaths] = useState({
+    // Store file paths here
+    birthCertificatePath: '',
+    medicalCertificatePath: '',
+    marriageCertificatePath: '',
+  })
+
+  const handleFileUpload = async (fieldName, file) => {
+    const storageRef = ref(storage, `enroll-form-files/${file.name}`);
+    // const photoData = await fetch(file.uri)       
+    // const blob = await photoData.blob()       
+  
+    try {
+      const snapshot = await uploadBytes(storageRef, file, );
+
+      const downloadURL = await getDownloadURL(snapshot.ref);
+
+      console.log(`Download URL for ${fieldName}:`, downloadURL);
+
+      setFilePaths((prevPaths) => ({
+        ...prevPaths,
+        [fieldName]: downloadURL,
+      }));
+    } catch (error) {
+      console.error(`Error uploading ${fieldName}:`, error);
+    }
+  };
+  const pickDocument = async () => {
+    let result = await DocumentPicker.getDocumentAsync({});
+    const selectedDocument = result.assets[0];
+    if (result.canceled === false) {
+      console.log(selectedDocument.uri);
+      console.log(result);
+      console.log(result.canceled)
+      setSelectedBirthCert(selectedDocument)
+    }
+
+  }
+
   const [formData, setFormData] = useState({
 
     childInfo: {
@@ -35,12 +79,7 @@ export default function Enrollment() {
 
   });
 
-  const [filePaths, setFilePaths] = useState({
-    // Store file paths here
-    birthCertificatePath: '',
-    medicalCertificatePath: '',
-    marriageCertificatePath: '',
-  })
+
   return (
     <ScrollView>
       <Text style={{ textAlign: 'center' }}>Child Information</Text>
@@ -110,11 +149,18 @@ export default function Enrollment() {
         style={{ borderBottomWidth: 1, marginBottom: 10 }}
       />
 
-      <TextInput
-        fullWidth
-        placeholder="Upload Birth Certificate"
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
+      <View style={{ alignItems: 'center' }}>
+        <Button title="Pick File" onPress={pickDocument} />
+
+        {selectedBirthCert && (
+          <View style={{ marginTop: 20 }}>
+            <Text>Selected Document:</Text>
+            <Text>Name:</Text>
+            <Text>Size:bytes</Text>
+            <Text>URI:</Text>
+          </View>
+        )}
+      </View>
 
       <TextInput
         fullWidth
@@ -325,7 +371,7 @@ export default function Enrollment() {
               guardianFirstName: text,
             },
           }))
-        }        style={{ borderBottomWidth: 1, marginBottom: 10 }}
+        } style={{ borderBottomWidth: 1, marginBottom: 10 }}
       />
 
       <TextInput
@@ -357,11 +403,14 @@ export default function Enrollment() {
               guardianEmail: text,
             },
           }))
-        }        style={{ borderBottomWidth: 1, marginBottom: 10 }}
+        } style={{ borderBottomWidth: 1, marginBottom: 10 }}
       />
 
       <Pressable
-        onPress={()=>console.log(formData)}
+        onPress={() => {
+          handleFileUpload('birthCertificatePath', selectedBirthCert),
+          console.log(filePaths.birthCertificatePath)
+        }}
         style={{
           alignItems: 'center',
           backgroundColor: 'blue',
