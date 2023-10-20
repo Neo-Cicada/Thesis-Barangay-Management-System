@@ -23,21 +23,20 @@ const MedicineForm = () => {
     )
     console.log(details)
   }
-    return (
+  return (
+    <>
       <View style={styles.container}>
         {/* Information */}
         <TextInput
           value={details.fullname}
           label="Fullname"
           mode='outlined'
-          placeholder="Enter your full name"
           onChangeText={(text) => setDetails({ ...details, fullname: text })}
         />
         <TextInput
           value={details.phoneNumber}
           mode='outlined'
           label="Phone Number"
-          placeholder="Phone Number"
           keyboardType="numeric"
           onChangeText={(text) => setDetails({ ...details, phoneNumber: text })}
 
@@ -46,7 +45,6 @@ const MedicineForm = () => {
           value={details.email}
           mode='outlined'
           label="Email Address"
-          placeholder="Email Address"
           keyboardType="email-address"
           onChangeText={(text) => setDetails({ ...details, email: text })}
 
@@ -69,57 +67,63 @@ const MedicineForm = () => {
 
         {/* Submit Button */}
         <Button
+          style={{ marginTop: 65 }}
           mode='contained'
           buttonColor='#3B5998'
           disabled={!checkBox} title="Submit" onPress={handleMedicineSubmit} >
           <Text>Submit</Text>
-        </Button>
-        <MedicineSummary
-          modalVisible={modalVisible}
-          onDismiss={() => setModalVisible(false)}
-        />
+        </Button >
+
       </View>
-    );
-  };
+      <MedicineSummary
+        modalVisible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+      />
 
-  const styles = StyleSheet.create({
-    container: {
-      height: 400,
-      flex: 1,
-      padding: 20,
-    },
-    labelContainer: {
-      marginVertical: 10,
-    },
-    label: {
-      fontSize: 16,
-      marginBottom: 5,
-    },
-    input: {
-      height: 40,
-      borderColor: 'gray',
-      borderWidth: 1,
-      borderRadius: 5,
-      marginVertical: 10,
-      paddingHorizontal: 10,
-    },
-    reviewText: {
-      marginBottom: 10,
-    },
-    checkboxContainer: {
 
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: 10,
-    },
-    checkbox: {
-      width: 20,
-      height: 20,
-      borderWidth: 1,
-      borderColor: 'gray',
-      marginRight: 10,
-      // You can style the checkbox here
-    },
-  });
+    </>
+  );
+};
 
-  export default MedicineForm;
+const styles = StyleSheet.create({
+  container: {
+    height: 400,
+    flex: 1,
+    padding: 20,
+    gap: 15
+  },
+  labelContainer: {
+    marginVertical: 10,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginVertical: 10,
+    paddingHorizontal: 10,
+  },
+  reviewText: {
+    marginBottom: 10,
+  },
+  checkboxContainer: {
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginRight: 10,
+    // You can style the checkbox here
+  },
+});
+
+export default MedicineForm;

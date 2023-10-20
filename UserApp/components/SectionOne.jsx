@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
     },
     containerTwo: {
-        marginTop: 30,
+        marginTop: 25,
         display: 'flex',
         flexDirection: 'row',
         marginHorizontal: 20,
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
 
     },
     imageBackground: {
-        height: 100,
+        height: 65,
         borderRadius: 20,
         backgroundBlendMode: 'multiply',
         flex: 1,

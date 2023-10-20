@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useEffect } from 'react'
-import { ScrollView, Text, View, StyleSheet, Dimensions } from 'react-native'
+import { ScrollView, Text, View, StyleSheet, Dimensions, KeyboardAvoidingView, Platform} from 'react-native'
 import Box from './Box';
 import MedicineForm from './MedicineForm';
 import useRead from '../../../hooks/useRead'
@@ -70,19 +70,30 @@ export default function Medicine() {
         selectedMedicines, setSelectedMedicines,
         details, setDetails, handleQuantityChange, items
       }}>
-        <View style={{ flex: 1}}>
-          {proceed ? <MedicineForm /> : <MedicineSelect />}
-          <View style={{ flex: 1, }}>
-            <Button
-              mode='contained'
-              buttonColor='#3B5998'
-              style={{ width: 100, }}
-              onPress={() => setProceed(!proceed)} >
-              {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
-            </Button>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
+            {proceed ? <MedicineForm /> : <MedicineSelect />}
+            <View style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              justifyContent: 'flex-end',
+              marginBottom: 10,
+            }}>
+              < Button
+                mode='contained'
+                buttonColor='#3B5998'
+                style={{ width: 100, }}
+                onPress={() => setProceed(!proceed)} >
+                {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
+              </Button>
+            </View>
           </View>
-        </View>
-      </MyMedicineContext.Provider>
+        </KeyboardAvoidingView>
+      </MyMedicineContext.Provider >
+
     </>
   )
 }
