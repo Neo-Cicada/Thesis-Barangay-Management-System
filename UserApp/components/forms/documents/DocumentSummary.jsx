@@ -20,8 +20,9 @@ const DocumentSummary = ({ modalVisible, onDismiss }) => {
           return (
             <>
               <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                <Text>Name: </Text>
-                <Text style={{ marginLeft: 10 }}>Quantity:</Text>
+                <Text>Name: {item.name} </Text>
+                <Text style={{ marginLeft: 10 }}>{item.mop}</Text>
+                <Text>{item.reference}</Text>
               </View>
 
             </>

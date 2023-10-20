@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext, useEffect, } from 'react'
 import { ScrollView, Text, View, StyleSheet, Pressable, TextInput, } from 'react-native'
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import Box from '../medicines/Box';
 import DocumentForm from './DocumentForm'
 import DocumentSelect from './DocumentSelect';
@@ -73,30 +73,32 @@ export default function Document() {
         details, setDetails, handleMopSelect, handleReference
       }}>
         <View style={{ flex: 1 }}>
-          {proceed ? <DocumentForm /> : <View style={{ borderWidth: 1, borderColor: 'red', height: 650 }}>
-            <Text style={{
-              textAlign: 'center',
-              fontSize: 25, fontWeight: 'bold'
-            }}>Available Documents</Text>
-            <View
-              style={{ flex: 0.5, height: 300, borderWidth: 1, borderColor: 'red' }}>
+          {proceed ? <DocumentForm /> :
+            <View style={{  flex: 0.9 }}>
+              <Text style={{
+                textAlign: 'center',
+                fontSize: 25, fontWeight: 'bold'
+              }}>Available Documents</Text>
 
-              <DocumentSelect />
-            </View>
-            <Text style={{
-              textAlign: 'center',
-              fontSize: 25, fontWeight: 'bold'
-            }}>Selected Documents</Text>
-            <SelectedDocument />
-          </View>}
+              <View
+                style={{ flex: 1, borderBottomColor: 'black', borderBottomWidth: 3,  }}>
+
+                <DocumentSelect />
+              </View>
+
+              <Text style={{
+                textAlign: 'center',
+                fontSize: 25, fontWeight: 'bold'
+              }}>Selected Documents</Text>
+              <SelectedDocument />
+            </View>}
           {/* <DocumentForm /> */}
           <View style={{
-            flex: 0.7,
+            flex: 0.1,
             flexDirection: 'row',
             alignItems: 'flex-end',
             justifyContent: 'flex-end',
-            borderColor: 'red',
-            borderWidth: 1,
+           
           }}>
 
             <Button

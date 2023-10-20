@@ -10,7 +10,7 @@ export default function SelectedDocument() {
         <>
             <ScrollView
                 nestedScrollEnabled={true}
-                style={{ flex: 0.5, borderWidth: 1, borderColor: 'black', }}>
+                style={{ flex: 1, }}>
 
                 {selectedCertificates.map((certificate, index) => (
                     <View
@@ -26,7 +26,7 @@ export default function SelectedDocument() {
                         <Text>{certificate.name}</Text>
                         <View >
                             <Picker
-                                style={{ height: 50, width: 150 }}
+                                style={{ height: 50, width: 150,  borderWidth: 1, borderColor: 'black' }}
                                 itemStyle={{ color: "black" }}
                                 selectedValue={certificate.mop}
                                 onValueChange={(itemValue, itemIndex) => handleMopSelect(certificate.name, itemValue)}
