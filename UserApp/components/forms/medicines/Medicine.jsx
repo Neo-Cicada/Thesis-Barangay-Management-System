@@ -82,7 +82,7 @@ export default function Medicine() {
               justifyContent: 'flex-end',
               marginBottom: 10,
             }}>
-              < Button
+              <Button
                 mode='contained'
                 buttonColor='#3B5998'
                 style={{ width: 100, }}

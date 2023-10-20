@@ -1,11 +1,15 @@
 import React, { useState, useContext, createContext, useEffect, } from 'react'
-import { ScrollView, Text, View, StyleSheet, Pressable, TextInput, Picker } from 'react-native'
+import { ScrollView, Text, View, StyleSheet, Pressable, TextInput, } from 'react-native'
+import {Picker} from '@react-native-picker/picker';
 import Box from '../medicines/Box';
 import DocumentForm from './DocumentForm'
 import DocumentSelect from './DocumentSelect';
+import SelectedDocument from './SelectedDocument';
+import { Button } from 'react-native-paper'
 export const myDocumentContext = createContext();
 export default function Document() {
   const [options, setOptions] = useState([])
+  const [proceed, setProceed] = useState(false)
   const [selectedCertificates, setSelectedCertificates] = useState([]);
   const [details, setDetails] = useState({
     fullname: '',
@@ -63,52 +67,47 @@ export default function Document() {
   }
   return (
     <>
-      <myDocumentContext.Provider value={{ selectedCertificates, handleBoxSelect, setSelectedCertificates, details, setDetails }}>
-        <ScrollView>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 500 }}>
-            <ScrollView nestedScrollEnabled={true} style={{ flex: 0.5, height: 300, borderWidth: 1, borderColor: 'red' }}>
-              <DocumentSelect />
-            </ScrollView>
-            <ScrollView
-              nestedScrollEnabled={true}
-              style={{ flex: 0.5, borderWidth: 1, borderColor: 'black', }}>
+      <myDocumentContext.Provider value={{
+        selectedCertificates,
+        handleBoxSelect, setSelectedCertificates,
+        details, setDetails, handleMopSelect, handleReference
+      }}>
+        <View style={{ flex: 1 }}>
+          {proceed ? <DocumentForm /> : <View style={{ borderWidth: 1, borderColor: 'red', height: 650 }}>
+            <Text style={{
+              textAlign: 'center',
+              fontSize: 25, fontWeight: 'bold'
+            }}>Available Documents</Text>
+            <View
+              style={{ flex: 0.5, height: 300, borderWidth: 1, borderColor: 'red' }}>
 
-              {selectedCertificates.map((certificate, index) => (
-                <View
-                  key={index}
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    borderBottomWidth: 1,
-                    borderBottomColor: 'grey',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text>{certificate.name}</Text>
-                  <View style={{ width: '60%' }}>
-                    <Picker
-                      selectedValue={certificate.mop}
-                      onValueChange={(itemValue) => handleMopSelect(certificate.name, itemValue)}
-                    >
-                      <Picker.Item  label="Cash" value="CASH" />
-                      <Picker.Item label="GCASH" value="GCASH" />
-                    </Picker>
-                  </View>
-                  <Text>Cost: {certificate.cost}</Text>
-                  {certificate.mop === 'GCASH' && (
-                    <TextInput
-                      value={certificate.reference}
-                      onChangeText={(text) => handleReference(certificate.name, text)}
-                      style={{ width: '60%' }}
-                      placeholder="Reference"
-                    />
-                  )}
-                </View>
-              ))}
-            </ScrollView>
+              <DocumentSelect />
+            </View>
+            <Text style={{
+              textAlign: 'center',
+              fontSize: 25, fontWeight: 'bold'
+            }}>Selected Documents</Text>
+            <SelectedDocument />
+          </View>}
+          {/* <DocumentForm /> */}
+          <View style={{
+            flex: 0.7,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
+            borderColor: 'red',
+            borderWidth: 1,
+          }}>
+
+            <Button
+              mode='contained'
+              buttonColor='#3B5998'
+              onPress={() => setProceed(!proceed)} >
+              {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
+            </Button>
           </View>
-          <DocumentForm />
-        </ScrollView>
+
+        </View>
       </myDocumentContext.Provider>
     </>
   )
