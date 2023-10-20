@@ -11,22 +11,26 @@ function Box({ name, isSelected, onSelect, quantity }) {
       onPress={() => onSelect(name)}
     >
       <Text style={styles.nameText}>{name}</Text>
-      <Text>{quantity}</Text>
+      <Text style={{
+        textAlign: 'center'
+      }}>{quantity}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   box: {
-    height: 120, // 5em in pixels
-    width: 140,  // 7em in pixels
-    borderRadius: 10, // 1em in pixels
+    height: 90, // 5em in pixels
+    width: 130,  // 7em in pixels
+    borderRadius: 100, // 1em in pixels
     justifyContent: 'center',
     alignItems: 'center',
     margin: 10,
   },
   nameText: {
-    fontSize: 20, // 1em in pixels
+    fontSize: 20,
+    textAlign: 'center'
+    // 1em in pixels
   },
 });
 

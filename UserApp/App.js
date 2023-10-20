@@ -38,18 +38,19 @@ function BottomTab() {
       }}
     >
       <Tab.Screen
-        name="eBarangay"
+        name="eBARANGAY"
         component={SectionOne}
         options={{
           headerTitleAlign: "center",
           headerTitleStyle: {
             fontSize: 30,
+            fontWeight: 900,
             color: "#3B5998",
           },
         }}
       />
       <Tab.Screen
-        name="Announcementext"
+        name="Announcement"
         component={SectionTwo}
         options={{
           headerTitleAlign: "center",

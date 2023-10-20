@@ -5,33 +5,36 @@ import MedicineSummary from './MedicineSummary';
 import useUpload from '../../../hooks/useUpload'
 const MedicineForm = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const {details, setDetails} = useContext(MyMedicineContext)
-  const handleMedicineSubmit = async () =>{
-    await useUpload(details, 'MedicineRequest').then(()=>{
+  const { details, setDetails } = useContext(MyMedicineContext)
+  const handleMedicineSubmit = async () => {
+    // await useUpload(details, 'MedicineRequest').then(()=>{
 
-      console.log('success')
-    })
+    console.log('success')
+    // })
   }
   return (
     <View style={styles.container}>
       {/* Information */}
-      <TextInput
-        style={styles.input}
-        placeholder="Full Name"
-        onChangeText={(text)=>setDetails({...details, fullname: text})}
-      />
+      <View style={styles.labelContainer}>
+        <Text style={styles.label}>Full Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your full name"
+          onChangeText={(text) => setDetails({ ...details, fullname: text })}
+        />
+      </View>
       <TextInput
         style={styles.input}
         placeholder="Phone Number"
         keyboardType="numeric"
-        onChangeText={(text)=>setDetails({...details, phoneNumber: text})}
+        onChangeText={(text) => setDetails({ ...details, phoneNumber: text })}
 
       />
       <TextInput
         style={styles.input}
         placeholder="Email Address"
         keyboardType="email-address"
-        onChangeText={(text)=>setDetails({...details, email: text})}
+        onChangeText={(text) => setDetails({ ...details, email: text })}
 
       />
 
@@ -49,7 +52,7 @@ const MedicineForm = () => {
       </View>
 
       {/* Submit Button */}
-      <Button title="Submit" onPress={handleMedicineSubmit}/>
+      <Button title="Submit" onPress={handleMedicineSubmit} />
       <MedicineSummary
         modalVisible={modalVisible}
         setModalVisible={setModalVisible} />
@@ -63,6 +66,13 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     height: 400,
     padding: 20,
+  },
+  labelContainer: {
+    marginVertical: 10,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
   },
   input: {
     height: 40,

@@ -25,19 +25,20 @@ export default function SectionOne({ navigation }) {
                     </ImageBackground>
                 </View>
 
-                <Text style={{borderWidth: 1,
+                <Text style={{
+                    borderWidth: 1,
                     fontSize: 20,
                     marginTop: 25,
                     marginHorizontal: 20,
                     textAlign: 'center',
-                    borderColor:'red',
+                    borderColor: 'red',
                     color: "#3B5998",
-                    }}>Online Services</Text>
+                }}>Online Services</Text>
 
                 <View style={styles.containerTwo}>
                     <Pressable onPress={() => navigation.navigate('Medicine')}>
                         <View style={styles.items}>
-
+                            <Text>Icon</Text>
                         </View>
                         <Text style={styles.textItems}>Medicines</Text>
                     </Pressable>
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         gap: 5,
         justifyContent: 'space-around',
-      
+
     },
     items: {
         marginTop: 10,
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
         width: 100,
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 1000
     },
     titleContainer: {
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
         flex: 1
     }, overlay: {
         flex: 1,
-        // backgroundColor: "rgba(0, 0, 0, 0.5)",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -140,8 +142,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 26,
         color: 'white',
+        fontWeight: 'bold'
     },
     subtitle: {
         fontSize: 20,
+        fontWeight: 'bold'
     }
 })

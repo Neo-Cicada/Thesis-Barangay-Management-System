@@ -1,12 +1,14 @@
 import React, { useState, useContext, createContext, useEffect } from 'react'
-import { ScrollView, Text, View, StyleSheet, Pressable, TextInput } from 'react-native'
+import { ScrollView, Text, View, StyleSheet,Button, Dimensions } from 'react-native'
 import Box from './Box';
 import MedicineForm from './MedicineForm';
 import useRead from '../../../hooks/useRead'
+import MedicineSelect from './MedicineSelect';
 export const MyMedicineContext = createContext();
 
 export default function Medicine() {
-  const [options, setOptions] = useState([])
+  const [options, setOptions] = useState([]);
+  const [proceed, setProceed] = useState(false);
   const [selectedMedicines, setSelectedMedicines] = useState([]);
   const [details, setDetails] = useState({
     fullname: '',
@@ -14,8 +16,9 @@ export default function Medicine() {
     phoneNumber: '',
     selectedMedicines: [], // Include the selectedItems property with an initial empty array
   });
+  
   useRead('Medicines', setOptions)
- 
+
   useEffect(() => {
     setDetails((prevDetails) => ({
       ...prevDetails,
@@ -44,9 +47,6 @@ export default function Medicine() {
       });
       setSelectedMedicines(updatedSelectedItems);
     } else {
-      // Handle the case when the input is not a valid number (empty or non-numeric)
-      // You can set a default value or show an error message here.
-      // For example, if you want to set a default value of 0:
       const updatedSelectedItems = selectedMedicines.map((item) => {
         if (item.name === name) {
           return { ...item, count: 0 };
@@ -64,53 +64,12 @@ export default function Medicine() {
   />)
   return (
     <>
-      <MyMedicineContext.Provider value={{ selectedMedicines, setSelectedMedicines, details, setDetails }}>
-        <ScrollView>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 500 }}>
-            <ScrollView nestedScrollEnabled={true} style={{ flex: 0.5, height: 300, borderWidth: 1, borderColor: 'red' }}>
-              {/* options */}
-
-              {items}
-
-
-            </ScrollView>
-            <ScrollView  
-              nestedScrollEnabled={true} 
-              style={{ flex: 0.5, borderWidth: 1, borderColor: 'black', }}>
-              {/* selected options */}
-              {selectedMedicines.map((medicine, index) => (
-                <View key={index} style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-
-                }}>
-                  <Text style={{ textAlign: 'center' }}>{medicine.name}</Text>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <TextInput
-                      style={{
-                        height: 40,
-                        borderColor: 'gray',
-                        borderWidth: 1,
-                        padding: 10,
-                        borderRadius: 5,
-                        fontSize: 16,
-                        marginBottom: 10,
-                      }}
-                      placeholder="Enter quantity"
-                      keyboardType="numeric"
-                      value={medicine.count.toString()}
-                      onChangeText={(text) => handleQuantityChange(medicine.name, text)}
-                    />
-                  </View>
-                </View>
-              ))}
-            </ScrollView>
-          </View>
-          {/* form down here */}
-          <MedicineForm />
-        </ScrollView>
+      <MyMedicineContext.Provider value={{ selectedMedicines, setSelectedMedicines,
+         details, setDetails, handleQuantityChange, items }}>
+        <View>
+          {proceed ? <MedicineForm/> :<MedicineSelect/>}
+          <Button title={proceed ? "Back": "Next"} onPress={() => setProceed(!proceed)} />
+        </View>
       </MyMedicineContext.Provider>
     </>
   )
