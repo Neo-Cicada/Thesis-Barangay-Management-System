@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
     },
     logoText: {
         fontSize: 0.04 * Dimensions.get('window').height, // 4% of the screen height
-        fontWeight: 'bold',
+        fontWeight: 500,
 
     },
     headerText: {
         fontSize: 0.02 * Dimensions.get('window').height, // 4% of the screen height
-        fontWeight: 'bold',
+        fontWeight: 500,
     },
 });
 

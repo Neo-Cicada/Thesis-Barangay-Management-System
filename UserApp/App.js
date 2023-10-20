@@ -18,12 +18,14 @@ const Tab = createBottomTabNavigator();
 function BottomTab() {
   return (
     <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarLabel: route.name, // Show the tab name as the label
+      })}
       tabBarOptions={{
         labelStyle: {
           fontSize: 14,
-          fontWeight: "bold",
         },
-        activeTintColor: "#ffffff",
+        activeTintColor: "blue",
         inactiveTintColor: "#000000",
         pressOpacity: 1,
         indicatorStyle: {
@@ -32,12 +34,32 @@ function BottomTab() {
           borderRadius: 30,
           top: 9,
         },
-        tabStyle: {
-          width: "auto",
-        },
-      }}>
-      <Tab.Screen name="eBarangay" component={SectionOne} />
-      <Tab.Screen name="Announcement" component={SectionTwo} />
+
+      }}
+    >
+      <Tab.Screen
+        name="eBarangay"
+        component={SectionOne}
+        options={{
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontSize: 30,
+            color: "#3B5998",
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Announcementext"
+        component={SectionTwo}
+        options={{
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontSize: 30,
+            fontWeight: 900,
+            color: "#3B5998",
+          },
+        }}
+      />
     </Tab.Navigator>
   )
 }
@@ -50,8 +72,8 @@ export default function App() {
         {/* <HeaderApp/> */}
         <Stack.Navigator
           screenOptions={{
-            headerStyle: { backgroundColor: '#DFE3EE' },
-            headerTintColor: '#3B5998', // Set the text color here
+            headerStyle: { backgroundColor: "#DFE3EE" },
+            headerTintColor: "#3B5998", // Set the text color here
           }}
         >
           <Stack.Screen name="eBarangay"
@@ -96,7 +118,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DFE3EE',
+    backgroundColor: "#DFE3EE",
     marginTop: StatusBar.currentHeight || 0, // Adjust the top margin to account for the status bar height
   },
   bodyContainer: {

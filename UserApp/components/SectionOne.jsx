@@ -15,9 +15,25 @@ export default function SectionOne({ navigation }) {
                         source={require('../assets/zyro-image.png')} // Replace with the path to your image
                         style={styles.imageBackground}
                     >
-                        <Text style={{ textAlign: 'center' }}>Amamprez Villasis Pangasinan</Text>
+                        <View style={styles.overlay}>
+                            <Text style={styles.text}>
+                                <Text>Amamperez</Text>
+                                {'\n'}
+                                <Text style={styles.subtitle}>Villasis Pangasinan</Text>
+                            </Text>
+                        </View>
                     </ImageBackground>
                 </View>
+
+                <Text style={{borderWidth: 1,
+                    fontSize: 20,
+                    marginTop: 25,
+                    marginHorizontal: 20,
+                    textAlign: 'center',
+                    borderColor:'red',
+                    color: "#3B5998",
+                    }}>Online Services</Text>
+
                 <View style={styles.containerTwo}>
                     <Pressable onPress={() => navigation.navigate('Medicine')}>
                         <View style={styles.items}>
@@ -67,8 +83,7 @@ export default function SectionOne({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderWidth: 1,
-        borderColor: 'red',
+
 
     },
     containerTwo: {
@@ -78,8 +93,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         gap: 5,
         justifyContent: 'space-around',
-        borderWidth: 1,
-        borderColor: 'red'
+      
     },
     items: {
         marginTop: 10,
@@ -103,16 +117,31 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 35,
         color: '#3B5998',
-        fontWeight: '500'
     },
     textItems: {
         borderWidth: 1,
         borderColor: 'red',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 15,
+
     },
     imageBackground: {
         height: 100,
         borderRadius: 20,
+        backgroundBlendMode: 'multiply',
         flex: 1
+    }, overlay: {
+        flex: 1,
+        // backgroundColor: "rgba(0, 0, 0, 0.5)",
+        justifyContent: 'center',
+        alignItems: 'center',
     },
+    text: {
+        textAlign: 'center',
+        fontSize: 26,
+        color: 'white',
+    },
+    subtitle: {
+        fontSize: 20,
+    }
 })

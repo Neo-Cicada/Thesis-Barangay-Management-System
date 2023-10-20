@@ -72,7 +72,8 @@ function ComplainForm() {
             <TouchableOpacity
                 style={{}}
                 onPress={() => setModalVisible(true)}>
-                <Text style={{ fontSize: 16, color: 'red', textDecorationLine: 'underline', cursor: 'pointer' }}>
+                <Text style={{ fontSize: 16, color: 'red',
+                 textDecorationLine: 'underline', }}>
                     Review summary of information provided
                 </Text>
             </TouchableOpacity>
