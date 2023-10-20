@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { Text, ScrollView, Modal, View, Button } from 'react-native';
+import { Text, ScrollView,  View, Button } from 'react-native';
 import { MyMedicineContext } from './Medicine';
+import { Modal } from 'react-native-paper';
 
-const MedicineSummary = ({ modalVisible, setModalVisible }) => {
+const MedicineSummary = ({ modalVisible, onDismiss }) => {
   const { selectedMedicines, details } = useContext(MyMedicineContext);
 
   return (
-    <Modal visible={modalVisible} transparent animationType="fade">
+    <Modal visible={modalVisible} onDismiss={onDismiss} transparent animationType="fade">
       <View
         style={{
           flex: 1,
@@ -26,7 +27,6 @@ const MedicineSummary = ({ modalVisible, setModalVisible }) => {
         <Text>{details.phoneNumber}</Text>
         <Text>{details.email}</Text>
 
-        <Button title="Close" onPress={() => setModalVisible(false)} />
       </View>
     </Modal>
   );

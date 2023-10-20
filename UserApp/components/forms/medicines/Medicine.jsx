@@ -1,9 +1,10 @@
 import React, { useState, useContext, createContext, useEffect } from 'react'
-import { ScrollView, Text, View, StyleSheet,Button, Dimensions } from 'react-native'
+import { ScrollView, Text, View, StyleSheet, Dimensions } from 'react-native'
 import Box from './Box';
 import MedicineForm from './MedicineForm';
 import useRead from '../../../hooks/useRead'
 import MedicineSelect from './MedicineSelect';
+import { Button } from 'react-native-paper'
 export const MyMedicineContext = createContext();
 
 export default function Medicine() {
@@ -14,9 +15,10 @@ export default function Medicine() {
     fullname: '',
     email: '',
     phoneNumber: '',
+    status: 'request',
     selectedMedicines: [], // Include the selectedItems property with an initial empty array
   });
-  
+
   useRead('Medicines', setOptions)
 
   useEffect(() => {
@@ -64,11 +66,21 @@ export default function Medicine() {
   />)
   return (
     <>
-      <MyMedicineContext.Provider value={{ selectedMedicines, setSelectedMedicines,
-         details, setDetails, handleQuantityChange, items }}>
-        <View>
-          {proceed ? <MedicineForm/> :<MedicineSelect/>}
-          <Button title={proceed ? "Back": "Next"} onPress={() => setProceed(!proceed)} />
+      <MyMedicineContext.Provider value={{
+        selectedMedicines, setSelectedMedicines,
+        details, setDetails, handleQuantityChange, items
+      }}>
+        <View style={{ flex: 1}}>
+          {proceed ? <MedicineForm /> : <MedicineSelect />}
+          <View style={{ flex: 1, }}>
+            <Button
+              mode='contained'
+              buttonColor='#3B5998'
+              style={{ width: 100, }}
+              onPress={() => setProceed(!proceed)} >
+              {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
+            </Button>
+          </View>
         </View>
       </MyMedicineContext.Provider>
     </>

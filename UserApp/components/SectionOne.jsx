@@ -138,7 +138,8 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 20,
         backgroundBlendMode: 'multiply',
-        flex: 1
+        flex: 1,
+        height: 250,
     }, overlay: {
         flex: 1,
         backgroundColor: "rgba(0, 0, 0, 0.5)",
