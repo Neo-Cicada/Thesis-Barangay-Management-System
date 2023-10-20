@@ -47,6 +47,7 @@ export default function SectionTwo() {
 const box = StyleSheet.create({
   box: {
     borderColor: '#3B5998',
+    backgroundColor: 'white',
     borderWidth: 5,
     marginTop: 30,
     borderRadius: 12

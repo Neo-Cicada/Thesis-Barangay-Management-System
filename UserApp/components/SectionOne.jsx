@@ -5,8 +5,15 @@ import {
     ImageBackground
 
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function SectionOne({ navigation }) {
+    const healthIcon = <Icon name="briefcase-medical" size={40} color={'#3B5998'} />
+    const documentIcon = <Icon name="file-signature" size={40} color={'#3B5998'} />
+    const facilityIcon = <Icon name="warehouse" size={40} color={'#3B5998'} />
+    const enrollmentIcon = <Icon name="child" size={40} color={'#3B5998'} />
+    const complainIcon = <Icon name="user-times" size={40} color={'#3B5998'} />
+    const equipmentIcon = <Icon name="tools" size={40} color={'#3B5998'} />
     return (
         <>
             <ScrollView style={styles.container}>
@@ -26,31 +33,30 @@ export default function SectionOne({ navigation }) {
                 </View>
 
                 <Text style={{
-                    borderWidth: 1,
-                    fontSize: 20,
+                    fontSize: 26,
                     marginTop: 25,
                     marginHorizontal: 20,
                     textAlign: 'center',
-                    borderColor: 'red',
+                    fontWeight: 'bold',
                     color: "#3B5998",
                 }}>Online Services</Text>
 
                 <View style={styles.containerTwo}>
                     <Pressable onPress={() => navigation.navigate('Medicine')}>
                         <View style={styles.items}>
-                            <Text>Icon</Text>
+                            {healthIcon}
                         </View>
                         <Text style={styles.textItems}>Medicines</Text>
                     </Pressable>
                     <Pressable onPress={() => navigation.navigate('Document')}>
                         <View style={styles.items}>
-
+                            {documentIcon}
                         </View>
                         <Text style={styles.textItems}>Documents</Text>
                     </Pressable>
                     <Pressable onPress={() => navigation.navigate('Facility')}>
                         <View style={styles.items}>
-
+                            {facilityIcon}
                         </View>
                         <Text style={styles.textItems}>Facility</Text>
                     </Pressable>
@@ -59,19 +65,19 @@ export default function SectionOne({ navigation }) {
                 <View style={styles.containerTwo}>
                     <Pressable onPress={() => navigation.navigate('Enrollment')}>
                         <View style={styles.items}>
-
+                            {enrollmentIcon}
                         </View>
-                        <Text style={styles.textItems}>Enrollment</Text>
+                        <Text style={styles.textItems}>Daycare</Text>
                     </Pressable>
                     <Pressable onPress={() => navigation.navigate('Complain')}>
                         <View style={styles.items}>
-
+                            {complainIcon}
                         </View>
                         <Text style={styles.textItems}>Complain</Text>
                     </Pressable>
                     <Pressable onPress={() => navigation.navigate('Equipment')}>
                         <View style={styles.items}>
-
+                            {equipmentIcon}
                         </View>
                         <Text style={styles.textItems}>Equipment</Text>
                     </Pressable>
@@ -99,8 +105,8 @@ const styles = StyleSheet.create({
     items: {
         marginTop: 10,
         backgroundColor: '#DFE3EE',
-        borderWidth: 1,
-        borderColor: 'red',
+        borderWidth: 2,
+        borderColor: '#3B5998',
         height: 100,
         width: 100,
         display: 'flex',
@@ -121,10 +127,11 @@ const styles = StyleSheet.create({
         color: '#3B5998',
     },
     textItems: {
-        borderWidth: 1,
-        borderColor: 'red',
+        borderBottomWidth: 3,
+        borderBottomColor: '#3B5998',
         textAlign: 'center',
-        fontSize: 15,
+        fontSize: 17,
+        fontWeight: 'bold'
 
     },
     imageBackground: {

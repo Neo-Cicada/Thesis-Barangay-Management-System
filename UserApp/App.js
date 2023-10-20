@@ -12,36 +12,27 @@ import Document from './components/forms/documents/Document'
 import Facility from './components/forms/facility/Facility'
 import Enrollment from './components/forms/Enrollment/Enrollment'
 import Complain from './components/forms/complain/Complain'
+import { useRoute } from '@react-navigation/native';
 import Equipment from './components/forms/Equipment/Equipment'
+import Icon from 'react-native-vector-icons/Entypo'
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 function BottomTab() {
+  const route = useRoute();
+  const homeIcon = <Icon name="home" size={30}
+    color={'black'} />
+  const newsIcon = <Icon name="newsletter" size={30} color={'black'} />
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarLabel: route.name, // Show the tab name as the label
-      })}
-      tabBarOptions={{
-        labelStyle: {
-          fontSize: 14,
-        },
-        activeTintColor: "blue",
-        inactiveTintColor: "#000000",
-        pressOpacity: 1,
-        indicatorStyle: {
-          backgroundColor: "black",
-          height: 30,
-          borderRadius: 30,
-          top: 9,
-        },
-
-      }}
     >
       <Tab.Screen
         name="eBARANGAY"
         component={SectionOne}
         options={{
+          tabBarIcon: () => homeIcon,
           headerTitleAlign: "center",
+          tabBarLabel: '',
           headerTitleStyle: {
             fontSize: 30,
             fontWeight: 900,
@@ -53,7 +44,9 @@ function BottomTab() {
         name="Announcement"
         component={SectionTwo}
         options={{
+          tabBarIcon: () => newsIcon,
           headerTitleAlign: "center",
+          tabBarLabel: '',
           headerTitleStyle: {
             fontSize: 30,
             fontWeight: 900,
