@@ -19,10 +19,10 @@ export default function SectionTwo() {
       <View>
         <Text style={box.time}>{item.date}</Text>
       </View>
-      <View style={{ borderWidth: 1, height: 240 }}>
+      <View style={{ borderRadius: 10, height: 240 }}>
         <Image
           source={{ uri: item.imageUrl }}
-          style={{ borderWidth: 1, flex: 1, borderColor: 'black' }}
+          style={{flex: 1, borderRadius: 10 }}
         />
       </View>
       <ScrollView>

@@ -1,12 +1,25 @@
-import React, { useState } from 'react'
-import { Text, View, ScrollView, TextInput, Pressable, Button } from 'react-native'
+import React, { useState, useContext, createContext, useEffect } from 'react'
+import { Text, View, ScrollView, TextInput, Pressable, } from 'react-native'
+import { Button } from 'react-native-paper'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage, db } from '../../../firebase'
 import * as DocumentPicker from 'expo-document-picker';
+import ChildForm from './ChildForm';
+import FatherForm from './FatherForm';
+import MotherForm from './MotherForm';
+import GuardianForm from './GuardinForm'
+export const myEnrollmentContext = createContext();
 
 export default function Enrollment() {
   const [selectedBirthCert, setSelectedBirthCert] = useState();
+  const [selectedMedCert, setSelectedMedCert] = useState();
+  const [selectedMarriageCert, setSelectedMarriageCert] = useState();
+
   const [birthCert, setBirthCert] = useState()
+  const [medCert, setMedCert] = useState()
+  const [marriageCert, setMarriageCert] = useState()
+
+  const [count, setCount] = useState(1)
   const [selectedMedical, setSelectedMedical] = useState();
   const [selectedMarriage, setSelectedMarriage] = useState();
   const [filePaths, setFilePaths] = useState({
@@ -15,7 +28,9 @@ export default function Enrollment() {
     medicalCertificatePath: '',
     marriageCertificatePath: '',
   })
-
+  // useEffect(()=>{ // upload when all the filepath are filed
+  //   useUpload(...formData, ...filePaths).clear.then alert sucess transaction
+  // },[filePaths])
   const handleFileUpload = async (fieldName, file, img) => {
     const storageRef = ref(storage, `enroll-form-files/${file.name}`);
 
@@ -35,23 +50,59 @@ export default function Enrollment() {
       console.error(`Error uploading ${fieldName}:`, error);
     }
   };
-  const pickDocument = async () => {
-    let result = await DocumentPicker.getDocumentAsync({
 
-      allowsEditing: true,
+  function uriToBlob(uri) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+
+      // If successful -> return with blob
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+
+      // reject on error
+      xhr.onerror = function () {
+        reject(new Error('uriToBlob failed'));
+      };
+
+      // Set the response type to 'blob' - this means the server's response 
+      // will be accessed as a binary object
+      xhr.responseType = 'blob';
+
+      // Initialize the request. The third argument set to 'true' denotes 
+      // that the request is asynchronous
+      xhr.open('GET', uri, true);
+
+      // Send the request. The 'null' argument means that no body content is given for the request
+      xhr.send(null);
     });
-    const selectedDocument = result.assets[0];
-    if (!result.canceled) {
-      const img = await fetch(result.assets[0].uri)
-      const bytes = await img.blob();
-      console.log(bytes)
-      setBirthCert(bytes)
-      setSelectedBirthCert(selectedDocument)
+  };
+  const pickDocument = async (setBlob, setNoBlob) => {
+    try {
+      let result = await DocumentPicker.getDocumentAsync({
+        allowsEditing: true,
+      });
+      const selectedDocument = result.assets[0];
 
+      if (!result.canceled) {
+        // const img = await fetch(result.assets[0].uri); this fucker cause a bug that lead me fix for 5 hours
+        const bytes = await uriToBlob(selectedDocument.uri).catch(error => {
+          console.log('bytes error', error);
+        });
+
+        setBlob(bytes);
+        setNoBlob(selectedDocument);
+      }
+    } catch (error) {
+      console.error('An error occurred while picking the document:', error);
     }
+  };
 
+  const handleSubmit = async () => {
+    await handleFileUpload('birthCertificatePath', selectedBirthCert, birthCert);
+    await handleFileUpload('medicalCertificatePath', selectedMedCert, medCert)
+    await handleFileUpload('marriageCertificatePath', selectedMarriageCert, marriageCert)
   }
-
   const [formData, setFormData] = useState({
 
     childInfo: {
@@ -83,350 +134,72 @@ export default function Enrollment() {
 
 
   });
-
-
+  const handleNext = () => {
+    if (count < 4) {
+      setCount(count + 1);
+    }
+  };
+  const handleBack = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
   return (
-    <ScrollView>
-      <Text style={{ textAlign: 'center' }}>Child Information</Text>
+    <myEnrollmentContext.Provider value={{
+      setSelectedMarriageCert,
+      selectedBirthCert,
+      handleFileUpload,
+      pickDocument,
+      formData,
+      setFormData,
+      birthCert,
+      medCert,
+      marriageCert,
+      selectedBirthCert,
+      selectedMarriageCert,
+      selectedMedCert,
+      setBirthCert,
+      setSelectedBirthCert,
+      setMedCert,
+      setSelectedMedCert,
+      setMarriageCert,
+      setSelectedMarriage,
+      setSelectedBirthCert
+    }}>
+      <View style={{ flex: 1 }}>
+        {count === 1 && <ChildForm />}
+        {count === 2 && <FatherForm />}
+        {count === 3 && <MotherForm />}
+        {count === 4 && <GuardianForm />}
 
-      <TextInput
-        required
-        value={formData.childInfo.childLastName}
-        placeholder="Lastname"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            childInfo: {
-              ...prevData.childInfo,
-              childLastName: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
+        <View style={{
+          flex: 0.1, borderColor: 'red',
+          borderWidth: 1, flexDirection: 'row',
+          justifyContent: 'space-between', alignItems: 'center'
+        }}>
+          <Button
+            style={{ width: 150, }}
+            mode='contained'
+            buttonColor='#3B5998'
+            title="BACK"
+            disabled={count === 1}
+            onPress={handleBack}
+          >
+            BACK
+          </Button>
+          <Button
+            style={{ width: 150, }}
+            mode='contained'
 
-      <TextInput
-        required
-        value={formData.childInfo.childFirstName}
-        placeholder="Firstname"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            childInfo: {
-              ...prevData.childInfo,
-              childFirstName: text,
-            },
-          }))
-        } style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
+            buttonColor='#3B5998'
+            title="NEXT"
+            disabled={count === 4}
+            onPress={handleNext} >
+            NEXT
+          </Button>
 
-      <TextInput
-        required
-        value={formData.childInfo.childMiddleName}
-        placeholder="Middlename"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            childInfo: {
-              ...prevData.childInfo,
-              childMiddleName: text,
-            },
-          }))
-        }
-
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.childInfo.childBirthDate}
-        placeholder="Date of Birth"
-
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            childInfo: {
-              ...prevData.childInfo,
-              childBirthDate: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <View style={{ alignItems: 'center' }}>
-        <Button title="Pick File" onPress={pickDocument} />
-
-        {selectedBirthCert && (
-          <View style={{ marginTop: 20 }}>
-            <Text>Selected Document:</Text>
-            <Text>Name:</Text>
-            <Text>Size:bytes</Text>
-            <Text>URI:</Text>
-          </View>
-        )}
+        </View>
       </View>
-
-      <TextInput
-        fullWidth
-        placeholder="Upload Medical Certificate"
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <Text style={{ textAlign: 'center' }}>Parents and Guardian Information</Text>
-      <Text style={{ textAlign: 'center' }}>Father Information</Text>
-
-      <TextInput
-        required
-        value={formData.fatherInfo.fatherLastName}
-        placeholder="Father's Lastname"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            fatherInfo: {
-              ...prevData.fatherInfo,
-              fatherLastName: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.fatherInfo.fatherFirstName}
-        placeholder="Father's Firstname"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            fatherInfo: {
-              ...prevData.fatherInfo,
-              fatherFirstName: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.fatherInfo.fatherOccupation}
-        placeholder="Occupation"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            fatherInfo: {
-              ...prevData.fatherInfo,
-              fatherOccupation: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.fatherInfo.fatherPhoneNumber}
-        placeholder="Phone number"
-        keyboardType="numeric"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            fatherInfo: {
-              ...prevData.fatherInfo,
-              fatherPhoneNumber: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.fatherInfo.fatherEmail}
-        placeholder="Email"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            fatherInfo: {
-              ...prevData.fatherInfo,
-              fatherEmail: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <Pressable
-        onPress={() => {
-          // Handle file upload logic here, e.g., open a file picker
-          console.log('Upload Marriage Certificate');
-        }}
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}>
-        <Text>Upload Marriage Certificate</Text>
-      </Pressable>
-      <Text style={{ textAlign: 'center' }}>Mother Information</Text>
-
-      <TextInput
-        required
-        value={formData.motherInfo.motherLastName}
-        placeholder="Mother's Lastname"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            motherInfo: {
-              ...prevData.motherInfo,
-              motherLastName: text,
-            },
-          }))
-        } style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.motherInfo.motherFirstName}
-        placeholder="Mother's Firstname"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            motherInfo: {
-              ...prevData.motherInfo,
-              motherFirstName: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.motherInfo.motherOccupation}
-        placeholder="Occupation"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            motherInfo: {
-              ...prevData.motherInfo,
-              motherOccupation: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.motherInfo.motherPhoneNumber}
-        placeholder="Phone number"
-        keyboardType="numeric"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            motherInfo: {
-              ...prevData.motherInfo,
-              motherPhoneNumber: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.motherInfo.motherEmail}
-        placeholder="Email"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            motherInfo: {
-              ...prevData.motherInfo,
-              motherEmail: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-      <Text style={{ textAlign: 'center' }}>Guardian Information</Text>
-
-      <TextInput
-        required
-        value={formData.guardianInfo.guardianLastName}
-        placeholder="Guardian's Lastname"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            guardianInfo: {
-              ...prevData.guardianInfo,
-              guardianLastName: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.guardianInfo.guardianFirstName}
-        placeholder="Guardian's Firstname"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            guardianInfo: {
-              ...prevData.guardianInfo,
-              guardianFirstName: text,
-            },
-          }))
-        } style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.guardianInfo.guardianPhoneNumber}
-        placeholder="Phone number"
-        keyboardType="numeric"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            guardianInfo: {
-              ...prevData.guardianInfo,
-              guardianPhoneNumber: text,
-            },
-          }))
-        }
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <TextInput
-        required
-        value={formData.guardianInfo.guardianEmail}
-        placeholder="Email"
-        onChangeText={(text) =>
-          setFormData((prevData) => ({
-            ...prevData,
-            guardianInfo: {
-              ...prevData.guardianInfo,
-              guardianEmail: text,
-            },
-          }))
-        } style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-
-      <Pressable
-        onPress={() => {
-          handleFileUpload('birthCertificatePath', selectedBirthCert, birthCert),
-            console.log(filePaths.birthCertificatePath)
-        }}
-        style={{
-          alignItems: 'center',
-          backgroundColor: 'blue',
-          padding: 10,
-          borderRadius: 5,
-        }}
-      >
-        <Text style={{ color: 'white' }}>Submit</Text>
-      </Pressable>
-
-
-    </ScrollView >
+    </myEnrollmentContext.Provider>
   )
 }
