@@ -51,6 +51,7 @@ export default function Equipment() {
     onSelect={handleBoxSelect}
     quantity={item.quantity}
   />)
+
   const handleQuantityChange = (name, newCount) => {
     const parsedCount = parseInt(newCount, 10); // Parse the input as an integer
 
@@ -80,7 +81,7 @@ export default function Equipment() {
     <>
       <myEquipmentContext.Provider value={{
         selectedEquipment, setSelectedEquipment,
-        details, setDetails, handleQuantityChange, items
+        details, setDetails, handleQuantityChange, items, options, handleBoxSelect
       }}>
         <View style={{ flex: 1 }}>
           {proceed ? <EquipmentForm/> : <EquipmentSelect/>}
@@ -89,7 +90,6 @@ export default function Equipment() {
             flexDirection: 'row',
             alignItems: 'flex-end',
             justifyContent: 'flex-end',
-
           }}>
 
             <Button

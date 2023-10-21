@@ -1,73 +1,89 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, Button, Pressable, TextInput, StyleSheet, Modal } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Modal } from 'react-native';
 import { myEquipmentContext } from './Equipment'
+import { Button, TextInput, Checkbox } from 'react-native-paper'
 import EquipmentSummary from './EquipmentSummary';
 import useUpload from '../../../hooks/useUpload'
 const EquipmentForm = () => {
-    const {details, setDetails} = useContext(myEquipmentContext)
+  const { details, setDetails } = useContext(myEquipmentContext)
+  const [checkBox, setCheckBox] = useState(false)
   const [modalVisible, setModalVisible] = useState(false);
-//   const handleMedicineSubmit = async () =>{
-//     await useUpload(details, 'MedicineRequest').then(()=>{
+  //   const handleMedicineSubmit = async () =>{
+  //     await useUpload(details, 'MedicineRequest').then(()=>{
 
-//       console.log('success')
-//     })
-//   }
+  //       console.log('success')
+  //     })
+  //   }
   return (
-    <View style={styles.container}>
-      {/* Information */}
-      <TextInput
-        style={styles.input}
-        placeholder="Full Name"
-        onChangeText={(text)=>setDetails({...details, fullname: text})}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Phone Number"
-        keyboardType="numeric"
-        onChangeText={(text)=>setDetails({...details, phoneNumber: text})}
+    <>
+      <View style={styles.container}>
+        {/* Information */}
+        <TextInput
+          mode='outlined'
+          label="Full Name"
+          onChangeText={(text) => setDetails({ ...details, fullname: text })}
+        />
+        <TextInput
+          mode='outlined'
+          label="Phone Number"
+          keyboardType="numeric"
+          onChangeText={(text) => setDetails({ ...details, phoneNumber: text })}
 
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email Address"
-        keyboardType="email-address"
-        onChangeText={(text)=>setDetails({...details, email: text})}
+        />
+        <TextInput
+          mode='outlined'
+          label="Email Address"
+          keyboardType="email-address"
+          onChangeText={(text) => setDetails({ ...details, email: text })}
 
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Return Date"
-        keyboardType="date"
-        onChangeText={(text)=>setDetails({...details, returnDate: text})}
+        />
+        <TextInput
+          mode='outlined'
+          label="Return Date"
+          keyboardType="date"
+          onChangeText={(text) => setDetails({ ...details, returnDate: text })}
 
-      />
+        />
 
-      {/* Review Summary of Information Provided */}
-      <Pressable style={styles.reviewText} onPress={() => setModalVisible(true)}>
-        <Text style={{ color: 'red' }}>Review Summary of Information Provided</Text>
-      </Pressable>
+        {/* Review Summary of Information Provided */}
+        <Pressable style={styles.reviewText} onPress={() => setModalVisible(true)}>
+          <Text style={{ color: 'red', textAlign: 'center' }}>Review Summary of Information Provided</Text>
+        </Pressable>
 
-      {/* Agree to Terms and Conditions Checkbox */}
-      <View style={styles.checkboxContainer}>
-        <View style={styles.checkbox}>
-          {/* You can implement a checkbox component here */}
+        {/* Agree to Terms and Conditions Checkbox */}
+        <View style={styles.checkboxContainer}>
+          <View>
+            <Checkbox.Item
+              onPress={() => setCheckBox(!checkBox)}
+              label="Agree to the Terms and Conditions"
+              status={checkBox ? 'checked' : 'unchecked'} />
+          </View>
         </View>
-        <Text>Agree to the Terms and Conditions</Text>
-      </View>
 
-      {/* Submit Button */}
-      <Button title="Submit" onPress={()=>console.log(details)}/>
+        {/* Submit Button */}
+        <Button
+          mode='contained'
+          buttonColor='#3B5998'
+          disabled={!checkBox}
+          title="Submit"
+          onPress={() => {
+            console.log('Button pressed');
+            alert('clicked');
+          }} >
+          Submit
+        </ Button>
+      </View>
       <EquipmentSummary
         modalVisible={modalVisible}
-        setModalVisible={setModalVisible} />
-    </View>
+        onDismiss={()=> setModalVisible(false)} />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: 'red',
+    flex: 1,
+    gap: 15,
     height: 400,
     padding: 20,
   },

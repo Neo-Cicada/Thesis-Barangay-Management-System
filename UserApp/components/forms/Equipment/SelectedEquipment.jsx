@@ -1,12 +1,12 @@
-import React, {useContext} from 'react'
-import {TextInput} from 'react-native-paper'
+import React, { useContext } from 'react'
+import { TextInput } from 'react-native-paper'
 import { ScrollView, Text, View } from 'react-native';
 import { myEquipmentContext } from './Equipment'
 export default function SelectedEquipment() {
-    const {selectedEquipment, handleQuantityChange} = useContext(myEquipmentContext);
+    const { selectedEquipment, handleQuantityChange } = useContext(myEquipmentContext);
     return (
         <>
-            <ScrollView style={{ flex: 1, borderWidth: 1, borderColor: 'red' }}>
+            <ScrollView style={{ flex: 1, }}>
                 {/* selected options */}
                 {selectedEquipment.map((medicine, index) => (
                     <View key={index} style={{
@@ -14,22 +14,16 @@ export default function SelectedEquipment() {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
+                        borderBottomColor: 'gray',
+                        borderBottomWidth: 1
 
                     }}>
 
-                        <Text style={{ textAlign: 'center' }}>{medicine.name}</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{ flex: 1, textAlign: 'center', fontSize: 20 }}>{medicine.name}</Text>
+
+                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <TextInput
-                                style={{
-                                    height: 40,
-                                    borderColor: 'gray',
-                                    borderWidth: 1,
-                                    padding: 10,
-                                    borderRadius: 5,
-                                    fontSize: 16,
-                                    marginBottom: 10,
-                                }}
-                                placeholder="Enter quantity"
+                                label="Enter quantity"
                                 keyboardType="numeric"
                                 value={medicine.count.toString()}
                                 onChangeText={(text) => handleQuantityChange(medicine.name, text)}
