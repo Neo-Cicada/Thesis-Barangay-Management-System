@@ -74,14 +74,18 @@ export default function Document() {
       }}>
         <View style={{ flex: 1 }}>
           {proceed ? <DocumentForm /> :
-            <View style={{  flex: 0.9 }}>
+            <View style={{ flex: 0.9 }}>
               <Text style={{
                 textAlign: 'center',
                 fontSize: 25, fontWeight: 'bold'
               }}>Available Documents</Text>
 
               <View
-                style={{ flex: 1, borderBottomColor: 'black', borderBottomWidth: 3,  }}>
+                style={{
+                  flex: 1,
+                  borderBottomColor: 'black',
+                  borderBottomWidth: 3,
+                }}>
 
                 <DocumentSelect />
               </View>
@@ -89,7 +93,9 @@ export default function Document() {
               <Text style={{
                 textAlign: 'center',
                 fontSize: 25, fontWeight: 'bold'
-              }}>Selected Documents</Text>
+              }}>
+                Selected Documents
+              </Text>
               <SelectedDocument />
             </View>}
           {/* <DocumentForm /> */}
@@ -98,7 +104,7 @@ export default function Document() {
             flexDirection: 'row',
             alignItems: 'flex-end',
             justifyContent: 'flex-end',
-           
+
           }}>
 
             <Button

@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useState } from 'react';
-import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
+import { StyleSheet, View, ScrollView, StatusBar, KeyboardAvoidingView, Platform} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -60,51 +60,51 @@ function BottomTab() {
 export default function App() {
   return (
     <>
+    
+        <NavigationContainer>
+          <StatusBar translucent />
+          {/* <HeaderApp/> */}
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "#DFE3EE" },
+              headerTintColor: "#3B5998", // Set the text color here
+            }}
+          >
+            <Stack.Screen name="eBarangay"
+              options={{ headerShown: false }}
+              component={BottomTab}
 
-      <NavigationContainer>
-        <StatusBar translucent />
-        {/* <HeaderApp/> */}
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: "#DFE3EE" },
-            headerTintColor: "#3B5998", // Set the text color here
-          }}
-        >
-          <Stack.Screen name="eBarangay"
-            options={{ headerShown: false }}
-            component={BottomTab}
+            />
+            <Stack.Screen
+              name="Medicine"
+              component={Medicine}
+              options={{ title: "Medicine Request Form" }}
+            />
 
-          />
-          <Stack.Screen
-            name="Medicine"
-            component={Medicine}
-            options={{ title: "Medicine Request Form" }}
-          />
+            <Stack.Screen
+              name="Document"
+              component={Document}
+              options={{ title: "Document Request Form" }}
+            />
+            <Stack.Screen
+              name="Facility"
+              options={{ title: "Facility Request Form" }}
+              component={Facility} />
+            <Stack.Screen
+              name="Enrollment"
+              options={{ title: "Enrollmnt Form" }}
+              component={Enrollment} />
+            <Stack.Screen
+              options={{ title: "Complain Form" }}
+              name="Complain"
+              component={Complain} />
+            <Stack.Screen
+              name="Equipment"
+              options={{ title: "Equipment Request Form" }}
+              component={Equipment} />
 
-          <Stack.Screen
-            name="Document"
-            component={Document}
-            options={{ title: "Document Request Form" }}
-          />
-          <Stack.Screen
-            name="Facility"
-            options={{ title: "Facility Request Form" }}
-            component={Facility} />
-          <Stack.Screen
-            name="Enrollment"
-            options={{ title: "Enrollmnt Form" }}
-            component={Enrollment} />
-          <Stack.Screen
-            options={{ title: "Complain Form" }}
-            name="Complain"
-            component={Complain} />
-          <Stack.Screen
-            name="Equipment"
-            options={{ title: "Equipment Request Form" }}
-            component={Equipment} />
-
-        </Stack.Navigator>
-      </NavigationContainer>
+          </Stack.Navigator>
+        </NavigationContainer>
     </>
   );
 }

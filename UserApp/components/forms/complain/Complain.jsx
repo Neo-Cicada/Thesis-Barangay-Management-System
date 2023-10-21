@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useContext, createContext } from 'react'
-import { View, ScrollView, FlatList, TextInput, Text } from 'react-native';
+import { View, ScrollView, FlatList, Text } from 'react-native';
 import ComplainForm from './ComplainForm';
 import Box from '../medicines/Box'
+import { TextInput, Button } from 'react-native-paper';
+import ComplainSelect from './ComplainSelect';
 export const myComplainContext = createContext();
 
 export default function Complain() {
   const [selectedReport, setSelectReportDalog] = useState([]);
+  const [proceed, setProceed] = useState(false)
   const [details, setDetails] = useState({
     fullname: '',
     email: '',
@@ -59,45 +62,29 @@ export default function Complain() {
   };
   return (
     <>
-      <myComplainContext.Provider value={{selectedReport, setSelectReportDalog, details, setDetails}}>
-        <ScrollView>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 500 }}>
-            <ScrollView style={{ flex: 0.5, borderWidth: 1, borderColor: 'red' }}>
-              {/* options */}
-              <Box name="Drunk"
-                isSelected={selectedReport.some((report) => report.name === "Drunk")}
-                onSelect={handleBoxSelect} />
-              <Box name="Vandalism"
-                isSelected={selectedReport.some((report) => report.name === "Vandalism")}
-                onSelect={handleBoxSelect} />
-            </ScrollView>
-            <ScrollView style={{ flex: 0.5, borderWidth: 1, borderColor: 'red' }}>
-              {/* selected options */}
-              <FlatList
-                data={selectedReport}
-                keyExtractor={(item) => item.name}
-                renderItem={({ item, index }) => (
-                  <View style={{ alignItems: 'center' }}>
-                    <Text>{item.name}</Text>
-                    <Text>Who's the person you're reporting?</Text>
-                    <TextInput
-                      value={item.person}
-                      onChangeText={(text) => handleReport(item.name, text)}
-                      placeholder="Enter person's name"
-                    />
-                  </View>
-                )}
-              />
-            </ScrollView>
+      <myComplainContext.Provider value={{
+        selectedReport,
+        setSelectReportDalog, details,
+        setDetails, handleBoxSelect, handleReport,
+      }}>
+        <View style={{ flex: 1 }}>
+          {proceed ? <ComplainForm /> : <ComplainSelect />}
+
+          <View style={{
+            flex: 0.1,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
+
+          }}>
+            <Button
+              mode='contained'
+              buttonColor='#3B5998'
+              onPress={() => setProceed(!proceed)} >
+              {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
+            </Button>
           </View>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 700 }}>
-            <ComplainForm />
-            {/* information */}
-            {/* review summary of information provided*/}
-            {/* agree to the terms and conditions */}
-            {/* Submit button */}
-          </View>
-        </ScrollView>
+        </View>
       </myComplainContext.Provider>
     </>
   )

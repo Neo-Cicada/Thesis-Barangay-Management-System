@@ -1,12 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, CheckBox, TouchableOpacity, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Pressable, ScrollView } from 'react-native';
 import ComplainSummary from './ComplainSummary';
+import { Checkbox, RadioButton, Button, TextInput } from 'react-native-paper';
 import { myComplainContext } from './Complain';
 function ComplainForm() {
     const [reportType, setReportType] = useState('anonymous');
     const [modalVisible, setModalVisible] = useState(false);
     const [showCondition, setShowCondition] = useState(false);
-    const {details, setDetails} = useContext(myComplainContext)
+    const [radio, setRadio] = useState('second')
+    const [summon, setSummon] = useState(false)
+    const [checkBox, setCheckBox] = useState(false)
+    const { details, setDetails } = useContext(myComplainContext)
     const handleRadioChange = (value) => {
         setReportType(value);
     };
@@ -16,83 +20,136 @@ function ComplainForm() {
     };
 
     return (
-        <View style={{ flex: 1, flexDirection: 'column' }}>
-            <View style={{ flex: 1 }}>
-                <View style={{ flexDirection: 'row' }}>
-                    <CheckBox
-                        value={reportType === 'anonymous'}
-                        onValueChange={() => handleRadioChange('anonymous')}
+        <>
+
+            <ScrollView style={{
+                flex: 1, padding: 20,
+                gap: 15
+            }}>
+
+                {/* radio button anon and personal info */}
+                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                        <RadioButton
+                            label="first"
+                            value="first"
+                            status={radio === 'first' ? 'checked' : 'unchecked'}
+                            onPress={() => {
+                                setRadio('first'),
+                                    setDetails({
+                                        ...details,
+                                        fullname: 'anonymous',
+                                        phoneNumber: 'anonymous',
+                                        email: 'anonymous',
+                                        summon: false
+                                    }),
+                                    setSummon(false)
+                            }}
+                        />
+                        <Text>Anonymous Report</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                        <RadioButton
+                            value="second"
+                            status={radio === 'second' ? 'checked' : 'unchecked'}
+                            onPress={() => {
+                                setRadio('second'), setDetails({
+                                    ...details,
+                                    fullname: '',
+                                    phoneNumber: '',
+                                    email: ''
+                                })
+                            }}
+                        />
+                        <Text>Personal Information</Text>
+                    </View>
+                </View>
+                {/* fullname number email */}
+                <View style={{
+                    gap: 15
+                }}>
+                    <TextInput
+                        value={details.fullname}
+                        onChangeText={(text) => setDetails({ ...details, fullname: text })}
+                        mode='outlined'
+                        label="Fullname"
+                        disabled={radio === "first"}
                     />
-                    <Text>Anonymous Report</Text>
-                    <CheckBox
-                        value={reportType === 'personal'}
-                        onValueChange={() => handleRadioChange('personal')}
+                    <TextInput
+                        value={details.phoneNumber}
+                        onChangeText={(text) => setDetails({ ...details, phoneNumber: text })}
+                        mode='outlined'
+                        label="Number"
+                        disabled={radio === "first"}
+
+
                     />
-                    <Text>Personal Information</Text>
+                    <TextInput
+                        value={details.email}
+                        onChangeText={(text) => setDetails({ ...details, email: text })}
+                        mode='outlined'
+                        label="Email"
+                        disabled={radio === "first"}
+
+                    />
+
+                </View>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <View>
+                        <Checkbox.Item
+                            disabled={radio === "first"}
+                            onPress={() => {
+                                const newSummon = !summon;
+                                setSummon(newSummon);
+                                setDetails({ ...details, summon: newSummon });
+                            }}
+                            label="Summon the person being reported"
+                            status={summon ? 'checked' : 'unchecked'} />
+                    </View>
                 </View>
 
-                <TextInput
-                    label="Fullname"
-                    name="Fullname"
-                    placeholder='Fullname'
-                    value={details.fullname}
-                    onChangeText={(text) => setDetails({ ...details, fullname: text })}
-                    required
-                    editable={reportType !== 'anonymous'}
-                />
-                <TextInput
-                    placeholder='Number'
-                    label="Number"
-                    name="number"
-                    value={details.phoneNumber}
-                    onChangeText={(text) => setDetails({ ...details, phoneNumber: text })}
-                    required
-                    editable={reportType !== 'anonymous'}
-                />
 
-                <TextInput
-                    placeholder='Email'
-                    label="Email"
-                    name="email"
-                    value={details.email}
-                    onChangeText={(text) => setDetails({ ...details, email: text })}
-                    required
-                    editable={reportType !== 'anonymous'}
-                />
-                <View style={{}}>
-                    <CheckBox
-                        value={details.summon}
-                        onValueChange={(value) => setDetails({ ...details, summon: value })}
-                        disabled={reportType === 'anonymous'}
-                    />
-                    <Text>Summon the person being reported</Text>
+                {/* checkbox asking if summon the person being reported */}
+
+                {/* summary of information provided */}
+                <Pressable onPress={() => setModalVisible(true)} style={{ marginBottom: 10, }} >
+                    <Text style={{ color: 'red', textAlign: 'center' }}>Review Summary of Information Provided</Text>
+                </Pressable>
+                {/* agree to the terms and condition */}
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <View>
+                        <Checkbox.Item
+                            onPress={() => setCheckBox(!checkBox)}
+                            label="Agree to the Terms and Conditions"
+                            status={checkBox ? 'checked' : 'unchecked'} />
+                    </View>
                 </View>
-            </View>
-
-            <TouchableOpacity
-                style={{}}
-                onPress={() => setModalVisible(true)}>
-                <Text style={{ fontSize: 16, color: 'red',
-                 textDecorationLine: 'underline', }}>
-                    Review summary of information provided
-                </Text>
-            </TouchableOpacity>
-
-            <View style={{ justifyContent: 'center' }}>
-                <CheckBox
-                    value={showCondition}
-                    onValueChange={() => setShowCondition(!showCondition)}
-                />
-                <Text style={{ fontSize: 16 }}>
-                    Agree to the <Text style={{ textDecorationLine: 'underline' }}>terms and conditions</Text>
-                </Text>
-            </View>
-
-            <Button title="Submit" onPress={handleSubmit} color="blue" />
+                <Button
+                    mode='contained'
+                    buttonColor='#3B5998'
+                    disabled={!checkBox}
+                    title="Submit"
+                    onPress={() => {
+                        console.log('Button pressed');
+                        alert('clicked');
+                    }} >
+                    Submit
+                </ Button>
+            </ScrollView>
             <ComplainSummary
                 modalVisible={modalVisible}
-                setModalVisible={setModalVisible} />
-        </View>
+                onDismiss={() => setModalVisible(false)} />
+        </>
     );
 }
 
