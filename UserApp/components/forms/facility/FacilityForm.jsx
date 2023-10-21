@@ -1,68 +1,85 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, Button, Pressable, TextInput, StyleSheet, Modal } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Modal } from 'react-native';
 import { myFacilityContext } from './Facility';
 import useUpload from '../../../hooks/useUpload'
+import { TextInput, Button, Checkbox } from 'react-native-paper';
 import FacilitySummary from './FacilitySummary';
 const FacilityForm = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const {details, setDetails} = useContext(myFacilityContext)
-  const handleMedicineSubmit = async () =>{
+  const [checkBox, setCheckBox] = useState(false)
+  const { details, setDetails } = useContext(myFacilityContext)
+  const handleMedicineSubmit = async () => {
     // await useUpload(details, 'MedicineRequest').then(()=>{
 
     //   console.log('success')
     // })
   }
   return (
-    <View style={styles.container}>
-      {/* Information */}
-      <TextInput
-        style={styles.input}
-        placeholder="Full Name"
-        onChangeText={(text)=>setDetails({...details, fullname: text})}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Phone Number"
-        keyboardType="numeric"
-        onChangeText={(text)=>setDetails({...details, phoneNumber: text})}
+    <>
+      <View style={styles.container}>
+        {/* Information */}
+        <TextInput
+          mode='outlined'
+          label="Full Name"
+          onChangeText={(text) => setDetails({ ...details, fullname: text })}
+        />
+        <TextInput
+          mode='outlined'
 
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email Address"
-        keyboardType="email-address"
-        onChangeText={(text)=>setDetails({...details, email: text})}
+          label="Phone Number"
+          keyboardType="numeric"
+          onChangeText={(text) => setDetails({ ...details, phoneNumber: text })}
 
-      />
+        />
+        <TextInput
+          mode='outlined'
+          label="Email Address"
+          keyboardType="email-address"
+          onChangeText={(text) => setDetails({ ...details, email: text })}
 
-      {/* Review Summary of Information Provided */}
-      <Pressable style={styles.reviewText} onPress={() => setModalVisible(true)}>
-        <Text style={{ color: 'red' }}>Review Summary of Information Provided</Text>
-      </Pressable>
+        />
 
-      {/* Agree to Terms and Conditions Checkbox */}
-      <View style={styles.checkboxContainer}>
-        <View style={styles.checkbox}>
-          {/* You can implement a checkbox component here */}
+        {/* Review Summary of Information Provided */}
+        <Pressable style={styles.reviewText} onPress={() => setModalVisible(true)}>
+          <Text style={{ color: 'red', textAlign: 'center' }}>Review Summary of Information Provided</Text>
+        </Pressable>
+
+        {/* Agree to Terms and Conditions Checkbox */}
+        <View style={styles.checkboxContainer}>
+          <View>
+            <Checkbox.Item
+              onPress={() => setCheckBox(!checkBox)}
+              label="Agree to the Terms and Conditions"
+              status={checkBox ? 'checked' : 'unchecked'} />
+          </View>
         </View>
-        <Text>Agree to the Terms and Conditions</Text>
-      </View>
 
-      {/* Submit Button */}
-      <Button title="Submit" onPress={handleMedicineSubmit}/>
+        {/* Submit Button */}
+        <Button
+          mode='contained'
+          buttonColor='#3B5998'
+          disabled={!checkBox}
+          title="Submit"
+          onPress={() => {
+            console.log('Button pressed');
+            alert('clicked');
+          }} >
+          Submit
+        </ Button>
+      </View>
       <FacilitySummary
         modalVisible={modalVisible}
-        setModalVisible={setModalVisible} />
-    </View>
+        onDismiss={()=>setModalVisible(false)} />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: 'red',
     height: 400,
+    flex: 1,
     padding: 20,
+    gap: 15
   },
   input: {
     height: 40,

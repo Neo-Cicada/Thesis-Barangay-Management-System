@@ -1,13 +1,16 @@
 import React, { useEffect, useState, createContext } from 'react'
-import { Text, View, ScrollView, Picker } from 'react-native'
+import { Text, View, ScrollView, } from 'react-native'
 import Box from '../medicines/Box'
 import useRead from '../../../hooks/useRead';
 import FacilityForm from './FacilityForm';
-
+import SelectedFacility from './SelectedFacility';
+import { Button } from 'react-native-paper';
+import FacilitySelect from './FacilitySelect';
 export const myFacilityContext = createContext();
 export default function Facility() {
   const [selectedFacility, setselectedFacility] = useState([]);
   const [data, setData] = useState([])
+  const [proceed, setProceed] = useState(false)
   const [details, setDetails] = useState({
     fullname: '',
     email: '',
@@ -62,58 +65,29 @@ export default function Facility() {
 
   return (
     <>
-      <myFacilityContext.Provider value={{details, setDetails, selectedFacility, setselectedFacility}}>
-        <ScrollView>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 500 }}>
-            <ScrollView style={{ flex: 0.5, borderWidth: 1, borderColor: 'red' }}>
-              {/* options */}
-              {items}
-            </ScrollView>
-            <ScrollView style={{ flex: 0.5, borderWidth: 1, borderColor: 'red' }}>
-              {/* selected options */}
-              {selectedFacility.map((facility, index) => (
-                <View key={index} style={{
-                  flexDirection: 'row',
-                  borderBottomWidth: 1,
-                  borderBottomColor: 'black',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <Text>{facility.name}</Text>
-                  <Picker
-                    selectedValue={facility.slot || ''}
-                    onValueChange={(itemValue) => handleOptionSelect(facility.name, itemValue)}>
-                    <Picker.Item label="Select Time Slot" value="" />
-                    {/* Populate these options with your time slot data */}
-                    <Picker.Item label="hello" />
-                    {options.map((option, i) => (
-                      option.map(
-                        item => {
-                          return (
-                            <Picker.Item
-                              key={item.key}
-                              label={item.label}
-                              value={item.value}
-                            />
-                          )
-                        }
-                      )
-                    ))}
-                    {/* Add more time slot options as needed */}
-                  </Picker>
-                </View>
-              ))}
+      <myFacilityContext.Provider value={{
+        details, setDetails, selectedFacility,
+        setselectedFacility,
+        handleOptionSelect, options, items
+      }}>
+        <View style={{ flex: 1 }}>
+          {proceed ? <FacilityForm /> : <FacilitySelect />}
+          <View style={{
+            flex: 0.1,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
 
-            </ScrollView>
+          }}>
+
+            <Button
+              mode='contained'
+              buttonColor='#3B5998'
+              onPress={() => setProceed(!proceed)} >
+              {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
+            </Button>
           </View>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 700 }}>
-            <FacilityForm/>
-            {/* information */}
-            {/* review summary of information provided*/}
-            {/* agree to the terms and conditions */}
-            {/* Submit button */}
-          </View>
-        </ScrollView>
+        </View>
       </myFacilityContext.Provider>
     </>
   )

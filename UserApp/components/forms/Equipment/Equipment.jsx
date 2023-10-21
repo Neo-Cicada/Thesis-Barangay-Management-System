@@ -3,8 +3,12 @@ import { ScrollView, Text, View, TextInput } from 'react-native'
 import useRead from '../../../hooks/useRead';
 import Box from '../medicines/Box'
 import EquipmentForm from './EquipmentForm'
+import SelectedEquipment from './SelectedEquipment';
+import { Button } from 'react-native-paper';
+import EquipmentSelect from './EquipmentSelect';
 export const myEquipmentContext = createContext()
 export default function Equipment() {
+  const [proceed, setProceed] = useState(false)
   const [options, setOptions] = useState([])
   const [selectedEquipment, setSelectedEquipment] = useState([]);
   const [details, setDetails] = useState({
@@ -74,54 +78,28 @@ export default function Equipment() {
   };
   return (
     <>
-      <myEquipmentContext.Provider value={{ selectedEquipment, setSelectedEquipment, details, setDetails }}>
-        <ScrollView>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 500 }}>
-            <ScrollView style={{ flex: 0.5, borderWidth: 1, borderColor: 'red' }}>
-              {/* options */}
-              {items}
-            </ScrollView>
-            <ScrollView style={{ flex: 0.5, borderWidth: 1, borderColor: 'red' }}>
-              {/* selected options */}
-              {selectedEquipment.map((medicine, index) => (
-                <View key={index} style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+      <myEquipmentContext.Provider value={{
+        selectedEquipment, setSelectedEquipment,
+        details, setDetails, handleQuantityChange, items
+      }}>
+        <View style={{ flex: 1 }}>
+          {proceed ? <EquipmentForm/> : <EquipmentSelect/>}
+          <View style={{
+            flex: 0.1,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
 
-                }}>
-                  <Text style={{ textAlign: 'center' }}>{medicine.name}</Text>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <TextInput
-                      style={{
-                        height: 40,
-                        borderColor: 'gray',
-                        borderWidth: 1,
-                        padding: 10,
-                        borderRadius: 5,
-                        fontSize: 16,
-                        marginBottom: 10,
-                      }}
-                      placeholder="Enter quantity"
-                      keyboardType="numeric"
-                      value={medicine.count.toString()}
-                      onChangeText={(text) => handleQuantityChange(medicine.name, text)}
-                    />
-                  </View>
-                </View>
-              ))}
-            </ScrollView>
-          </View>
-          <View style={{ borderWidth: 1, borderColor: 'red', height: 700 }}>
+          }}>
 
-            <EquipmentForm />
-            {/* information */}
-            {/* review summary of information provided*/}
-            {/* agree to the terms and conditions */}
-            {/* Submit button */}
+            <Button
+              mode='contained'
+              buttonColor='#3B5998'
+              onPress={() => setProceed(!proceed)} >
+              {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
+            </Button>
           </View>
-        </ScrollView>
+        </View>
       </myEquipmentContext.Provider>
     </>
   )
