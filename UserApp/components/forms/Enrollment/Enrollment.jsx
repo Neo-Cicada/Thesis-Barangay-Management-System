@@ -173,8 +173,7 @@ export default function Enrollment() {
         {count === 4 && <GuardianForm />}
 
         <View style={{
-          flex: 0.1, borderColor: 'red',
-          borderWidth: 1, flexDirection: 'row',
+          flex: 0.1, flexDirection: 'row',
           justifyContent: 'space-between', alignItems: 'center'
         }}>
           <Button

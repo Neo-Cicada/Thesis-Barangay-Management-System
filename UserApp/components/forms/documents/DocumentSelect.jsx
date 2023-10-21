@@ -13,12 +13,14 @@ export default function DocumentSelect() {
   const items = data.map((item) => ({
     key: item.id.toString(),
     name: item.type,
+    quantity: item.quantity,
     isSelected: selectedCertificates.some((certificate) => certificate.name === String(item.type)),
   }));
   const renderItem = ({ item }) => (
     <Box
       key={item.key}
       name={item.name}
+      quantity={item.quantity}
       isSelected={item.isSelected}
       onSelect={handleBoxSelect}
     />

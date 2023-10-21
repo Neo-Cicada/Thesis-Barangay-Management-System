@@ -10,7 +10,7 @@ export default function MedicineSelect() {
     const desiredHeight = (screenHeight * desiredHeightPercentage) / 100;
     return (
         <>
-            <View style={{ height: desiredHeight }}>
+            <View style={{ flex: 1,}}>
                 <Text style={{
                     textAlign: 'center',
                     fontSize: 25, fontWeight: 'bold'

@@ -23,6 +23,7 @@ const DocumentSummary = ({ modalVisible, onDismiss }) => {
                 <Text>Name: {item.name} </Text>
                 <Text style={{ marginLeft: 10 }}>{item.mop}</Text>
                 <Text>{item.reference}</Text>
+                <Text>{item.quantity}</Text>
               </View>
 
             </>

@@ -76,7 +76,7 @@ export default function Medicine() {
           <View style={{ flex: 1 }}>
             {proceed ? <MedicineForm /> : <MedicineSelect />}
             <View style={{
-              flex: 1,
+              flex: 0.1,
               flexDirection: 'row',
               alignItems: 'flex-end',
               justifyContent: 'flex-end',
@@ -85,7 +85,7 @@ export default function Medicine() {
               <Button
                 mode='contained'
                 buttonColor='#3B5998'
-                style={{ width: 100, }}
+                style={{ width: 150, }}
                 onPress={() => setProceed(!proceed)} >
                 {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
               </Button>

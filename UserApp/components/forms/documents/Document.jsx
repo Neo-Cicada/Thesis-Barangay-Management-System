@@ -6,6 +6,7 @@ import DocumentForm from './DocumentForm'
 import DocumentSelect from './DocumentSelect';
 import SelectedDocument from './SelectedDocument';
 import { Button } from 'react-native-paper'
+import useUpload from '../../../hooks/useUpload'
 export const myDocumentContext = createContext();
 export default function Document() {
   const [options, setOptions] = useState([])
@@ -26,7 +27,7 @@ export default function Document() {
   }, [selectedCertificates]);
 
 
-  const handleBoxSelect = (name, mop, reference) => {
+  const handleBoxSelect = (name, mop, reference, quantity) => {
     const index = selectedCertificates.findIndex((certificate) => certificate.name === name);
 
     if (index !== -1) {
@@ -38,6 +39,7 @@ export default function Document() {
       setSelectedCertificates([...selectedCertificates, {
         name: name,
         mop: mop,
+        quantity: quantity,
         reference: reference
       }]);
     }
@@ -108,6 +110,7 @@ export default function Document() {
           }}>
 
             <Button
+              style={{width: 150}}
               mode='contained'
               buttonColor='#3B5998'
               onPress={() => setProceed(!proceed)} >

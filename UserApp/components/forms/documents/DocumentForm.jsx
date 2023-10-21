@@ -4,15 +4,26 @@ import useUpload from '../../../hooks/useUpload'
 import DocumentSummary from './DocumentSummary'
 import { TextInput, Checkbox, Button } from 'react-native-paper';
 import { myDocumentContext } from './Document';
+
 const DocumentForm = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [checkBox, setCheckBox] = useState(false)
-  const { details, setDetails } = useContext(myDocumentContext)
+  const { details, setDetails, setSelectedCertificates } = useContext(myDocumentContext)
   const handleMedicineSubmit = async () => {
-    // await useUpload(details, 'MedicineRequest').then(()=>{
+    await useUpload({ ...details }, 'CertificateRequest').then(() => {
 
-    //   console.log('success')
-    // })
+      console.log('success')
+      alert('Successfuly Uploaded!')
+      setDetails({
+        fullname: '',
+        email: '',
+        phoneNumber: '',
+        status: 'request',
+        selectedCertificates: []
+      })
+      setSelectedCertificates([])
+    })
+    setCheckBox(false)
   }
   return (
     <>
@@ -20,13 +31,13 @@ const DocumentForm = () => {
         {/* Information */}
         <TextInput
           mode='outlined'
-
+          value={details.fullname}
           label="Fullname"
           onChangeText={(text) => setDetails({ ...details, fullname: text })}
         />
         <TextInput
           mode='outlined'
-
+          value={details.phoneNumber}
           label="Phone Number"
           keyboardType="numeric"
           onChangeText={(text) => setDetails({ ...details, phoneNumber: text })}
@@ -34,6 +45,7 @@ const DocumentForm = () => {
         />
         <TextInput
           mode='outlined'
+          value={details.email}
           label="Email Address"
           keyboardType="email-address"
           onChangeText={(text) => setDetails({ ...details, email: text })}
@@ -61,10 +73,7 @@ const DocumentForm = () => {
           buttonColor='#3B5998'
           disabled={!checkBox}
           title="Submit"
-          onPress={() => {
-            console.log('Button pressed');
-            alert('clicked');
-          }} >
+          onPress={handleMedicineSubmit} >
           Submit
         </ Button>
       </View>

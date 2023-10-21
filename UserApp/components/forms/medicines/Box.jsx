@@ -8,7 +8,7 @@ function Box({ name, isSelected, onSelect, quantity }) {
         styles.box,
         { backgroundColor: isSelected ? '#8B9DC3' : '#DFE3EE' },
       ]}
-      onPress={() => onSelect(name)}
+      onPress={() => onSelect(name, '', '', quantity)}
     >
       <Text style={styles.nameText}>{name}</Text>
       <Text style={{

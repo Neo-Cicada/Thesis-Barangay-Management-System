@@ -8,7 +8,7 @@ import useUpload from '../../../hooks/useUpload'
 const MedicineForm = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
-  const { details, setDetails } = useContext(MyMedicineContext)
+  const { details, setDetails, setSelectedMedicines } = useContext(MyMedicineContext)
   const [checkBox, setCheckBox] = useState(false)
   const handleMedicineSubmit = async () => {
     await useUpload(details, 'MedicineRequest').then(() => alert('Successfuly Submited'))
@@ -21,6 +21,8 @@ const MedicineForm = () => {
       selectedMedicines: [],
     }
     )
+    setSelectedMedicines([])
+    setCheckBox(false)
     console.log(details)
   }
   return (
@@ -111,10 +113,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   checkboxContainer: {
-
+  
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    justifyContent:'center'
   },
   checkbox: {
     width: 20,
