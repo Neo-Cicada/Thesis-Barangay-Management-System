@@ -7,12 +7,20 @@ import FacilitySummary from './FacilitySummary';
 const FacilityForm = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [checkBox, setCheckBox] = useState(false)
-  const { details, setDetails } = useContext(myFacilityContext)
-  const handleMedicineSubmit = async () => {
-    // await useUpload(details, 'MedicineRequest').then(()=>{
-
-    //   console.log('success')
-    // })
+  const { details, setDetails, setSelectedFacility } = useContext(myFacilityContext)
+  const handleFacilitySubmit = async () => {
+    await useUpload({ ...details }, 'FacilityRequest').then(() => {
+      alert('Successfuly Uploaded!')
+      setDetails({
+        fullname: '',
+        email: '',
+        phoneNumber: '',
+        status: 'request',
+        selectedFacility: []
+      })
+      setSelectedFacility([])
+      console.log('success')
+    })
   }
   return (
     <>
@@ -20,18 +28,20 @@ const FacilityForm = () => {
         {/* Information */}
         <TextInput
           mode='outlined'
+          value={details.fullname}
           label="Full Name"
           onChangeText={(text) => setDetails({ ...details, fullname: text })}
         />
         <TextInput
           mode='outlined'
-
+          value={details.phoneNumber}
           label="Phone Number"
           keyboardType="numeric"
           onChangeText={(text) => setDetails({ ...details, phoneNumber: text })}
 
         />
         <TextInput
+          value={details.email}
           mode='outlined'
           label="Email Address"
           keyboardType="email-address"
@@ -60,16 +70,16 @@ const FacilityForm = () => {
           buttonColor='#3B5998'
           disabled={!checkBox}
           title="Submit"
-          onPress={() => {
-            console.log('Button pressed');
-            alert('clicked');
-          }} >
+          onPress={
+            handleFacilitySubmit
+          }
+          >
           Submit
         </ Button>
-      </View>
+      </View >
       <FacilitySummary
         modalVisible={modalVisible}
-        onDismiss={()=>setModalVisible(false)} />
+        onDismiss={() => setModalVisible(false)} />
     </>
   );
 };
@@ -96,6 +106,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    justifyContent: 'center'
   },
   checkbox: {
     width: 20,

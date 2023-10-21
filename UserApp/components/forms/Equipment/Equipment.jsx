@@ -15,7 +15,7 @@ export default function Equipment() {
     fullname: '',
     email: '',
     phoneNumber: '',
-    selectedEquipment: [...selectedEquipment], // Include the selectedItems property with an initial empty array
+    selectedEquipment: [...selectedEquipment],
   });
   useRead('Equipments', setOptions)
   const handleBoxSelect = (name, count) => {
@@ -65,9 +65,7 @@ export default function Equipment() {
       });
       setSelectedEquipment(updatedSelectedItems);
     } else {
-      // Handle the case when the input is not a valid number (empty or non-numeric)
-      // You can set a default value or show an error message here.
-      // For example, if you want to set a default value of 0:
+
       const updatedSelectedItems = selectedEquipment.map((item) => {
         if (item.name === name) {
           return { ...item, count: 0 };
@@ -84,7 +82,7 @@ export default function Equipment() {
         details, setDetails, handleQuantityChange, items, options, handleBoxSelect
       }}>
         <View style={{ flex: 1 }}>
-          {proceed ? <EquipmentForm/> : <EquipmentSelect/>}
+          {proceed ? <EquipmentForm /> : <EquipmentSelect />}
           <View style={{
             flex: 0.1,
             flexDirection: 'row',
@@ -95,6 +93,7 @@ export default function Equipment() {
             <Button
               mode='contained'
               buttonColor='#3B5998'
+              style={{ width: 150 }}
               onPress={() => setProceed(!proceed)} >
               {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}
             </Button>

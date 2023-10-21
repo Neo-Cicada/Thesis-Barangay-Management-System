@@ -78,6 +78,7 @@ export default function Complain() {
 
           }}>
             <Button
+              style={{ width: 150 }}
               mode='contained'
               buttonColor='#3B5998'
               onPress={() => setProceed(!proceed)} >

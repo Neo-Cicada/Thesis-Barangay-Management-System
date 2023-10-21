@@ -82,6 +82,7 @@ export default function Facility() {
 
             <Button
               mode='contained'
+              style={{width: 150}}
               buttonColor='#3B5998'
               onPress={() => setProceed(!proceed)} >
               {proceed ? <Text>BACK</Text> : <Text>NEXT</Text>}

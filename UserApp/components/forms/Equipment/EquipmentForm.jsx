@@ -1,29 +1,55 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, Pressable, StyleSheet, Modal } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Modal, Alert } from 'react-native';
 import { myEquipmentContext } from './Equipment'
-import { Button, TextInput, Checkbox } from 'react-native-paper'
+import { Button, TextInput, Checkbox, Icon } from 'react-native-paper'
 import EquipmentSummary from './EquipmentSummary';
 import useUpload from '../../../hooks/useUpload'
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 const EquipmentForm = () => {
+  const [date, setDate] = useState(new Date())
+
   const { details, setDetails } = useContext(myEquipmentContext)
   const [checkBox, setCheckBox] = useState(false)
   const [modalVisible, setModalVisible] = useState(false);
-  //   const handleMedicineSubmit = async () =>{
-  //     await useUpload(details, 'MedicineRequest').then(()=>{
+  const [show, setShow] = useState(false)
+  const formattedDate = date.toLocaleDateString('en-US', {
+    month: '2-digit',
+    day: '2-digit',
+    year: 'numeric'
+  });
+  const onDate = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+    setDetails({ ...details, returnDate: formattedDate });
+  };
+  const handleEquipmentSubmit = async () => {
+    await useUpload(details, 'EquipmentRequest').then(() => {
 
-  //       console.log('success')
-  //     })
-  //   }
+      alert('Successfuly Submited!'),
+        setDetails({
+          fullname: '',
+          email: '',
+          phoneNumber: '',
+          selectedEquipment: [],
+        })
+      setSelectedEquipment([]);
+      setCheckBox(false)
+    })
+  }
   return (
     <>
       <View style={styles.container}>
         {/* Information */}
         <TextInput
+          value={details.fullname}
           mode='outlined'
           label="Full Name"
           onChangeText={(text) => setDetails({ ...details, fullname: text })}
         />
         <TextInput
+          value={details.phoneNumber}
           mode='outlined'
           label="Phone Number"
           keyboardType="numeric"
@@ -31,19 +57,38 @@ const EquipmentForm = () => {
 
         />
         <TextInput
+          value={details.email}
           mode='outlined'
           label="Email Address"
           keyboardType="email-address"
           onChangeText={(text) => setDetails({ ...details, email: text })}
 
         />
-        <TextInput
-          mode='outlined'
-          label="Return Date"
-          keyboardType="date"
-          onChangeText={(text) => setDetails({ ...details, returnDate: text })}
+        {/* onChangeText={(text) => setDetails({ ...details, returnDate: text })} */}
+        <Button
+          style={{ borderWidth: 1, borderColor: 'gray', }}
+          textColor='black'
+          mode='contained'
+          buttonColor="white"
+          title={'Return Date'}
+          onPress={() => setShow(true)}
+        >
+          <Text>
+            {details.returnDate ? `${details.returnDate}` : 'Return Date'}
+          </Text>
+          <Icon source="calendar" size={20} />
+        </Button>
 
-        />
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={'date'}
+            is24Hour={true}
+            onChange={onDate}
+
+          />
+        )}
 
         {/* Review Summary of Information Provided */}
         <Pressable style={styles.reviewText} onPress={() => setModalVisible(true)}>
@@ -66,16 +111,13 @@ const EquipmentForm = () => {
           buttonColor='#3B5998'
           disabled={!checkBox}
           title="Submit"
-          onPress={() => {
-            console.log('Button pressed');
-            alert('clicked');
-          }} >
+          onPress={handleEquipmentSubmit} >
           Submit
         </ Button>
       </View>
       <EquipmentSummary
         modalVisible={modalVisible}
-        onDismiss={()=> setModalVisible(false)} />
+        onDismiss={() => setModalVisible(false)} />
     </>
   );
 };

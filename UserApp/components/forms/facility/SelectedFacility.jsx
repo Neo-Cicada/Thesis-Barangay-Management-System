@@ -22,8 +22,6 @@ export default function SelectedFacility() {
                             selectedValue={facility.slot || ''}
                             onValueChange={(itemValue) => handleOptionSelect(facility.name, itemValue)}>
                             <Picker.Item label="Select Time Slot" value="" />
-                            {/* Populate these options with your time slot data */}
-                            <Picker.Item label="hello" />
                             {options.map((option, i) => (
                                 option.map(
                                     item => {

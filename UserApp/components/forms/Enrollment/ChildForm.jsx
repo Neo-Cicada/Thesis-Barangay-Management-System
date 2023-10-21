@@ -5,7 +5,7 @@ import { myEnrollmentContext } from './Enrollment'
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function ChildForm() {
-    const [date, setDate] = useState(new Date(null))
+    const [date, setDate] = useState(new Date())
     const formattedDate = date.toLocaleDateString('en-US', {
         month: '2-digit',
         day: '2-digit',

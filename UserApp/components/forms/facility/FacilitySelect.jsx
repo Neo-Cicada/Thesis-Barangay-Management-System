@@ -14,7 +14,15 @@ export default function FacilitySelect() {
                 }}>Available Facility</Text>
                 <ScrollView style={{ flex: 1, borderBottomWidth: 3, borderBottomColor: 'black' }}>
                     {/* options */}
-                    {items}
+                    <View style={{
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        {items}
+                    </View>
                 </ScrollView>
                 <Text style={{
                     textAlign: 'center',

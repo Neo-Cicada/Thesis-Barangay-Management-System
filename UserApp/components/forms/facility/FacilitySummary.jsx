@@ -21,6 +21,7 @@ const FacilitySummary = ({ modalVisible, onDismiss }) => {
             <>
               <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                 <Text>Name: {item.name} </Text>
+                <Text>Slot: {item.slot}</Text>
               </View>
 
             </>
