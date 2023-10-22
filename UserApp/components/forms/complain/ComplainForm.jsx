@@ -3,21 +3,20 @@ import { View, Text, TouchableOpacity, Pressable, ScrollView } from 'react-nativ
 import ComplainSummary from './ComplainSummary';
 import { Checkbox, RadioButton, Button, TextInput } from 'react-native-paper';
 import { myComplainContext } from './Complain';
+import useUpload from '../../../hooks/useUpload'
 function ComplainForm() {
     const [reportType, setReportType] = useState('anonymous');
     const [modalVisible, setModalVisible] = useState(false);
     const [showCondition, setShowCondition] = useState(false);
     const [radio, setRadio] = useState('second')
     const [summon, setSummon] = useState(false)
-    const [checkBox, setCheckBox] = useState(false)
-    const { details, setDetails } = useContext(myComplainContext)
+    const [checkBox, setCheckBox,] = useState(false)
+    const { details, setDetails, setSelectReportDalog,handleSubmit} = useContext(myComplainContext)
     const handleRadioChange = (value) => {
         setReportType(value);
     };
 
-    const handleSubmit = () => {
-        // Your form submission logic here
-    };
+
 
     return (
         <>
@@ -139,10 +138,7 @@ function ComplainForm() {
                     buttonColor='#3B5998'
                     disabled={!checkBox}
                     title="Submit"
-                    onPress={() => {
-                        console.log('Button pressed');
-                        alert('clicked');
-                    }} >
+                    onPress={handleSubmit}>
                     Submit
                 </ Button>
             </ScrollView>

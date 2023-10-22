@@ -17,7 +17,10 @@ export default function SectionOne({ navigation }) {
     return (
         <>
             <ScrollView style={styles.container}>
-                <View style={styles.containerTwo}>
+                <View style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                }}>
                     <ImageBackground
                         source={require('../assets/zyro-image.png')} // Replace with the path to your image
                         style={styles.imageBackground}

@@ -5,7 +5,7 @@ import { TextInput } from 'react-native-paper';
 
 
 export default function GuardinForm() {
-    const { formData, setFormData } = useContext(myEnrollmentContext);
+    const { formData, setFormData, handleSubmit } = useContext(myEnrollmentContext);
     return (
         <>
             <View style={{
@@ -15,7 +15,7 @@ export default function GuardinForm() {
             <View style={{ flex: 1, marginHorizontal: 10, padding: 10, gap: 10 }}>
 
 
-                <Text style={{ textAlign: 'center' }}>Guardian Information</Text>
+                <Text style={{ textAlign: 'center' }}>Guardian Information / Contact Incase of Emergency</Text>
 
                 <TextInput
                     required
@@ -83,11 +83,7 @@ export default function GuardinForm() {
                 />
 
                 <Pressable
-                    onPress={() => {
-                        console.log(formData)
-                        { /*handleFileUpload('birthCertificatePath', selectedBirthCert, birthCert),
-                    console.log(filePaths.birthCertificatePath)*/}
-                    }}
+                    onPress={handleSubmit}
                     style={{
                         alignItems: 'center',
                         backgroundColor: 'blue',

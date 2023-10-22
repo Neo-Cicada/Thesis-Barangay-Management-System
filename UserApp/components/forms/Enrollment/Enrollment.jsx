@@ -8,6 +8,8 @@ import ChildForm from './ChildForm';
 import FatherForm from './FatherForm';
 import MotherForm from './MotherForm';
 import GuardianForm from './GuardinForm'
+import { reset } from './reset';
+import useUpload from '../../../hooks/useUpload'
 export const myEnrollmentContext = createContext();
 
 export default function Enrollment() {
@@ -28,9 +30,25 @@ export default function Enrollment() {
     medicalCertificatePath: '',
     marriageCertificatePath: '',
   })
-  // useEffect(()=>{ // upload when all the filepath are filed
-  //   useUpload(...formData, ...filePaths).clear.then alert sucess transaction
-  // },[filePaths])
+
+  useEffect(() => {
+    // Check if all filePaths values are not empty strings
+    const areFilePathsFilled = Object.values(filePaths).every(path => path !== '');
+
+    if (areFilePathsFilled) {
+      console.log("All filePaths are filled:");
+      console.log(formData);
+      console.log(filePaths);
+      useUpload({ ...formData, ...filePaths }, 'EnrollmentRequest').then(() => setFilePaths({
+        // Store file paths here
+        birthCertificatePath: '',
+        medicalCertificatePath: '',
+        marriageCertificatePath: '',
+      }))
+      alert('Successfuly Uploaded!')
+    }
+
+  }, [filePaths]);
   const handleFileUpload = async (fieldName, file, img) => {
     const storageRef = ref(storage, `enroll-form-files/${file.name}`);
 
@@ -85,7 +103,7 @@ export default function Enrollment() {
       const selectedDocument = result.assets[0];
 
       if (!result.canceled) {
-        // const img = await fetch(result.assets[0].uri); this fucker cause a bug that lead me fix for 5 hours
+        // const img = await fetch(result.assets[0].uri); this fucker cause a bug that I fixed for 5 hours
         const bytes = await uriToBlob(selectedDocument.uri).catch(error => {
           console.log('bytes error', error);
         });
@@ -99,9 +117,16 @@ export default function Enrollment() {
   };
 
   const handleSubmit = async () => {
-    await handleFileUpload('birthCertificatePath', selectedBirthCert, birthCert);
-    await handleFileUpload('medicalCertificatePath', selectedMedCert, medCert)
-    await handleFileUpload('marriageCertificatePath', selectedMarriageCert, marriageCert)
+
+    try {
+      await handleFileUpload('birthCertificatePath', selectedBirthCert, birthCert);
+      await handleFileUpload('medicalCertificatePath', selectedMedCert, medCert)
+      await handleFileUpload('marriageCertificatePath', selectedMarriageCert, marriageCert)
+    } catch (error) {
+      console.error('Error during file upload:', error);
+    }
+
+
   }
   const [formData, setFormData] = useState({
 
@@ -164,7 +189,8 @@ export default function Enrollment() {
       setSelectedMedCert,
       setMarriageCert,
       setSelectedMarriage,
-      setSelectedBirthCert
+      setSelectedBirthCert,
+      handleSubmit
     }}>
       <View style={{ flex: 1 }}>
         {count === 1 && <ChildForm />}

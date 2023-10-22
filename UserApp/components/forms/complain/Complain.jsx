@@ -5,6 +5,7 @@ import Box from '../medicines/Box'
 import { TextInput, Button } from 'react-native-paper';
 import ComplainSelect from './ComplainSelect';
 export const myComplainContext = createContext();
+import useUpload from '../../../hooks/useUpload'
 
 export default function Complain() {
   const [selectedReport, setSelectReportDalog] = useState([]);
@@ -37,7 +38,6 @@ export default function Complain() {
     }
   };
   const handleSubmit = async (e) => {
-    e.preventDefault()
     console.log(details)
     await useUpload(details, 'ReportRequest')
     setSelectReportDalog([])
@@ -49,7 +49,7 @@ export default function Complain() {
       summon: false,
       status: 'request'
     });
-
+    alert("Successfuly Submited!")
   }
   const handleReport = (reportName, badGuy) => {
     const updatedSelectedReport = selectedReport.map((item) => {
@@ -65,7 +65,7 @@ export default function Complain() {
       <myComplainContext.Provider value={{
         selectedReport,
         setSelectReportDalog, details,
-        setDetails, handleBoxSelect, handleReport,
+        setDetails, handleBoxSelect, handleReport,handleSubmit
       }}>
         <View style={{ flex: 1 }}>
           {proceed ? <ComplainForm /> : <ComplainSelect />}
