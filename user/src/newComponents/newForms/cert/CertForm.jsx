@@ -25,7 +25,7 @@ export default function CertForm() {
   const { details, setDetails, handleSubmit } = useContext(MyCertContext)
   const [showAgreement, setShowAgreement,] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
-
+  const [agreement, setAgreement] = useState(false)
   const handleOpenAgreement = () => {
     setShowAgreement(true);
   };
@@ -67,25 +67,36 @@ export default function CertForm() {
           justifyContent: 'center'
         }}>
           <TextField
+            required
             fullWidth
-            label="Fullname"
-            onChange={(e) => setDetails({ ...details, fullname: e.target.value })}
             value={details.fullname}
-          />
+            label="Fullname"
+            error={!isNaN(details.fullname) && details.fullname !== ''}
+            helperText={"Required"}
+            onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
           <TextField
+            required
             fullWidth
-
-            label="Phone number"
-            onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
+            label="Phone Number"
+            placeholder="09..."
             value={details.phoneNumber}
+            onChange={(e) => {
+              const onlyNums = e.target.value.replace(/[^0-9]/g, '');
+              if (onlyNums.length <= 11) {
+                const number = onlyNums;
+                setDetails({ ...details, phoneNumber: number });
+              }
+            }}
+            error={!/^09/.test(details.phoneNumber) && details.phoneNumber !== ''}
+            helperText={/^09/.test(details.phoneNumber) && details.phoneNumber !== '' ? "Required" : "Phone number must start with '09'"}
           />
           <TextField
+            helperText="Optional"
             fullWidth
-            label="Email"
+            variant="outlined"
+            label="Email address"
             value={details.email}
             onChange={(e) => setDetails({ ...details, email: e.target.value })}
-
-          // Add your state and onChange logic here
           />
           <Box sx={{
             display: 'flex',
@@ -100,7 +111,8 @@ export default function CertForm() {
             <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>        </Box>
           <FormControlLabel
             required
-            control={<Checkbox />}
+            control={<Checkbox checked={!agreement} />}
+            onClick={() => setAgreement(!agreement)}
             label={
               <span style={{ cursor: 'pointer' }}>
                 Agree to the <u onClick={handleOpenAgreement}>terms and conditions</u>
@@ -108,7 +120,14 @@ export default function CertForm() {
             }
           />
         </div>
-        <Button type="submit" fullWidth variant="contained">Submit</Button>
+        <Button
+          style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+          fullWidth
+          variant="contained"
+          disabled={agreement}
+          type={'submit'}
+        >
+          {agreement ? 'Disabled' : 'Submit'}</Button>
       </form>
       <TermsAndCondition open={showAgreement} onClose={handleCloseAgreement} />
       <Summary open={showSummary} onClose={() => setShowSummary(false)} />

@@ -40,7 +40,7 @@ export default function Services() {
             image={MedicineIcon}
             handleOpen={() => setIsMedicineOpen(true)} />
           <ServiceBox
-            title={'Certificates'}
+            title={'Documents'}
             image={CertificateIcon}
             handleOpen={() => setIsCertificateOpen(true)}
           />
@@ -54,7 +54,7 @@ export default function Services() {
             handleOpen={() => setIsEnrollmentOpen(true)}
           />
           <ServiceBox
-            title={'Report'}
+            title={'Complain'}
             image={ReportIcon}
             handleOpen={() => setIsReportOpen(true)}
           />

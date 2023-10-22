@@ -12,6 +12,7 @@ export default function CertSummary() {
                         <p>Full Name: {details.fullname}</p>
                         <p>Phone Number:{details.phoneNumber}</p>
                         <p>Email:{details.email}</p>
+
                     </div>
                 </div>
                 <div>
@@ -19,7 +20,8 @@ export default function CertSummary() {
                         Selected Certificate</h2>
                     <div>
                         {details.selectedCertificates.map(item =>
-                            <p>name: {item.name} - {item.mop} {item.reference}</p>
+                            <p>name: {item.name} - {item.mop} {item.reference}{item.quantity}</p>
+                            
                             )
                         }
                     </div>

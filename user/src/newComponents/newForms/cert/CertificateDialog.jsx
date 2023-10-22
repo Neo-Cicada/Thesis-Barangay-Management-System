@@ -13,7 +13,7 @@ export default function CertificateDialog({ open, handleClose }) {
         fullname: '',
         email: '',
         phoneNumber: '',
-        status:'request',
+        status: 'request',
         selectedCertificates: [...selectedCertificates] // spread the array elements
     });
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function CertificateDialog({ open, handleClose }) {
         })
         handleClose()
     }
-    const handleBoxSelect = (name, mop, reference) => {
+    const handleBoxSelect = (name, mop, reference, quantity) => {
         const index = selectedCertificates.findIndex((certificate) => certificate.name === name);
 
         if (index !== -1) {
@@ -48,6 +48,7 @@ export default function CertificateDialog({ open, handleClose }) {
             setSelectedCertificates([...selectedCertificates, {
                 name: name,
                 mop: mop,
+                quantity: quantity,
                 reference: reference
             }]);
         }
@@ -65,14 +66,21 @@ export default function CertificateDialog({ open, handleClose }) {
                 details, setDetails,
                 handleSubmit
             }}>
-                <Dialog open={open} onClose={handleClose}  fullWidth>
-                    <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>Available Certificates</DialogTitle>
+                <Dialog open={open} onClose={handleClose} fullWidth>
+                    <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>Available Documents</DialogTitle>
                     <DialogContent style={dialogContentStyle} className='certificate-dialog-content'>
                         {proceed ? <CertForm /> : <CertSelect />}
                     </DialogContent>
                     <DialogActions>
-                        {proceed ? <Button onClick={() => setProceed(false)}>Back</Button> : <Button onClick={handleClose}>Close</Button>}
-                        {!proceed && <Button onClick={() => setProceed(true)}>Next</Button>}
+                        {proceed ?
+                            <Button
+                                style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                                onClick={() => setProceed(false)}>Back</Button
+                            > : <Button
+                                style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                                onClick={handleClose}>Close</Button>}
+                        {!proceed && <Button style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                            onClick={() => setProceed(true)}>Next</Button>}
                     </DialogActions>
                 </Dialog>
             </MyCertContext.Provider>

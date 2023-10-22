@@ -43,7 +43,8 @@ export default function SelectedDocument() {
                             </Picker>
                         </View>
                         {certificate.mop === "GCASH" &&
-                            <Text style={{ textAlign: 'center' }}>Please make a payment using Gcash to the account number 09084590726.</Text>}
+                            <Text style={{ textAlign: 'center' }}>Please make a payment using Gcash to
+                             the account number 09084590726.</Text>}
                         <Text>Cost: {certificate.quantity}</Text>
                         {certificate.mop === 'GCASH' && (
                             <TextInput

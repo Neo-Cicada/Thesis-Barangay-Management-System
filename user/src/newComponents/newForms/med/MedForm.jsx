@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { TextField, Box, FormControlLabel, Checkbox, Dialog, Button } from '@mui/material'
+import { TextField, Box, FormControlLabel, Checkbox, Dialog, Button, CircularProgress } from '@mui/material'
 import { MyContext } from './MedicineDialogForm'
 import Agreement from '../../../components/dialogs/Agreement'
 import MedSummary from './MedSummary';
@@ -29,7 +29,8 @@ const Summary = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose} fullWidth >
       <div style={dialogStyle}>
         <MedSummary />
-        <Button onClick={onClose}>Close</Button>
+        <Button variant='contained' style={{ backgroundColor: '#3B5998' }}
+          onClick={onClose}>Close</Button>
       </div>
     </Dialog>
   );
@@ -42,6 +43,7 @@ export default function MedForm() {
     setAgreement, agreement, handleSubmit } = useContext(MyContext);
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
+  const [progress, setProgress] = useState(false)
   const handleOpenInnerDialog = () => {
     setOpenInnerDialog(true);
   };
@@ -52,7 +54,8 @@ export default function MedForm() {
   return (
     <>
       <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-        <form onSubmit={handleSubmit} style={{
+        <form onSubmit={handleSubmit}
+          style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '1em',
@@ -66,6 +69,8 @@ export default function MedForm() {
             fullWidth
             value={details.fullname}
             label="Fullname"
+            error={!isNaN(details.fullname) && details.fullname !== ''}
+            helperText={"Required"}
             onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
           <TextField
             required
@@ -73,17 +78,25 @@ export default function MedForm() {
             label="Phone Number"
             placeholder="09..."
             value={details.phoneNumber}
-            onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
+            onChange={(e) => {
+              const onlyNums = e.target.value.replace(/[^0-9]/g, '');
+              if (onlyNums.length <= 11) {
+                const number = onlyNums;
+                setDetails({ ...details, phoneNumber: number });
+              }
+            }}
+            error={!/^09/.test(details.phoneNumber) && details.phoneNumber !== ''}
+            helperText={/^09/.test(details.phoneNumber) && details.fullname !== '' ? "Required" : "Phone number must start with '09'"}
           />
           <TextField
-            required
-
+            helperText="Optional"
             fullWidth
             variant="outlined"
             label="Email address"
             value={details.email}
             onChange={(e) => setDetails({ ...details, email: e.target.value })}
           />
+          {progress && <CircularProgress color="inherit" />}
           <Box sx={{
             display: 'flex', alignItems: 'center',
             justifyContent: 'center', marginTop: '0.3em',
@@ -102,7 +115,10 @@ export default function MedForm() {
               </span>
             }
           />
+
+
           <Button
+            style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
             fullWidth
             variant="contained"
             disabled={agreement}
@@ -110,6 +126,7 @@ export default function MedForm() {
           >
             {agreement ? 'Disabled' : 'Submit'}</Button>
         </form>
+
       </div>
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />

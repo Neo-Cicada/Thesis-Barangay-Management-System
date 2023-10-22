@@ -28,7 +28,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
   }, [selectedMedicines]);
   const handleSubmit = async (e) => {
     e.preventDefault()
-   await useUpload(details, 'MedicineRequest')
+    await useUpload(details, 'MedicineRequest')
     setSelectedMedicines([]);
     setDetails({
       fullname: '',
@@ -60,31 +60,39 @@ export default function MedicineDialogForm({ open, handleClose }) {
     }
   };
   return (
-    <MyContext.Provider value={{ selectedMedicines, setSelectedMedicines,
-      handleSubmit, setDetails, details, setAgreement,agreement }}>
+    <MyContext.Provider value={{
+      selectedMedicines, setSelectedMedicines,
+      handleSubmit, setDetails, details, setAgreement, agreement
+    }}>
       <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle style={{ textAlign: 'center', borderBottom:'2px dashed grey' }}>
+        <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>
           {proceed ? 'Medicine Form' : 'List of Medicines'}
         </DialogTitle>
         <DialogContent style={dialogContentStyle} className='medicine-dialog-content'>
-          {proceed ?<MedForm /> : <MedicineSelect
+          {proceed ? <MedForm /> : <MedicineSelect
             handleBoxSelect={handleBoxSelect}
           />}
+          
         </DialogContent>
-        <DialogActions sx={{borderTop:'2px dashed grey'}}>
+        <DialogActions sx={{ borderTop: '2px dashed grey' }}>
           {proceed ?
             <Button
+              style={{ backgroundColor: '#3B5998' }}
+
               variant="contained"
               onClick={() => setProceed(!proceed)}>
               Back</Button>
             :
             <Button
+              style={{ backgroundColor: '#3B5998' }}
+
               variant="contained"
               onClick={handleClose}>
               Close</Button>}
           {!proceed &&
-             
+
             <Button
+              style={{ backgroundColor: '#3B5998' }}
               variant="contained"
               onClick={() => setProceed(!proceed)}>
               Next</Button>}

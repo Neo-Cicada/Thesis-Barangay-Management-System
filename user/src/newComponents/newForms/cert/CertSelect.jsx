@@ -3,12 +3,13 @@ import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { MyCertContext } from './CertificateDialog';
 import { TextField } from '@mui/material';
 import useRead from '../../../hooks/useRead'
-const Box = ({ name, isSelected, onSelect }) => {
+const Box = ({ name, isSelected, onSelect, quantity }) => {
     const boxStyle = {
-        height: '5em',
+        height: '6em',
         textAlign: 'center',
         borderRadius: '1em',
         display: 'flex',
+        flexDirection: "column",
         justifyContent: 'center',
         alignItems: 'center',
         width: '7em',
@@ -19,9 +20,11 @@ const Box = ({ name, isSelected, onSelect }) => {
     return (
         <div
             style={boxStyle}
-            onClick={() => onSelect(name)}
+            onClick={() => onSelect(name, '', '', quantity)}
         >
             <p style={{ fontSize: '1em' }}>{name}</p>
+            <p style={{ fontSize: '1em' }}>{quantity}</p>
+
         </div>
     );
 }
@@ -33,7 +36,8 @@ export default function CertSelect() {
     const handleMopSelect = (certName, mop) => {
         const updateSelectedCertificates = selectedCertificates.map((item) => {
             if (item.name === certName) {
-                return { ...item, mop: mop, reference: mop === 'GCASH' ? item.reference : '' };            }
+                return { ...item, mop: mop, reference: mop === 'GCASH' ? item.reference : '' };
+            }
             else {
                 return item
             }
@@ -56,6 +60,8 @@ export default function CertSelect() {
         name={item.type}
         isSelected={selectedCertificates.some((certificate) => certificate.name === String(item.type))}
         onSelect={handleBoxSelect}
+        quantity={item.quantity}
+
     />)
     return (
         <>
@@ -68,22 +74,19 @@ export default function CertSelect() {
                 {selectedCertificates.map((certificate, index) => (
                     <div
                         style={{
-                            textAlign: 'center',
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '1em',
-                            borderBottom: '1px solid grey'
+                            border:'1px solid gray',
+                            display:'flex',
+                            flexDirection:'column',
+                            alignItems:'center', gap: '1em'
+
                         }}
                         key={index}
                     >
-                        <div>{certificate.name}</div>
+                        <div style={{fontSize: '1.1rem'}}>{certificate.name}</div>
 
-
-                        <div style={{ width: '60%' }}>
+                        <div style={{ width: '40%' }}>
                             <FormControl fullWidth size='small'>
-                                <InputLabel id="paymentMethod-label">Payment Method</InputLabel>
+                                <InputLabel id={`paymentMethod-label-${index}`}>Payment Method</InputLabel>
                                 <Select
                                     value={certificate.mop}
                                     variant="standard"
@@ -96,11 +99,17 @@ export default function CertSelect() {
                                     <MenuItem value={'GCASH'}>GCASH</MenuItem>
                                 </Select>
                             </FormControl>
+                            {certificate.mop === "GCASH" && 
+                            <div style={{textAlign:'center'}}>Please make a payment using Gcash to the account number 09084590726.</div>}
+
                         </div>
-                        <div>Cost: {certificate.cost}</div>
+
+                        <div>Cost: {certificate.quantity}</div>
+
                         {certificate.mop === "GCASH" && (
                             <TextField
-                            value={certificate.reference}
+                                style={{ width: '40%' }}
+                                value={certificate.reference}
                                 onChange={(e) => handleReference(certificate.name, e.target.value)}
                                 variant="standard"
                                 size="small"
@@ -111,7 +120,8 @@ export default function CertSelect() {
                     </div>
                 ))}
 
-            </div>
+
+        </div >
         </>
     )
 }

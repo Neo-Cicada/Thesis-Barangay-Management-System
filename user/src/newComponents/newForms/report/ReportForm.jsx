@@ -88,17 +88,26 @@ export default function ReportForm() {
           fullWidth
           required
           margin="normal"
+          error={!isNaN(details.fullname) && details.fullname !== ''}
+          helperText={"Required"}
           disabled={reportType === 'anonymous'}
         />
         <TextField
           label="Number"
           name="number"
           value={details.phoneNumber}
-          onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
+          onChange={(e) => {
+            const onlyNums = e.target.value.replace(/[^0-9]/g, '');
+            if (onlyNums.length <= 11) {
+              const number = onlyNums;
+              setDetails({ ...details, phoneNumber: number });
+            }
+          }}
           fullWidth
           required
           margin="normal"
           disabled={reportType === 'anonymous'}
+          helperText="Required"
         />
 
         <TextField
@@ -107,9 +116,9 @@ export default function ReportForm() {
           value={details.email}
           onChange={(e) => setDetails({ ...details, email: e.target.value })}
           fullWidth
-          required
           margin="normal"
           disabled={reportType === 'anonymous'}
+          helperText="Optional"
         />
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
 
