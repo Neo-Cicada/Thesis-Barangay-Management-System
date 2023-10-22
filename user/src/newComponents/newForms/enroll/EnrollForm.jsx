@@ -164,6 +164,8 @@ export default function EnrollForm() {
                         Child Information
                     </Typography>
                     <TextField
+                        error={!isNaN(formData.childInfo.childLastName) && formData.childInfo.childLastName !== ''}
+                        helperText="Required"
                         required
                         value={formData.childInfo.childLastName}
                         fullWidth
@@ -178,7 +180,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.childInfo.childFirstName}
-
+                        helperText="Required"
                         label="Firstname"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -192,7 +194,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.childInfo.childMiddleName}
-
+                        helperText="Required"
                         label="Middlename"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -204,6 +206,7 @@ export default function EnrollForm() {
                         }))} />
                     <TextField
                         required
+                        helperText="Required"
                         value={formData.childInfo.childBirthDate}
                         type="date"
                         label="Date of Birth"
@@ -219,6 +222,8 @@ export default function EnrollForm() {
                         fullWidth
                     />
                     <TextField
+                        required
+                        helperText="Required"
                         fullWidth
                         type="file"
                         label="Upload Birth Certificate"
@@ -236,7 +241,8 @@ export default function EnrollForm() {
                         }
                     />
                     <TextField
-
+                        required
+                        helperText="Required"
                         fullWidth
                         type="file"
                         label="Upload Medical Certificate"
@@ -261,6 +267,7 @@ export default function EnrollForm() {
                         textAlign: 'center'
                     }}>Father Information</Typography>
                     <TextField
+                        helperText="Required"
                         required
                         value={formData.fatherInfo.fatherLastName}
                         label="Father's Lastname"
@@ -273,6 +280,7 @@ export default function EnrollForm() {
                             }
                         }))} />
                     <TextField
+                        helperText="Required"
                         required
                         value={formData.fatherInfo.fatherFirstName}
 
@@ -286,9 +294,8 @@ export default function EnrollForm() {
                             }
                         }))} />
                     <TextField
-                        required
                         value={formData.fatherInfo.fatherOccupation}
-
+                        helperText="Optional"
                         label="Occupation"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -300,6 +307,7 @@ export default function EnrollForm() {
                         }))} />
                     <TextField
                         required
+                        helperText="Required"
                         fatherPhoneNumber
                         label="Phone number"
                         fullWidth
@@ -314,6 +322,7 @@ export default function EnrollForm() {
                         required
                         value={formData.fatherInfo.fatherEmail}
                         label="Email"
+                        helperText="Optional"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
                             ...prevData,
@@ -325,6 +334,7 @@ export default function EnrollForm() {
                     <TextField
                         fullWidth
                         type="file"
+                        helperText="Optional"
                         label="Upload Marriage Certificate"
                         InputLabelProps={{
                             shrink: true,
@@ -343,6 +353,7 @@ export default function EnrollForm() {
                         textAlign: 'center'
                     }}>Mother Information</Typography>
                     <TextField
+                        helperText="Required"
                         required
                         value={formData.motherInfo.motherLastName}
                         label="Mother's Lastname"
@@ -357,7 +368,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.motherInfo.motherFirstName}
-
+                        helperText="Required"
                         label="Mother's Firstname"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -370,7 +381,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.motherInfo.motherOccupation}
-
+                        helperText="Required"
                         label="Occupation"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -384,7 +395,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.motherInfo.motherPhoneNumber}
-
+                        helperText="Required"
                         label="Phone number"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -397,7 +408,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.motherInfo.motherEmail}
-
+                        helperText="Optional"
                         label="Email"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -414,7 +425,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.guardianInfo.guardianLastName}
-
+                        helperText="Required"
                         label="Guardian's Lastname"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -427,7 +438,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.guardianInfo.guardianFirstName}
-
+                        helperText="Required"
                         label="Guardian's Firstname"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -440,7 +451,7 @@ export default function EnrollForm() {
                     <TextField
                         required
                         value={formData.guardianInfo.guardianPhoneNumber}
-
+                        helperText="Required"
                         label="Phone number"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -453,8 +464,7 @@ export default function EnrollForm() {
                     />
                     <TextField
                         value={formData.guardianInfo.guardianEmail}
-
-                        required
+                        helperText="Optional"
                         label="Emails"
                         fullWidth
                         onChange={(e) => setFormData((prevData) => ({
@@ -464,7 +474,10 @@ export default function EnrollForm() {
                                 guardianEmail: e.target.value
                             }
                         }))} />
-                    <Button fullWidth type='submit' variant='contained'>Submit</Button>
+                    <Button fullWidth type='submit'
+                        style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+
+                        variant='contained'>Submit</Button>
                 </form>
             </div>
         </>

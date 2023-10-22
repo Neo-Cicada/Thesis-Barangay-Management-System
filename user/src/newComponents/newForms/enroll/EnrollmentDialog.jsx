@@ -6,12 +6,12 @@ export default function EnrollmentDialog({ open, handleClose }) {
   return (
     <>
       <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle sx={{ textAlign: 'center', borderBottom:'3px dashed grey' }}>Daycare Enrollment Form</DialogTitle>
-        <DialogContent fullWidth sx={{borderBottom:'3px dashed grey'}}>
+        <DialogTitle sx={{ textAlign: 'center', borderBottom: '3px dashed grey' }}>Daycare Enrollment Form</DialogTitle>
+        <DialogContent fullWidth sx={{ borderBottom: '3px dashed grey' }}>
           <EnrollForm />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} variant='contained'>Close</Button>
+          <Button style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }} onClick={handleClose} variant='contained'>Close</Button>
         </DialogActions>
       </Dialog>
     </>
