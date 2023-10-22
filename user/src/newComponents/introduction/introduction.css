@@ -22,21 +22,21 @@
   bottom: 0;
   left: 0;
   z-index: -1;
-  opacity: 0.7; /* Adjust the opacity to make the image dimmer */
+  opacity: 0.7; 
 }
 
-/* Add the linear gradient overlay for text readability */
+/* linear gradient overlay for text readability */
 .introduction::before {
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../../assets/zyro-image.png');
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+   url('../../assets/zyro-image.png');
   background-blend-mode: multiply; /* Helps to make the image darker */
 }
 
-/* Adjust other styles as needed */
 
 
 
 .introduction-circle {
-  position: relative; /* Added */
+  position: relative;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -59,15 +59,15 @@
   background-color:white;
   transition: background-color 0.3s;
   pointer-events: none;
-  top: 50%; /* Added */
-  left: 50%; /* Added */
-  width: 0; /* Added */
-  height: 0; /* Added */
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
 }
 
 .introduction-circle:hover::after {
-  width: 140%; /* Adjust the size as needed */
-  height: 140%; /* Adjust the size as needed */
+  width: 140%;
+  height: 140%;
   background: white;
   mix-blend-mode: normal;
   opacity: 0.1;

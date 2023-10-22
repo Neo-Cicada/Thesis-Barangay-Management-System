@@ -50,6 +50,7 @@
 
 .aboutEB{
     /* border: 1px solid rgb(245, 25, 227); */
+    margin: 0 1em 0 1em;
     height: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -60,20 +61,23 @@
     /* border: 1px solid rgb(245, 25, 227); */
 }
 .aboutEB > .EB-title{
+        /* border: 1px solid red; */
+
    grid-column-start: 1;
    grid-column-end: 4;
    grid-row-start: 1;
    display: flex;
    align-items: center;
    justify-content: center;
-   font-size: clamp(1.3rem, 1.5rem, 1.7rem);
+   font-weight: 550;
+   font-size: clamp(1.6rem, 2rem, 1.7rem);
 }
 .aboutEB > .EB-description{
     grid-row-start: 2;
     grid-column: 2/span 3;
 }
 .aboutEB> .EB-image{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     grid-column: 1/span 2;
     grid-row: 3/span 4;
 }
@@ -104,27 +108,41 @@
 /* Officials css */
 .officials{
     height: 100%;
-    display: grid;
+    /* border: 1px solid red; */
+    margin: 0 3em 0 3em;
+    display: flex;
+    gap: 1.5em;
+    flex-direction: column;
+    align-items: center;
     grid-template-columns: repeat(4, 1fr);
+
     grid-template-rows: repeat(4, 1fr);
 }
-.officials > .official-title{
-    /* border: 1px solid red; */
-    grid-column: 1/span 3;
+.officials > div{
+    width: 100%;
+    /* border-bottom: 1px solid #3B5998; */
 }
-.officials > .official-current{
-    /* border: 1px solid red; */
-    grid-row: 2/span 3;
-    grid-column: 3/span 4;
+.officials > div > .items{
+        width: 50%;
+    text-align: center;
 }
-.officials > .official-image{
-    /* border: 1px solid red; */
-    grid-column: 1/span 2;
-    grid-row: 3/span 4;
+.below-text {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    color: #3B5998;
+    font-weight: bold;
+  }
+.politicians{
+    font-size: minmax(1rem, 1.2rem);
 
+    font-weight: 600;
 }
 
 @media screen and (min-width: 768px) {
+    .aboutEB{
+        margin: 0 3.5em 0 3.5em;
+    }
     .aboutEB > .EB-description{
         grid-row: 2/span 3;
         grid-column: 3/span 2;

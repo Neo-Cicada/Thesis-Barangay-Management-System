@@ -10,14 +10,14 @@ import Image2 from '../../assets/imgs2.jpg'
 import AboutNavigation from './AboutNavigation'
 const jsonData = {
   introduction: {
-    title: 'What is EBarangay?',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque laud antium natus magnam esse tempore sapiente ducimus quisquam, quas repudiandae deleniti?',
+    title: 'What is eBarangay?',
+    description: "eBarangay empowers officials while making resident satisfaction the core of governance. Request medicines, documents, facility access, equipment, and voice concerns - all efficiently, quickly, and accurately. Your needs, our priority.",
     image: ''
   },
 
   visson: {
-    title: 'Mission and Vission',
-    description: 'lorem20',
+    title: ' Mission and Vission',
+    description: ' Empowering Communities, Enhancing Lives  and to create connected, efficient, and responsive communities through technology, ensuring the well-being of every resident.',
     image: ''
   }
 }

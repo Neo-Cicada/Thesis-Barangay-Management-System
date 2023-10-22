@@ -9,20 +9,19 @@ export default function Introduction() {
             BARANGAY AMAMPEREZ
           </p>
           <p className='intro-location'>Villasis Pangasinan</p>
-          <p className='intro-description' style={{ fontSize: '1.6rem' }}><span style={{
-            fontWeight: '900',
-            color: 'white',
-            fontSize: '2rem',
-            borderBottom: '8px solid #3B5998'
-          }}>
-            <b>Welcome to eBarangay</b>
-          </span>
-            <br />
-          </p>
+
         </div>
 
         <div className='introduction-circle'  >
-          ABOUT
+          <p className='intro-description' style={{ fontSize: '1.6rem' }}><span style={{
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize: '1.5rem',
+          }}>
+            <b>WELCOME <br /> TO <br />eBARANGAY</b>
+          </span>
+            <br />
+          </p>
         </div>
 
       </div>

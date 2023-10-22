@@ -17,6 +17,7 @@ export default function NewHeader() {
       <header style={{ position: 'sticky', top: '0', zIndex: '5' }}>
         <div className='header-div'>
           <div className='navigation-logo' style={{
+            cursor: 'pointer',
             fontFamily: 'Arial, sans-serif',
             fontSize: '3.3rem',
             fontWeight: 'bolder',
@@ -39,7 +40,7 @@ export default function NewHeader() {
                   fontSize: '1.2rem',
                   fontWeight: '700',
                   '&:hover': {
-                    border: '1px dashed black',
+                    borderBottom: '3px dashed black',
                     color: 'white'
                   }
                 }}
@@ -54,7 +55,7 @@ export default function NewHeader() {
                   fontWeight: '700',
                   '&:hover': {
                     color: 'white',
-                    border: '1px dashed black'
+                    borderBottom: '3px dashed black',
                   }
                 }}
                 component={Link}
@@ -68,7 +69,7 @@ export default function NewHeader() {
                   fontWeight: '700',
                   '&:hover': {
                     color: 'white',
-                    border: '1px dashed black'
+                    borderBottom: '3px dashed black',
                   }
                 }}
                 component={Link} className='nav-menu' to="#services" smooth>Services</Button>
@@ -79,7 +80,7 @@ export default function NewHeader() {
                   fontWeight: '700',
                   '&:hover': {
                     color: 'white',
-                    border: '1px dashed black'
+                    borderBottom: '3px dashed black',
                   }
                 }}
                 component={Link} className='nav-menu' to="#about" smooth>About</Button>
@@ -99,7 +100,6 @@ export default function NewHeader() {
                 fontWeight: '1em',
                 '&:hover': {
                   color: 'white',
-                  border: '1px dashed black'
                 }
               }}
               className='nav-menu' component={Link} to="#home">Home</Button>
@@ -110,7 +110,6 @@ export default function NewHeader() {
                 fontWeight: '1em',
                 '&:hover': {
                   color: 'white',
-                  border: '1px dashed black'
                 }
               }}
               className='nav-menu' component={Link} to="#announcement">Announcement</Button>
@@ -121,7 +120,6 @@ export default function NewHeader() {
                 fontWeight: '1em',
                 '&:hover': {
                   color: 'white',
-                  border: '1px dashed black'
                 }
               }}
               className='nav-menu' component={Link} to="#services">Services</Button>
@@ -132,7 +130,6 @@ export default function NewHeader() {
                 fontWeight: '1em',
                 '&:hover': {
                   color: 'white',
-                  border: '1px dashed black'
                 }
               }}
               className='nav-menu' component={Link} to="#about">About</Button>

@@ -47,13 +47,13 @@
   .announcement-image {
     height: 100%;
     position: relative;
-    overflow: hidden; /* Hide any overflow */
+    overflow: hidden;
     border-radius: 1em;
   }
 
   .announcement-image:hover img {
-    transform: scale(1.5); /* Scale the image to 110% on hover */
-    transition: transform 0.2s ease; /* Apply a smooth transition to the image only on hover */
+    transform: scale(1.5);
+    transition: transform 0.2s ease;
   }
 
   .announcement-image img {
@@ -62,7 +62,7 @@
   }
 
   .announcement-image:hover img {
-    transform: scale(1.3); /* Scale the image to 110% on hover */
+    transform: scale(1.3);
   }
 
 .announcement-text{
@@ -72,7 +72,7 @@
     width: 100%;
     height: 25%;
     background-color: rgba(0, 0, 0, 0.7); /* Adjust the alpha value to change the transparency */
-    color: white; /* Text color */
+    color: white;
     box-sizing: border-box;
     text-align: center;
     border-radius: 0 0 0.9em 0.9em;
