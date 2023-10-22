@@ -1,4 +1,3 @@
-import './App.css'
 import NewHeader from './newComponents/newHeader/NewHeader'
 import Introduction from './newComponents/introduction/Introduction'
 import Announcement from './newComponents/announcement/Announcement'
@@ -13,9 +12,7 @@ function App() {
       <NewHeader />
       <Introduction />
       <Announcement />
-
       <Services />
-
       <About />
       <Footer />
 

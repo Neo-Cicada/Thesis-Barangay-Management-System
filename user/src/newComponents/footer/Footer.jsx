@@ -13,7 +13,7 @@ export default function Footer() {
             < Button
               sx={{
                 color: 'black',
-                fontSize: '1rem',
+                fontSize: '0.9rem',
                 fontWeight: 'bold',
                 '&:hover': {
                   color: 'white'
@@ -26,7 +26,7 @@ export default function Footer() {
             < Button
               sx={{
                 color: 'black',
-                fontSize: '1rem',
+                fontSize: '0.9rem',
                 fontWeight: 'bold',
                 '&:hover': {
                   color: 'white'
@@ -36,30 +36,30 @@ export default function Footer() {
               className='nav-menu'
               to="#announcement"
               smooth>Announcement</Button>< Button
-              sx={{
-                color: 'black',
-                fontSize: '1rem',
-                fontWeight: 'bold',
-                '&:hover': {
-                  color: 'white'
-                }
-              }}
-              component={Link}
-              className='nav-menu'
-              to="#services"
-              smooth>Services</Button>< Button
-              sx={{
-                color: 'black',
-                fontSize: '1rem',
-                fontWeight: 'bold',
-                '&:hover': {
-                  color: 'white'
-                }
-              }}
-              component={Link}
-              className='nav-menu'
-              to="#about"
-              smooth>About</Button>
+                sx={{
+                  color: 'black',
+                  fontSize: '0.9rem',
+                  fontWeight: 'bold',
+                  '&:hover': {
+                    color: 'white'
+                  }
+                }}
+                component={Link}
+                className='nav-menu'
+                to="#services"
+                smooth>Services</Button>< Button
+                  sx={{
+                    color: 'black',
+                    fontSize: '0.9rem',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                      color: 'white'
+                    }
+                  }}
+                  component={Link}
+                  className='nav-menu'
+                  to="#about"
+                  smooth>About</Button>
           </ul>
         </div>
         <div className='foot copyright'>
@@ -69,16 +69,16 @@ export default function Footer() {
           <p>Terms of Service</p>
         </div>
         <div className='foot loc'>
-          <p>BARANGAY HALL ADDRESS</p>
-          <p>Amamperez Zone 3 <br />Villasis, Pangasinan <br />Philippines</p>
+          <p style={{ textAlign: 'center' }}>BARANGAY HALL ADDRESS</p>
+          <p style={{ textAlign: 'center' }}>Amamperez Zone 3 <br />Villasis, Pangasinan <br />Philippines</p>
         </div>
         <div className='foot emergency'>
           <p>PHONE NUMBERS</p>
-          <p>
-            Villasis Police Station(075) 6327566 <br />
-            Villasis Fire Department632-2105 <br />
-            Municipal Health Officer632-2099 <br />
-            Mayor's Office632-2152 / 2041206</p>
+
+          <p>Villasis Police Station(075) 6327566</p>
+          <p> Villasis Fire Department632-2105</p>
+          <p>Municipal Health Officer632-2099</p>
+          <p>Mayor's Office632-2152 / 2041206</p>
         </div>
       </div>
     </>
