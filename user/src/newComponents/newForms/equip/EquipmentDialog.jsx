@@ -25,19 +25,7 @@ export default function EquipmentDialog({ open, handleClose }) {
   }, [selectedEquipment]);
   const isDetailsFilled = Object.values(details).every((value) => Boolean(value));
 
-  const handleSubmit = async (e) => {
-    //useUpload here
-    e.preventDefault();
-    await useUpload(details, 'EquipmentRequest')
-    setSelectedEquipment([])
-    setDetails({
-      returnDate: '',
-      fullname: '',
-      email: '',
-      phoneNumber: '',
-      selectedEquipment: []
-    })
-  }
+
   const handleBoxSelect = (name, count) => {
     const index = selectedEquipment.findIndex((item) => item.name === name);
 
@@ -68,7 +56,6 @@ export default function EquipmentDialog({ open, handleClose }) {
         setAgreement,
         setDetails,
         handleBoxSelect,
-        handleSubmit
       }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>Available Equipment</DialogTitle>

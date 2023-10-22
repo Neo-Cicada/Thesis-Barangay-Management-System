@@ -3,6 +3,8 @@ import { TextField, Box, FormControlLabel, FormControl, Checkbox, Dialog, Button
 import { MyEquipmentContext } from './EquipmentDialog';
 import Agreement from '../../../components/dialogs/Agreement'
 import EquipmentSummary from './EquipmentSummary'
+import useUpload from '../../../hooks/useUpload';
+import SnackBar from '../../SnackBar'
 function TermsAndCondition({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose}>
@@ -29,20 +31,38 @@ const Summary = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose} fullWidth >
       <div style={dialogStyle}>
         <EquipmentSummary />
-        <Button onClick={onClose}>Close</Button>
+        <Button
+          style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+
+          onClick={onClose}>Close</Button>
       </div>
     </Dialog>
   );
 };
 export default function EquipmentDialogForm() {
   const [showAgreement, setShowAgreement] = useState(false);
-  const { selectedEquipment, details, setDetails, agreement, setAgreement, handleSubmit } = useContext(MyEquipmentContext);
+  const { selectedEquipment, details, setDetails,
+    agreement, setAgreement, setSelectedEquipment } = useContext(MyEquipmentContext);
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
+  const [openSnack, setOpenSnack] = useState(false)
   const handleOpenInnerDialog = () => {
     setOpenInnerDialog(true);
   };
-
+  const handleSubmit = async (e) => {
+    //useUpload here
+    e.preventDefault();
+    await useUpload(details, 'EquipmentRequest')
+    setSelectedEquipment([])
+    setDetails({
+      returnDate: '',
+      fullname: '',
+      email: '',
+      phoneNumber: '',
+      selectedEquipment: []
+    })
+    setOpenSnack(true)
+  }
   const handleCloseInnerDialog = () => {
     setOpenInnerDialog(false);
   };
@@ -136,6 +156,7 @@ export default function EquipmentDialogForm() {
           >{agreement ? 'Disabled' : 'Submit'}</Button>
         </form>
       </div>
+      <SnackBar open={openSnack} handleClose={() => setOpenSnack(false)} />
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />
     </>

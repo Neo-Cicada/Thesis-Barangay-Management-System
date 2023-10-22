@@ -23,19 +23,6 @@ export default function CertificateDialog({ open, handleClose }) {
         }));
     }, [selectedCertificates]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        //useUpload here
-        await useUpload(details, 'CertificateRequest')
-        setSelectedCertificates([])
-        setDetails({
-            fullname: '',
-            email: '',
-            phoneNumber: '',
-            selectedCertificates: []
-        })
-        handleClose()
-    }
     const handleBoxSelect = (name, mop, reference, quantity) => {
         const index = selectedCertificates.findIndex((certificate) => certificate.name === name);
 
@@ -64,7 +51,6 @@ export default function CertificateDialog({ open, handleClose }) {
                 setSelectedCertificates,
                 handleBoxSelect,
                 details, setDetails,
-                handleSubmit
             }}>
                 <Dialog open={open} onClose={handleClose} fullWidth>
                     <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>Available Documents</DialogTitle>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, Button, Checkbox, Dialog, Box } from '@mui/material';
+import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, Button, Checkbox, Dialog, Box, Snackbar } from '@mui/material';
 import SummarayReport from './SummarayReport';
 import Agreement from '../../../components/dialogs/Agreement';
 import { MyReportContext } from './ReportDialog';
 import { useContext } from 'react';
+import useUpload from '../../../hooks/useUpload'
+import SnackBar from '../../SnackBar'
 function TermsAndCondition({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose}>
@@ -39,11 +41,26 @@ const Summary = ({ open, onClose }) => {
   );
 };
 export default function ReportForm() {
-  const { details, setDetails, handleSubmit } = useContext(MyReportContext)
+  const { details, setDetails, setSelectReportDalog } = useContext(MyReportContext)
   const [reportType, setReportType] = useState('anonymous');
   const [showSummary, setShowSummary] = useState(false);
   const [showCondition, setShowCondition] = useState(false);
   const [agreement, setAgreement] = useState(false)
+  const [openSnack, setOpenSnack] = useState(false)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await useUpload(details, 'ReportRequest')
+    setSelectReportDalog([])
+    setDetails({
+      fullname: '',
+      email: '',
+      phoneNumber: '',
+      selectedReport: [],
+      summon: false,
+      status: 'request'
+    });
+    setOpenSnack(true)
+  }
   useEffect(() => {
     if (reportType === 'anonymous') {
       // Clear the values when reportType is 'anonymous'
@@ -169,6 +186,7 @@ export default function ReportForm() {
         >
           {agreement ? 'Disabled' : 'Submit'}</Button>
       </form>
+      <SnackBar open={openSnack} handleCLose={()=>setOpenSnack(false)}/>
       {showCondition && <TermsAndCondition open={showCondition} onClose={() => setShowCondition(false)} />}
       {showSummary && <Summary open={showSummary} onClose={() => setShowSummary(false)} />}
     </div>

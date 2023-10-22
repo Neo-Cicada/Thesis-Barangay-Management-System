@@ -34,26 +34,10 @@ export default function ReportDialog({ open, handleClose }) {
       setSelectReportDalog([...selectedReport, { name: name, person: badGuy }]);
     }
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log(details)
-    await useUpload(details, 'ReportRequest')
-    setSelectReportDalog([])
-    setDetails({
-      fullname: '',
-      email: '',
-      phoneNumber: '',
-      selectedReport: [],
-      summon: false,
-      status: 'request'
-    });
-
-    handleClose()
-
-  }
+ 
   return (
     <>
-      <MyReportContext.Provider value={{ handleSubmit, selectedReport, setSelectReportDalog, handleBoxSelect, details, setDetails }}>
+      <MyReportContext.Provider value={{  selectedReport, setSelectReportDalog, handleBoxSelect, details, setDetails }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle sx={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>{proceed ? 'Report Form' : 'Report Someone'}</DialogTitle>
           <DialogContent style={{ height: '100vh', borderBottom: '2px dashed grey' }}>

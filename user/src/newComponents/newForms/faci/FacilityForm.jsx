@@ -4,6 +4,7 @@ import { MyFacilityContext } from './FacilityDialog';
 import Agreement from '../../../components/dialogs/Agreement';
 import FacilitySummary from './FacilitySummary'
 import useUpload from '../../../hooks/useUpload';
+import SnackBar from '../../SnackBar'
 function TermsAndCondition({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose}>
@@ -30,7 +31,10 @@ const Summary = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose} fullWidth >
       <div style={dialogStyle}>
         <FacilitySummary />
-        <Button onClick={onClose}>Close</Button>
+        <Button
+          style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+
+          onClick={onClose}>Close</Button>
       </div>
     </Dialog>
   );
@@ -41,6 +45,7 @@ export default function FacilityForm() {
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
   const [agreement, setAgreement] = useState(false)
+  const [openSnack, setOpenSnack] = useState(false)
   const handleOpenInnerDialog = () => {
     setOpenInnerDialog(true);
   };
@@ -59,7 +64,7 @@ export default function FacilityForm() {
       phoneNumber: '',
       selectedFacility: []
     });
-
+    setOpenSnack(true)
   }
   return (
     <>
@@ -134,6 +139,7 @@ export default function FacilityForm() {
             {agreement ? 'Disabled' : 'Submit'}</Button>
         </form>
       </div>
+      <SnackBar open={openSnack} handleClose={() => setOpenSnack(false)} />
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />
     </>

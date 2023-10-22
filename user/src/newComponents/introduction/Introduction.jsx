@@ -13,18 +13,19 @@ export default function Introduction() {
         </div>
 
         <div className='introduction-circle'  >
-          <p className='intro-description' style={{ fontSize: '1.6rem' }}><span style={{
+          <p className='intro-description' style={{
             fontWeight: 'bold',
             color: 'white',
             fontSize: '1.5rem',
+            textAlign:'center',
           }}>
-            <b>WELCOME <br /> TO <br />eBARANGAY</b>
-          </span>
-            <br />
+            WELCOME
+
+
           </p>
         </div>
 
-      </div>
+      </div >
 
 
     </>

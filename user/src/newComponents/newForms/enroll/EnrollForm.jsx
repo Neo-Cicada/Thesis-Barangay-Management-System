@@ -3,46 +3,17 @@ import {
 
     TextField,
     Typography,
-    Button,
+    Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio
 
 } from '@mui/material';
 import { storage, db } from '../../../firebase';
 
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import useUpload from '../../../hooks/useUpload';
+import SnackBar from '../../SnackBar'
+export default function EnrollForm({ formData, setFormData }) {
+    const [openSnack, setOpenSnack] = useState(false)
 
-export default function EnrollForm() {
-    const [formData, setFormData] = useState({
-
-        childInfo: {
-            childFirstName: "",
-            childLastName: "",
-            childMiddleName: "",
-            childBirthDate: ""
-        },
-        fatherInfo: {
-            fatherFirstName: "",
-            fatherLastName: "",
-            fatherOccupation: "",
-            fatherPhoneNumber: "",
-            fatherEmail: ""
-        },
-        motherInfo: {
-            motherFirstName: "",
-            motherLastName: "",
-            motherOccupation: "",
-            motherPhoneNumber: "",
-            motherEmail: ""
-        },
-        guardianInfo: {
-            guardianFirstName: "",
-            guardianLastName: "",
-            guardianPhoneNumber: "",
-            guardianEmail: ""
-        },
-
-
-    });
 
     const [filePaths, setFilePaths] = useState({
         // Store file paths here
@@ -99,6 +70,7 @@ export default function EnrollForm() {
             console.log(filePaths);
             useUpload({ formData, ...filePaths }, 'EnrollmentRequest')
             resetFormDataAndFilePaths();
+            setOpenSnack(true)
         }
     }, [filePaths]);
 
@@ -204,6 +176,24 @@ export default function EnrollForm() {
                                 childMiddleName: e.target.value
                             }
                         }))} />
+                    <FormControl>
+                        <FormLabel sx={{ textAlign: 'center' }}>Gender</FormLabel>
+                        <RadioGroup
+
+                            row
+                            name="radio-buttons-group"
+                            onChange={(e) => setFormData((prevData) => ({
+                                ...prevData,
+                                childInfo: {
+                                    ...prevData.childInfo,
+                                    childGender: e.target.value
+                                }
+                            }))}
+                        >
+                            <FormControlLabel value="female" control={<Radio />} label="Female" />
+                            <FormControlLabel value="male" control={<Radio />} label="Male" />
+                        </RadioGroup>
+                    </FormControl>
                     <TextField
                         required
                         helperText="Required"
@@ -479,6 +469,7 @@ export default function EnrollForm() {
 
                         variant='contained'>Submit</Button>
                 </form>
+                <SnackBar open={openSnack} handleClose={() => setOpenSnack(false)} />
             </div>
         </>
     )

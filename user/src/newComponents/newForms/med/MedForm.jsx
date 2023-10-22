@@ -3,6 +3,8 @@ import { TextField, Box, FormControlLabel, Checkbox, Dialog, Button, CircularPro
 import { MyContext } from './MedicineDialogForm'
 import Agreement from '../../../components/dialogs/Agreement'
 import MedSummary from './MedSummary';
+import SnackBar from '../../SnackBar'
+import useUpload from '../../../hooks/useUpload';
 function TermsAndCondition({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose}>
@@ -40,10 +42,11 @@ export default function MedForm() {
 
   const [showAgreement, setShowAgreement] = useState(false);
   const { selectedMedicines, details, setDetails,
-    setAgreement, agreement, handleSubmit } = useContext(MyContext);
+    setAgreement, agreement, setSelectedMedicines } = useContext(MyContext);
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
   const [progress, setProgress] = useState(false)
+  const [openSnack, setOpenSnack] = useState(false)
   const handleOpenInnerDialog = () => {
     setOpenInnerDialog(true);
   };
@@ -51,19 +54,35 @@ export default function MedForm() {
   const handleCloseInnerDialog = () => {
     setOpenInnerDialog(false);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    await useUpload(details, 'MedicineRequest').then(()=> setOpenSnack(true))
+
+    setSelectedMedicines([]);
+    setDetails({
+      fullname: '',
+      email: '',
+      phoneNumber: '',
+      selectedMedicines: [],
+      status: 'request'
+    });
+    console.log(selectedMedicines);
+   
+  };
   return (
     <>
       <div style={{ maxWidth: '400px', margin: '0 auto' }}>
         <form onSubmit={handleSubmit}
           style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1em',
-          marginTop: '1em',
-          alignItems: 'center',
-          justifyContent: 'center',
-          maxWidth: '400px',
-        }}>
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1em',
+            marginTop: '1em',
+            alignItems: 'center',
+            justifyContent: 'center',
+            maxWidth: '400px',
+          }}>
           <TextField
             required
             fullWidth
@@ -128,6 +147,7 @@ export default function MedForm() {
         </form>
 
       </div>
+      <SnackBar open={openSnack} handleClose={() => setOpenSnack(false)} />
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />
     </>

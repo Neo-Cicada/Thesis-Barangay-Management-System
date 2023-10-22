@@ -26,19 +26,6 @@ export default function MedicineDialogForm({ open, handleClose }) {
       selectedMedicines: selectedMedicines,
     }));
   }, [selectedMedicines]);
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    await useUpload(details, 'MedicineRequest')
-    setSelectedMedicines([]);
-    setDetails({
-      fullname: '',
-      email: '',
-      phoneNumber: '',
-      selectedMedicines: [],
-      status: 'request'
-    });
-    console.log(selectedMedicines);
-  };
   const handleBoxSelect = (name, count) => {
     const index = selectedMedicines.findIndex((item) => item.name === name);
 
@@ -62,7 +49,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
   return (
     <MyContext.Provider value={{
       selectedMedicines, setSelectedMedicines,
-      handleSubmit, setDetails, details, setAgreement, agreement
+       setDetails, details, setAgreement, agreement
     }}>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>
@@ -72,7 +59,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
           {proceed ? <MedForm /> : <MedicineSelect
             handleBoxSelect={handleBoxSelect}
           />}
-          
+
         </DialogContent>
         <DialogActions sx={{ borderTop: '2px dashed grey' }}>
           {proceed ?

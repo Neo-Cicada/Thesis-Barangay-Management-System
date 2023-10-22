@@ -6,7 +6,8 @@ import {
 import Agreement from '../../../components/dialogs/Agreement';
 import { MyCertContext } from './CertificateDialog';
 import CertSummary from './CertSummary';
-import useUpload from '../../../hooks/useUpload'
+import useUpload from '../../../hooks/useUpload';
+import SnackBar from '../../SnackBar'
 function TermsAndCondition({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose}>
@@ -22,10 +23,11 @@ function TermsAndCondition({ open, onClose }) {
 }
 
 export default function CertForm() {
-  const { details, setDetails, handleSubmit } = useContext(MyCertContext)
+  const { details, setDetails, setSelectedCertificates } = useContext(MyCertContext)
   const [showAgreement, setShowAgreement,] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
   const [agreement, setAgreement] = useState(false)
+  const [openSnack, setOpenSnack] = useState(false)
   const handleOpenAgreement = () => {
     setShowAgreement(true);
   };
@@ -53,6 +55,19 @@ export default function CertForm() {
       </Dialog>
     );
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    //useUpload here
+    await useUpload(details, 'CertificateRequest')
+    setSelectedCertificates([])
+    setDetails({
+      fullname: '',
+      email: '',
+      phoneNumber: '',
+      selectedCertificates: []
+    })
+    setOpenSnack(true)
+  }
   return (
     <>
       <form
@@ -129,6 +144,7 @@ export default function CertForm() {
         >
           {agreement ? 'Disabled' : 'Submit'}</Button>
       </form>
+      <SnackBar open={openSnack} handleCLose={()=>setOpenSnack(false)}/>
       <TermsAndCondition open={showAgreement} onClose={handleCloseAgreement} />
       <Summary open={showSummary} onClose={() => setShowSummary(false)} />
     </>
