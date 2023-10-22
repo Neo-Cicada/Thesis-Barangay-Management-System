@@ -25,8 +25,9 @@ export default function EquipmentDialog({ open, handleClose }) {
   }, [selectedEquipment]);
   const isDetailsFilled = Object.values(details).every((value) => Boolean(value));
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     //useUpload here
+    e.preventDefault();
     await useUpload(details, 'EquipmentRequest')
     setSelectedEquipment([])
     setDetails({
@@ -76,11 +77,14 @@ export default function EquipmentDialog({ open, handleClose }) {
           </DialogContent>
           <DialogActions>
             {proceed ?
-              <Button variant="contained" onClick={() => setProceed(!proceed)}>Back</Button> :
-              <Button variant="contained"  onClick={handleClose}>Close</Button>}
+              <Button style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                variant="contained" onClick={() => setProceed(!proceed)}>Back</Button> :
+              <Button style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                variant="contained" onClick={handleClose}>Close</Button>}
             {!proceed &&
 
-              <Button variant="contained"  onClick={() => setProceed(!proceed)}>Next</Button>}
+              <Button style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                variant="contained" onClick={() => setProceed(!proceed)}>Next</Button>}
           </DialogActions>
         </Dialog>
       </MyEquipmentContext.Provider>

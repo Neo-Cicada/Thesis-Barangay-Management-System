@@ -37,7 +37,7 @@ export default function ReportDialog({ open, handleClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(details)
-    await useUpload(details , 'ReportRequest')
+    await useUpload(details, 'ReportRequest')
     setSelectReportDalog([])
     setDetails({
       fullname: '',
@@ -45,9 +45,9 @@ export default function ReportDialog({ open, handleClose }) {
       phoneNumber: '',
       selectedReport: [],
       summon: false,
-      status:'request'
+      status: 'request'
     });
-   
+
     handleClose()
 
   }
@@ -63,10 +63,14 @@ export default function ReportDialog({ open, handleClose }) {
           <DialogActions>
 
             {proceed ? <Button
+              style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+
               variant="contained"
 
               onClick={() => setProceed(false)}
             >Back</Button> : <Button
+              style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+
               variant="contained"
               onClick={handleClose}>
               Close
@@ -74,6 +78,8 @@ export default function ReportDialog({ open, handleClose }) {
 
             {!proceed &&
               <Button
+                style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+
                 variant="contained"
                 onClick={() => setProceed(true)}
               >Next</Button>

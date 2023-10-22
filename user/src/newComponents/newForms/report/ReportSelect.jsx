@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { MyReportContext } from './ReportDialog'
+import { TextField } from '@mui/material';
 const Box = ({ name, isSelected, onSelect }) => {
   const boxStyle = {
     height: '5em',
@@ -46,17 +47,22 @@ export default function ReportSelect() {
       </div>
       <div className='selected-certificates-dialog'>
         {selectedReport.map((report, index) => (
-          <div style={{ textAlign: 'center' }} key={index}>
+          <div style={{ textAlign: 'center', border: '1px solid black' }} key={index}>
             <p>{report.name}</p>
-            <label htmlFor={`report-input-${index}`}>Who's the person you're reporting?</label>
-            <input
-              value={report.person}
-              onChange={(e)=>handleReport(report.name, e.target.value)}
-              type="text"
-              id={`report-input-${index}`}
-              aria-label="who"
-              placeholder="Enter person's name"
-            />
+            <div style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
+              <div>Who's the person you're reporting?
+              </div>
+              <TextField
+                size='small'
+                value={report.person}
+                onChange={(e) => handleReport(report.name, e.target.value)}
+                type="text"
+                label="Enter person name"
+                id={`report-input-${index}`}
+                aria-label="who"
+                placeholder="Enter person's name"
+              />
+            </div>
           </div>
         ))}
       </div>

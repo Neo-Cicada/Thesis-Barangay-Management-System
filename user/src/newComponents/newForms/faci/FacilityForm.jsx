@@ -40,6 +40,7 @@ export default function FacilityForm() {
   const { selectedFacility, details, setDetails, setselectedFacility } = useContext(MyFacilityContext)
   const [openInnerDialog, setOpenInnerDialog] = useState(false);
   const [showSummary, setShowSummary] = useState(false)
+  const [agreement, setAgreement] = useState(false)
   const handleOpenInnerDialog = () => {
     setOpenInnerDialog(true);
   };
@@ -74,22 +75,32 @@ export default function FacilityForm() {
             justifyContent: 'center'
           }}>
           <TextField
+            required
             fullWidth
             value={details.fullname}
             label="Fullname"
-            onChange={(e) => setDetails({ ...details, fullname: e.target.value })}
-          />
+            error={!isNaN(details.fullname) && details.fullname !== ''}
+            helperText={"Required"}
+            onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
           <TextField
+            required
             fullWidth
-
             label="Phone Number"
             placeholder="09..."
             value={details.phoneNumber}
-            onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
+            onChange={(e) => {
+              const onlyNums = e.target.value.replace(/[^0-9]/g, '');
+              if (onlyNums.length <= 11) {
+                const number = onlyNums;
+                setDetails({ ...details, phoneNumber: number });
+              }
+            }}
+            error={!/^09/.test(details.phoneNumber) && details.phoneNumber !== ''}
+            helperText={/^09/.test(details.phoneNumber) && details.fullname !== '' ? "Required" : "Phone number must start with '09'"}
           />
           <TextField
+            helperText="Optional"
             fullWidth
-
             variant="outlined"
             label="Email address"
             value={details.email}
@@ -105,14 +116,22 @@ export default function FacilityForm() {
           </Box>
           <FormControlLabel
             required
-            control={<Checkbox />}
+            control={<Checkbox checked={!agreement} />}
+            onClick={() => setAgreement(!agreement)}
             label={
               <span style={{ cursor: 'pointer' }}>
                 Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>
               </span>
             }
           />
-          <Button type="submit" fullWidth variant='contained'>Submit</Button>
+          <Button
+            style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+            fullWidth
+            variant="contained"
+            disabled={agreement}
+            type={'submit'}
+          >
+            {agreement ? 'Disabled' : 'Submit'}</Button>
         </form>
       </div>
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />

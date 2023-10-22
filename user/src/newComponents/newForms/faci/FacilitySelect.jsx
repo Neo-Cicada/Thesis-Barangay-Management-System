@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { MyFacilityContext } from './FacilityDialog';
 import useRead from '../../../hooks/useRead'
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 export function Box({ name, isSelected, onSelect }) {
   const boxStyle = {
     height: '5em',
@@ -39,9 +40,9 @@ export default function FacilitySelect() {
   />)
   const options = data.map((item) => (
     item.slots.map((slot, index) => (
-      <option key={index} value={`${slot.startTime} - ${slot.endTime}`}>
+      <MenuItem key={index} value={`${slot.startTime} - ${slot.endTime}`}>
         {`${slot.startTime} - ${slot.endTime}`}
-      </option>
+      </MenuItem>
     ))
   ));
   return (
@@ -50,21 +51,27 @@ export default function FacilitySelect() {
         {items}
       </div>
       <p style={{ textAlign: 'center' }}>Selected Facility</p>
-      <div className='selected-certificates-dialog'>
+      <div className='selected-certificates-dialog' style={{height: '4em'}}>
         {selectedFacility.map((facility, index) => (
-          <div style={{ textAlign: 'center', display: 'flex', borderBottom: '1px solid black', alignItems: 'center', gap: '1em', justifyContent: 'center' }} key={index}>
+          <div style={{ textAlign: 'center', display: 'flex',
+          borderBottom: '1px solid black', alignItems: 'center', gap: '1em', justifyContent: 'center' }} key={index}>
             <div >{facility.name}</div>
-            <select
-              value={facility.slot || ''} // Use the facility's slot value
-              onChange={(e) => handleOptionSelect(facility.name, e.target.value)}
-            >
-              <option value="" disabled>
-                Select Time Slot
-              </option>
-              {/* Populate these options with your time slot data */}
-              {options}
-              {/* Add more time slot options as needed */}
-            </select>
+            <FormControl style={{width: "50%"}}>
+              <InputLabel >Available Time</InputLabel>
+              <Select
+              size='small'
+                label={"Available Time"}
+                value={facility.slot || ''} // Use the facility's slot value
+                onChange={(e) => handleOptionSelect(facility.name, e.target.value)}
+              >
+                <MenuItem value="" disabled>
+                  Select Time Slot
+                </MenuItem>
+                {/* Populate these options with your time slot data */}
+                {options}
+                {/* Add more time slot options as needed */}
+                </Select>
+            </FormControl>
           </div>
         ))}
       </div>

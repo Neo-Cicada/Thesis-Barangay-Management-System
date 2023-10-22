@@ -10,9 +10,9 @@ export default function EquipmentSummary() {
           <h2 style={{ textAlign: 'center' }}>
             Personal Information</h2>
           <div>
-            <p>Full Name: {details.fullname}</p>
-            <p>Phone Number:{details.phoneNumber}</p>
-            <p>Email:{details.email}</p>
+            <p>Fullname: {details.fullname}</p>
+            <p>Phone Number: {details.phoneNumber}</p>
+            <p>Email: {details.email}</p>
             <p>Return Date: {details.returnDate}</p>
           </div>
         </div>
@@ -20,7 +20,7 @@ export default function EquipmentSummary() {
           <h2 style={{ textAlign: 'center' }}>
             Selected Items</h2>
           <div>
-            {details.selectedEquipment.map(item => <p>name: {item.name} | quantiy: {item.count}</p>)}
+            {details.selectedEquipment.map(item => <p>Name: {item.name} | Quantity: {item.count}</p>)}
           </div>
         </div>
 

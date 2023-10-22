@@ -14,7 +14,7 @@ export default function FacilityDialog({ open, handleClose }) {
     fullname: '',
     email: '',
     phoneNumber: '',
-    status:'request',
+    status: 'request',
     selectedFacility: [...selectedFacility] // spread the array elements
   });
   useEffect(() => {
@@ -45,8 +45,17 @@ export default function FacilityDialog({ open, handleClose }) {
             {proceed ? <FacilityForm /> : <FacilitySelect />}
           </DialogContent>
           <DialogActions>
-            {proceed ? <Button variant="contained"  onClick={() => setProceed(!proceed)}>Back</Button> : <Button variant="contained"  onClick={handleClose}>Close</Button>}
-            {!proceed &&<Button variant="contained" onClick={() => setProceed(true)}>Next</Button>}
+            {proceed ?
+              <Button
+                style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+
+                variant="contained" onClick={() => setProceed(!proceed)}>Back</Button> :
+              <Button
+                style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                variant="contained" onClick={handleClose}>Close</Button>}
+            {!proceed && <Button
+              style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+              variant="contained" onClick={() => setProceed(true)}>Next</Button>}
           </DialogActions>
         </Dialog>
       </MyFacilityContext.Provider>

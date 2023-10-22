@@ -11,8 +11,8 @@ export default function FacilitySummary() {
             Personal Information</h2>
           <div>
             <p>Full Name: {details.fullname}</p>
-            <p>Phone Number:{details.phoneNumber}</p>
-            <p>Email:{details.email}</p>
+            <p>Phone Number: {details.phoneNumber}</p>
+            <p>Email: {details.email}</p>
 
           </div>
         </div>
@@ -20,7 +20,7 @@ export default function FacilitySummary() {
           <h2 style={{ textAlign: 'center' }}>
             Selected Items</h2>
           <div>
-            {details.selectedFacility.map(item => <p>name: {item.name} - {item.slot}</p>)}
+            {details.selectedFacility.map(item => <p>Name: {item.name} - Time Slots: {item.slot}</p>)}
           </div>
         </div>
 

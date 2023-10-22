@@ -30,7 +30,10 @@ const Summary = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose} fullWidth >
       <div style={dialogStyle}>
         <SummarayReport />
-        <Button variant='contained' onClick={onClose}>Close</Button>
+        <Button
+          style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+
+          variant='contained' onClick={onClose}>Close</Button>
       </div>
     </Dialog>
   );
@@ -40,7 +43,7 @@ export default function ReportForm() {
   const [reportType, setReportType] = useState('anonymous');
   const [showSummary, setShowSummary] = useState(false);
   const [showCondition, setShowCondition] = useState(false);
-
+  const [agreement, setAgreement] = useState(false)
   useEffect(() => {
     if (reportType === 'anonymous') {
       // Clear the values when reportType is 'anonymous'
@@ -147,7 +150,8 @@ export default function ReportForm() {
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <FormControlLabel
             required
-            control={<Checkbox />}
+            control={<Checkbox checked={!agreement} />}
+            onClick={() => setAgreement(!agreement)}
             label={
               <span style={{ cursor: 'pointer' }} onClick={() => setShowCondition(true)}>
                 Agree to the <u >terms and conditions</u>
@@ -156,9 +160,14 @@ export default function ReportForm() {
           />
         </Box>
 
-        <Button type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
+        <Button
+          style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+          fullWidth
+          variant="contained"
+          disabled={agreement}
+          type={'submit'}
+        >
+          {agreement ? 'Disabled' : 'Submit'}</Button>
       </form>
       {showCondition && <TermsAndCondition open={showCondition} onClose={() => setShowCondition(false)} />}
       {showSummary && <Summary open={showSummary} onClose={() => setShowSummary(false)} />}

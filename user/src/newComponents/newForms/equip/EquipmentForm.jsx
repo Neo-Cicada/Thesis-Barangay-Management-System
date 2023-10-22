@@ -49,79 +49,92 @@ export default function EquipmentDialogForm() {
 
   return (
     <>
-      <div style={{ maxWidth: '400px', margin: '0 auto' }}>        <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1em',
-        marginTop: '1em',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <TextField
-          required
-
-          fullWidth
-          value={details.fullname}
-          label="Fullname"
-          onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
-        <TextField
-          required
-
-          fullWidth
-          label="Phone Number"
-          placeholder="09..."
-          value={details.phoneNumber}
-          onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
-        />
-        <TextField
-          required
-
-          fullWidth
-          variant="outlined"
-          label="Email address"
-          value={details.email}
-          onChange={(e) => setDetails({ ...details, email: e.target.value })}
-        />
-        <FormControl fullWidth >
-          {/* <InputLabel htmlFor="returnDate">Return Date</InputLabel> */}
+      <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+        <form onSubmit={handleSubmit} style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1em',
+          marginTop: '1em',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
           <TextField
             required
-            label="Return Date"
-            id="returnDate"
-            variant="outlined"
-            type="date"
-            value={details.returnDate}
-            onChange={(e) => setDetails({ ...details, returnDate: e.target.value })}
-            InputLabelProps={{
-              shrink: true,
+            fullWidth
+            value={details.fullname}
+            label="Fullname"
+            error={!isNaN(details.fullname) && details.fullname !== ''}
+            helperText={"Required"}
+            onChange={(e) => setDetails({ ...details, fullname: e.target.value })} />
+          <TextField
+            required
+            fullWidth
+            label="Phone Number"
+            placeholder="09..."
+            value={details.phoneNumber}
+            onChange={(e) => {
+              const onlyNums = e.target.value.replace(/[^0-9]/g, '');
+              if (onlyNums.length <= 11) {
+                const number = onlyNums;
+                setDetails({ ...details, phoneNumber: number });
+              }
             }}
+            error={!/^09/.test(details.phoneNumber) && details.phoneNumber !== ''}
+            helperText={/^09/.test(details.phoneNumber) && details.fullname !== '' ? "Required" : "Phone number must start with '09'"}
           />
-        </FormControl>
-        <Box sx={{
-          display: 'flex', alignItems: 'center',
-          justifyContent: 'center', marginTop: '0.3em',
-          fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
-          cursor: 'pointer'
-        }} >
-          <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>
-        </Box>
-        <FormControlLabel
-          required
-          control={<Checkbox checked={!agreement} />}
-          onClick={() => setAgreement(!agreement)}
-          label={
-            <span style={{ cursor: 'pointer' }}>
-              Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>
-            </span>
-          }
-        />
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={handleSubmit}
-          disabled={agreement}
-        >{agreement ? 'Disabled' : 'Submit'}</Button>
-      </div>
+          <TextField
+            helperText="Optional"
+            fullWidth
+            variant="outlined"
+            label="Email address"
+            value={details.email}
+            onChange={(e) => setDetails({ ...details, email: e.target.value })}
+          />
+          <FormControl fullWidth >
+            {/* <InputLabel htmlFor="returnDate">Return Date</InputLabel> */}
+            <TextField
+              helperText="Select Return Date"
+              required
+              label="Return Date"
+              id="returnDate"
+              variant="outlined"
+              type="date"
+              inputProps={{
+                min: new Date().toISOString().slice(0, 16),
+              }}
+              value={details.returnDate}
+              onChange={(e) => setDetails({ ...details, returnDate: e.target.value })}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </FormControl>
+          <Box sx={{
+            display: 'flex', alignItems: 'center',
+            justifyContent: 'center', marginTop: '0.3em',
+            fontSize: '1.1rem', color: 'red', textDecoration: 'underline',
+            cursor: 'pointer'
+          }} >
+            <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>
+          </Box>
+          <FormControlLabel
+            required
+            control={<Checkbox checked={!agreement} />}
+            onClick={() => setAgreement(!agreement)}
+            label={
+              <span style={{ cursor: 'pointer' }}>
+                Agree to the <u onClick={handleOpenInnerDialog}>terms and conditions</u>
+              </span>
+            }
+          />
+          <Button
+            style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+            type="submit"
+            fullWidth
+            variant="contained"
+            disabled={agreement}
+          >{agreement ? 'Disabled' : 'Submit'}</Button>
+        </form>
       </div>
       <TermsAndCondition open={openInnerDialog} onClose={handleCloseInnerDialog} />
       <Summary open={showSummary} onClose={() => setShowSummary(!showSummary)} />
