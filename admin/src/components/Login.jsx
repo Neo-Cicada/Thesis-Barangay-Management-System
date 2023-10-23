@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import '../styles/login.css'
 import TextField from '@mui/material/TextField';
-import { Button, } from '@mui/material';
+import { Button, Snackbar, Alert } from '@mui/material';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, Navigate, useNavigate, } from 'react-router-dom';
 import { auth } from '../firebase'
 import App from '../App';
 import GreenToast from './GreenToast';
+import RedToast from './RedToast'
 import Logo from '../assets/oiweo.png'
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 export default function Login({ setLoginStatus }) {
@@ -14,6 +15,8 @@ export default function Login({ setLoginStatus }) {
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState(false);
   const [toast, setToast] = useState(false)
+  const [redToast, setRedToast] = useState(false)
+  const [emailToast, setEmailToast] = useState(false)
   const onLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -28,6 +31,7 @@ export default function Login({ setLoginStatus }) {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setRedToast(true)
         console.log('Hello error', errorCode, errorMessage);
       })
   }
@@ -35,8 +39,8 @@ export default function Login({ setLoginStatus }) {
     e.preventDefault
     sendPasswordResetEmail(auth, email)
       .then(() => {
+        setEmailToast(true)
         // Password reset email sent!
-        // ..
         console.log('send in email')
       })
       .catch((error) => {
@@ -64,7 +68,8 @@ export default function Login({ setLoginStatus }) {
             }}
             name='email'
             type='email'
-            label="Email"
+            label={redToast ? "Wrong Email" : "Email"}
+            error={redToast}
             variant="outlined"
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -81,8 +86,9 @@ export default function Login({ setLoginStatus }) {
             }}
             name='password'
             type='password'
-            label="Password"
+            label={redToast ? "Wrong Password" : "Password"}
             variant="outlined"
+            error={redToast}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
@@ -97,6 +103,15 @@ export default function Login({ setLoginStatus }) {
         </form>
       </div>
       <GreenToast open={toast} onClose={() => setToast(!toast)} />
+      <RedToast
+        open={redToast}
+        onClose={() => setRedToast(false)}
+        content={"Invalid Credentials: The email or password you entered is incorrect. Please double-check and try again."} />
+      <Snackbar open={emailToast} autoHideDuration={6000} onClose={() => setEmailToast(false)}>
+        <Alert onClose={() => setEmailToast(false)} severity="success" sx={{ width: '100%' }}>
+          Password reset email sent!
+        </Alert>
+      </Snackbar>
     </>
   )
 }

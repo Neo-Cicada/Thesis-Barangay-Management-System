@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
 
-function RedToast({ open, onClose }) {
+function RedToast({ open, onClose, content="Cancelled!" }) {
   const [autoHideDuration, setAutoHideDuration] = useState(1500);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function RedToast({ open, onClose }) {
     >
       <div style={{ backgroundColor: 'red', color: 'white', padding: '12px', display: 'flex', alignItems: 'center' }}>
         <CheckCircleIcon style={{ marginRight: '8px' }} />
-        Cancelled!
+          {content}
         <IconButton size="small" aria-label="close" color="inherit" onClick={onClose}>
           <CloseIcon fontSize="small" />
         </IconButton>

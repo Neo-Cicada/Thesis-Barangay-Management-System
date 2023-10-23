@@ -41,11 +41,11 @@ export default function EquipmentChart() {
 
   const data = {
 
-    labels: customLabels, // Use custom labels here
+    labels: customLabels,
     datasets: [
       {
         label: '# of Requested Equipmetns',
-        data: doughnutData, // Use data values here
+        data: doughnutData, // data values here
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',

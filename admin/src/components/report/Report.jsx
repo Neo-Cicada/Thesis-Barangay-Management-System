@@ -86,7 +86,7 @@ export default function Report() {
         flexDirection: 'column', gap: '1em',
       }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Report</h3>
+          <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Complaints</h3>
         </div>
         <div style={{ display: 'flex', gap: '1em', justifyContent: 'space-around' }}>
           <DashboardBox

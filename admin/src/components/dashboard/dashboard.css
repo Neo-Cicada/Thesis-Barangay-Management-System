@@ -49,6 +49,7 @@
 }
 .ul{
     list-style: none;
+    list-style-type: none;
 }
 .recent-status{
     /* border: 1px solid red; */

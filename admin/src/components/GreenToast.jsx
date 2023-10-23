@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
 
-function GreenToast({ delay, onClose }) {
+function GreenToast({ delay, onClose, content="" }) {
   const [open, setOpen] = useState(false);
   const [autoHideDuration, setAutoHideDuration] = useState(2500);
 

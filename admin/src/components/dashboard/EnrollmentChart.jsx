@@ -3,25 +3,27 @@ import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut, Pie } from 'react-chartjs-2';
 import useRead from '../../hooks/useRead';
+import { red } from '@mui/material/colors';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
 
 export default function EnrollmentChart() {
   const [reData, setReData] = useState([])
-  // useRead('FacilityRequest', setReData)
-  const [doughnutData, setDoughnutData] = useState(['20','15']); // State for data values
-  const [doughnutlabel, setDoughnutLabel] = useState(['Boy', 'Girl']); // State for labels
+  useRead('EnrollmentRequest', setReData);
+  const [doughnutData, setDoughnutData] = useState([]);
+  const [doughnutlabel, setDoughnutLabel] = useState([]);
+
+  console.log(reData)
 
   useEffect(() => {
     const reportCounts = {};
 
     reData.forEach(item => {
-      if (item.selectedFacility) {
-        item.selectedFacility.forEach(report => {
-          const name = report.name;
-          reportCounts[name] = (reportCounts[name] || 0) + 1;
-        });
+      if (item.childInfo && item.childInfo.childGender) {
+        const gender = item.childInfo.childGender;
+        // Check if the gender is already in the reportCounts object, and increment the count
+        reportCounts[gender] = (reportCounts[gender] || 0) + 1;
       }
     });
 
@@ -29,10 +31,14 @@ export default function EnrollmentChart() {
     const names = Object.keys(reportCounts);
     const counts = Object.values(reportCounts);
 
+    console.log(names); // Check the names array
+    console.log(counts); // Check the counts array
+
     // Update the state with the data for the doughnut chart
     setDoughnutData(counts);
     setDoughnutLabel(names);
   }, [reData]);
+
 
   console.log(doughnutData);
   console.log(doughnutlabel);
@@ -41,11 +47,11 @@ export default function EnrollmentChart() {
 
   const data = {
 
-    labels: customLabels, // Use custom labels here
+    labels: customLabels, //  custom labels here
     datasets: [
       {
         label: '# of Students',
-        data: doughnutData, // Use data values here
+        data: doughnutData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
