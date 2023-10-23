@@ -14,7 +14,6 @@ import SnackBar from '../../SnackBar'
 export default function EnrollForm({ formData, setFormData }) {
     const [openSnack, setOpenSnack] = useState(false)
 
-
     const [filePaths, setFilePaths] = useState({
         // Store file paths here
         birthCertificatePath: '',

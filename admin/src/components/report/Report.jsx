@@ -20,50 +20,64 @@ export default function Report() {
 
     return () => clearTimeout(timer);
   }, []);
-  const items = data.filter(item => item.status === "request").map(item => <DashboardListRep
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    seventh={item.status}
-    path={'ReportRequest'}
-    status={"request"}
-  />)
-  const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashboardListRep
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'ReportRequest'}
-    status={"ongoing"}
-  />)
-  const acceptedItems = data.filter(item => item.status === "accepted").map(item => <DashboardListRep
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'ReportRequest'}
-    status={"accepted"}
-  />)
-  const rejectedItems = data.filter(item => item.status === "rejected").map(item => <DashboardListRep
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'ReportRequest'}
-    status={"rejected"}
-  />)
+  const items = data
+    .filter(item => item.status === "request")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashboardListRep
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'ReportRequest'}
+      status={"request"}
+    />)
+  const ongoingItems = data
+    .filter(item => item.status === "ongoing")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => (
+      <DashboardListRep
+        key={item.id}
+        item={item}
+        first={item.fullname}
+        second={item.email}
+        third={item.phoneNumber}
+        fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+        seventh={item.status}
+        path={'ReportRequest'}
+        status={"ongoing"}
+      />
+    ));
+  const acceptedItems = data
+    .filter(item => item.status === "accepted")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashboardListRep
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'ReportRequest'}
+      status={"accepted"}
+    />)
+  const rejectedItems = data
+    .filter(item => item.status === "rejected")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashboardListRep
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'ReportRequest'}
+      status={"rejected"}
+    />)
   return (
 
     <div className='equipment-container'>
@@ -72,9 +86,9 @@ export default function Report() {
         flexDirection: 'column', gap: '1em',
       }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <h3 style={{fontSize:'2rem', fontWeight:"bold", color:'#3B5998'}}>Manage Report</h3>
+          <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Report</h3>
         </div>
-        <div style={{ display: 'flex', gap: '1em', justifyContent:'space-around' }}>
+        <div style={{ display: 'flex', gap: '1em', justifyContent: 'space-around' }}>
           <DashboardBox
             name="Total"
             numbers={items.length}

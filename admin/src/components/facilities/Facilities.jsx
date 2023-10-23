@@ -21,46 +21,58 @@ export default function Facilities() {
 
     return () => clearTimeout(timer);
   }, []);
-  const items = data.filter(item => item.status === "request").map((item) => <DashboardListFaci
+  const items = data
+    .filter(item => item.status === "request")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map((item) => <DashboardListFaci
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'FacilityRequest'}
+      status={"request"}
+    />)
+  const ongoingItems = data
+    .filter(item => item.status === "ongoing")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map((item) => <DashboardListFaci
     key={item.id}
     item={item}
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
-    seventh={item.status}
-    path={'FacilityRequest'}
-    status={"request"}
-  />)
-  const ongoingItems = data.filter(item => item.status === "ongoing").map((item) => <DashboardListFaci
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'FacilityRequest'}
     status={"ongoing"}
   />)
-  const acceptdItems = data.filter(item => item.status === "accepted").map((item) => <DashboardListFaci
+  const acceptdItems = data
+    .filter(item => item.status === "accepted")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map((item) => <DashboardListFaci
     key={item.id}
     item={item}
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'FacilityRequest'}
     status={"accepted"}
   />)
-  const rejectedItems = data.filter(item => item.status === "rejected").map((item) => <DashboardListFaci
+  const rejectedItems = data
+    .filter(item => item.status === "rejected")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map((item) => <DashboardListFaci
     key={item.id}
     item={item}
     first={item.fullname}
     second={item.email}
     third={item.phoneNumber}
-    fourth={"09/08/23"}
+    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
     seventh={item.status}
     path={'FacilityRequest'}
     status={"rejected"}

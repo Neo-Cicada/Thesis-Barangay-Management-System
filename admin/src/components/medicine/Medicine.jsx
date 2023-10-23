@@ -21,52 +21,64 @@ export default function Medicine() {
 
     return () => clearTimeout(timer);
   }, []);
-  const items = data.filter(item => item.status === "request").map(item => <DashBoardListMed
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    seventh={item.status}
-    path={'MedicineRequest'}
-    status={"request"}
-  />)
-
-  const acceptedItems = data.filter(item => item.status === "accepted").map(item =>
-    <DashBoardListMed
+  const items = data
+    .filter(item => item.status === "request")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashBoardListMed
       key={item.id}
       item={item}
       first={item.fullname}
       second={item.email}
       third={item.phoneNumber}
-      fourth={"09/08/23"}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
       seventh={item.status}
       path={'MedicineRequest'}
-      status={"accepted"} />)
+      status={"request"}
+    />)
 
-  const rejectedItems = data.filter(item => item.status === "rejected").map(item =>
-    <DashBoardListMed
+  const acceptedItems = data
+    .filter(item => item.status === "accepted")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item =>
+      <DashBoardListMed
+        key={item.id}
+        item={item}
+        first={item.fullname}
+        second={item.email}
+        third={item.phoneNumber}
+        fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+        seventh={item.status}
+        path={'MedicineRequest'}
+        status={"accepted"} />)
+
+  const rejectedItems = data
+    .filter(item => item.status === "rejected")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item =>
+      <DashBoardListMed
+        key={item.id}
+        item={item}
+        first={item.fullname}
+        second={item.email}
+        third={item.phoneNumber}
+        fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+        seventh={item.status}
+        path={'MedicineRequest'}
+        status={"rejected"} />)
+
+  const ongoingItems = data
+    .filter(item => item.status === "ongoing")
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashBoardListMed
       key={item.id}
       item={item}
       first={item.fullname}
       second={item.email}
       third={item.phoneNumber}
-      fourth={"09/08/23"}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
       seventh={item.status}
       path={'MedicineRequest'}
-      status={"rejected"} />)
-
-  const ongoingItems = data.filter(item => item.status === "ongoing").map(item => <DashBoardListMed
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={"09/08/23"}
-    seventh={item.status}
-    path={'MedicineRequest'}
-    status={"ongoing"} />)
+      status={"ongoing"} />)
 
   return (
     <>
@@ -78,7 +90,7 @@ export default function Medicine() {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Medicine</h3>
           </div>
-          <div style={{ display: 'flex', justifyContent:'space-around' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <DashboardBox
               name="Total"
               numbers={items.length}

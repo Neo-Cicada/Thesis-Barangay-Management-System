@@ -25,20 +25,43 @@ export default function Equipment() {
 
     return () => clearTimeout(timer);
   }, []);
-  const allItems = data.filter(item => item.status === 'request').map(item => <DashboardList
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'EquipmentRequest'}
-    status={"request"}
-  />
+  const allItems = data
+    .filter(item => item.status === 'request')
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashboardList
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'EquipmentRequest'}
+      status={"request"}
+    />
 
-  )
-  const ongoingItems = data.filter(item => item.status === 'ongoing').map(item => <DashboardList
+    )
+  const ongoingItems = data
+    .filter(item => item.status === 'ongoing')
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashboardList
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'EquipmentRequest'}
+      status={item.status}
+    />
+
+    )
+  const acceptedItems = data
+    .filter(item => item.status === 'accepted')
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+
+    .map(item => <DashboardList
     key={item.id}
     item={item}
     first={item.fullname}
@@ -51,20 +74,10 @@ export default function Equipment() {
   />
 
   )
-  const acceptedItems = data.filter(item => item.status === 'accepted').map(item => <DashboardList
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'EquipmentRequest'}
-    status={item.status}
-  />
-
-  )
-  const rejectedItems = data.filter(item => item.status === 'rejected').map(item =>
+  const rejectedItems = data
+  .filter(item => item.status === 'rejected')
+  .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+  .map(item =>
     <DashboardList
       key={item.id}
       item={item}
@@ -87,7 +100,7 @@ export default function Equipment() {
           <div className='manageEquipment-title'>
             <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Equipment</h3>
           </div>
-          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent:'space-around' }}>
+          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent: 'space-around' }}>
             <DashboardBox
               name="Total"
               numbers={allItems.length}
