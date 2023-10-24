@@ -20,7 +20,7 @@ export default function EquipmentSummary() {
           <h2 style={{ textAlign: 'center' }}>
             Selected Items</h2>
           <div>
-            {details.selectedEquipment.map(item => <p>Name: {item.name} | Quantity: {item.count}</p>)}
+            {details.selectedEquipment.map(item => <p>Name: {item.name} {item.itemId}| Quantity: {item.count}</p>)}
           </div>
         </div>
 

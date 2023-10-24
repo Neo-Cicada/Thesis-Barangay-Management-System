@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { MyEquipmentContext } from './EquipmentDialog'; // Update with the correct import path
 import SelectedEquipment from './SelectedEquipment';
 import useRead from '../../../hooks/useRead'
-export function Box({ name, isSelected, onSelect, quantity }) {
+export function Box({ name, isSelected, onSelect, quantity, itemId }) {
   const boxStyle = {
     height: '5em',
     textAlign: 'center',
@@ -15,7 +15,7 @@ export function Box({ name, isSelected, onSelect, quantity }) {
   return (
     <div
       style={boxStyle}
-      onClick={() => onSelect(name)}
+      onClick={() => onSelect(name, "", itemId)}
     >
       <p style={{ fontSize: '1em' }}>{name}</p>
       <p>{quantity}</p>
@@ -31,6 +31,7 @@ export default function EquipmentSelect() {
 
   const items = data.map(item => <Box
     name={item.equipment}
+    itemId={item.id}
     isSelected={selectedEquipment.some((equipment) => equipment.name === String(item.equipment))}
     onSelect={handleBoxSelect}
     quantity={item.quantity}

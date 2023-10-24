@@ -26,7 +26,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
       selectedMedicines: selectedMedicines,
     }));
   }, [selectedMedicines]);
-  const handleBoxSelect = (name, count) => {
+  const handleBoxSelect = (name, count, itemId) => {
     const index = selectedMedicines.findIndex((item) => item.name === name);
 
     if (index !== -1) {
@@ -43,7 +43,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
       }
     } else {
       // If not selected, select it with a count of 1
-      setSelectedMedicines([...selectedMedicines, { name: name, count: 1 }]);
+      setSelectedMedicines([...selectedMedicines, { name: name, count: 1, itemId: itemId }]);
     }
   };
   return (

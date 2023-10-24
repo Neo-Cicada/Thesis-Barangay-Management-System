@@ -7,6 +7,7 @@ const useUpload = async (data, path) => {
     await addDoc(collection(db, path),
       {
         ...data,
+        status: 'request',
         timestamp: serverTimestamp(),
       }
     )

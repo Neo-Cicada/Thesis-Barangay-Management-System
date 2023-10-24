@@ -6,7 +6,8 @@ import ConfirmationDialog from '../ConfirmationDialog';
 import GreenToast from '../GreenToast';
 import RedToast from '../RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import CertificateViewInformation from './CertificateViewInformation'
+import CertificateViewInformation from './CertificateViewInformation';
+import sendEmailFunction from '../../functions/sendEmailFunction';
 export default function DashboardList({
   first,
   second,
@@ -22,7 +23,8 @@ export default function DashboardList({
     e.stopPropagation();
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'ongoing').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      const success = await sendEmailFunction(item.email, 'Document Request Status',
+        'Your document is now ready for pickup at our Barangay Hall.');
       if (success) {
         console.log('Email sent successfully');
       } else {
@@ -42,7 +44,9 @@ export default function DashboardList({
     e.stopPropagation();
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'accepted').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      const success = await sendEmailFunction(item.email, 'Equipment Request Status',
+        'Your request has been fulfilled. Please give us feedback at amamperez858@gmail.com.'
+      );
       if (success) {
         console.log('Email sent successfully');
       } else {
@@ -62,7 +66,10 @@ export default function DashboardList({
     e.stopPropagation();
     setIsRedOpen(true)
     await useStatusUpdate(path, item.id, 'rejected').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      const success = await sendEmailFunction(item.email, 'Document Request Status',
+        'Your request has been rejected. If you have any questions, please email us at amamperez858@gmail.com.'
+
+      );
       if (success) {
         console.log('Email sent successfully');
       } else {
@@ -114,7 +121,8 @@ export default function DashboardList({
       </tr>
 
       <GreenToast delay={isGreenOpen} onClose={() => setIsGreenOpen(false)} />
-      <RedToast open={isRedOpen} onClose={() => setIsRedOpen(false)} />
+      <RedToast open={isGreenOpen} onClose={() => setIsGreenOpen(false)} type='success' content='Request Accepted!'/>
+      <RedToast open={isRedOpen} onClose={() => setIsRedOpen(false)} content='Request Rejected'/>
       <CertificateViewInformation
         open={showInformation}
         item={item}

@@ -52,9 +52,11 @@ export default function EquipmentDialogForm() {
   const handleSubmit = async (e) => {
     //useUpload here
     e.preventDefault();
+    console.log(details)
     await useUpload(details, 'EquipmentRequest')
     setSelectedEquipment([])
     setDetails({
+      status: 'request',
       returnDate: '',
       fullname: '',
       email: '',

@@ -5,10 +5,12 @@ import ScrollableContainer from '../ScrollableContainer';
 import DashboardItem from '../DashboardItem';
 import useRead from '../../hooks/useRead';
 import CertificateAdd from './CertificateAdd'
+import RedToast from '../RedToast';
 export default function CertificateCrud() {
   const [data, setData] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true)
+  const [openToast, setOpenToast] = useState(false)
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -63,9 +65,11 @@ export default function CertificateCrud() {
             </div>
           ) : (
             <ScrollableContainer>
-              <Container sx={{ height: '2em', width: '100%', borderBottom: '1px solid black',
-             
-              display: 'flex', justifyContent: 'space-between' }}>
+              <Container sx={{
+                height: '2em', width: '100%', borderBottom: '1px solid black',
+
+                display: 'flex', justifyContent: 'space-between'
+              }}>
                 <div style={{
                   // border:'1px solid red',
                   width: '15em',
@@ -90,10 +94,13 @@ export default function CertificateCrud() {
 
         </ScrollableContainer>
       </Container>
+      <RedToast open={openToast} onClose={() => setOpenToast(false)}
+        content="Successfully added!" type="success" />
       <CertificateAdd
         handleDialogClose={handleDialogClose}
         isDialogOpen={isDialogOpen}
         setIsDialogOpen={setIsDialogOpen}
+        setOpenToast={setOpenToast}
       />
     </>
   )

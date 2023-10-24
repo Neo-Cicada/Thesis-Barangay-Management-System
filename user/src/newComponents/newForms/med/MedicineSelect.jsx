@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import SelectedMedicine from './SelectedMedicine';
 import { MyContext } from './MedicineDialogForm';
 import useRead from '../../../hooks/useRead'
-export function Box({ name, isSelected, onSelect, quantity }) {
+export function Box({ name, isSelected, onSelect, quantity, itemId }) {
   const boxStyle = {
     height: '5em',
     textAlign: 'center',
@@ -15,7 +15,7 @@ export function Box({ name, isSelected, onSelect, quantity }) {
   return (
     <div
       style={boxStyle}
-      onClick={() => onSelect(name)}
+      onClick={() => onSelect(name, "", itemId)}
     >
       <p style={{ fontSize: '1em' }}>{name}</p>
       <p>{quantity}</p>
@@ -30,6 +30,7 @@ export default function MedicineSelect({ handleBoxSelect }) {
   useRead('Medicines', setData)
 
   const items = data.map(item => <Box
+    itemId={item.id}
     name={item.type}
     quantity={item.quantity}
     isSelected={selectedMedicines.some((medicine) => medicine.name == String(item.type))}

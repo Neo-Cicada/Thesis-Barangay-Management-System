@@ -26,7 +26,7 @@ export default function EquipmentDialog({ open, handleClose }) {
   const isDetailsFilled = Object.values(details).every((value) => Boolean(value));
 
 
-  const handleBoxSelect = (name, count) => {
+  const handleBoxSelect = (name, count, itemId) => {
     const index = selectedEquipment.findIndex((item) => item.name === name);
 
     if (index !== -1) {
@@ -43,7 +43,7 @@ export default function EquipmentDialog({ open, handleClose }) {
       }
     } else {
       // If not selected, select it with a count of 1
-      setSelectedEquipment([...selectedEquipment, { name: name, count: 1 }]);
+      setSelectedEquipment([...selectedEquipment, { name: name, count: 1, itemId: itemId }]);
     }
   };
   return (

@@ -3,7 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } 
 import { useState } from 'react'
 import useUploadDirectly from '../../hooks/useUploadDirectly';
 
-export default function CertificateAdd({ handleDialogClose, isDialogOpen, setIsDialogOpen }) {
+export default function CertificateAdd({ handleDialogClose, isDialogOpen, setIsDialogOpen, setOpenToast }) {
   const [item, setItem] = useState({
     type: '',
     quantity: ''
@@ -18,13 +18,14 @@ export default function CertificateAdd({ handleDialogClose, isDialogOpen, setIsD
       type: '',
       quantity: ''
     })
+    setOpenToast(true)
     setIsDialogOpen(!isDialogOpen)
     // console.log(item)
   }
   return (
     <>
       <Dialog open={isDialogOpen} onClose={handleDialogClose}>
-        <DialogTitle sx={{ textAlign: 'center' }}> Add Item</DialogTitle>
+        <DialogTitle sx={{ textAlign: 'center', fontWeight: 600, color: "rgb(59, 89, 152)" }}> Add Item</DialogTitle>
         <DialogContent
         >
           <div style={{
@@ -36,19 +37,27 @@ export default function CertificateAdd({ handleDialogClose, isDialogOpen, setIsD
           }}>
             <TextField
               value={item.type}
-              label="Name"
+              label="Document Name"
               onChange={(e) => setItem({ ...item, type: (e.target.value) })}
             />
             <TextField
               value={item.quantity}
-              label="quantity"
-              onChange={(e) => setItem({ ...item, quantity: (e.target.value) })}
+              label="Price"
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                if (!isNaN(inputValue)) {
+                  setItem({ ...item, quantity: inputValue });
+                }
+              }}
             />
           </div>
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClickOk}>OK</Button>
+
+          <Button
+            disabled={!item.quantity || !item.type}
+            color='success' variant='contained' onClick={handleClickOk}>OK</Button>
         </DialogActions>
       </Dialog>
     </>
