@@ -5,10 +5,8 @@ import { Pagination, PaginationItem } from '@mui/material';
 import {Container} from '@mui/material'
 
 export default function EquipmentAllRequest({ items }) {
-  // Define the number of items per page
   const itemsPerPage = 3;
 
-  // State to manage the current page
   const [currentPage, setCurrentPage] = useState(1);
 
   // Calculate the index range of items to display on the current page
@@ -18,7 +16,6 @@ export default function EquipmentAllRequest({ items }) {
   // Slice the items array to get the items for the current page
   const itemsToDisplay = items.slice(startIndex, endIndex);
 
-  // Function to handle page changes
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
   };

@@ -11,10 +11,10 @@ const RecentReport = () => {
     return (
         <>
             <h2 style={{fontWeight: 500}}>Most Recent Activities</h2>
-            <ul style={{ display:'flex', flexDirection:'column', gap:'1em'}}>
+            <ul style={{ display:'flex', flexDirection:'column', gap:'1.5em'}}>
                 {data.length > 0 ? (
                     data.map((activity, index) => (
-                        <li key={index}>
+                        <li  key={index}>
                            <span className='recent-status'>{activity.status} </span>- {activity.timestamp.toDate().toLocaleString()}
                         </li>
                     ))

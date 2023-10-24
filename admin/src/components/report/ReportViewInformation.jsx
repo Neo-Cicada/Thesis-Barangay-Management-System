@@ -4,11 +4,14 @@ import SmsIcon from '@mui/icons-material/Sms';
 import EmailIcon from '@mui/icons-material/Email';
 import SendSms from '../SendSms';
 import SendEmail from '../SendEmail';
+import RedToast from '../RedToast';
 export default function ReportViewInformation({ item, open, onClose, onConfirm, title, message }) {
     const [sms, setSms] = useState(false)
     const [messageInput, setMessageInput] = useState('');
     const [messages, setMessages] = useState([]);
     const [email, setEmail] = useState(false)
+    const [fail, setFail] = useState(false)
+    const [emailFail, setEmailFail] = useState(false)
     const [openSnack, setOpenSnack] = useState(false)
     const smsStyle = {
         display: 'flex',
@@ -27,19 +30,31 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
     }
     const items = item.selectedReport.map(item => <Box
         key={item.id}
-        style={styleP}> <p style={{ width: '50%', textAlign: 'center', textTransform: 'capitalize' }}>{item.person}</p>
+        style={styleP}>
+        <p style={{
+            width: '50%', textAlign: 'center',
+            textTransform: 'capitalize', fontWeight: 500
+        }}>Name: {item.person}</p>
         <hr />
-        <p style={{ width: '50%', textAlign: 'center', textTransform: 'capitalize' }}>{item.name}</p>
+        <p style={{
+            width: '50%', textAlign: 'center',
+            textTransform: 'capitalize', fontWeight: 500
+        }}>Violation: {item.name}</p>
     </Box>)
     const boxStyle = {
-        width: 'auto',
-        display: 'flex',
-        justifyContent: 'center', gap: '1em',
-        textTransform: 'capitalize'
-    }
-    const nameStyle = {
+        // border:'1px solid red',
+        width: '100%',
         display: 'flex',
         justifyContent: 'start',
+        gap: '1em',
+        textTransform: 'capitalize',
+    }
+    const nameStyle = {
+        // border: '1px solid red',
+        display: 'flex',
+        justifyContent: 'start',
+        fontWeight: 500,
+        fontSize: 18
     }
 
     return (
@@ -52,12 +67,17 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
                         fontWeight: 500
                     }}>{item.fullname} Request Information</h2>
                 </DialogTitle>
-                <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', }}>
+                <DialogContent sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em',
+                    alignItems: 'center',
+                }}>
                     <Box sx={boxStyle}>
                         <p style={nameStyle}>Fullname — {item.fullname} </p>
                     </Box>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Email — {item.email}</p></Box>
+                        <p style={nameStyle}>Email — <span style={{ textTransform: 'lowercase', fontWeight: 500 }}>{item.email}</span></p></Box>
                     <Box sx={boxStyle}>
                         <p style={nameStyle}>Phone Number — {item.phoneNumber}</p> </Box>
 
@@ -77,7 +97,10 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
                                     sx={smsStyle}><EmailIcon />Email</Box>
                             </Box>}
                         <Box
-                            sx={{ textAlign: 'center', fontSize: '1.2rem', fontWeight: 500 }}>Complaints</Box>
+                            sx={{
+                                textAlign: 'center', fontSize: '1.2rem',
+                                fontWeight: 500
+                            }}>Complaints</Box>
                         <Box style={{ width: '100%' }} key={item.id}>
                             {items}
                         </Box>
@@ -96,11 +119,23 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
 
                     <Typography variant="subtitle1" sx={{ fontSize: '1.5rem' }} >To: {item.phoneNumber}</Typography>
 
-                    <SendSms number={item.phoneNumber} setSms={setSms} setOpenSnack={setOpenSnack} />
+                    <SendSms setFail={setFail}
+                        number={item.phoneNumber} setSms={setSms} setOpenSnack={setOpenSnack} />
 
 
                 </DialogContent>
             </Dialog>
+            <RedToast
+                open={fail}
+                onClose={() => setFail(false)}
+                content='Message Not Sent,
+          Oops!'/>
+            <RedToast
+                open={emailFail}
+                onClose={() => setEmailFail(false)}
+                content='Email Not Sent,
+          Oops!'
+            />
             <Snackbar
                 open={openSnack}
                 autoHideDuration={3000}
@@ -127,7 +162,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
                     <Typography variant="subtitle1"
                         sx={{ fontSize: '1.5rem' }} >To: {item.email}</Typography>
 
-                    <SendEmail to={item.email} />
+                    <SendEmail to={item.email} setEmailFail={setEmailFail}/>
                 </DialogContent>
             </Dialog>
         </>

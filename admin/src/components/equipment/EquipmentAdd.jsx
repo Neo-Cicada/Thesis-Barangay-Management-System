@@ -8,17 +8,17 @@ export default function EquipmentAdd({ handleDialogClose, isDialogOpen, setIsDia
     quantity: ''
   })
 
-  const handleClickOk = async (e)=>{
+  const handleClickOk = async (e) => {
     console.log(item)
 
-    await useUploadDirectly('Equipments', item).then(()=> {
+    await useUploadDirectly('Equipments', item).then(() => {
       setItem({
         equipment: '',
         quantity: ''
       })
       setIsDialogOpen(false)
-  })
-    
+    })
+
   }
   return (
     <>
@@ -36,13 +36,13 @@ export default function EquipmentAdd({ handleDialogClose, isDialogOpen, setIsDia
             <TextField
               value={item.equipment}
               label="Name"
-              onChange={(e)=> setItem({...item, equipment:(e.target.value)})}
-              />
+              onChange={(e) => setItem({ ...item, equipment: (e.target.value) })}
+            />
             <TextField
               value={item.quantity}
               label="quantity"
-              onChange={(e)=> setItem({...item, quantity:(e.target.value)})}
-              />
+              onChange={(e) => setItem({ ...item, quantity: (e.target.value) })}
+            />
           </div>
 
         </DialogContent>

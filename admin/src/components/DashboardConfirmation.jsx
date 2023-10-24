@@ -11,7 +11,7 @@ export default function DashboardConfirmation({ accept, reject, status, open, on
           <Button variant='contained' color='success' onClick={confirm}>Confirm</Button> :
            <Button variant='contained' color='success' onClick={accept}>Accept</Button>}
 
-          <Button variant='contained' color='warning' onClick={reject}>Reject</Button>
+          <Button variant='contained' color='warning' onClick={reject}>{status === "ongoing" ? "Cancel": "Decline"}</Button>
         </DialogActions>
       </Dialog>
       {/* <div

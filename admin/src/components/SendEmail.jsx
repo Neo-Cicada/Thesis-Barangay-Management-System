@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
-function SendEmail({ to, setEmail }) {
+function SendEmail({ to, setEmail, setEmailFail }) {
 
   const [subject, setSubject] = useState('')
   const [html, setHtml] = useState('')
@@ -31,6 +31,7 @@ function SendEmail({ to, setEmail }) {
       }
     } catch (error) {
       console.error('Error sending email:', error);
+      setEmailFail(true)
     }
     setSubject('');
     setHtml('');
@@ -61,7 +62,7 @@ function SendEmail({ to, setEmail }) {
       />
 
 
-      <Button variant="contained" onClick={sendEmail}>Send Email</Button>
+      <Button style={{ backgroundColor: '#3B5998', fontWeight: 600 }} variant="contained" onClick={sendEmail}>Send Email</Button>
 
 
     </>

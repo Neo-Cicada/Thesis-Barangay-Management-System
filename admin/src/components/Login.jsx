@@ -92,10 +92,16 @@ export default function Login({ setLoginStatus }) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-
           <Button
+            style={{ backgroundColor: '#3B5998', fontWeight: 600 }}
             onClick={onLogin}
             variant="contained"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                onLogin();
+              }
+            }}
           >
             Login
           </Button>

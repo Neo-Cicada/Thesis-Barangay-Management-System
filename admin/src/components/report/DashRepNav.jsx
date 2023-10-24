@@ -21,7 +21,7 @@ export default function DashRepNav({ setStatus, status }) {
     }
     return (
         <>
-            <Container sx={{ display:'flex', gap:'1em', overflow:'auto'}} >
+            <Container sx={{ display: 'flex', gap: '1em', overflow: 'auto' }} >
                 <button
                     style={status === 'default' ? activeBtn : btnStyle}
                     onClick={() => setStatus("default")}
@@ -37,7 +37,7 @@ export default function DashRepNav({ setStatus, status }) {
                 <button
                     style={status === 'fourth' ? activeBtn : btnStyle}
                     onClick={() => setStatus("fourth")}>Rejected</button>
-                
+
             </Container>
         </>
     )

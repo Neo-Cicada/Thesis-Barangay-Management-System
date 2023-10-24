@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
-
+import { Alert } from '@mui/material';
 function RedToast({ open, onClose, content="Cancelled!" }) {
   const [autoHideDuration, setAutoHideDuration] = useState(1500);
 
@@ -21,15 +21,10 @@ function RedToast({ open, onClose, content="Cancelled!" }) {
       open={open}
       autoHideDuration={autoHideDuration}
       onClose={onClose}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
     >
-      <div style={{ backgroundColor: 'red', color: 'white', padding: '12px', display: 'flex', alignItems: 'center' }}>
-        <CheckCircleIcon style={{ marginRight: '8px' }} />
-          {content}
-        <IconButton size="small" aria-label="close" color="inherit" onClick={onClose}>
-          <CloseIcon fontSize="small" />
-        </IconButton>
-      </div>
+       <Alert onClose={() => setOpenSnack(false)} severity="error" sx={{ width: '100%' }}>
+                    {content}
+        </Alert>
     </Snackbar>
   );
 }
