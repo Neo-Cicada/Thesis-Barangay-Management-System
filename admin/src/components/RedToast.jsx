@@ -19,6 +19,10 @@ function RedToast({ open, onClose, content = "Cancelled!", type = "error" }) {
 
   return (
     <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
       open={open}
       autoHideDuration={autoHideDuration}
       onClose={onClose}

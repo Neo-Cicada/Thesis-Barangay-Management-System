@@ -29,6 +29,7 @@ export default function SendMessage({ number, setSms, setOpenSnack, setFail }) {
     } catch (error) {
       console.error('Error sending SMS:', error);
       setFail(true)
+      setMessage('')
     }
   };
 

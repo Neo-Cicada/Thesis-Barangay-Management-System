@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import { Button } from '@mui/material';
-export default function AnnouncementImage({ setFile }) {
+export default function AnnouncementImage({ setFile, file }) {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageChange = (e) => {
@@ -20,7 +20,7 @@ export default function AnnouncementImage({ setFile }) {
             <div className='announcement-body-head'
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
 
-                {selectedImage ? <img src={selectedImage} alt='Selected' height={'100%'} width="50%" /> :
+                {selectedImage && file!=null ? <img src={selectedImage} alt='Selected' height={'100%'} width="50%" /> :
                     <label style={{
                         height: '100%', width: '100%',
                         cursor: 'pointer',

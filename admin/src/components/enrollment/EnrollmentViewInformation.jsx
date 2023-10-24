@@ -4,12 +4,16 @@ import SmsIcon from '@mui/icons-material/Sms';
 import EmailIcon from '@mui/icons-material/Email';
 import SendSms from '../SendSms';
 import SendEmail from '../SendEmail';
+import RedToast from '../RedToast';
 export default function EnrollmentViewInformation({ item, open, onClose, onConfirm, title, message }) {
     const [sms, setSms] = useState(false)
     const [messageInput, setMessageInput] = useState('');
     const [messages, setMessages] = useState([]);
     const [email, setEmail] = useState(false)
-    const [openSnack, setOpenSnack] = useState(false)
+    const [openSnack, setOpenSnack] = useState(false);
+    const [emailFail, setEmailFail] = useState(false)
+    const [emailSuccess, setEmailSuccess] = useState(false)
+    const [smsFail, setSmsFail] = useState(false)
     const smsStyle = {
         display: 'flex',
         justifyContent: 'center',
@@ -19,9 +23,18 @@ export default function EnrollmentViewInformation({ item, open, onClose, onConfi
             color: '#3B5998',
         },
     };
+    const nameStyle = {
+        display: 'flex',
+        justifyContent: 'start',
+        fontWeight: 500,
+        fontSize: 18
+    }
     const boxStyle = {
-        fontWeight: 'bold',
-        fontSize: '1.1rem'
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'start',
+        gap: '1em',
+        textTransform: 'capitalize',
     }
     return (
         <>
@@ -38,83 +51,92 @@ export default function EnrollmentViewInformation({ item, open, onClose, onConfi
                 <DialogContent fullWidth style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
                     <div style={{ width: '100%', textAlign: 'center', borderBottom: '2px dashed grey' }}>
                         <h2 style={{ fontSize: '1.5rem' }}>Child Information</h2>
-                        <div>
-                            <span style={boxStyle}>Firstname:</span> {item.childInfo.childFirstName}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Firstname:</span> {item.childInfo.childFirstName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Middlename:</span> {item.childInfo.childMiddleName}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Middlename:</span> {item.childInfo.childMiddleName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Lastname:</span> {item.childInfo.childLastName}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Lastname:</span> {item.childInfo.childLastName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Birthdate:</span> {item.childInfo.childBirthDate}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Birthdate:</span> {item.childInfo.childBirthDate}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Birth Certificate:</span>
-                            <a href={item.birthCertificatePath} target="_blank" style={{ textDecoration: 'none', marginLeft: '0.5em', fontSize: '1rem' }}>View Birth Certificate</a>
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Birth Certificate:</span>
+                            <a href={item.birthCertificatePath} target="_blank" style={{ textDecoration: 'none', fontSize: '1rem' }}>View Birth Certificate</a>
                         </div>
-                        <div>
-                            <span style={boxStyle}>Medical Certificate:</span>
-                            <a href={item.medicalCertificatePath} target="_blank" style={{ textDecoration: 'none', marginLeft: '0.5em', fontSize: '1rem' }}>View Medical Certificate</a>
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Medical Certificate:</span>
+                            <a href={item.medicalCertificatePath} target="_blank" style={{ textDecoration: 'none', fontSize: '1rem' }}>View Medical Certificate</a>
                         </div>
                     </div>
 
                     <div style={{ width: '100%', textAlign: 'center', borderBottom: '2px dashed grey' }}>
                         <h2 style={{ fontSize: '1.5rem' }}>Father Information</h2>
-                        <div>
-                            <span style={boxStyle}>Firstname:</span> {item.fatherInfo.fatherFirstName}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Firstname:</span> {item.fatherInfo.fatherFirstName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Lastname:</span> {item.fatherInfo.fatherLastName}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Lastname:</span> {item.fatherInfo.fatherLastName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Occupation:</span> {item.fatherInfo.fatherOccupation}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Occupation:</span> {item.fatherInfo.fatherOccupation}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Email:</span> {item.fatherInfo.fatherEmail}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Email:</span>
+                            <span style={{ textTransform: 'lowercase', }}>
+                                {item.fatherInfo.fatherEmail}
+                            </span>
                         </div>
-                        <div>
-                            <span style={boxStyle}>Phone Number:</span> {item.fatherInfo.fatherPhoneNumber}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Phone Number:</span> {item.fatherInfo.fatherPhoneNumber}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Marriage Certificate:</span>
-                            <a href={item.marriageCertificatePath} target="_blank" style={{ textDecoration: 'none', marginLeft: '0.5em', fontSize: '1rem' }}>View Marriage Certificate</a>
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Marriage Certificate:</span>
+                            <a href={item.marriageCertificatePath} target="_blank" style={{ textDecoration: 'none', fontSize: '1rem' }}>View Marriage Certificate</a>
                         </div>
                     </div>
 
                     <div style={{ width: '100%', textAlign: 'center', borderBottom: '2px dashed grey' }}>
                         <h2 style={{ fontSize: '1.5rem' }}>Mother Information</h2>
-                        <div>
-                            <span style={boxStyle}>Firstname:</span> {item.motherInfo.motherFirstName}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Firstname:</span> {item.motherInfo.motherFirstName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Lastname:</span> {item.motherInfo.motherLastName}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Lastname:</span> {item.motherInfo.motherLastName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Occupation:</span> {item.motherInfo.motherOccupation}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Occupation:</span> {item.motherInfo.motherOccupation}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Email:</span> {item.motherInfo.motherEmail}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Email:</span>
+                            <span style={{ textTransform: 'lowercase', }}>
+                                {item.motherInfo.motherEmail}
+                            </span>
                         </div>
-                        <div>
-                            <span style={boxStyle}>Phone Number:</span> {item.motherInfo.motherPhoneNumber}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Phone Number:</span> {item.motherInfo.motherPhoneNumber}
                         </div>
                     </div>
 
                     <div style={{ width: '100%', textAlign: 'center', borderBottom: '2px dashed grey' }}>
-                        <h2 style={{ fontSize: '1.5rem' }}>Guardian Information</h2>
-                        <div>
-                            <span style={boxStyle}>Firstname:</span> {item.guardianInfo.guardianFirstName}
+                        <h2 style={{ fontSize: '1.5rem' }}>Guardian Information / Incase of Emergency Contact</h2>
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Firstname:</span> {item.guardianInfo.guardianFirstName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Lastname:</span> {item.guardianInfo.guardianLastName}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Lastname:</span> {item.guardianInfo.guardianLastName}
                         </div>
-                        <div>
-                            <span style={boxStyle}>Email:</span> {item.guardianInfo.guardianEmail}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Email:</span>
+                            <span style={{ textTransform: 'lowercase', }}>
+                                {item.guardianInfo.guardianEmail}
+                            </span>
                         </div>
-                        <div>
-                            <span style={boxStyle}>Phone Number:</span> {item.guardianInfo.guardianPhoneNumber}
+                        <div style={boxStyle}>
+                            <span style={nameStyle}>Phone Number:</span> {item.guardianInfo.guardianPhoneNumber}
                         </div>
                     </div>
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em' }}>
@@ -138,11 +160,28 @@ export default function EnrollmentViewInformation({ item, open, onClose, onConfi
 
                     <Typography variant="subtitle1" sx={{ fontSize: '1.5rem' }} >To: {item.guardianInfo.guardianPhoneNumber}</Typography>
 
-                    <SendSms number={item.guardianInfo.guardianPhoneNumber} setSms={setSms} setOpenSnack={setOpenSnack} />
-
+                    <SendSms setFail={setSmsFail}
+                        number={item.guardianInfo.phoneNumber} setSms={setSms} setOpenSnack={setOpenSnack} />
 
                 </DialogContent>
             </Dialog>
+            <RedToast
+                open={smsFail}
+                onClose={() => setSmsFail(false)}
+                content='Message Not Sent,
+          Oops!'/>
+            <RedToast
+                open={emailFail}
+                onClose={() => setEmailFail(false)}
+                content='Email Not Sent,
+          Oops!'
+            />
+            <RedToast
+                open={emailSuccess}
+                onClose={() => setEmailSuccess(false)}
+                content="Email Sent!"
+                type="success"
+            />
             <Snackbar
                 open={openSnack}
                 autoHideDuration={3000}
@@ -169,7 +208,10 @@ export default function EnrollmentViewInformation({ item, open, onClose, onConfi
                     <Typography variant="subtitle1"
                         sx={{ fontSize: '1.5rem' }} >To: {item.guardianInfo.guardianEmail}</Typography>
 
-                    <SendEmail to={item.guardianInfo.guardianEmail} />
+                    <SendEmail
+                        to={item.guardianInfo.guardianEmail}
+                        setEmailFail={setEmailFail}
+                        setEmailSuccess={setEmailSuccess} />
                 </DialogContent>
             </Dialog>
         </>

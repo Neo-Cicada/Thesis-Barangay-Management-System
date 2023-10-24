@@ -154,7 +154,6 @@ export default function CertificateViewInformation({ item, open, onClose, onConf
                     gap: '1em',
                     alignItems: 'center',
                 }}>
-
                     <Typography variant="subtitle1"
                         sx={{ fontSize: '1.5rem' }} >To: {item.email}</Typography>
 
