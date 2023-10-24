@@ -9,10 +9,14 @@ import SmsIcon from '@mui/icons-material/Sms';
 import EmailIcon from '@mui/icons-material/Email';
 import SendSms from '../SendSms';
 import SendEmail from '../SendEmail';
+import RedToast from '../RedToast';
 export default function EquipmentViewInformation({ item, open, onClose, onConfirm, title, message }) {
     const [sms, setSms] = useState(false)
     const [email, setEmail] = useState(false)
     const [openSnack, setOpenSnack] = useState(false)
+    const [smsFail, setSmsFail] = useState(false)
+    const [emailFail, setEmailFail] = useState(false)
+    const [emailSuccess, setEmailSuccess] = useState(false)
     const styleP = {
         borderBottom: '1px solid grey',
         display: 'flex',
@@ -35,12 +39,17 @@ export default function EquipmentViewInformation({ item, open, onClose, onConfir
         <p style={{ width: '50%', textAlign: 'center' }}>Quantity: {item.count}</p>
     </Box>)
     const boxStyle = {
-        width: '100%', display: 'flex', justifyContent: 'center', gap: '1em'
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'start',
+        gap: '1em',
+        textTransform: 'capitalize',
     }
     const nameStyle = {
-        width: '40%',
         display: 'flex',
-        justifyContent: 'end',
+        justifyContent: 'start',
+        fontWeight: 500,
+        fontSize: 18
     }
     const valueStyle = {
         width: '60%',
@@ -57,14 +66,26 @@ export default function EquipmentViewInformation({ item, open, onClose, onConfir
                         fontWeight: 500
                     }}> {item.fullname} Request Information </h2>
                 </DialogTitle>
-                <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
+                <DialogContent sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em',
+                    alignItems: 'center',
+                }}>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Fullname: </p>
-                        <p style={valueStyle}>{item.fullname}</p>  </Box>
-                    <Box sx={boxStyle}> <p style={nameStyle}>Email: </p><p style={valueStyle}>{item.email}</p></Box>
-                    <Box sx={boxStyle}><p style={nameStyle}>Phone Number:</p> <p style={valueStyle}>{item.phoneNumber} </p></Box>
-                    <Box sx={boxStyle}><p style={nameStyle}>Date: </p> <p style={valueStyle}></p></Box>
-                    <Box sx={boxStyle}><p style={nameStyle}>Return Date:</p> <p style={valueStyle}> {item.returnDate}</p></Box>
+                        <p style={nameStyle}>Fullname: - {item.fullname} </p>
+                    </Box>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Email — <span style={{ textTransform: 'lowercase', fontWeight: 500 }}>{item.email}</span></p>
+                    </Box>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Phone Number — {item.phoneNumber}</p></Box>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Date — {item.timestamp.toDate().toLocaleString()} </p>
+                    </Box>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Return Date — {item.returnDate}</p>
+                    </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em' }}>
                         <Box
                             onClick={() => setSms(true)}
@@ -80,6 +101,7 @@ export default function EquipmentViewInformation({ item, open, onClose, onConfir
                         </Box>
                     </Box>
                 </DialogContent>
+
             </Dialog>
             <Dialog open={sms} onClose={() => setSms(false)}>
                 <DialogTitle sx={{
@@ -92,12 +114,28 @@ export default function EquipmentViewInformation({ item, open, onClose, onConfir
 
                     <Typography variant="subtitle1" sx={{ fontSize: '1.5rem' }} >To: {item.phoneNumber}</Typography>
 
-                    <SendSms number={item.phoneNumber} setSms={setSms} setOpenSnack={setOpenSnack} />
-
+                    <SendSms setFail={setSmsFail}
+                        number={item.phoneNumber} setSms={setSms} setOpenSnack={setOpenSnack} />
 
                 </DialogContent>
             </Dialog>
-
+            <RedToast
+                open={smsFail}
+                onClose={() => setSmsFail(false)}
+                content='Message Not Sent,
+          Oops!'/>
+            <RedToast
+                open={emailFail}
+                onClose={() => setEmailFail(false)}
+                content='Email Not Sent,
+          Oops!'
+            />
+            <RedToast
+                open={emailSuccess}
+                onClose={() => setEmailSuccess(false)}
+                content="Email Sent!"
+                type="success"
+            />
             <Snackbar
                 open={openSnack}
                 autoHideDuration={3000}
@@ -125,7 +163,7 @@ export default function EquipmentViewInformation({ item, open, onClose, onConfir
                     <Typography variant="subtitle1"
                         sx={{ fontSize: '1.5rem' }} >To: {item.email}</Typography>
 
-                    <SendEmail to={item.email} setEmail={setEmail} />
+                    <SendEmail to={item.email} setEmailFail={setEmailFail} setEmailSuccess={setEmailSuccess} />
                 </DialogContent>
             </Dialog>
         </>

@@ -143,7 +143,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
             />
             <RedToast
                 open={emailSuccess}
-                onClose={()=> setEmailSuccess(false)}
+                onClose={() => setEmailSuccess(false)}
                 content="Email Sent!"
                 type="success"
             />

@@ -6,11 +6,12 @@ import EquipmentAdd from './EquipmentAdd';
 import useRead from '../../hooks/useRead';
 import DashboardItem from '../DashboardItem';
 import ScrollableContainer from '../ScrollableContainer';
+import RedToast from '../RedToast';
 export default function EquipmentCrud() {
     const [data, setData] = useState([])
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-
+    const [openToast, setOpenToast] = useState(false)
     useRead('Equipments', setData)
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -20,7 +21,7 @@ export default function EquipmentCrud() {
         return () => clearTimeout(timer);
     }, []);
     const items = data.map((item) =>
-        <DashboardItem path={'Equipments'} data={item} name={item.equipment} itemId={item.id}/>)
+        <DashboardItem path={'Equipments'} data={item} name={item.equipment} itemId={item.id} />)
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
     };
@@ -34,6 +35,7 @@ export default function EquipmentCrud() {
                 <Container
                     sx={{ display: 'flex', justifyContent: 'flex-end' }}
                 >
+
                     <div
                         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}
                         onClick={() => setIsDialogOpen(true)}>
@@ -86,7 +88,12 @@ export default function EquipmentCrud() {
                 handleDialogClose={handleDialogClose}
                 isDialogOpen={isDialogOpen}
                 setIsDialogOpen={setIsDialogOpen}
+                setOpenToast={setOpenToast}
             />
+            <RedToast
+                type='success'
+                open={openToast}
+                onClose={() => setOpenToast(false)} content="Success!" />
         </>
     )
 }

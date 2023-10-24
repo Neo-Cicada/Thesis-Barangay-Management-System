@@ -27,7 +27,9 @@ export default function DashboardList({
     e.stopPropagation();
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'ongoing').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      const success = await sendEmailFunction(item.email,
+        'Equipment Request Status',
+        'Your request has been accepted; please proceed to the barangay hall to claim the equipment.');
       if (success) {
         console.log('Email sent successfully');
         const selectedEquipments = item.selectedEquipment; // Access the snapshot data
@@ -56,7 +58,7 @@ export default function DashboardList({
       }
     }).then(
       async () => {
-        
+
         setIsOpenProceed(false)
       }
     )
@@ -69,10 +71,12 @@ export default function DashboardList({
   const onConfirm = async (e) => {
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'accepted').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      const success = await sendEmailFunction(item.email,
+        'Equipment Request Status',
+        'Your request is done; please give us feedback on amamperez858@gmail.com.');
       if (success) {
         console.log('Email sent successfully');
-        updateItems("Equipments",item.selectedEquipment, useUpdateItem, "add")
+        updateItems("Equipments", item.selectedEquipment, useUpdateItem, "add")
       } else {
         console.error('Email sending failed');
       }
@@ -91,8 +95,10 @@ export default function DashboardList({
     e.stopPropagation();
     setIsRedOpen(true)
     await useStatusUpdate(path, item.id, 'rejected').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
-      if (success) {
+      const success = await sendEmailFunction(item.email,
+         'Equipment Request Status',
+         'Your request was rejected. If you have any questions, please email us at amamperez858@gmail.com.');
+         if (success) {
         console.log('Email sent successfully');
       } else {
         console.error('Email sending failed');

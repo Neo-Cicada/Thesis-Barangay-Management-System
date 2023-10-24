@@ -8,10 +8,10 @@ export default function ConfirmationDialog({ open, onClose, onConfirm, title, me
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>{message}</DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button onClick={onClose} variant='contained' color="warning">
           Cancel
         </Button>
-        <Button onClick={onConfirm} color="primary">
+        <Button onClick={onConfirm}  variant='contained' color='success'>
           Confirm
         </Button>
       </DialogActions>
