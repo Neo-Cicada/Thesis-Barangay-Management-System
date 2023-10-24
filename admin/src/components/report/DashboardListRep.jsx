@@ -128,8 +128,9 @@ export default function DashboardListRep({
       </tr >
 
 
-      <GreenToast delay={isGreenOpen} onClose={() => setIsGreenOpen(false)} />
+      {/* <GreenToast delay={isGreenOpen} onClose={() => setIsGreenOpen(false)} /> */}
       <RedToast open={isRedOpen} onClose={() => setIsRedOpen(false)} />
+      <RedToast open={isGreenOpen} onClose={() => setIsGreenOpen(false)} type='success' content='Successful!'/>
 
       <ReportViewInformation
         open={showInformation}

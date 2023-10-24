@@ -5,6 +5,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import SendSms from '../SendSms';
 import SendEmail from '../SendEmail';
 import RedToast from '../RedToast';
+import GreenToast from '../GreenToast'
 export default function ReportViewInformation({ item, open, onClose, onConfirm, title, message }) {
     const [sms, setSms] = useState(false)
     const [messageInput, setMessageInput] = useState('');
@@ -12,6 +13,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
     const [email, setEmail] = useState(false)
     const [fail, setFail] = useState(false)
     const [emailFail, setEmailFail] = useState(false)
+    const [emailSuccess, setEmailSuccess] = useState(false)
     const [openSnack, setOpenSnack] = useState(false)
     const smsStyle = {
         display: 'flex',
@@ -88,13 +90,14 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
 
                     <Box sx={{ width: '100%' }}>
                         {item.summon &&
-                            <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em' }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em', }}>
                                 <Box
+                                    style={{ textAlign: 'center', width: ' 100' }}
                                     onClick={() => setSms(true)}
-                                    sx={smsStyle}>Message<SmsIcon /></Box>
+                                    sx={smsStyle}>Send Message<SmsIcon /></Box>
                                 <Box
                                     onClick={() => setEmail(true)}
-                                    sx={smsStyle}><EmailIcon />Email</Box>
+                                    sx={smsStyle}><EmailIcon />Send Email</Box>
                             </Box>}
                         <Box
                             sx={{
@@ -115,6 +118,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
                     fontSize: '2rem',
                     fontWeight: 500
                 }}>Send Message</DialogTitle>
+
                 <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', }}>
 
                     <Typography variant="subtitle1" sx={{ fontSize: '1.5rem' }} >To: {item.phoneNumber}</Typography>
@@ -124,6 +128,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
 
 
                 </DialogContent>
+
             </Dialog>
             <RedToast
                 open={fail}
@@ -135,6 +140,12 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
                 onClose={() => setEmailFail(false)}
                 content='Email Not Sent,
           Oops!'
+            />
+            <RedToast
+                open={emailSuccess}
+                onClose={()=> setEmailSuccess(false)}
+                content="Email Sent!"
+                type="success"
             />
             <Snackbar
                 open={openSnack}
@@ -162,7 +173,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
                     <Typography variant="subtitle1"
                         sx={{ fontSize: '1.5rem' }} >To: {item.email}</Typography>
 
-                    <SendEmail to={item.email} setEmailFail={setEmailFail}/>
+                    <SendEmail to={item.email} setEmailFail={setEmailFail} setEmailSuccess={setEmailSuccess} />
                 </DialogContent>
             </Dialog>
         </>

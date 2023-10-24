@@ -7,7 +7,7 @@ import useUpdate from '../hooks/useUpdate'
 import ConfirmationDialog from './ConfirmationDialog'
 import GreenToast from './GreenToast'
 import RedToast from './RedToast'
-export default function DashboardItem({ data, path, name }) {
+export default function DashboardItem({ data, path, name, itemId }) {
   const [quantityValue, setQuantityValue] = React.useState(false)
   const [newValue, setNewValue] = React.useState(data.quantity)
   const [onpenDialog, setOpenDialog] = React.useState(false)

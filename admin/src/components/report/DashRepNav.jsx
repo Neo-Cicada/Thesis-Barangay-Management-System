@@ -33,7 +33,7 @@ export default function DashRepNav({ setStatus, status }) {
                     onClick={() => setStatus("second")}>Ongoing</button>
                 <button
                     style={status === 'third' ? activeBtn : btnStyle}
-                    onClick={() => setStatus("third")}>Accepted</button>
+                    onClick={() => setStatus("third")}>Completed</button>
                 <button
                     style={status === 'fourth' ? activeBtn : btnStyle}
                     onClick={() => setStatus("fourth")}>Rejected</button>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
-function SendEmail({ to, setEmail, setEmailFail }) {
+function SendEmail({ to, setEmail, setEmailFail, setEmailSuccess }) {
 
   const [subject, setSubject] = useState('')
   const [html, setHtml] = useState('')
@@ -26,8 +26,11 @@ function SendEmail({ to, setEmail, setEmailFail }) {
 
       if (response.status === 200) {
         console.log('sucess')
+        setEmailSuccess(true)
       } else {
         console.error('Email sending failed');
+        setEmailFail(true)
+
       }
     } catch (error) {
       console.error('Error sending email:', error);

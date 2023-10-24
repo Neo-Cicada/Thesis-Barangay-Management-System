@@ -20,7 +20,7 @@ export default function EquipmentCrud() {
         return () => clearTimeout(timer);
     }, []);
     const items = data.map((item) =>
-        <DashboardItem path={'Equipments'} data={item} name={item.equipment} />)
+        <DashboardItem path={'Equipments'} data={item} name={item.equipment} itemId={item.id}/>)
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
     };

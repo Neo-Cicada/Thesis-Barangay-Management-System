@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
 import { Alert } from '@mui/material';
-function RedToast({ open, onClose, content="Cancelled!" }) {
+function RedToast({ open, onClose, content="Cancelled!", type="error" }) {
   const [autoHideDuration, setAutoHideDuration] = useState(1500);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function RedToast({ open, onClose, content="Cancelled!" }) {
       autoHideDuration={autoHideDuration}
       onClose={onClose}
     >
-       <Alert onClose={() => setOpenSnack(false)} severity="error" sx={{ width: '100%' }}>
+       <Alert onClose={() => setOpenSnack(false)} severity={type} sx={{ width: '100%' }}>
                     {content}
         </Alert>
     </Snackbar>
