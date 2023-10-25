@@ -25,7 +25,10 @@ export default function EnrollmentDashList({
     e.stopPropagation();
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'ongoing').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      const success = await sendEmailFunction(
+        item.email,
+        'Enrollment Request Status',
+        'Your enrollment request is currently being processed, and we will contact you for further instructions.');
       if (success) {
         console.log('Email sent successfully');
       } else {
@@ -47,7 +50,10 @@ export default function EnrollmentDashList({
     e.stopPropagation();
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'accepted').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      const success = await sendEmailFunction(
+        item.email,
+        'Enrollment Request Status',
+        'We have accepted your enrollment request. We will contact you with further instructions');
       if (success) {
         console.log('Email sent successfully');
       } else {
@@ -68,7 +74,10 @@ export default function EnrollmentDashList({
     e.stopPropagation();
     setIsRedOpen(true)
     await useStatusUpdate(path, item.id, 'rejected').then(async () => {
-      const success = await sendEmailFunction(item.email, 'subject', 'html');
+      const success = await sendEmailFunction(
+         item.email,
+        'Enrollment Request Status',
+        'We regret to inform you that your enrollment request has been declined. If you have any questions or wish to inquire further, please feel free to reach out to us at amamperez858@gmail.com.');
       if (success) {
         console.log('Email sent successfully');
       } else {

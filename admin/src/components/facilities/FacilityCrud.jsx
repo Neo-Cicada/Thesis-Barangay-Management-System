@@ -14,13 +14,13 @@ export default function FacilityCrud() {
     const handleDialogClose = () => {
         setIsDialogOpen(!isDialogOpen);
     };
-    const items = data.map((item)=> <FacilityItem data={item} name={item.type}/>)
+    const items = data.map((item) => <FacilityItem data={item} name={item.type} />)
 
 
 
-  return (
-    <>
-       <Container
+    return (
+        <>
+            <Container
                 sx={{
                     height: '100%',
                 }}
@@ -29,38 +29,41 @@ export default function FacilityCrud() {
                     style={{
                         borderBottom: '1px solid black',
                         height: '10%',
-                        display:'flex',
-                        justifyContent:'space-between'
+                        display: 'flex',
+                        justifyContent: 'space-between'
                     }}
                 >
-                    <div style={{width:'28em', display:'flex',
-                     justifyContent:'space-between', alignItems:'center', paddingLeft:'0.6em'}}>
-                        <div style={{fontSize:'1.2rem'}}>Name</div>
-                        <div style={{fontSize:'1.2rem'}}>Available Time</div>
+                    <div style={{
+                        width: '28em', display: 'flex',
+                        justifyContent: 'space-between', alignItems: 'center', paddingLeft: '0.6em'
+                    }}>
+                        <div style={{ fontSize: '1.2rem' }}>Name</div>
+                        <div style={{ fontSize: '1.2rem' }}>Available Time</div>
                         <div></div>
 
                     </div>
                     <div
                         onClick={() => setIsDialogOpen(true)}
-                        style={{height:'100%',
-                        cursor: 'pointer', width:'10em',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center',
-                        textAlign:'center',
-                        fontWeight: 500
-                    }}
-                    > <AddIcon color='info' fontSize='medium'/> Add Facility</div>
+                        style={{
+                            height: '100%',
+                            cursor: 'pointer', width: '10em',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            fontWeight: 500
+                        }}
+                    > <AddIcon color='info' fontSize='medium' /> Add Facility</div>
                 </Container>
                 <ScrollableContainer>
                     {items}
                 </ScrollableContainer>
             </Container>
             <FacilityAdd
-         handleDialogClose={handleDialogClose}
-         isDialogOpen={isDialogOpen}
-         setIsDialogOpen={setIsDialogOpen}
-      />
-    </>
-  )
+                handleDialogClose={handleDialogClose}
+                isDialogOpen={isDialogOpen}
+                setIsDialogOpen={setIsDialogOpen}
+            />
+        </>
+    )
 }

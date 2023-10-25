@@ -23,8 +23,11 @@ export default function DashboardListFaci({
         setIsGreenOpen(true)
         await useStatusUpdate(path, item.id, 'ongoing')
             .then(async () => {
-                const success = await sendEmailFunction(item.email, 'subject', 'html');
+                const success = await sendEmailFunction(item.email,
+                    'Facility Request Status',
+                    'Your request has been accepted. Please be mindful of your selected time slot.');
                 if (success) {
+                    const selectedFacility = item.selectedFacility;
                     console.log('Email sent successfully');
                 } else {
                     console.error('Email sending failed');
@@ -46,7 +49,10 @@ export default function DashboardListFaci({
 
         await useStatusUpdate(path, item.id, 'accepted')
             .then(async () => {
-                const success = await sendEmailFunction(item.email, 'subject', 'html');
+                const success = await sendEmailFunction(
+                    item.email,
+                    'Facility Request Status',
+                    'Your request has been successfully completed. We value your feedback and invite you to share your thoughts with us. Please feel free to send your feedback to amamperez858@gmail.com. We greatly appreciate your input');
                 if (success) {
                     console.log('Email sent successfully');
                 } else {
@@ -68,7 +74,9 @@ export default function DashboardListFaci({
         setIsRedOpen(true)
         await useStatusUpdate(path, item.id, 'rejected')
             .then(async () => {
-                const success = await sendEmailFunction(item.email, 'subject', 'html');
+                const success = await sendEmailFunction(item.email,
+                    'Facility Request Status',
+                    'We regret to inform you that your request has been declined. If you have any questions or need further clarification, please do not hesitate to reach out to us via email at amamperez858@gmail.com.');
                 if (success) {
                     console.log('Email sent successfully');
                 } else {
@@ -86,8 +94,6 @@ export default function DashboardListFaci({
     }
     return (
         <>
-
-
             <tr >
                 <td style={{ textTransform: 'capitalize' }}>{first}</td>
                 <td>{second}</td>
@@ -113,7 +119,9 @@ export default function DashboardListFaci({
                             status={status} />
 
                     </td> :
-                    <td><VisibilityIcon sx={{ cursor: 'pointer' }} onClick={() => setShowInformation(true)} /></td>
+                    <td><VisibilityIcon
+                        color="info"
+                        sx={{ cursor: 'pointer' }} onClick={() => setShowInformation(true)} /></td>
                 }
             </tr>
 

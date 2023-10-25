@@ -4,49 +4,58 @@ import SmsIcon from '@mui/icons-material/Sms';
 import EmailIcon from '@mui/icons-material/Email';
 import SendSms from '../SendSms';
 import SendEmail from '../SendEmail';
+import RedToast from '../RedToast';
 export default function FacilityViewInformation({ item, open, onClose, onConfirm, title, message }) {
-  const [sms, setSms] = useState(false)
-  const [messageInput, setMessageInput] = useState('');
-  const [messages, setMessages] = useState([]);
-  const [email, setEmail] = useState(false)
-  const [openSnack, setOpenSnack] = useState(false)
-  const smsStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    transition: 'color 0.3s', // Add a smooth transition for the color change
-    '&:hover': {
-      color: '#3B5998',
-    },
-  };
-  const styleP = {
-    borderBottom: '1px solid grey',
-    display: 'flex',
-    gap: '2em',
+    const [sms, setSms] = useState(false)
+    const [messageInput, setMessageInput] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [email, setEmail] = useState(false)
+    const [openSnack, setOpenSnack] = useState(false)
+    const [emailFail, setEmailFail] = useState(false)
+    const [emailSuccess, setEmailSuccess] = useState(false)
+    const [smsFail, setSmsFail] = useState(false)
+    const smsStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        transition: 'color 0.3s', // Add a smooth transition for the color change
+        '&:hover': {
+            color: '#3B5998',
+        },
+    };
+    const styleP = {
+        borderBottom: '1px solid grey',
+        display: 'flex',
+        gap: '2em',
 
-}
-const boxStyle = {
-  width: '100%', display: 'flex', justifyContent: 'center', gap: '1em'
-}
-const nameStyle = {
-  width: '40%',
-  display: 'flex',
-  justifyContent: 'end',
-}
-const valueStyle = {
-  width: '60%',
-  display: 'flex',
-  justifyContent: 'start',
-}
-const items = item.selectedFacility.map(item => <Box
-  key={item.id}
-  style={styleP}> <p style={{ width: '50%', textAlign: 'center' }}>Name: {item.name}</p>
-  <hr />
-  <p style={{ width: '50%', textAlign: 'center' }}>Time: {item.slot}</p>
-</Box>)
-  return (
-    <>
-      <Dialog open={open} onClose={onClose} fullWidth key={item.id}>
+    }
+    const boxStyle = {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'start',
+        gap: '1em',
+        textTransform: 'capitalize',
+    }
+    const nameStyle = {
+        display: 'flex',
+        justifyContent: 'start',
+        fontWeight: 500,
+        fontSize: 18
+    }
+    const valueStyle = {
+        width: '60%',
+        display: 'flex',
+        justifyContent: 'start',
+    }
+    const items = item.selectedFacility.map(item => <Box
+        key={item.id}
+        style={styleP}> <p style={{ width: '50%', textAlign: 'center' }}>Name: {item.name}</p>
+        <hr />
+        <p style={{ width: '50%', textAlign: 'center' }}>Time Slot: {item.slot}</p>
+    </Box>)
+    return (
+        <>
+            <Dialog open={open} onClose={onClose} fullWidth key={item.id}>
                 <DialogTitle sx={{ textAlign: 'center' }}>
                     <h2 style={{
                         textTransform: 'capitalize',
@@ -56,15 +65,18 @@ const items = item.selectedFacility.map(item => <Box
                 </DialogTitle>
                 <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Fullname: </p>
-                        <p style={valueStyle}>{item.fullname}</p>  </Box>
+                        <p style={nameStyle}>Fullname — {item.fullname} </p>
+                    </Box>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Email: </p><p style={valueStyle}>{item.email}</p></Box>
+                        <p style={{ ...nameStyle }}>Email — <span style={{textTransform: 'lowercase'}}> {item.email}</span></p>
+                    </Box>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Phone Number:</p>
-                        <p style={valueStyle}>{item.phoneNumber} </p></Box>
+                        <p style={nameStyle}>Phone Number — {item.phoneNumber}</p>
+                    </Box>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Date: </p> <p style={valueStyle}></p></Box>
+                        <p style={nameStyle}>Date — {item.timestamp.toDate().toLocaleString()} </p>
+
+                    </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em' }}>
                         <Box
                             onClick={() => setSms(true)}
@@ -94,11 +106,32 @@ const items = item.selectedFacility.map(item => <Box
 
                     <Typography variant="subtitle1" sx={{ fontSize: '1.5rem' }} >To: {item.phoneNumber}</Typography>
 
-                    <SendSms number={item.phoneNumber} setSms={setSms} setOpenSnack={setOpenSnack} />
-
+                    <SendSms
+                        setFail={setSmsFail}
+                        number={item.phoneNumber}
+                        setSms={setSms}
+                        setOpenSnack={setOpenSnack} />
 
                 </DialogContent>
+
             </Dialog>
+            <RedToast
+                open={smsFail}
+                onClose={() => setSmsFail(false)}
+                content='Message Not Sent,
+          Oops!'/>
+            <RedToast
+                open={emailFail}
+                onClose={() => setEmailFail(false)}
+                content='Email Not Sent,
+          Oops!'
+            />
+            <RedToast
+                open={emailSuccess}
+                onClose={() => setEmailSuccess(false)}
+                content="Email Sent!"
+                type="success"
+            />
             <Snackbar
                 open={openSnack}
                 autoHideDuration={3000}
@@ -125,9 +158,9 @@ const items = item.selectedFacility.map(item => <Box
                     <Typography variant="subtitle1"
                         sx={{ fontSize: '1.5rem' }} >To: {item.email}</Typography>
 
-                    <SendEmail to={item.email} />
+                    <SendEmail to={item.email} setEmailFail={setEmailFail} setEmailSuccess={setEmailSuccess} />
                 </DialogContent>
             </Dialog>
-    </>
-  )
+        </>
+    )
 }

@@ -8,8 +8,10 @@ import {
   TextField,
 } from '@mui/material'
 import useUploadDirectly from '../../hooks/useUploadDirectly'
+import RedToast from '../RedToast'
 
 export default function FacilityAdd({ handleDialogClose, isDialogOpen, setIsDialogOpen }) {
+  const [toast, setToast] = useState(false)
   const initialTime = {
     startTime: '',
     endTime: ''
@@ -38,7 +40,7 @@ export default function FacilityAdd({ handleDialogClose, isDialogOpen, setIsDial
 
   const handleClickOk = async () => {
     console.log(item);
-
+    setToast(true)
     if (item.type.trim() !== '' && item.slots.length > 0) {
       await useUploadDirectly('Facility', item).then(() => {
         setIsDialogOpen(false);
@@ -48,6 +50,7 @@ export default function FacilityAdd({ handleDialogClose, isDialogOpen, setIsDial
         });
       });
     }
+
   }
 
   return (
@@ -97,13 +100,14 @@ export default function FacilityAdd({ handleDialogClose, isDialogOpen, setIsDial
               </div>
             ))}
 
-            <Button onClick={handleAddSlot}>Add Slot</Button>
+            <Button variant='contained' onClick={handleAddSlot}>Add Slot</Button>
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClickOk}>OK</Button>
+          <Button variant='contained' color='success' onClick={handleClickOk}>OK</Button>
         </DialogActions>
       </Dialog>
+      <RedToast open={toast} onClose={() => setToast(false)} content={"Item Added!"} type="success" />
     </>
   )
 }

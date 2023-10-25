@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, FormControl, MenuItem, InputLabel, Select, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import useDelete from '../../hooks/useDelete';
 import useUpdate from '../../hooks/useUpdate';
-
+import ConfirmationDialog from '../ConfirmationDialog';
+import RedToast from '../RedToast';
 export default function FacilityItem({ data, name }) {
   const [quantityValue, setQuantityValue] = React.useState(false);
   const [newValue, setNewValue] = React.useState(data.quantity);
+  const [confirm, setConfirm] = useState(false)
   const [editedSlots, setEditedSlots] = React.useState([...data.slots]);
-  // Copy the initial slots for editing
-
+  const [openToast, setOpenToast] = useState(false)
   const handleDelete = async (e) => {
     console.log('clicked');
     e.preventDefault();
-    await useDelete('Facility', data.id);
+    try {
+      await useDelete('Facility', data.id);
+
+    } catch (error) {
+      console.error('Deletion error:', error);
+    }
   }
 
   const handleEdit = async (e) => {
@@ -32,9 +38,25 @@ export default function FacilityItem({ data, name }) {
     updatedSlots[index][field] = value;
     setEditedSlots(updatedSlots);
   }
-  const options = data.slots.map(item => <MenuItem key={item.id}>{item.startTime} - {item.endTime}</MenuItem>)
+  function formatTimeToAmPm(militaryTime) {
+    const timeParts = militaryTime.split(':');
+    let hours = parseInt(timeParts[0]);
+    const minutes = timeParts[1];
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+
+    if (hours > 12) {
+      hours -= 12;
+    } else if (hours === 0) {
+      hours = 12;
+    }
+
+    return `${hours}:${minutes} ${amPm}`;
+  }
+  const options = data.slots.map(item =>
+    <MenuItem key={item.id}>{formatTimeToAmPm(item.startTime)} - {formatTimeToAmPm(item.endTime)}
+    </MenuItem>)
   const slotsDisplay = editedSlots.map((slot, index) => (
-    <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop:'1em' }}>
+    <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop: '1em' }}>
       <TextField
         label="Start Time"
         value={slot.startTime}
@@ -87,13 +109,21 @@ export default function FacilityItem({ data, name }) {
 
         <div style={{ height: '2em', display: 'flex', gap: '1em' }}>
           <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={handleEdit}>
-            <EditIcon color='info'/>{quantityValue === false ? 'Edit' : 'Save'}
+            <EditIcon color='info' />{quantityValue === false ? 'Edit' : 'Save'}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-            onClick={handleDelete}
-          ><DeleteIcon color='error'/>Delete</div>
+            onClick={() => setConfirm(true)}
+          ><DeleteIcon color='error' />Delete</div>
         </div>
       </div>
+      <ConfirmationDialog
+        open={confirm}
+        onClose={() => setConfirm(false)}
+        onConfirm={handleDelete}
+        title={"Are you sure you want to delete this item?"}
+        message={"Deleted items will be permanently removed and cannot be recovered."}
+      />
+      <RedToast open={openToast} onClose={() => setOpenToast(false)} content='Successfully Deleted!' type="success" />
     </>
   )
 }

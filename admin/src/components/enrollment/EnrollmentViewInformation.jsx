@@ -211,7 +211,9 @@ export default function EnrollmentViewInformation({ item, open, onClose, onConfi
                     <SendEmail
                         to={item.guardianInfo.guardianEmail}
                         setEmailFail={setEmailFail}
-                        setEmailSuccess={setEmailSuccess} />
+                        setEmailSuccess={setEmailSuccess}
+
+                    />
                 </DialogContent>
             </Dialog>
         </>

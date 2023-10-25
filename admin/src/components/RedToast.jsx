@@ -32,9 +32,10 @@ function RedToast({ open, onClose, content = "Cancelled!", type = "error" }) {
         severity={type}
         sx={{
           width: '100%',
-          // Adjust the height and padding to make the Snackbar bigger
-          height: 'auto', // Set the height to 'auto' to allow the content to determine the height
-          padding: '1em', // Add more padding for a larger appearance
+          fontWeight: "bold",
+          height: 'auto',
+          fontSize: '1.2rem',
+          padding: '1em',
         }}
       >
         {content}
