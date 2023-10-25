@@ -37,7 +37,7 @@ export default function SectionTwo() {
           data={data}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
-          horizontal={true} // Make the FlatList horizontal
+          horizontal={false}
         />
       </View>
     </>
@@ -46,11 +46,11 @@ export default function SectionTwo() {
 
 const box = StyleSheet.create({
   box: {
-    // borderColor: '#3B5998',
+    borderColor: '#3B5998',
     backgroundColor: 'white',
-    // borderWidth: 5,
+    borderWidth: 5,
     marginTop: 30,
-    borderRadius: 12
+    borderRadius: 12,
   },
   image: {
 

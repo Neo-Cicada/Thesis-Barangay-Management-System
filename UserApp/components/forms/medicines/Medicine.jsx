@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useEffect } from 'react'
-import { ScrollView, Text, View, StyleSheet, Dimensions, KeyboardAvoidingView, Platform} from 'react-native'
+import { ScrollView, Text, View, StyleSheet, Dimensions, KeyboardAvoidingView, Platform } from 'react-native'
 import Box from './Box';
 import MedicineForm from './MedicineForm';
 import useRead from '../../../hooks/useRead'
@@ -27,13 +27,13 @@ export default function Medicine() {
       selectedMedicines: selectedMedicines,
     }));
   }, [selectedMedicines]);
-  const handleBoxSelection = (name) => {
+  const handleBoxSelection = (name,  itemId) => {
     if (selectedMedicines.some(item => item.name === name)) {
       // If the item is already selected, deselect it
       setSelectedMedicines(selectedMedicines.filter(item => item.name !== name));
     } else {
       // If the item is not selected, select it with an initial quantity of 0
-      setSelectedMedicines([...selectedMedicines, { name, count: 1 }]);
+      setSelectedMedicines([...selectedMedicines, { name, count: 1, itemId: itemId }]);
     }
   };
   const handleQuantityChange = (name, newCount) => {
@@ -58,12 +58,14 @@ export default function Medicine() {
       setSelectedMedicines(updatedSelectedItems);
     }
   };
-  const items = options.map(item => <Box key={item.id}
-    name={item.type}
-    quantity={item.quantity}
-    isSelected={selectedMedicines.some((medicine) => medicine.name == String(item.type))}
-    onSelect={handleBoxSelection}
-  />)
+  const items = options.map(item =>
+    <Box key={item.id}
+      itemId={item.id}
+      name={item.type}
+      quantity={item.quantity}
+      isSelected={selectedMedicines.some((medicine) => medicine.name == String(item.type))}
+      onSelect={handleBoxSelection}
+    />)
   return (
     <>
       <MyMedicineContext.Provider value={{
@@ -76,7 +78,7 @@ export default function Medicine() {
           <View style={{ flex: 1 }}>
             {proceed ? <MedicineForm /> : <MedicineSelect />}
             <View style={{
-              flex: 0.1,
+              flex: 0.15,
               flexDirection: 'row',
               alignItems: 'flex-end',
               justifyContent: 'flex-end',

@@ -1,16 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-function Box({ name, isSelected, onSelect, quantity }) {
+function Box({ name, isSelected, onSelect, quantity, itemId }) {
   return (
     <TouchableOpacity
       style={[
         styles.box,
         { backgroundColor: isSelected ? '#8B9DC3' : '#DFE3EE' },
       ]}
-      onPress={() => onSelect(name, '', '', quantity)}
+      onPress={() => onSelect(name, itemId)}
     >
       <Text style={styles.nameText}>{name}</Text>
+
       <Text style={{
         textAlign: 'center'
       }}>{quantity}</Text>

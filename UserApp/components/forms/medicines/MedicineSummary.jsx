@@ -1,39 +1,42 @@
 import React, { useContext } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Modal } from 'react-native';
 import { MyMedicineContext } from './Medicine';
-import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
+
 const MedicineSummary = ({ modalVisible, onDismiss }) => {
   const { selectedMedicines, details } = useContext(MyMedicineContext);
-
+  const { width, height } = Dimensions.get('window');
+  const modalWidth = width * 0.8; // 80% of the screen width
 
   return (
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={onDismiss}
+    >
+      <View style={{
+        flex: 1, justifyContent: 'center', alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+      }}>
+        <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, width: modalWidth }}>
+          <Text variant='bodyLarge' style={{textAlign:'center'}}>Summarry of information</Text>
+          <Text variant="bodyMedium">Fullname: {details.fullname}</Text>
+          <Text variant="bodyMedium">Phone Number: {details.phoneNumber}</Text>
+          <Text variant="bodyMedium">Email: {details.email}</Text>
 
-    <Dialog style={{ backgroundColor: 'white' }} visible={modalVisible} onDismiss={onDismiss}>
-      <Dialog.Title>Summary of Information Provided</Dialog.Title>
-      <Dialog.Content>
-        <Text variant="bodyMedium">Fullname: {details.fullname}</Text>
-        <Text variant="bodyMedium">Phone Number: {details.phoneNumber}</Text>
-        <Text variant="bodyMedium">Email: {details.email}</Text>
+          <Text variant='bodyLarge' style={{ textAlign: 'center' }}>Selected Medicine</Text>
+          {selectedMedicines.map(item => (
+            <View style={{ flexDirection: 'row', alignItems: 'center' }} key={item.name}>
+              <Text>Name: {item.name}</Text>
+              <Text style={{ marginLeft: 10 }}>Quantity: {item.count}</Text>
+            </View>
+          ))}
 
-        <Text variant='bodyLarge' style={{ textAlign: 'center' }}>Selected Medicine </Text>
-        {selectedMedicines.map(item => {
-          return (
-            <>
-              <View  style={{ flexDirection: 'row', alignItems: 'center', }}>
-                <Text>Name: {item.name}</Text>
-                <Text style={{ marginLeft: 10 }}>Quantity: {item.count}</Text>
-              </View>
-
-            </>
-          )
-        })}
-      </Dialog.Content>
-      <Dialog.Actions>
-        <Button onPress={onDismiss}>Done</Button>
-      </Dialog.Actions>
-    </Dialog>
-
-
+          <Button onPress={onDismiss}>Done</Button>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
