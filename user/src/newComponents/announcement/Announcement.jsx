@@ -3,10 +3,11 @@ import { Button, Container } from '@mui/material'
 import './announcement.css'
 import AnnouncementBox from './AnnouncementBox'
 import useRead from '../../hooks/useRead'
+import useRecent from '../../hooks/useRecent'
 export default function Announcement() {
   const [data, setData] = useState([])
   const [isExpand, setIsExpand] = useState(false)
-  useRead('images', setData)
+  useRecent('images', setData)
   console.log(data)
   const items = data.map(item => <AnnouncementBox
     image={item.imageUrl} title={item.title} date={item.date} description={item.description} />)

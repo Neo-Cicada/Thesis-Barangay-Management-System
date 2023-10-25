@@ -21,7 +21,11 @@ export default function MedicineAdd({ handleDialogClose, isDialogOpen, setIsDial
   return (
     <>
       <Dialog open={isDialogOpen} onClose={handleDialogClose}>
-        <DialogTitle sx={{ textAlign: 'center', fontWeight: 600, color: "rgb(59, 89, 152)" }}> Add Item</DialogTitle>
+        <DialogTitle sx={{
+          textAlign: 'center',
+          fontWeight: 600,
+          color: "rgb(59, 89, 152)"
+        }}> Add Item</DialogTitle>
         <DialogContent
         >
           <div style={{

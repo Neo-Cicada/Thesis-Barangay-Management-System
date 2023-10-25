@@ -37,7 +37,7 @@ export default function MedicineCrud() {
           <div
             onClick={() => setIsDialogOpen(true)}
             style={{
-              width:'100%',
+              width: '100%',
               height: '100%',
               cursor: 'pointer',
               display: 'flex',
@@ -62,25 +62,31 @@ export default function MedicineCrud() {
             </div>
           ) : (
             <ScrollableContainer>
-              <Container sx={{ height: '2em', width: '100%', borderBottom: '1px solid black', display: 'flex', justifyContent: 'space-between' }}>
-                                <div style={{
-                                    // border:'1px solid red',
-                                    width: '15em',
-                                    height: '95%%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between'
-                                }}>
-                                    <div style={{
-                                        fontSize: '1.4rem',
-                                        textTransform: 'capitalize',
-                                        fontWeight: 600
-                                    }}>Name</div>
-                                    <div style={{
-                                        fontSize: '1.4rem', fontWeight: 600
-                                    }}>Quantity</div>
-                                </div>
-                            </Container>
+              <Container sx={{
+                height: '2em', width: '100%',
+                borderBottom: '1px solid black',
+                // border: '1px solid red',
+                display: 'flex', justifyContent: 'space-between'
+              }}>
+                
+                <div style={{
+                  // border:'1px solid red',
+                  width: '15em',
+                  height: '95%%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}>
+                  <div style={{
+                    fontSize: '1.4rem',
+                    textTransform: 'capitalize',
+                    fontWeight: 600
+                  }}>Name</div>
+                  <div style={{
+                    fontSize: '1.4rem', fontWeight: 600
+                  }}>Quantity</div>
+                </div>
+              </Container>
               {items}
             </ScrollableContainer>
           )}

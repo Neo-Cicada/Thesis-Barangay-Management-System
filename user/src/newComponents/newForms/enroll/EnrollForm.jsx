@@ -410,7 +410,7 @@ export default function EnrollForm({ formData, setFormData }) {
                     />
                     <Typography variant="h6" gutterBottom maxWidth sx={{
                         textAlign: 'center'
-                    }}>Guardian Information</Typography>
+                    }}>Guardian Information / Incase of Emergency Contact</Typography>
                     <TextField
                         required
                         value={formData.guardianInfo.guardianLastName}

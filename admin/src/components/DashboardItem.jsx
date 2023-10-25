@@ -17,7 +17,7 @@ export default function DashboardItem({ data, path, name, itemId }) {
     console.log('clicked')
     e.preventDefault();
     setOpenDialog(true)
-    // await useDelete(path, data.id)
+    await useDelete(path, data.id)
   }
   const handleClose = () => {
 
@@ -38,7 +38,13 @@ export default function DashboardItem({ data, path, name, itemId }) {
   return (
     <>
 
-      <Container sx={{ height: '2.5em', width: '100%', borderBottom: '1px solid black', display: 'flex', justifyContent: 'space-between' }}>
+      <Container sx={{
+        height: '2.5em',
+        width: '100%',
+        borderBottom: '1px solid black',
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
 
         <div style={{
           // border:'1px solid red',
@@ -74,7 +80,7 @@ export default function DashboardItem({ data, path, name, itemId }) {
 
           <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }
           }
-            onClick={handleDelete}
+            onClick={()=>setOpenDialog(true)}
           ><DeleteIcon color="error" />Delete</div>
         </div>
       </Container>
