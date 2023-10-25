@@ -18,7 +18,7 @@ export default function FacilityViewInformation({ item, open, onClose, onConfirm
         display: 'flex',
         justifyContent: 'center',
         cursor: 'pointer',
-        transition: 'color 0.3s', // Add a smooth transition for the color change
+        transition: 'color 0.3s',
         '&:hover': {
             color: '#3B5998',
         },
@@ -68,7 +68,7 @@ export default function FacilityViewInformation({ item, open, onClose, onConfirm
                         <p style={nameStyle}>Fullname — {item.fullname} </p>
                     </Box>
                     <Box sx={boxStyle}>
-                        <p style={{ ...nameStyle }}>Email — <span style={{textTransform: 'lowercase'}}> {item.email}</span></p>
+                        <p style={{ ...nameStyle }}>Email — <span style={{ textTransform: 'lowercase' }}> {item.email}</span></p>
                     </Box>
                     <Box sx={boxStyle}>
                         <p style={nameStyle}>Phone Number — {item.phoneNumber}</p>

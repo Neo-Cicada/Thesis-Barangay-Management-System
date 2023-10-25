@@ -55,6 +55,7 @@ export default function FacilityForm() {
   };
   const handleUpload = async (e) => {
     e.preventDefault();
+    // console.log(details)
     await useUpload(details, 'FacilityRequest')
     console.log(details)
     setselectedFacility([])

@@ -9,6 +9,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import MedicineViewInformation from './MedicineViewInformation'
 import sendSmsFunction from '../../functions/sendSmsFunction';
 import sendEmailFunction from '../../functions/sendEmailFunction';
+import useUpdateItem from '../../hooks/useUpdateItem';
 export default function DashboardList({
   first,
   second,
@@ -22,29 +23,49 @@ export default function DashboardList({
   const [isOpenProceed, setIsOpenProceed] = useState(false)
   const [isGreenOpen, setIsGreenOpen] = useState(false)
   const [isRedOpen, setIsRedOpen] = useState(false)
+    console.log(item)
   const onAccept = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
-    await useStatusUpdate(path, item.id, 'ongoing')
-      .then(async () => {
-        const success = await sendEmailFunction(item.email,
-          'Medicine Request Status',
-          'Your request has been accepted please procceed to our Barangay Clinic to claim your requested medicines');
-        if (success) {
-          console.log('Email sent successfully');
+    await useStatusUpdate(path, item.id, 'ongoing').then(async () => {
+      const success = await sendEmailFunction(item.email,
+        'Medicine Request Status',
+        'Your request has been accepted; please proceed to the barangay hall to claim your medicines.');
+      if (success) {
+        console.log('Email sent successfully')
+        const selectedEquipments = item.selectedMedicines; // Access the snapshot data
+
+        if (selectedEquipments) {
+          const updatePromises = [];
+
+          // Loop through the keys of selectedEquipments
+          Object.keys(selectedEquipments).forEach((key) => {
+            const equipment = selectedEquipments[key];
+            const count = equipment.count;
+            const itemId = equipment.itemId; // Assuming key is the itemId
+            updatePromises.push(useUpdateItem("Medicines", itemId, count));
+            console.log("Item Updated");
+          });
+
+          // Wait for all update promises to complete
+          await Promise.all(updatePromises);
+
+          console.log("Items Updated");
         } else {
-          console.error('Email sending failed');
+          console.log("No selectedEquipments found.");
         }
-      }).then(
-        async () => {
-          setIsOpenProceed(false)
-        }
-      )
+      } else {
+        console.error('Email sending failed');
+      }
+    }).then(
+      async () => {
+
+        setIsOpenProceed(false)
+      }
+    )
       .catch((error) => {
         console.error('Error updating status:', error);
       })
-
-
   }
 
   const onConfirm = async (e) => {

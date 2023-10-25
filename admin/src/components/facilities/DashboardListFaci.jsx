@@ -34,9 +34,9 @@ export default function DashboardListFaci({
                         const updatePromises = []
                         Object.keys(selectedFacility).forEach((key) => {  //facility.slot;
                             const facility = selectedFacility[key];
-                            const slot = 0;
+                            const slot = facility.itemIndex;
                             const itemId = facility.itemId; // Assuming key is the itemId
-                            updatePromises.push(useUpdateTimeSlot(itemId, 0));
+                            updatePromises.push(useUpdateTimeSlot(itemId, slot));
                             console.log("Item Updated");
                         });
 
