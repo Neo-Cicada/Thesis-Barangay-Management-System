@@ -23,7 +23,7 @@ export default function DashboardList({
   const [isOpenProceed, setIsOpenProceed] = useState(false)
   const [isGreenOpen, setIsGreenOpen] = useState(false)
   const [isRedOpen, setIsRedOpen] = useState(false)
-    console.log(item)
+  console.log(item)
   const onAccept = async (e) => {
     e.stopPropagation();
     setIsGreenOpen(true)
@@ -33,27 +33,6 @@ export default function DashboardList({
         'Your request has been accepted; please proceed to the barangay hall to claim your medicines.');
       if (success) {
         console.log('Email sent successfully')
-        const selectedEquipments = item.selectedMedicines; // Access the snapshot data
-
-        if (selectedEquipments) {
-          const updatePromises = [];
-
-          // Loop through the keys of selectedEquipments
-          Object.keys(selectedEquipments).forEach((key) => {
-            const equipment = selectedEquipments[key];
-            const count = equipment.count;
-            const itemId = equipment.itemId; // Assuming key is the itemId
-            updatePromises.push(useUpdateItem("Medicines", itemId, count));
-            console.log("Item Updated");
-          });
-
-          // Wait for all update promises to complete
-          await Promise.all(updatePromises);
-
-          console.log("Items Updated");
-        } else {
-          console.log("No selectedEquipments found.");
-        }
       } else {
         console.error('Email sending failed');
       }
@@ -78,7 +57,28 @@ export default function DashboardList({
           'Medicine Request Status',
           'You have claimed your requested medicines. Please provide a feedback by emailing us at amamperez@858gmail.com');
         if (success) {
-          console.log('Email sent successfully');
+          console.log("Email sent")
+          const selectedEquipments = item.selectedMedicines; // Access the snapshot data
+
+          if (selectedEquipments) {
+            const updatePromises = [];
+
+            // Loop through the keys of selectedEquipments
+            Object.keys(selectedEquipments).forEach((key) => {
+              const equipment = selectedEquipments[key];
+              const count = equipment.count;
+              const itemId = equipment.itemId; // Assuming key is the itemId
+              updatePromises.push(useUpdateItem("Medicines", itemId, count));
+              console.log("Item Updated");
+            });
+
+            // Wait for all update promises to complete
+            await Promise.all(updatePromises);
+
+            console.log("Items Updated");
+          } else {
+            console.log("No selectedEquipments found.");
+          }
         } else {
           console.error('Email sending failed');
         }
