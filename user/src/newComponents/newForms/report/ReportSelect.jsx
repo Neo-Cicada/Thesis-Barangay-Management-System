@@ -23,7 +23,16 @@ const Box = ({ name, isSelected, onSelect }) => {
 
 export default function ReportSelect() {
   const { selectedReport, setSelectReportDalog, handleBoxSelect } = useContext(MyReportContext);
-
+  const violation = ["Violence", "Vandalism", "Infidelity", "Physical Abuse", "Verbal Abuse",
+    "Scam", "Money Related", "Land Grabbing", "Drug Related", "Others"]
+  const violationBoxes = violation.map((violationName) => (
+    <Box
+      name={violationName}
+      isSelected={selectedReport.some((report) => report.name === violationName)}
+      onSelect={handleBoxSelect}
+      key={violationName}
+    />
+  ));
   const handleReport = (reportName, badGuy) => {
     const updatedSelectedReport = selectedReport.map((item) => {
       if (item.name === reportName) {
@@ -35,21 +44,17 @@ export default function ReportSelect() {
   };
   return (
     <>
+      <h2 style={{ textAlign: 'center' }}>Common Issues</h2>
       <div className='items-certificates-dialog'>
-        <Box name="Drunk"
-          isSelected={selectedReport.some((report) => report.name === "Drunk")}
-          onSelect={handleBoxSelect} />
-        <Box name="Vandalism"
-          isSelected={selectedReport.some((report) => report.name === "Vandalism")}
-          onSelect={handleBoxSelect} />
+        {violationBoxes}
 
 
       </div>
       <div className='selected-certificates-dialog'>
         {selectedReport.map((report, index) => (
-          <div style={{ textAlign: 'center', border: '1px solid black' }} key={index}>
+          <div style={{ textAlign: 'center', borderBottom: '1px solid black' }} key={index}>
             <p>{report.name}</p>
-            <div style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
               <div>Who's the person you're reporting?
               </div>
               <TextField

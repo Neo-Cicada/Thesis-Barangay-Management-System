@@ -4,7 +4,7 @@ import SelectedEquipment from './SelectedEquipment';
 import useRead from '../../../hooks/useRead'
 export function Box({ name, isSelected, onSelect, quantity, itemId }) {
   const boxStyle = {
-    height: '5em',
+    height: '5.5em',
     textAlign: 'center',
     borderRadius: '1em',
     width: '7em',
@@ -18,7 +18,7 @@ export function Box({ name, isSelected, onSelect, quantity, itemId }) {
       onClick={() => onSelect(name, "", itemId)}
     >
       <p style={{ fontSize: '1em' }}>{name}</p>
-      <p>{quantity}</p>
+      <p style={{ fontSize: '1em' }}> {quantity}</p>
     </div>
   );
 }
