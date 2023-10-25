@@ -364,7 +364,7 @@ export default function EnrollmentForm() {
         </Box>
 
         {/* Guardian Information */}
-        <Typography variant="subtitle1">Guardian Information</Typography>
+        <Typography variant="subtitle1">Guardian Information / Contact Incase of Emergency</Typography>
         <Box sx={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
           <Box sx={{ display: 'flex', justifyContent: 'center', width: '15em', }}>
             <TextField

@@ -24,7 +24,7 @@ export default function FacilityDialog({ open, handleClose }) {
     }));
   }, [selectedFacility]);
 
-  const handleBoxSelect = (name) => {
+  const handleBoxSelect = (name, itemId, slots) => {
     const index = selectedFacility.findIndex((facility) => facility.name === name);
 
     if (index !== -1) {
@@ -33,13 +33,15 @@ export default function FacilityDialog({ open, handleClose }) {
       setselectedFacility(updatedSelected);
     } else {
       // If not selected, select it
-      setselectedFacility([...selectedFacility, { name: name }]);
+      setselectedFacility([...selectedFacility, { name: name, itemId: itemId, slots: slots}]);
     }
   };
   return (
     <>
-      <MyFacilityContext.Provider value={{ selectedFacility, setselectedFacility,
-         handleBoxSelect, details, setDetails }}>
+      <MyFacilityContext.Provider value={{
+        selectedFacility, setselectedFacility,
+        handleBoxSelect, details, setDetails
+      }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle sx={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>{proceed ? 'Facility Form' : 'Available Facility'}</DialogTitle>
           <DialogContent sx={{ borderBottom: '2px dashed grey' }} className="facility-dialog-content" style={{ height: '100vh' }}>

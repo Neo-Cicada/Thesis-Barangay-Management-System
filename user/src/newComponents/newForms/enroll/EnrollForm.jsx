@@ -67,7 +67,7 @@ export default function EnrollForm({ formData, setFormData }) {
             console.log("All filePaths are filled:");
             console.log(formData);
             console.log(filePaths);
-            useUpload({ formData, ...filePaths }, 'EnrollmentRequest')
+            useUpload({ ...formData, ...filePaths }, 'EnrollmentRequest')
             resetFormDataAndFilePaths();
             setOpenSnack(true)
         }

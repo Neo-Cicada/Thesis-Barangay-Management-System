@@ -8,6 +8,7 @@ import RedToast from '../RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FacilityViewInformation from './FacilityViewInformation';
 import sendEmailFunction from '../../functions/sendEmailFunction'
+import useUpdateTimeSlot from '../../hooks/useUpdateTimeSlot';
 export default function DashboardListFaci({
     first,
     second,
@@ -29,6 +30,21 @@ export default function DashboardListFaci({
                 if (success) {
                     const selectedFacility = item.selectedFacility;
                     console.log('Email sent successfully');
+                    if (selectedFacility) {
+                        const updatePromises = []
+                        Object.keys(selectedFacility).forEach((key) => {  //facility.slot;
+                            const facility = selectedFacility[key];
+                            const slot = 0;
+                            const itemId = facility.itemId; // Assuming key is the itemId
+                            updatePromises.push(useUpdateTimeSlot(itemId, 0));
+                            console.log("Item Updated");
+                        });
+
+                        // Wait for all update promises to complete
+                        await Promise.all(updatePromises);
+
+                        console.log("Items Updated");
+                    }
                 } else {
                     console.error('Email sending failed');
                 }

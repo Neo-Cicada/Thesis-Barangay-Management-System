@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { MyFacilityContext } from './FacilityDialog';
 import useRead from '../../../hooks/useRead'
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-export function Box({ name, isSelected, onSelect }) {
+export function Box({ name, isSelected, onSelect, itemId, slots }) {
   const boxStyle = {
     height: '5em',
     textAlign: 'center',
@@ -14,7 +14,7 @@ export function Box({ name, isSelected, onSelect }) {
   return (
     <div
       style={boxStyle}
-      onClick={() => onSelect(name)}
+      onClick={() => onSelect(name, itemId, slots)}
     >
       <p style={{ fontSize: '1em' }}>{name}</p>
     </div>
@@ -34,14 +34,30 @@ export default function FacilitySelect() {
     setselectedFacility(updatedSelectedFacility);
   };
   const items = data.map(item => <Box
+    itemId={item.id}
+    slots={item.slots}
     name={item.type}
     isSelected={selectedFacility.some((facility) => facility.name === String(item.type))}
     onSelect={handleBoxSelect}
   />)
+  function formatTimeToAmPm(militaryTime) {
+    const timeParts = militaryTime.split(':');
+    let hours = parseInt(timeParts[0]);
+    const minutes = timeParts[1];
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+
+    if (hours > 12) {
+      hours -= 12;
+    } else if (hours === 0) {
+      hours = 12;
+    }
+
+    return `${hours}:${minutes} ${amPm}`;
+  }
   const options = data.map((item) => (
     item.slots.map((slot, index) => (
       <MenuItem key={index} value={`${slot.startTime} - ${slot.endTime}`}>
-        {`${slot.startTime} - ${slot.endTime}`}
+        {`${formatTimeToAmPm(slot.startTime)} - ${formatTimeToAmPm(slot.endTime)}`}
       </MenuItem>
     ))
   ));
@@ -51,15 +67,19 @@ export default function FacilitySelect() {
         {items}
       </div>
       <p style={{ textAlign: 'center' }}>Selected Facility</p>
-      <div className='selected-certificates-dialog' style={{height: '4em'}}>
+      <div className='selected-certificates-dialog' style={{ height: '8em', display:'flex',
+       flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
         {selectedFacility.map((facility, index) => (
-          <div style={{ textAlign: 'center', display: 'flex',
-          borderBottom: '1px solid black', alignItems: 'center', gap: '1em', justifyContent: 'center' }} key={index}>
-            <div >{facility.name}</div>
-            <FormControl style={{width: "50%"}}>
+          <div style={{
+            textAlign: 'center', display: 'flex',
+            width:'100%',
+            borderBottom: '1px solid black', alignItems: 'center', gap: '2em', justifyContent: 'center',
+          }} key={index}>
+            <div style={{width: '50%'}} >{facility.name}</div>
+            <FormControl style={{ width: "50%" }}>
               <InputLabel >Available Time</InputLabel>
               <Select
-              size='small'
+                size='small'
                 label={"Available Time"}
                 value={facility.slot || ''} // Use the facility's slot value
                 onChange={(e) => handleOptionSelect(facility.name, e.target.value)}
@@ -67,10 +87,13 @@ export default function FacilitySelect() {
                 <MenuItem value="" disabled>
                   Select Time Slot
                 </MenuItem>
-                {/* Populate these options with your time slot data */}
-                {options}
-                {/* Add more time slot options as needed */}
-                </Select>
+                {/* {options} */}
+                {facility.slots.map((slot, index) => (
+                  <MenuItem key={index} value={`${slot.startTime} - ${slot.endTime}`}>
+                    {`${formatTimeToAmPm(slot.startTime)} - ${formatTimeToAmPm(slot.endTime)}`}
+                  </MenuItem>
+                ))}
+              </Select>
             </FormControl>
           </div>
         ))}
