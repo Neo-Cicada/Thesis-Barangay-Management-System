@@ -102,6 +102,7 @@ admin.initializeApp({
     "universe_domain": "googleapis.com"
   })
 });
+
 app.get('/api/listUsers', async (req, res) => {
   try {
     const listUsersResult = await admin.auth().listUsers();
@@ -140,6 +141,7 @@ app.delete('/api/deleteUser/:uid', async (req, res) => {
 
     res.json({ message: 'User deleted successfully' });
   } catch (error) {
+    console.error(error.response.data);
     res.status(500).json({ error: 'Error deleting user' });
   }
 });

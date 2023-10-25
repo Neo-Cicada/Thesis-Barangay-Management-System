@@ -68,7 +68,7 @@ export default function ProfileInformation() {
         sx={{ width: 200 }}
       />
       <Box sx={{ width: 200 }}>
-        <Button variant='outlined' onClick={onUpdateProfile}>Save</Button>
+        <Button variant='outlined' style={{backgroundColor:'rgb(59, 89, 152)'}} onClick={onUpdateProfile}>Save</Button>
       </Box>
     </Box>
   )

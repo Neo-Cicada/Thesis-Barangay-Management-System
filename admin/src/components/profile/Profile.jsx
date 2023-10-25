@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './profile.css'
-import { Container } from '@mui/material'
+import { Button, Container } from '@mui/material'
 import DashboardBox from '../DashboardBox'
 import EditIcon from '@mui/icons-material/Edit';
 import ChecklistIcon from '@mui/icons-material/Checklist'
@@ -9,6 +9,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ProfileNavigation from './ProfileNavigation';
 import CreateAdmin from './CreateAdmin'
 import UpdateProfile from './UpdateProfile';
+import ConfirmationDialog from '../ConfirmationDialog'
+import RedToast from '../RedToast';
 const auth = getAuth();
 
 function Profile() {
@@ -17,7 +19,18 @@ function Profile() {
   const [status, setStatus] = useState('default')
   const [currentUser, setCurrentUser] = useState('')
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [updateUser, setUpdateUser] = useState()
+  const [updateUser, setUpdateUser] = useState();
+  const [confirm, setConfirm] = useState(false)
+  const [refresh, setRefresh] = useState(false)
+  const [deleteUser, setDeleteUser] = useState(false)
+  const [refreshList, setRefershList] = useState(false)
+  useEffect(() => {
+    if (deleteUser) {
+      handleDeleteUser(updateUser)
+      setDeleteUser(false);
+
+    }
+  }, [deleteUser]);// The effect depends on the deleteUser state
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -41,17 +54,20 @@ function Profile() {
       .catch(error => {
         console.error('Error fetching user data:', error);
       });
-  }, []);
+  }, [refresh]);
 
 
   const handleDeleteUser = (uid) => {
     axios.delete(`http://localhost:3001/api/deleteUser/${uid}`)
       .then(response => {
-        // Handle the response, e.g., show a success message
         console.log(response.data);
+        setConfirm(false);
+        setRefresh(true)
+
       })
       .catch(error => {
         console.error('Error deleting user:', error);
+
       });
   };
 
@@ -98,25 +114,41 @@ function Profile() {
                 <p style={{ fontWeight: 500, fontSize: '1.2rem' }}> {user.email}</p>
                 <div className='list-action'>
                   {(currentUser === user.email) && (
-                    <div style={{ display: 'flex', gap: '2px', cursor: 'pointer' }}
+                    <div style={{
+                      display: 'flex', gap: '2px',
+                      cursor: 'pointer',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
                       onClick={() => { setIsUpdateOpen(true), setUpdateUser(user.uid) }}>
-                      <EditIcon color="info" /> <span>Update</span></div>
+                      <EditIcon color="info" /> <span>Update Password</span></div>
                   )}
 
                   {
-                    currentUser === "test@gmail.com" &&
-                    <button onClick={() => handleDeleteUser(user.uid)}>Delete</button>
+                    currentUser === "lordneobarnachea@gmail.com" &&
+                    <Button variant='contained' color='error' style={{ color: "#FFFFFF", fontWeight: 'bold' }}
+                      onClick={() => { setConfirm(true), setUpdateUser(user.uid) }}>Delete</Button>
 
                   }
+                  <ConfirmationDialog open={confirm}
+                    onClose={() => setConfirm(false)}
+                    onConfirm={() => setDeleteUser(true)}
+                    title={"Confirm Admin Deletion"}
+                    message={"Are you absolutely sure you wish to delete this admin account?"} />
                 </div>
 
               </li>
             ))
           )}
         </ul>}
-        {status === "second" && currentUser === "test@gmail.com" && <CreateAdmin />}
+        {status === "second" && currentUser === "lordneobarnachea@gmail.com" && <CreateAdmin />}
       </Container>
-      <UpdateProfile open={isUpdateOpen} onClose={() => setIsUpdateOpen(false)} user={updateUser} />
+      <RedToast open={refresh}
+        onClose={() => setRefresh(false)} type='success'
+        content='Successfully deleted!' />
+      <UpdateProfile open={isUpdateOpen}
+        onClose={() => setIsUpdateOpen(false)}
+        user={updateUser} />
     </>
   );
 }

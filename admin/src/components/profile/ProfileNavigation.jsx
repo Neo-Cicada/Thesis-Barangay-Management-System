@@ -32,7 +32,7 @@ export default function ProfileNavigation({ setStatus, status, currentUser }) {
 
                 >
                     Profile Information</button>
-                {currentUser === "test@gmail.com" && <button
+                {currentUser === "lordneobarnachea@gmail.com" && <button
                     style={status === 'second' ? activeBtn : btnStyle}
                     onClick={() => setStatus("second")}>Manage Admins</button>}
 
