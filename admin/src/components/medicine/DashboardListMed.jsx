@@ -10,6 +10,7 @@ import MedicineViewInformation from './MedicineViewInformation'
 import sendSmsFunction from '../../functions/sendSmsFunction';
 import sendEmailFunction from '../../functions/sendEmailFunction';
 import useUpdateItem from '../../hooks/useUpdateItem';
+
 export default function DashboardList({
   first,
   second,
@@ -31,7 +32,8 @@ export default function DashboardList({
       const success = await sendEmailFunction(item.email,
         'Medicine Request Status',
         'Your request has been accepted; please proceed to the barangay hall to claim your medicines.');
-      if (success) {
+      const smsSuccess = await sendSmsFunction(item.phoneNumber, "'Your request has been accepted; please proceed to the barangay hall to claim your medicines.'")
+      if (success || smsSuccess) {
         console.log('Email sent successfully')
       } else {
         console.error('Email sending failed');
@@ -56,7 +58,9 @@ export default function DashboardList({
         const success = await sendEmailFunction(item.email,
           'Medicine Request Status',
           'You have claimed your requested medicines. Please provide a feedback by emailing us at amamperez@858gmail.com');
-        if (success) {
+        const smsSuccess = await sendSmsFunction(item.phoneNumber,
+          'You have claimed your requested medicines. Please provide a feedback by emailing us at amamperez@858gmail.com')
+        if (success || smsSuccess) {
           console.log("Email sent")
           const selectedEquipments = item.selectedMedicines; // Access the snapshot data
 
@@ -102,7 +106,10 @@ export default function DashboardList({
         const success = await sendEmailFunction(item.email,
           'Medicine Request Status',
           'Your request has been declined. If you have question email us at amamperez858@gmail.com');
-        if (success) {
+        const smsSuccess = await sendSmsFunction(
+          item.phoneNumber,
+          'Your request has been declined. If you have question email us at amamperez858@gmail.com')
+        if (success || smsSuccess) {
           console.log('Email sent successfully');
         } else {
           console.error('Email sending failed');

@@ -4,14 +4,17 @@ import ComplainSummary from './ComplainSummary';
 import { Checkbox, RadioButton, Button, TextInput } from 'react-native-paper';
 import { myComplainContext } from './Complain';
 import useUpload from '../../../hooks/useUpload'
+import Agreement from '../../Agreement';
+
 function ComplainForm() {
+    const [isAgreementOpen, setIsAgreementOpen] = useState(false)
     const [reportType, setReportType] = useState('anonymous');
     const [modalVisible, setModalVisible] = useState(false);
     const [showCondition, setShowCondition] = useState(false);
     const [radio, setRadio] = useState('second')
     const [summon, setSummon] = useState(false)
     const [checkBox, setCheckBox,] = useState(false)
-    const { details, setDetails, setSelectReportDalog,handleSubmit} = useContext(myComplainContext)
+    const { details, setDetails, setSelectReportDalog, handleSubmit } = useContext(myComplainContext)
     const handleRadioChange = (value) => {
         setReportType(value);
     };
@@ -128,7 +131,7 @@ function ComplainForm() {
                 }}>
                     <View>
                         <Checkbox.Item
-                            onPress={() => setCheckBox(!checkBox)}
+                            onPress={() => { setCheckBox(!checkBox), setIsAgreementOpen(true) }}
                             label="Agree to the Terms and Conditions"
                             status={checkBox ? 'checked' : 'unchecked'} />
                     </View>
@@ -145,6 +148,8 @@ function ComplainForm() {
             <ComplainSummary
                 modalVisible={modalVisible}
                 onDismiss={() => setModalVisible(false)} />
+            <Agreement modalVisible={isAgreementOpen} onDismiss={() => setIsAgreementOpen(false)} />
+
         </>
     );
 }

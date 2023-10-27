@@ -8,6 +8,7 @@ import RedToast from '../RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CertificateViewInformation from './CertificateViewInformation';
 import sendEmailFunction from '../../functions/sendEmailFunction';
+import sendSmsFunction from '../../functions/sendSmsFunction';
 export default function DashboardList({
   first,
   second,
@@ -24,8 +25,9 @@ export default function DashboardList({
     setIsGreenOpen(true)
     await useStatusUpdate(path, item.id, 'ongoing').then(async () => {
       const success = await sendEmailFunction(item.email, 'Document Request Status',
-        'Your document is now ready for pickup at our Barangay Hall.');
-      if (success) {
+        'Your document is now ready for pickup in Barangay Hall');
+      const smsSuccess = await sendSmsFunction(item.phoneNumber, 'Your document is now ready for pickup in Barangay Hall')
+      if (success || smsSuccess) {
         console.log('Email sent successfully');
       } else {
         console.error('Email sending failed');
@@ -47,7 +49,10 @@ export default function DashboardList({
       const success = await sendEmailFunction(item.email, 'Equipment Request Status',
         'Your request has been fulfilled. Please give us feedback at amamperez858@gmail.com.'
       );
-      if (success) {
+      const smsSuccess = await sendSmsFunction(item.phoneNumber,
+        'Your request has been fulfilled. Please give us feedback at amamperez858@gmail.com.')
+
+      if (success || smsSuccess) {
         console.log('Email sent successfully');
       } else {
         console.error('Email sending failed');
@@ -67,9 +72,9 @@ export default function DashboardList({
     setIsRedOpen(true)
     await useStatusUpdate(path, item.id, 'rejected').then(async () => {
       const success = await sendEmailFunction(item.email, 'Document Request Status',
-        'Your request has been rejected. If you have any questions, please email us at amamperez858@gmail.com.'
-
-      );
+        'Your request has been rejected. If you have any questions, please email us at amamperez858@gmail.com.');
+      const smsSuccess = await sendSmsFunction(item.phoneNumber,
+        'Your request has been rejected. If you have any questions, please email us at amamperez858@gmail.com.')
       if (success) {
         console.log('Email sent successfully');
       } else {
@@ -121,8 +126,8 @@ export default function DashboardList({
       </tr>
 
       <GreenToast delay={isGreenOpen} onClose={() => setIsGreenOpen(false)} />
-      <RedToast open={isGreenOpen} onClose={() => setIsGreenOpen(false)} type='success' content='Request Accepted!'/>
-      <RedToast open={isRedOpen} onClose={() => setIsRedOpen(false)} content='Request Rejected'/>
+      <RedToast open={isGreenOpen} onClose={() => setIsGreenOpen(false)} type='success' content='Request Accepted!' />
+      <RedToast open={isRedOpen} onClose={() => setIsRedOpen(false)} content='Request Rejected' />
       <CertificateViewInformation
         open={showInformation}
         item={item}

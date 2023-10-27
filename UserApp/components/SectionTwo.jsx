@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, Image, FlatList, ScrollView } from 'react-native';
 import useRead from '../hooks/useRead';
+import useRecent from '../hooks/useRecent';
 export default function SectionTwo() {
   const [data, setData] = useState([])
   const screenWidth = Dimensions.get('window').width;

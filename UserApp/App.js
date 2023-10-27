@@ -92,7 +92,7 @@ export default function App() {
               component={Facility} />
             <Stack.Screen
               name="Enrollment"
-              options={{ title: "Enrollmnt Form" }}
+              options={{ title: "Enrollment Form" }}
               component={Enrollment} />
             <Stack.Screen
               options={{ title: "Complain Form" }}

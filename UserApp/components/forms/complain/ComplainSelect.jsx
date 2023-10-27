@@ -1,14 +1,15 @@
-import React, {useContext} from 'react'
-import {View, FlatList, Text} from 'react-native'
+import React, { useContext } from 'react'
+import { View, FlatList, Text } from 'react-native'
 import { TextInput } from 'react-native-paper'
 import Box from '../medicines/Box'
 import { myComplainContext } from './Complain'
 export default function ComplainSelect() {
-    const violations = ['Drunk', 'Vandalism', 'Others', 'Drugs', 'Violence',]
-    const {handleBoxSelect, selectedReport,handleReport} = useContext(myComplainContext)
+    const violations = ["Violence", "Vandalism", "Infidelity", "Physical Abuse", "Verbal Abuse",
+        "Scam", "Money Related", "Land Grabbing", "Drug Related", "Others"]
+    const { handleBoxSelect, selectedReport, handleReport } = useContext(myComplainContext)
     return (
         <>
-            <View style={{  flex: 0.9 }}>
+            <View style={{ flex: 0.9 }}>
                 <Text style={{
                     textAlign: 'center',
                     fontSize: 25, fontWeight: 'bold'
