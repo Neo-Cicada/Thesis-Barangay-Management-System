@@ -15,7 +15,7 @@ export function Box({ name, isSelected, onSelect, quantity, itemId }) {
   return (
     <div
       style={boxStyle}
-      onClick={() => onSelect(name, "", itemId)}
+      onClick={() => onSelect(name, "", itemId, quantity)}
     >
       <p style={{ fontSize: '1em' }}>{name}</p>
       <p style={{ fontSize: '1em' }}> {quantity}</p>

@@ -7,6 +7,7 @@ import useUpload from '../../../hooks/useUpload';
 export const MyEquipmentContext = createContext();
 export default function EquipmentDialog({ open, handleClose }) {
   const [agreement, setAgreement] = useState(true)
+  const [counterCondition, setCounterCondition] = useState()
   const [selectedEquipment, setSelectedEquipment] = useState([])
   const [proceed, setProceed] = useState(false)
   const [details, setDetails] = useState({
@@ -26,7 +27,7 @@ export default function EquipmentDialog({ open, handleClose }) {
   const isDetailsFilled = Object.values(details).every((value) => Boolean(value));
 
 
-  const handleBoxSelect = (name, count, itemId) => {
+  const handleBoxSelect = (name, count, itemId, maxCount) => {
     const index = selectedEquipment.findIndex((item) => item.name === name);
 
     if (index !== -1) {
@@ -43,7 +44,7 @@ export default function EquipmentDialog({ open, handleClose }) {
       }
     } else {
       // If not selected, select it with a count of 1
-      setSelectedEquipment([...selectedEquipment, { name: name, count: 1, itemId: itemId }]);
+      setSelectedEquipment([...selectedEquipment, { name: name, count: 1, itemId: itemId, maxCount: maxCount }]);
     }
   };
   return (
@@ -56,6 +57,7 @@ export default function EquipmentDialog({ open, handleClose }) {
         setAgreement,
         setDetails,
         handleBoxSelect,
+        setCounterCondition
       }}>
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>Available Equipment</DialogTitle>
@@ -70,8 +72,9 @@ export default function EquipmentDialog({ open, handleClose }) {
                 variant="contained" onClick={handleClose}>Close</Button>}
             {!proceed &&
 
-              <Button style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
-                variant="contained" onClick={() => setProceed(!proceed)}>Next</Button>}
+              <Button disabled={counterCondition} style={{ backgroundColor: counterCondition ? 'red' : '#3B5998',
+               color: 'white', fontWeight: 'bold' }}
+                variant="contained" onClick={() => setProceed(!proceed)}>{counterCondition ? 'Disabled' : "Next"}</Button>}
           </DialogActions>
         </Dialog>
       </MyEquipmentContext.Provider>

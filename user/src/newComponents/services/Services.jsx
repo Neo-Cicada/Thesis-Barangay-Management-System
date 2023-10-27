@@ -7,6 +7,7 @@ import CertificateIcon from '../../assets/certificate.svg';
 import EnrollmentIcon from '../../assets/enrollment.svg';
 import ReportIcon from '../../assets/report.svg';
 import Equipment from '../../assets/equipment.svg';
+import Garbage from '../../assets/garbage.svg'
 import MedicineDialogForm from '../newForms/med/MedicineDialogForm';
 import CertificateDialog from '../newForms/cert/CertificateDialog';
 import EnrollmentDialog from '../newForms/enroll/EnrollmentDialog'
@@ -61,6 +62,11 @@ export default function Services() {
           <ServiceBox
             title={'Equipment'}
             image={Equipment}
+            handleOpen={() => setIsEquipmentOpen(true)}
+          />
+          <ServiceBox
+            title={'Garbage Collection'}
+            image={Garbage}
             handleOpen={() => setIsEquipmentOpen(true)}
           />
         </div>
