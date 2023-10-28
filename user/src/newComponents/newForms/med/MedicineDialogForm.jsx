@@ -7,6 +7,9 @@ import MedForm from './MedForm';
 import useUpload from '../../../hooks/useUpload'
 export const MyContext = createContext();
 export default function MedicineDialogForm({ open, handleClose }) {
+  const [counterCondition, setCounterCondition] = useState()
+  const [counter, setCounter] = useState(1)
+  const [maxCount, setMaxCount] = useState();
   const [selectedMedicines, setSelectedMedicines] = useState([]);
   const [agreement, setAgreement] = useState(true)
   const [details, setDetails] = useState({
@@ -26,7 +29,7 @@ export default function MedicineDialogForm({ open, handleClose }) {
       selectedMedicines: selectedMedicines,
     }));
   }, [selectedMedicines]);
-  const handleBoxSelect = (name, count, itemId) => {
+  const handleBoxSelect = (name, count, itemId, maxCount) => {
     const index = selectedMedicines.findIndex((item) => item.name === name);
 
     if (index !== -1) {
@@ -43,13 +46,19 @@ export default function MedicineDialogForm({ open, handleClose }) {
       }
     } else {
       // If not selected, select it with a count of 1
-      setSelectedMedicines([...selectedMedicines, { name: name, count: 1, itemId: itemId }]);
+      setSelectedMedicines([...selectedMedicines, {
+        name: name,
+        count: 1,
+        itemId: itemId,
+        maxCount: maxCount
+      }]);
     }
   };
   return (
     <MyContext.Provider value={{
       selectedMedicines, setSelectedMedicines,
-       setDetails, details, setAgreement, agreement
+      setDetails, details, setAgreement, agreement, setCounterCondition,
+      counter, setCounter, maxCount, setMaxCount
     }}>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle style={{ textAlign: 'center', borderBottom: '2px dashed grey' }}>
@@ -78,11 +87,12 @@ export default function MedicineDialogForm({ open, handleClose }) {
               Close</Button>}
           {!proceed &&
 
-            <Button
-              style={{ backgroundColor: '#3B5998' }}
+            <Button disabled={counterCondition} style={{
+              backgroundColor: counterCondition ? 'red' : '#3B5998',
+              color: 'white', fontWeight: 'bold'
+            }}
               variant="contained"
-              onClick={() => setProceed(!proceed)}>
-              Next</Button>}
+              onClick={() => setProceed(!proceed)}>{counterCondition ? 'Disabled' : "Next"}</Button>}
         </DialogActions>
       </Dialog>
     </MyContext.Provider>

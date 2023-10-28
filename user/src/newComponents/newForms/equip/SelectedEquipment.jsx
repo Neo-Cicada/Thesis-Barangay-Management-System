@@ -9,15 +9,16 @@ export default function SelectedEquipment({ equipment, key, }) {
   const { selectedEquipment, setSelectedEquipment, setCounterCondition } = useContext(MyEquipmentContext)
   const [counter, setCounter] = useState(1)
   const [maxCount, setMaxCount] = useState();
-  console.log(maxCount)
 
-  useEffect(()=>{
-    if(counter > maxCount){
+  const allItemsValid = selectedEquipment.every(item => parseInt(item.maxCount) > parseInt(item.count));
+
+  useEffect(() => {
+    if (!allItemsValid) {
       setCounterCondition(true)
-    }else{
+    } else {
       setCounterCondition(false)
     }
-  },[counter] )
+  }, [counter])
   const handleIncrement = () => {
 
     const updatedSelectedEquipment = selectedEquipment.map((item) => {
@@ -47,8 +48,8 @@ export default function SelectedEquipment({ equipment, key, }) {
   return (
     <div className='selected-medicine' key={key} style={{
       borderBottom: '1px solid black',
-      display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop : '1em'
-      
+      display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1em'
+
     }}>
       <IconButton onClick={handleDecrement} aria-label="Decrement">
         <RemoveIcon />
