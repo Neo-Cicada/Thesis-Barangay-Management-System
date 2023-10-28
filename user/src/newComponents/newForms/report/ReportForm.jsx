@@ -41,26 +41,59 @@ const Summary = ({ open, onClose }) => {
   );
 };
 export default function ReportForm() {
-  const { details, setDetails, setSelectReportDalog } = useContext(MyReportContext)
+  const { details, setDetails, setSelectReportDalog, selectedReport, handleFileUpload } = useContext(MyReportContext)
   const [reportType, setReportType] = useState('anonymous');
   const [showSummary, setShowSummary] = useState(false);
   const [showCondition, setShowCondition] = useState(false);
   const [agreement, setAgreement] = useState(false)
   const [openSnack, setOpenSnack] = useState(false)
+  const [submit, setSubmit] = useState(false)
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await useUpload(details, 'ReportRequest')
-    setSelectReportDalog([])
-    setDetails({
-      fullname: '',
-      email: '',
-      phoneNumber: '',
-      selectedReport: [],
-      summon: false,
-      status: 'request'
-    });
-    setOpenSnack(true)
-  }
+    e.preventDefault();
+
+    try {
+      // Step 1: Upload files for each report and get their URLs
+      const updatedSelectedReport = await Promise.all(
+        selectedReport.map(async (report) => {
+          if (report.file) {
+            const downloadURL = await handleFileUpload(report.file);
+            if (downloadURL) {
+              return { ...report, imagePath: downloadURL, file: '' };
+            }
+          }
+          return report;
+        })
+      );
+
+      // Step 2: Update selectedReport with the file paths
+      setSelectReportDalog(updatedSelectedReport);
+      setDetails({ ...details, selectedReport: updatedSelectedReport });
+      setSubmit(true);
+    } catch (error) {
+      console.error('Error during file upload:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (submit) {
+      useUpload(details, 'ReportRequest');
+      console.log(selectedReport)
+      setSelectReportDalog([]);
+      setDetails({
+        fullname: '',
+        email: '',
+        phoneNumber: '',
+        selectedReport: [],
+        summon: false,
+        status: 'request',
+      });
+      console.log('Updated selectedReport:', selectedReport);
+      setSubmit(false)
+      setOpenSnack(true)
+
+    }
+  }, [submit, selectedReport]);
+
   useEffect(() => {
     if (reportType === 'anonymous') {
       // Clear the values when reportType is 'anonymous'
@@ -186,7 +219,7 @@ export default function ReportForm() {
         >
           {agreement ? 'Disabled' : 'Submit'}</Button>
       </form>
-      <SnackBar open={openSnack} handleCLose={()=>setOpenSnack(false)}/>
+      <SnackBar open={openSnack} handleCLose={() => setOpenSnack(false)} />
       {showCondition && <TermsAndCondition open={showCondition} onClose={() => setShowCondition(false)} />}
       {showSummary && <Summary open={showSummary} onClose={() => setShowSummary(false)} />}
     </div>

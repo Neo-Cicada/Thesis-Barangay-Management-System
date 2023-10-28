@@ -42,6 +42,16 @@ export default function ReportSelect() {
     });
     setSelectReportDalog(updatedSelectedReport);
   };
+  const handleFileReport = (reportName, file) => {
+    const updatedSelectedReport = selectedReport.map((item) => {
+      if (item.name === reportName) {
+        return { ...item, file: file };
+      }
+      return item;
+    });
+    setSelectReportDalog(updatedSelectedReport);
+  };
+  console.log(selectedReport)
   return (
     <>
       <h2 style={{ textAlign: 'center' }}>Common Issues</h2>
@@ -62,10 +72,21 @@ export default function ReportSelect() {
                 value={report.person}
                 onChange={(e) => handleReport(report.name, e.target.value)}
                 type="text"
-                label="Enter person name"
+                label="Enter name"
                 id={`report-input-${index}`}
                 aria-label="who"
-                placeholder="Enter person's name"
+                placeholder="Enter name"
+
+              />
+              <TextField
+                type='file'
+                size='small'
+                sx={{ width: "50%" }}
+                label="Person Identification"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={(e) => handleFileReport(report.name, e.target.files[0])}
               />
             </div>
           </div>
