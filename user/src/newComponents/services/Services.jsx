@@ -15,6 +15,7 @@ import FacilityDialog from '../newForms/faci/FacilityDialog'
 import ReportDialog from '../newForms/report/ReportDialog'
 import EquipmentDialog from '../newForms/equip/EquipmentDialog';
 import { Container } from '@mui/material';
+import GarbageDialog from '../newForms/garbage/GarbageDialog';
 export default function Services() {
   const [isMedicineOpen, setIsMedicineOpen] = useState(false); // Initialize to false
   const [isCertificateOpen, setIsCertificateOpen] = useState(false);
@@ -22,6 +23,7 @@ export default function Services() {
   const [isFacilityOpen, setIsFacilityOpen] = useState(false)
   const [isReportOpen, setIsReportOpen] = useState(false)
   const [isEquipmentOpen, setIsEquipmentOpen] = useState(false)
+  const [isGarbageOpen, setIsGarbageOpen] = useState(false)
   const handleClose = () => {
     setIsMedicineOpen(false);
   };
@@ -67,7 +69,7 @@ export default function Services() {
           <ServiceBox
             title={'Garbage Collection'}
             image={Garbage}
-            handleOpen={() => setIsEquipmentOpen(true)}
+            handleOpen={() => setIsGarbageOpen(true)}
           />
         </div>
       </div>
@@ -91,6 +93,10 @@ export default function Services() {
       <ReportDialog
         open={isReportOpen}
         handleClose={() => setIsReportOpen(false)} />
+      <GarbageDialog
+        open={isGarbageOpen}
+        handleClose={()=> setIsGarbageOpen(false)}
+       />
     </>
   );
 }

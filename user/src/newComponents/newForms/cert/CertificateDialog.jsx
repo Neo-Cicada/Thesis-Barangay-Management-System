@@ -13,6 +13,8 @@ export default function CertificateDialog({ open, handleClose }) {
         fullname: '',
         email: '',
         phoneNumber: '',
+        mod: 'Pickup',
+        address:"",
         status: 'request',
         selectedCertificates: [...selectedCertificates] // spread the array elements
     });

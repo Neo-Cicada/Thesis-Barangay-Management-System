@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   TextField, Box, FormControlLabel, Checkbox, Dialog, Button, DialogContent,
-  FormControl, InputLabel, Select, MenuItem
+  FormControl, InputLabel, Select, MenuItem, RadioGroup, FormLabel, Radio
 } from '@mui/material';
 import Agreement from '../../../components/dialogs/Agreement';
 import { MyCertContext } from './CertificateDialog';
@@ -11,7 +11,7 @@ import SnackBar from '../../SnackBar'
 function TermsAndCondition({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose}>
-      {/* Inner Dialog content */}
+      {/* Innerx Dialog content */}
       <div>
         <Agreement />
         <Button onClick={onClose} color="primary">
@@ -28,6 +28,17 @@ export default function CertForm() {
   const [showSummary, setShowSummary] = useState(false)
   const [agreement, setAgreement] = useState(false)
   const [openSnack, setOpenSnack] = useState(false)
+  const totalQuantity = details.selectedCertificates.reduce((total, item) => total + parseInt(item.quantity, 10), 0);
+
+  useEffect(()=>{
+    if(totalQuantity&&details.mod === "Delivery"){
+      setDetails({ ...details, total: (parseInt(totalQuantity, 10) + 50).toString() });
+    }else{
+      setDetails({...details, total: totalQuantity})
+
+    }
+  },[details.mod])
+  console.log(details)
   const handleOpenAgreement = () => {
     setShowAgreement(true);
   };
@@ -64,6 +75,7 @@ export default function CertForm() {
       fullname: '',
       email: '',
       phoneNumber: '',
+      address: "",
       selectedCertificates: []
     })
     setOpenSnack(true)
@@ -81,6 +93,17 @@ export default function CertForm() {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
+          <FormControl>
+            <FormLabel sx={{ textAlign: 'center' }}>Mode of collection</FormLabel>
+            <RadioGroup
+              defaultValue={"Pickup"}
+              value={details.mod}
+              onChange={(e) => setDetails({ ...details, mod: e.target.value })}
+              row>
+              <FormControlLabel value="Delivery" control={<Radio />} label="Delivery" />
+              <FormControlLabel value="Pickup" control={<Radio />} label="Pickup" />
+            </RadioGroup>
+          </FormControl>
           <TextField
             required
             fullWidth
@@ -103,7 +126,8 @@ export default function CertForm() {
               }
             }}
             error={!/^09/.test(details.phoneNumber) && details.phoneNumber !== ''}
-            helperText={/^09/.test(details.phoneNumber) && details.phoneNumber !== '' ? "Required" : "Phone number must start with '09'"}
+            helperText={/^09/.test(details.phoneNumber) && details.phoneNumber !== '' ?
+              "Required" : "Phone number must start with '09'"}
           />
           <TextField
             helperText="Optional"
@@ -113,7 +137,17 @@ export default function CertForm() {
             value={details.email}
             onChange={(e) => setDetails({ ...details, email: e.target.value })}
           />
-          <Box sx={{
+          {details.mod === "Delivery" &&
+
+            <TextField
+              fullWidth
+              helperText="Required"
+              label="Delivery Address"
+              onChange={(e) => setDetails({ ...details, address: e.target.value })}
+            />}
+          <h3>
+            Total: {details.mod === "Delivery" ? totalQuantity + 50 + "pesos delivery fee included" : totalQuantity}
+          </h3>          <Box sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -144,7 +178,7 @@ export default function CertForm() {
         >
           {agreement ? 'Disabled' : 'Submit'}</Button>
       </form>
-      <SnackBar open={openSnack} handleCLose={()=>setOpenSnack(false)}/>
+      <SnackBar open={openSnack} handleCLose={() => setOpenSnack(false)} />
       <TermsAndCondition open={showAgreement} onClose={handleCloseAgreement} />
       <Summary open={showSummary} onClose={() => setShowSummary(false)} />
     </>
