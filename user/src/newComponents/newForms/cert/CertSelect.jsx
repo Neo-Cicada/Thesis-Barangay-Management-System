@@ -74,39 +74,19 @@ export default function CertSelect() {
                 {selectedCertificates.map((certificate, index) => (
                     <div
                         style={{
-                            border:'1px solid gray',
-                            display:'flex',
-                            flexDirection:'column',
-                            alignItems:'center', gap: '1em'
+                            border: '1px solid gray',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center', gap: '1em'
 
                         }}
                         key={index}
                     >
-                        <div style={{fontSize: '1.1rem'}}>{certificate.name}</div>
+                        <div style={{ fontSize: '1.1rem' }}>{certificate.name}</div>
 
-                        <div style={{ width: '40%' }}>
-                            <FormControl fullWidth size='small'>
-                                <InputLabel id={`paymentMethod-label-${index}`}>Payment Method</InputLabel>
-                                <Select
-                                    value={certificate.mop}
-                                    variant="standard"
-                                    size="small"
-                                    label="Payment Method"
-                                    id={`paymentMethod-${index}`}
-                                    onChange={(e) => handleMopSelect(certificate.name, e.target.value)}
-                                >
-                                    <MenuItem value={'CASH'}>Cash</MenuItem>
-                                    <MenuItem value={'GCASH'}>GCASH</MenuItem>
-                                </Select>
-                            </FormControl>
-                            {certificate.mop === "GCASH" && 
-                            <div style={{textAlign:'center'}}>Please make a payment using Gcash to the account number 09084590726.</div>}
+                        <div>Cost: <b style={{fontWeight:"bold"}}>{certificate.quantity}</b> </div>
 
-                        </div>
-
-                        <div>Cost: {certificate.quantity}</div>
-
-                        {certificate.mop === "GCASH" && (
+                        {/* {certificate.mop === "GCASH" && (
                             <TextField
                                 style={{ width: '40%' }}
                                 value={certificate.reference}
@@ -116,12 +96,12 @@ export default function CertSelect() {
                                 label="Reference"
                                 width="small"
                             />
-                        )}
+                        )} */}
                     </div>
                 ))}
 
 
-        </div >
+            </div >
         </>
     )
 }

@@ -1,22 +1,36 @@
-import { Dialog, DialogContent, DialogTitle } from '@mui/material'
-import React from 'react'
-
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
+import React, { useContext, createContext, useState, useEffect } from 'react'
+import GarbageForm from './GarbageForm'
+export const myGarbageContext = createContext();
 export default function GarbageDialog({ open, handleClose }) {
+    const [details, setDetails] = useState({
+        fullname: '',
+        email: '',
+        phoneNumber: '',
+        address: '',
+        mop:'Cash',
+        status: 'request',
+
+
+    })
     return (
         <>
-            <Dialog open={open} onClose={handleClose} fullWidth>
-                <DialogTitle sx={{
-                    textAlign: 'center',
-                    borderBottom: '2px dashed grey'
-                }}>Garbage Collection Form</DialogTitle>
-                <DialogContent>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt quidem, ab reprehenderit facilis voluptate temporibus tenetur corporis illo distinctio dolorum, ipsa perferendis deleniti debitis quas totam deserunt sit asperiores aspernatur.
-                    Aspernatur delectus enim iste nemo mollitia! Ipsum nesciunt doloribus laboriosam expedita perspiciatis molestias necessitatibus? Officia fuga perferendis neque eius, sunt tenetur quod! Eligendi veritatis accusamus nostrum saepe maxime, aut reprehenderit?
-                    Esse accusantium necessitatibus odit voluptate sunt? Fugiat nam incidunt autem eligendi illum, dignissimos officiis. Accusamus inventore in facere pariatur. Molestiae excepturi optio minus delectus. Impedit dignissimos molestias alias labore est.
-                    Officia ipsa, et amet corrupti quia esse itaque distinctio optio commodi quisquam magni, explicabo quae provident necessitatibus quasi molestias dicta voluptates enim. Cupiditate quasi velit, alias possimus tempora recusandae vitae.
-                    Suscipit, aut reprehenderit? In iusto modi exercitationem alias dolorum optio culpa voluptas deleniti accusamus quis laudantium laboriosam, nesciunt delectus ab illo aspernatur sapiente quisquam sint sed necessitatibus quia libero dolores!
-                </DialogContent>
-            </Dialog>
+            <myGarbageContext.Provider value={{details, setDetails}}>
+                <Dialog open={open} onClose={handleClose} fullWidth>
+                    <DialogTitle sx={{
+                        textAlign: 'center',
+                        borderBottom: '2px dashed grey'
+                    }}>Garbage Collection Registration Form</DialogTitle>
+                    <DialogContent>
+                        <GarbageForm />
+                    </DialogContent>
+                    <DialogActions sx={{ borderTop: '2px dashed gray' }}>
+                        <Button
+                            style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                            onClick={handleClose}>Close</Button>
+                    </DialogActions>
+                </Dialog>
+            </myGarbageContext.Provider>
         </>
     )
 }

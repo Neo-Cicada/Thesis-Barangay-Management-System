@@ -30,14 +30,13 @@ export default function CertForm() {
   const [openSnack, setOpenSnack] = useState(false)
   const totalQuantity = details.selectedCertificates.reduce((total, item) => total + parseInt(item.quantity, 10), 0);
 
-  useEffect(()=>{
-    if(totalQuantity&&details.mod === "Delivery"){
+  useEffect(() => {
+    if (totalQuantity && details.mod === "Delivery") {
       setDetails({ ...details, total: (parseInt(totalQuantity, 10) + 50).toString() });
-    }else{
-      setDetails({...details, total: totalQuantity})
-
+    } else {
+      setDetails({ ...details, total: totalQuantity })
     }
-  },[details.mod])
+  }, [details.mod])
   console.log(details)
   const handleOpenAgreement = () => {
     setShowAgreement(true);
@@ -76,6 +75,7 @@ export default function CertForm() {
       email: '',
       phoneNumber: '',
       address: "",
+      reference: "",
       selectedCertificates: []
     })
     setOpenSnack(true)
@@ -145,9 +145,29 @@ export default function CertForm() {
               label="Delivery Address"
               onChange={(e) => setDetails({ ...details, address: e.target.value })}
             />}
+          <FormControl>
+            <FormLabel sx={{ textAlign: 'center' }}>Mode of Payment</FormLabel>
+            <RadioGroup
+              defaultValue={"Cash"}
+              value={details.mop}
+              onChange={(e) => setDetails({ ...details, mop: e.target.value })}
+              row>
+              <FormControlLabel value="Cash" control={<Radio />} label="Cash" />
+              <FormControlLabel value="Gcash" control={<Radio />} label="Gcash" />
+            </RadioGroup>
+          </FormControl>
           <h3>
-            Total: {details.mod === "Delivery" ? totalQuantity + 50 + "pesos delivery fee included" : totalQuantity}
-          </h3>          <Box sx={{
+            Total: {details.mod === "Delivery" ? totalQuantity + 50 + "pesos delivery fee included" :
+              totalQuantity + "pesos"}
+          </h3>
+          {details.mop === "Gcash" &&
+            <TextField
+              fullWidth
+              onChange={(e) => setDetails({ ...details, reference: e.target.value })}
+              label="Gcash Reference" />
+
+          }
+          <Box sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

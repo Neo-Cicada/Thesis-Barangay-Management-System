@@ -14,7 +14,8 @@ export default function CertificateDialog({ open, handleClose }) {
         email: '',
         phoneNumber: '',
         mod: 'Pickup',
-        address:"",
+        address: "",
+        mop: "Cash",
         status: 'request',
         selectedCertificates: [...selectedCertificates] // spread the array elements
     });
@@ -67,8 +68,9 @@ export default function CertificateDialog({ open, handleClose }) {
                             > : <Button
                                 style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
                                 onClick={handleClose}>Close</Button>}
-                        {!proceed && <Button style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
-                            onClick={() => setProceed(true)}>Next</Button>}
+                        {!proceed &&
+                            <Button style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
+                                onClick={() => setProceed(true)}>Next</Button>}
                     </DialogActions>
                 </Dialog>
             </MyCertContext.Provider>

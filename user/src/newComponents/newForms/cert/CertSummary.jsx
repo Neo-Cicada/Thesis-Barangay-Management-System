@@ -26,7 +26,7 @@ export default function CertSummary() {
                         Selected Certificate</h2>
                     <div>
                         {details.selectedCertificates.map(item =>
-                            <p>name: {item.name} - {item.mop} {item.reference}{item.quantity}</p>
+                            <p>Name: {item.name} {item.quantity}</p>
                         )
                         }
                     </div>
