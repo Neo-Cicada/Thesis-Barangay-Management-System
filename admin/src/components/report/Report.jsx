@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Skeleton } from '@mui/material'
+import { Container, Skeleton, TextField, Box } from '@mui/material'
 import ChecklistIcon from '@mui/icons-material/Checklist'
 import DashboardBox from '../DashboardBox'
 import DashboardNavigation from '../DashboardNavigation'
+import SearchIcon from '@mui/icons-material/Search';
 import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
 import Loading from '../Loading'
@@ -12,6 +13,7 @@ export default function Report() {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState('default')
+  const [searchQuery, setSearchQuery] = useState("");
   useRead('ReportRequest', setData)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,6 +24,7 @@ export default function Report() {
   }, []);
   const items = data
     .filter(item => item.status === "request")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardListRep
       key={item.id}
@@ -109,6 +112,17 @@ export default function Report() {
 
       </Container>
       <DashRepNav setStatus={setStatus} status={status} />
+      <Container sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5em' }}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}> <TextField
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder='Search'
+            size='small' /> <SearchIcon fontSize='large' /> </Box>
+        <div>Filter by date</div>
+      </Container>
       {isLoading ? (
         <Loading />
 

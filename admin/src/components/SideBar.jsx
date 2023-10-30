@@ -58,7 +58,7 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; expor
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          <img src={One} height={'150%'} width={'1000%'}/>
+          <img src={One} height={'150%'} width={'1000%'} />
         </div>
         <ul className='sb-ul-list' >
           <li className='sb-list'>
@@ -170,6 +170,20 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; expor
             </Button>
           </li>
           <li className='sb-list'>
+            <Button to='garbage'
+              component={Link}
+              sx={status === "garbage" ? activeStyle : normalStyle}
+              onClick={() => setStatus("garbage")}
+            >
+              <div className='sidebar-logo'
+                style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
+                {status === "garbage" ?
+                  <LocalHospitalIcon fontSize="large" /> :
+                  <LocalHospitalOutlinedIcon fontSize="large" />}</div>
+              <div className='sidebar-btn-name' style={{ width: '70%', }}>Garbage</div>
+            </Button>
+          </li>
+          <li className='sb-list'>
             <Button
               to="profile"
               component={Link}
@@ -189,10 +203,10 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; expor
 
           >
             <div
-              style={{display:'flex', justifyContent:'center', alignItems:'center', color:'black'}}
+              style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'black' }}
               className='logout-btn'
               onClick={handleSignout}
-            ><ExitToAppOutlinedIcon/></div>
+            ><ExitToAppOutlinedIcon /></div>
           </li>
         </ul>
       </div>
