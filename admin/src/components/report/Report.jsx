@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Skeleton, TextField, Box } from '@mui/material'
+import { Container, Skeleton, TextField, MenuItem, Select, FormControl, InputLabel, Box } from '@mui/material'
 import ChecklistIcon from '@mui/icons-material/Checklist'
 import DashboardBox from '../DashboardBox'
 import DashboardNavigation from '../DashboardNavigation'
@@ -14,6 +14,8 @@ export default function Report() {
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState('default')
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState(null);
+
   useRead('ReportRequest', setData)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,9 +24,23 @@ export default function Report() {
 
     return () => clearTimeout(timer);
   }, []);
+
+
   const items = data
     .filter(item => item.status === "request")
     .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(item => {
+      if (selectedMonth !== null) {
+        if (!item.timestamp) {
+          return false; // Ignore items with no timestamp
+        }
+
+        const itemMonth = item.timestamp.toDate().getMonth(); // Get the month (0-11)
+        return itemMonth === selectedMonth;
+      }
+
+      return true; // No filtering if selectedMonth is null
+    })
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardListRep
       key={item.id}
@@ -39,6 +55,19 @@ export default function Report() {
     />)
   const ongoingItems = data
     .filter(item => item.status === "ongoing")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(item => {
+      if (selectedMonth !== null) {
+        if (!item.timestamp) {
+          return false; // Ignore items with no timestamp
+        }
+
+        const itemMonth = item.timestamp.toDate().getMonth(); // Get the month (0-11)
+        return itemMonth === selectedMonth;
+      }
+
+      return true; // No filtering if selectedMonth is null
+    })
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => (
       <DashboardListRep
@@ -55,6 +84,19 @@ export default function Report() {
     ));
   const acceptedItems = data
     .filter(item => item.status === "accepted")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(item => {
+      if (selectedMonth !== null) {
+        if (!item.timestamp) {
+          return false; // Ignore items with no timestamp
+        }
+
+        const itemMonth = item.timestamp.toDate().getMonth(); // Get the month (0-11)
+        return itemMonth === selectedMonth;
+      }
+
+      return true; // No filtering if selectedMonth is null
+    })
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardListRep
       key={item.id}
@@ -69,6 +111,19 @@ export default function Report() {
     />)
   const rejectedItems = data
     .filter(item => item.status === "rejected")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(item => {
+      if (selectedMonth !== null) {
+        if (!item.timestamp) {
+          return false; // Ignore items with no timestamp
+        }
+
+        const itemMonth = item.timestamp.toDate().getMonth(); // Get the month (0-11)
+        return itemMonth === selectedMonth;
+      }
+
+      return true; // No filtering if selectedMonth is null
+    })
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardListRep
       key={item.id}
@@ -121,7 +176,52 @@ export default function Report() {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder='Search'
             size='small' /> <SearchIcon fontSize='large' /> </Box>
-        <div>Filter by date</div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1em' }}>
+          <div style={{
+            borderRadius: '1em',
+            padding: '0px 5px 0px 5px',
+            background:'#DFE3EE',
+            color:"#3B5998",
+            fontWeight: 500,
+            cursor:'pointer'
+          }}>Complainants</div>
+          <div style={{
+            borderRadius: '1em',
+            padding: '0px 5px 0px 5px',
+            background:'#F5F5F5',
+            color:"black",
+            fontWeight: 500,
+            cursor:'pointer'
+
+          }}>Defendants</div>
+        </div>
+        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <FormControl fullWidth>
+            <InputLabel>Filter By Month</InputLabel>
+            <Select
+              fillWidth
+              size='small'
+              value={selectedMonth}
+              label="Filter By Month"
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              <MenuItem value={null}>None</MenuItem>
+              <MenuItem value={0}>January</MenuItem>
+              <MenuItem value={1}>Febuary</MenuItem>
+              <MenuItem value={2}>March</MenuItem>
+              <MenuItem value={3}>April</MenuItem>
+              <MenuItem value={4}>May</MenuItem>
+              <MenuItem value={5}>June</MenuItem>
+              <MenuItem value={6}>July</MenuItem>
+              <MenuItem value={7}>August</MenuItem>
+              <MenuItem value={8}>September</MenuItem>
+              <MenuItem value={9}>October</MenuItem>
+              <MenuItem value={10}>November</MenuItem>
+              <MenuItem value={11}>December</MenuItem>
+
+
+            </Select>
+          </FormControl></div>
       </Container>
       {isLoading ? (
         <Loading />
