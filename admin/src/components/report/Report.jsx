@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Skeleton, TextField, MenuItem, Select, FormControl, InputLabel, Box } from '@mui/material'
+import { Container, Skeleton, TextField, MenuItem, Select, FormControl, InputLabel, Box, Dialog, DialogTitle } from '@mui/material'
 import ChecklistIcon from '@mui/icons-material/Checklist'
 import DashboardBox from '../DashboardBox'
 import DashboardNavigation from '../DashboardNavigation'
@@ -10,6 +10,9 @@ import Loading from '../Loading'
 import DashboardListRep from './DashboardListRep'
 import DashRepNav from './DashRepNav'
 import FilterNav from './FilterNav'
+import Resolution from './Resolution'
+import CreateResolution from './CreateResolution'
+import UploadResolution from './UploadResolution'
 export default function Report() {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true);
@@ -17,6 +20,8 @@ export default function Report() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [who, setWho] = useState("complainants")
+  const [openResolution, setOpenResolution] = useState(false)
+  const [openUpload, setOpenUpload] = useState(false)
   useRead('ReportRequest', setData)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -197,11 +202,20 @@ export default function Report() {
       </Container>
       <DashRepNav setStatus={setStatus} status={status} />
       {/* Filter Nav here */}
-      {status === "fifth" ?
-        <Container sx={{display:'flex', justifyContent:'flex-end', gap:'1em'}}>
-          <div>UPLOAD RESOLUTION</div>
-          <div>CREATE RESOLUTION</div>
-        </Container> : <FilterNav
+      {status === "fifth"
+        ?
+        <Container sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1em' }}>
+          <div
+            style={{ cursor: 'pointer' }}
+            onClick={()=>setOpenUpload(true)}
+          >UPLOAD RESOLUTION</div>
+          <div
+            style={{ cursor: 'pointer' }}
+            onClick={()=>setOpenResolution(true)}
+          >CREATE RESOLUTION</div>
+        </Container>
+        :
+        <FilterNav
           setSearchQuery={setSearchQuery}
           setWho={setWho}
           who={who}
@@ -216,8 +230,11 @@ export default function Report() {
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
           {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
           {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
+          {status === "fifth" && <Resolution/>}
         </div>)}
 
+        <CreateResolution open={openResolution} handleClose={()=>setOpenResolution(false)}/>
+        <UploadResolution open={openUpload} handleClose={()=>setOpenUpload(false)}/>
     </div>
   )
 }
