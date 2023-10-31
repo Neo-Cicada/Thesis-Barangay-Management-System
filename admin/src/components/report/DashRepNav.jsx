@@ -37,8 +37,15 @@ export default function DashRepNav({ setStatus, status }) {
                 <button
                     style={status === 'fourth' ? activeBtn : btnStyle}
                     onClick={() => setStatus("fourth")}>Rejected</button>
+                <button
+                    style={status === 'fifth' ? activeBtn : btnStyle}
+                    onClick={() => setStatus("fifth")}>
+                    Resolutions</button>
 
-            </Container>
+
+
+
+            </Container >
         </>
     )
 }

@@ -9,13 +9,14 @@ import useRead from '../../hooks/useRead'
 import Loading from '../Loading'
 import DashboardListRep from './DashboardListRep'
 import DashRepNav from './DashRepNav'
+import FilterNav from './FilterNav'
 export default function Report() {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState('default')
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMonth, setSelectedMonth] = useState(null);
-
+  const [who, setWho] = useState("complainants")
   useRead('ReportRequest', setData)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,7 +29,14 @@ export default function Report() {
 
   const items = data
     .filter(item => item.status === "request")
-    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(item => {
+      if (who === "defendants") {
+        const persons = item.selectedReport.map(selectedItem => selectedItem.person.toLowerCase());
+        return !searchQuery || persons.some(person => person.includes(searchQuery.toLowerCase()));
+      } else {
+        return !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+    })
     .filter(item => {
       if (selectedMonth !== null) {
         if (!item.timestamp) {
@@ -45,7 +53,7 @@ export default function Report() {
     .map(item => <DashboardListRep
       key={item.id}
       item={item}
-      first={item.fullname}
+      first={who === "defendants" ? item.selectedReport.map(item => item.person) : item.fullname}
       second={item.email}
       third={item.phoneNumber}
       fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
@@ -55,7 +63,14 @@ export default function Report() {
     />)
   const ongoingItems = data
     .filter(item => item.status === "ongoing")
-    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(item => {
+      if (who === "defendants") {
+        const persons = item.selectedReport.map(selectedItem => selectedItem.person.toLowerCase());
+        return !searchQuery || persons.some(person => person.includes(searchQuery.toLowerCase()));
+      } else {
+        return !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+    })
     .filter(item => {
       if (selectedMonth !== null) {
         if (!item.timestamp) {
@@ -73,7 +88,7 @@ export default function Report() {
       <DashboardListRep
         key={item.id}
         item={item}
-        first={item.fullname}
+        first={who === "defendants" ? item.selectedReport.map(item => item.person) : item.fullname}
         second={item.email}
         third={item.phoneNumber}
         fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
@@ -84,7 +99,14 @@ export default function Report() {
     ));
   const acceptedItems = data
     .filter(item => item.status === "accepted")
-    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(item => {
+      if (who === "defendants") {
+        const persons = item.selectedReport.map(selectedItem => selectedItem.person.toLowerCase());
+        return !searchQuery || persons.some(person => person.includes(searchQuery.toLowerCase()));
+      } else {
+        return !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+    })
     .filter(item => {
       if (selectedMonth !== null) {
         if (!item.timestamp) {
@@ -101,7 +123,7 @@ export default function Report() {
     .map(item => <DashboardListRep
       key={item.id}
       item={item}
-      first={item.fullname}
+      first={who === "defendants" ? item.selectedReport.map(item => item.person) : item.fullname}
       second={item.email}
       third={item.phoneNumber}
       fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
@@ -111,7 +133,14 @@ export default function Report() {
     />)
   const rejectedItems = data
     .filter(item => item.status === "rejected")
-    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(item => {
+      if (who === "defendants") {
+        const persons = item.selectedReport.map(selectedItem => selectedItem.person.toLowerCase());
+        return !searchQuery || persons.some(person => person.includes(searchQuery.toLowerCase()));
+      } else {
+        return !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+    })
     .filter(item => {
       if (selectedMonth !== null) {
         if (!item.timestamp) {
@@ -128,7 +157,7 @@ export default function Report() {
     .map(item => <DashboardListRep
       key={item.id}
       item={item}
-      first={item.fullname}
+      first={who === "defendants" ? item.selectedReport.map(item => item.person) : item.fullname}
       second={item.email}
       third={item.phoneNumber}
       fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
@@ -167,62 +196,17 @@ export default function Report() {
 
       </Container>
       <DashRepNav setStatus={setStatus} status={status} />
-      <Container sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5em' }}>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}> <TextField
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder='Search'
-            size='small' /> <SearchIcon fontSize='large' /> </Box>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1em' }}>
-          <div style={{
-            borderRadius: '1em',
-            padding: '0px 5px 0px 5px',
-            background:'#DFE3EE',
-            color:"#3B5998",
-            fontWeight: 500,
-            cursor:'pointer'
-          }}>Complainants</div>
-          <div style={{
-            borderRadius: '1em',
-            padding: '0px 5px 0px 5px',
-            background:'#F5F5F5',
-            color:"black",
-            fontWeight: 500,
-            cursor:'pointer'
-
-          }}>Defendants</div>
-        </div>
-        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <FormControl fullWidth>
-            <InputLabel>Filter By Month</InputLabel>
-            <Select
-              fillWidth
-              size='small'
-              value={selectedMonth}
-              label="Filter By Month"
-              onChange={(e) => setSelectedMonth(e.target.value)}
-            >
-              <MenuItem value={null}>None</MenuItem>
-              <MenuItem value={0}>January</MenuItem>
-              <MenuItem value={1}>Febuary</MenuItem>
-              <MenuItem value={2}>March</MenuItem>
-              <MenuItem value={3}>April</MenuItem>
-              <MenuItem value={4}>May</MenuItem>
-              <MenuItem value={5}>June</MenuItem>
-              <MenuItem value={6}>July</MenuItem>
-              <MenuItem value={7}>August</MenuItem>
-              <MenuItem value={8}>September</MenuItem>
-              <MenuItem value={9}>October</MenuItem>
-              <MenuItem value={10}>November</MenuItem>
-              <MenuItem value={11}>December</MenuItem>
-
-
-            </Select>
-          </FormControl></div>
-      </Container>
+      {/* Filter Nav here */}
+      {status === "fifth" ?
+        <Container sx={{display:'flex', justifyContent:'flex-end', gap:'1em'}}>
+          <div>UPLOAD RESOLUTION</div>
+          <div>CREATE RESOLUTION</div>
+        </Container> : <FilterNav
+          setSearchQuery={setSearchQuery}
+          setWho={setWho}
+          who={who}
+          selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth} />}
       {isLoading ? (
         <Loading />
 
