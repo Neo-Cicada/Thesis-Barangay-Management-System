@@ -18,10 +18,22 @@ const UploadResolution = ({ open, handleClose }) => {
                         label="Upload Resolution"
                         InputLabelProps={{ shrink: true }}
                     />
-                    <Button fullWidth variant='contained'>Submit</Button>
+                    <Button fullWidth
+                        style={{
+                            backgroundColor: 'rgb(59, 89, 152)',
+                            color: '#FFFFFF',
+                            fontWeight: 'bold'
+                        }}
+                        variant='contained'>Submit</Button>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Close</Button>
+                    <Button
+                        style={{
+                            backgroundColor: 'rgb(59, 89, 152)',
+                            color: '#FFFFFF',
+                            fontWeight: 'bold'
+                        }}
+                        onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
         </>
