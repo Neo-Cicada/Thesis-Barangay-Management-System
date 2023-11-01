@@ -205,6 +205,7 @@ export default function Report() {
       {status === "fifth"
         ?
         <Container sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1em' }}>
+          <FilterNav/>
           <div
             style={{ cursor: 'pointer' }}
             onClick={()=>setOpenUpload(true)}

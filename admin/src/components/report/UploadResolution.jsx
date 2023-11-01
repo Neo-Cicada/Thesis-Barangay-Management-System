@@ -1,22 +1,71 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Box } from '@mui/material';
+import { storage, db } from '../../firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import useUpload from '../../hooks/useUpload';
+
 const UploadResolution = ({ open, handleClose }) => {
+    const [file, setFile] = useState()
+    const [details, setDetails] = useState({
+        complainants: "",
+        defendants: "",
+        content: "",
+        imagePath: ""
+    })
+
+    useEffect(() => {
+        if (details.imagePath) {
+            console.log(details)
+            useUpload("Resolutions", details)
+            setDetails({
+                complainants: "",
+                defendants: "",
+                content: "",
+                imagePath: ""
+            })
+            setFile(null)
+        }
+    }, [details])
+
+    const handleFileUpload = async (file) => {
+
+        const storageRef = ref(storage, `resolution/${file.name}`);
+        try {
+            const snapshot = await uploadBytes(storageRef, file);
+            const downloadURL = await getDownloadURL(snapshot.ref);
+            setDetails({ ...details, imagePath: downloadURL });
+            return downloadURL;
+        } catch (error) {
+            console.error(`Error uploading:`, error);
+            return null;
+        }
+
+    };
     return (
         <>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle sx={{ textAlign: 'center' }}>Upload Resolution</DialogTitle>
                 <DialogContent>
                     <Box sx={{ marginTop: '1em', display: 'flex', gap: '1em' }}>
-                        <TextField label="Complainants Name" />
-                        <TextField label="Defendants Name" />
+                        <TextField
+                            value={details.complainants}
+                            label="Complainants Name"
+                            onChange={(e)=>setDetails({...details, complainants: e.target.value})}
+                            />
+                        <TextField
+                            value={details.defendants}
+                            onChange={(e)=>setDetails({...details, defendants: e.target.value})}
+                            label="Defendants Name" />
                     </Box>
                     <TextField
                         sx={{ marginTop: '1em', marginBottom: '1em', }}
                         fullWidth
+                        value={file}
                         rows={5}
                         type='file'
                         label="Upload Resolution"
                         InputLabelProps={{ shrink: true }}
+                        onChange={(e) => setFile(e.target.files[0])}
                     />
                     <Button fullWidth
                         style={{
@@ -24,6 +73,7 @@ const UploadResolution = ({ open, handleClose }) => {
                             color: '#FFFFFF',
                             fontWeight: 'bold'
                         }}
+                        onClick={() => handleFileUpload(file)}
                         variant='contained'>Submit</Button>
                 </DialogContent>
                 <DialogActions>
@@ -33,6 +83,7 @@ const UploadResolution = ({ open, handleClose }) => {
                             color: '#FFFFFF',
                             fontWeight: 'bold'
                         }}
+
                         onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
