@@ -36,7 +36,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
         <p style={{
             width: '50%', textAlign: 'center',
             textTransform: 'capitalize', fontWeight: 500
-        }}>Name: {item.person}</p>
+        }}>Defendant Name: {item.person}</p>
         <hr />
         <p style={{
             width: '50%', textAlign: 'center',
@@ -103,7 +103,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
                             sx={{
                                 textAlign: 'center', fontSize: '1.2rem',
                                 fontWeight: 500
-                            }}>Complaints</Box>
+                            }}>Defendant Information</Box>
                         <Box style={{ width: '100%' }} key={item.id}>
                             {items}
                         </Box>

@@ -9,6 +9,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import FacilityViewInformation from './FacilityViewInformation';
 import sendEmailFunction from '../../functions/sendEmailFunction'
 import useUpdateTimeSlot from '../../hooks/useUpdateTimeSlot';
+import { connectStorageEmulator } from 'firebase/storage';
 export default function DashboardListFaci({
     first,
     second,
@@ -108,13 +109,32 @@ export default function DashboardListFaci({
             })
 
     }
+
+    const isTimestampExpired = (fourth) => {
+        const currentDate = new Date();
+        const inputDate = new Date(fourth);
+        inputDate.setDate(inputDate.getDate() + 1);
+        return currentDate > inputDate;
+    };
+    const currentDate = new Date();
+    const inputDate = new Date(fourth);
+
+    console.log('current', currentDate, "input", inputDate)
     return (
         <>
             <tr >
                 <td style={{ textTransform: 'capitalize' }}>{first}</td>
                 <td>{second}</td>
                 <td style={{ textTransform: 'capitalize' }}>{third}</td>
-                <td style={{ textTransform: 'capitalize' }}>{fourth}</td>
+
+                {status === "ongoing" ? <td style={{
+                    textTransform: 'capitalize',
+                    color: isTimestampExpired(fourth) ? 'red' : 'green',
+                }}>{fourth}</td>
+                    : <td style={{
+                        textTransform: 'capitalize',
+                    }}>{fourth}</td>
+                }
                 <td style={{ textTransform: 'capitalize' }}>{seventh}</td>
                 {status === "ongoing" || status === "request" ?
                     <td >

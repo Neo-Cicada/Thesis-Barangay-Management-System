@@ -79,6 +79,10 @@ export default function Agreement() {
 
                     </p>
                     <p>
+                        10. Must be a 18 years old
+                        User should be a 18 years old adult to have a valid request, failure to do so may cause on cancellation of request.
+                    </p>
+                    <p>
                         By using the Form, you indicate your understanding and acceptance of this Privacy Agreement.
                         If you do not agree with the terms outlined herein, please refrain from using the Form.
                     </p>

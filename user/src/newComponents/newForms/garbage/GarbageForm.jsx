@@ -1,11 +1,12 @@
 import React, { useEffect, useContext, useState } from 'react'
 import {
     Button, TextField, FormControl, Dialog,
-    Checkbox, FormControlLabel, Box, Radio, FormLabel, RadioGroup
+    Checkbox, FormControlLabel, Box, Radio, FormLabel, RadioGroup, Typography
 } from '@mui/material'
 import { myGarbageContext } from './GarbageDialog'
 import Agreement from '../../../components/dialogs/Agreement';
 import GarbagSummary from './GarbagSummary';
+import useUpload from '../../../hooks/useUpload';
 function TermsAndCondition({ open, onClose }) {
     return (
         <Dialog open={open} onClose={onClose}>
@@ -42,9 +43,23 @@ export default function GarbageForm() {
     const [agreement, setAgreement] = useState(false)
     const [showSummary, setShowSummary] = useState(false)
     const [showAgreement, setShowAgreement] = useState(false)
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await useUpload(details, "GarbageRequest")
+        setDetails({
+            fullname: '',
+            email: '',
+            phoneNumber: '',
+            address: '',
+            mop: 'Cash',
+            status: 'request',
+        })
+    }
     return (
         <>
-            <form style={{ maxWidth: '400px', margin: '0 auto' }}>
+            <form style={{ maxWidth: '400px', margin: '0 auto' }} onSubmit={handleSubmit}>
                 {/* fullname, phone number, email, address, mode of payment*/}
                 <div style={{
                     display: 'flex',
@@ -96,6 +111,9 @@ export default function GarbageForm() {
                         onChange={(e) => setDetails({ ...details, address: e.target.value })}
                         label="Address"
                     />
+                    <Box fullWidth>
+                        <Typography fontSize={20}>A monthly payment of 100 pesos will be collected monthly</Typography>
+                    </Box>
                     <FormControl>
                         <FormLabel sx={{ textAlign: 'center' }}>Mode of Payment</FormLabel>
                         <RadioGroup
@@ -120,11 +138,12 @@ export default function GarbageForm() {
                         <span onClick={() => setShowSummary(true)}>Review summary of informaton provided</span>        </Box>
                     <FormControlLabel
                         required
-                        control={<Checkbox checked={!agreement} />}
+                        control={<Checkbox checked={agreement} />}
                         onClick={() => setAgreement(!agreement)}
                         label={
                             <span style={{ cursor: 'pointer' }}>
-                                Agree to the <u onClick={() => setShowAgreement(true)}>terms and conditions</u>
+                                Agree to the <u onClick={() =>
+                                    setShowAgreement(true)}>terms and conditions</u>
                             </span>
                         }
                     />
@@ -135,10 +154,10 @@ export default function GarbageForm() {
                         style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
                         fullWidth
                         variant="contained"
-                        disabled={agreement}
-                        type={'submit'}
+                        disabled={!agreement}
+                        type="submit"
                     >
-                        {agreement ? 'Disabled' : 'Submit'}</Button>
+                        {!agreement ? 'Disabled' : 'Submit'}</Button>
                 </div>
 
             </form>
