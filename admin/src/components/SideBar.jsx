@@ -27,7 +27,11 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import Logo from '../assets/2.png'
 import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; export default function SideBar({ handleSignout }) {
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
+
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
+export default function SideBar({ handleSignout }) {
   // const loc = useLocation();
   // const path = loc.pathname; scan current location
 
@@ -178,8 +182,8 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'; expor
               <div className='sidebar-logo'
                 style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
                 {status === "garbage" ?
-                  <LocalHospitalIcon fontSize="large" /> :
-                  <LocalHospitalOutlinedIcon fontSize="large" />}</div>
+                  <DeleteIcon fontSize="large" /> :
+                  <DeleteOutlinedIcon fontSize="large" />}</div>
               <div className='sidebar-btn-name' style={{ width: '70%', }}>Garbage</div>
             </Button>
           </li>

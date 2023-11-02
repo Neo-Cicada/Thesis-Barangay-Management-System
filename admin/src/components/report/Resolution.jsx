@@ -4,23 +4,21 @@ import useRead from '../../hooks/useRead'
 import useRecent from '../../hooks/useRecent'
 
 
-export default function Resolution() {
-    const [data, setData] = useState([]);
+export default function Resolution({ resolutionItem }) {
     const itemsPerPage = 2;
-    useRecent("Resolutions", setData);
     const [currentPage, setCurrentPage] = useState(1);
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = currentPage * itemsPerPage;
-    const [open,setOpen] = useState(false)
+    const [open, setOpen] = useState(false)
     const [itemData, setItemData] = useState([])
-    const items = data.map(item => (
+    const items = resolutionItem.map(item => (
         <>
             <tr key={item.id}>
                 <td>{item.complainants}</td>
                 <td>{item.defendants}</td>
                 <td>{item.timestamp && item.timestamp.toDate().toLocaleString()}</td>
-                <td onClick={(e)=>{setOpen(true), setItemData(item)}}>Review</td>
+                <td onClick={(e) => { setOpen(true), setItemData(item) }}>Review</td>
             </tr>
         </>
     ));
@@ -48,16 +46,17 @@ export default function Resolution() {
                         {itemsToDisplay}
                     </tbody>
                 </table>
-                {data.length > itemsPerPage && (
+                {resolutionItem.length > itemsPerPage && (
                     <div sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Pagination
                             size='small'
                             color='primary'
                             style={{
                                 display: 'flex',
-                                justifyContent: 'center'
+                                justifyContent: 'center',
+                                border:'1px solid red'
                             }}
-                            count={Math.ceil(data.length / itemsPerPage)}
+                            count={Math.ceil(resolutionItem.length / itemsPerPage)}
                             page={currentPage}
                             onChange={handlePageChange}
                             renderItem={(item) => (
@@ -71,9 +70,9 @@ export default function Resolution() {
                     </div>
                 )}
             </Container>
-            <Dialog open={open} onClose={() => setOpen(false)}>
-                <DialogTitle>Information</DialogTitle>
-                <DialogContent>
+            <Dialog fullWidth open={open} onClose={() => setOpen(false)}>
+                <DialogTitle sx={{ textAlign: 'center' }}>INFORMATION</DialogTitle>
+                <DialogContent >
                     {itemData.complainants}
                 </DialogContent>
             </Dialog>

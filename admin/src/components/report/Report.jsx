@@ -13,8 +13,10 @@ import FilterNav from './FilterNav'
 import Resolution from './Resolution'
 import CreateResolution from './CreateResolution'
 import UploadResolution from './UploadResolution'
+import useRecent from '../../hooks/useRecent'
 export default function Report() {
   const [data, setData] = useState([])
+  const [resolutionData, setResolutinData] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState('default')
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,6 +25,8 @@ export default function Report() {
   const [openResolution, setOpenResolution] = useState(false)
   const [openUpload, setOpenUpload] = useState(false)
   useRead('ReportRequest', setData)
+  useRecent("Resolutions", setResolutinData);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -31,6 +35,27 @@ export default function Report() {
     return () => clearTimeout(timer);
   }, []);
 
+  const resolutionItem = resolutionData.filter(item => {
+    if (who === "defendants") {
+      const persons = item.defendants.toLowerCase();
+      return !searchQuery || persons.includes(searchQuery.toLowerCase());
+    } else {
+      const complainants = item.complainants.toLowerCase();
+      return !searchQuery || complainants.includes(searchQuery.toLowerCase());
+    }
+  })
+    .filter(item => {
+    if (selectedMonth !== null) {
+      if (!item.timestamp) {
+        return false; // Ignore items with no timestamp
+      }
+
+      const itemMonth = item.timestamp.toDate().getMonth(); // Get the month (0-11)
+      return itemMonth === selectedMonth;
+    }
+
+    return true;
+  })
 
   const items = data
     .filter(item => item.status === "request")
@@ -204,17 +229,22 @@ export default function Report() {
       {/* Filter Nav here */}
       {status === "fifth"
         ?
-        <Container sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1em' }}>
-          <FilterNav/>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1em', margin: '0.5em' }}>
+          <FilterNav
+            setSearchQuery={setSearchQuery}
+            setWho={setWho}
+            who={who}
+            selectedMonth={selectedMonth}
+            setSelectedMonth={setSelectedMonth} />
           <div
             style={{ cursor: 'pointer' }}
-            onClick={()=>setOpenUpload(true)}
+            onClick={() => setOpenUpload(true)}
           >UPLOAD RESOLUTION</div>
           <div
             style={{ cursor: 'pointer' }}
-            onClick={()=>setOpenResolution(true)}
+            onClick={() => setOpenResolution(true)}
           >CREATE RESOLUTION</div>
-        </Container>
+        </div>
         :
         <FilterNav
           setSearchQuery={setSearchQuery}
@@ -231,11 +261,11 @@ export default function Report() {
           {status === "second" && <EquipmentAllRequest items={ongoingItems} />}
           {status === "third" && <EquipmentAllRequest items={acceptedItems} />}
           {status === "fourth" && <EquipmentAllRequest items={rejectedItems} />}
-          {status === "fifth" && <Resolution/>}
+          {status === "fifth" && <Resolution resolutionItem={resolutionItem} />}
         </div>)}
 
-        <CreateResolution open={openResolution} handleClose={()=>setOpenResolution(false)}/>
-        <UploadResolution open={openUpload} handleClose={()=>setOpenUpload(false)}/>
+      <CreateResolution open={openResolution} handleClose={() => setOpenResolution(false)} />
+      <UploadResolution open={openUpload} handleClose={() => setOpenUpload(false)} />
     </div>
   )
 }
