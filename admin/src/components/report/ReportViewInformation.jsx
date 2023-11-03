@@ -28,6 +28,7 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
         borderBottom: '1px solid grey',
         display: 'flex',
         gap: '2em',
+        justifyContent: 'center', alignItems: 'center'
 
     }
     const items = item.selectedReport.map(item => <Box
@@ -37,9 +38,9 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
             width: '50%', textAlign: 'center',
             textTransform: 'capitalize', fontWeight: 500
         }}>Defendant Name: {item.person}</p>
-        <hr />
+        {item.imagePath && <a href={item.imagePath} target='_'>Identification</a>}
         <p style={{
-            width: '50%', textAlign: 'center',
+            width: '40%', textAlign: 'center',
             textTransform: 'capitalize', fontWeight: 500
         }}>Violation: {item.name}</p>
     </Box>)

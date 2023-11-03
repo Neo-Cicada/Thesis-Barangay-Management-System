@@ -8,6 +8,7 @@ import Facilities from '../components/facilities/Facilities'
 import Medicine from '../components/medicine/Medicine'
 import Report from '../components/report/Report'
 import Dashboard from '../components/dashboard/Dashboard'
+import Garbage from "../components/garbage/Garbage"
 import AnnouncementManagement from '../components/announcement/AnnouncementManagement'
 import AnnouncementHistory from '../components/announcement/AnnouncementHistory'
 
@@ -19,7 +20,7 @@ const AppRoutes = () => {
       <Route path="report" element={<Report />} />
       <Route path='equipment' element={<Equipment />} />
       <Route path='certificate' element={<Certificate />} />
-
+      <Route path="garbage" element={<Garbage/>}/>
 
 
 
