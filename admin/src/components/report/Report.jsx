@@ -45,17 +45,17 @@ export default function Report() {
     }
   })
     .filter(item => {
-    if (selectedMonth !== null) {
-      if (!item.timestamp) {
-        return false; // Ignore items with no timestamp
+      if (selectedMonth !== null) {
+        if (!item.timestamp) {
+          return false; // Ignore items with no timestamp
+        }
+
+        const itemMonth = item.timestamp.toDate().getMonth(); // Get the month (0-11)
+        return itemMonth === selectedMonth;
       }
 
-      const itemMonth = item.timestamp.toDate().getMonth(); // Get the month (0-11)
-      return itemMonth === selectedMonth;
-    }
-
-    return true;
-  })
+      return true;
+    })
 
   const items = data
     .filter(item => item.status === "request")
@@ -237,12 +237,27 @@ export default function Report() {
             selectedMonth={selectedMonth}
             setSelectedMonth={setSelectedMonth} />
           <div
-            style={{ cursor: 'pointer' }}
+            style={{
+              borderRadius: '20%',
+              padding: '0px 5px 0px 5px',
+              background: '#F5F5F5',
+              color: "black",
+              fontWeight: 500,
+              textAlign: 'center',
+              cursor: 'pointer'
+            }}
             onClick={() => setOpenUpload(true)}
           >UPLOAD RESOLUTION</div>
           <div
-            style={{ cursor: 'pointer' }}
-            onClick={() => setOpenResolution(true)}
+            style={{
+              borderRadius: '20%',
+              padding: '0px 5px 0px 5px',
+              background: '#F5F5F5',
+              color: "black",
+              fontWeight: 500,
+              textAlign: 'center',
+              cursor: 'pointer'
+            }} onClick={() => setOpenResolution(true)}
           >CREATE RESOLUTION</div>
         </div>
         :

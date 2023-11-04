@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Skeleton, TextField, MenuItem, Select, FormControl, InputLabel, Box } from '@mui/material'
+import { Container, Skeleton, TextField, MenuItem, Select, FormControl, InputLabel, Box, InputAdornment } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function FilterNav({setWho, setSelectedMonth, setSearchQuery, who, selectedMonth}) {
+export default function FilterNav({ setWho, setSelectedMonth, setSearchQuery, who, selectedMonth }) {
     const normal = {
         borderRadius: '1em',
         padding: '0px 5px 0px 5px',
@@ -10,15 +10,15 @@ export default function FilterNav({setWho, setSelectedMonth, setSearchQuery, who
         color: "black",
         fontWeight: 500,
         cursor: 'pointer'
-      }
-      const active = {
+    }
+    const active = {
         borderRadius: '1em',
         padding: '0px 5px 0px 5px',
         background: '#DFE3EE',
         color: "#3B5998",
         fontWeight: 500,
         cursor: 'pointer'
-      }
+    }
     return (
         <>
             <Container sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5em' }}>
@@ -29,7 +29,15 @@ export default function FilterNav({setWho, setSelectedMonth, setSearchQuery, who
                 }}> <TextField
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder='Search'
-                        size='small' /> <SearchIcon fontSize='large' /> </Box>
+                        size='small'
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon fontSize="medium" />
+                                </InputAdornment>
+                            ),
+                        }}
+                    /> </Box>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1em' }}>
                     <div style={who === "complainants" ? active : normal}
                         onClick={() => setWho("complainants")}

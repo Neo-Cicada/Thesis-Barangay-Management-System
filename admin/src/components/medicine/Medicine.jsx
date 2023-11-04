@@ -9,10 +9,12 @@ import DashboardList from '../DashboardList'
 import MedicineCrud from './MedicineCrud'
 import DashBoardListMed from './DashBoardListMed'
 import Loading from '../Loading'
+import Filter from '../Filter'
 export default function Medicine() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
   const [isLoading, setIsLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState("")
   useRead('MedicineRequest', setData)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,6 +25,7 @@ export default function Medicine() {
   }, []);
   const items = data
     .filter(item => item.status === "request")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashBoardListMed
       key={item.id}
@@ -38,6 +41,7 @@ export default function Medicine() {
 
   const acceptedItems = data
     .filter(item => item.status === "accepted")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item =>
       <DashBoardListMed
@@ -53,6 +57,7 @@ export default function Medicine() {
 
   const rejectedItems = data
     .filter(item => item.status === "rejected")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item =>
       <DashBoardListMed
@@ -68,6 +73,7 @@ export default function Medicine() {
 
   const ongoingItems = data
     .filter(item => item.status === "ongoing")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashBoardListMed
       key={item.id}
@@ -112,6 +118,7 @@ export default function Medicine() {
 
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
+        <Filter setSearchQuery={setSearchQuery}/>
         {isLoading ? (
           <Loading />
 

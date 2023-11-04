@@ -22,13 +22,10 @@ export default function Garbage() {
                             // numbers={ongoingItems.length}
                             logo={<ChecklistIcon />} />
                         <DashboardBox
-                            name="Completed"
+                            name="Cancelled"
                             // numbers={acceptedItems.length}
                             logo={<ChecklistIcon />} />
-                        <DashboardBox
-                            name="Rejected"
-                            // numbers={rejectedItems.length}
-                            logo={<ChecklistIcon />} />
+
                     </Box>
                 </Container>
             </div>

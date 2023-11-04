@@ -12,10 +12,13 @@ import EquipManage from './EquipManage'
 import EquipmentCrud from './EquipmentCrud';
 import DashboardHeader from '../DashboardHeader';
 import Loading from '../Loading'
+import Filter from '../Filter';
 export default function Equipment() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState("default")
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+
   useRead('EquipmentRequest', setData)
 
   useEffect(() => {
@@ -27,6 +30,7 @@ export default function Equipment() {
   }, []);
   const allItems = data
     .filter(item => item.status === 'request')
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardList
       key={item.id}
@@ -43,6 +47,7 @@ export default function Equipment() {
     )
   const ongoingItems = data
     .filter(item => item.status === 'ongoing')
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardList
       key={item.id}
@@ -59,26 +64,10 @@ export default function Equipment() {
     )
   const acceptedItems = data
     .filter(item => item.status === 'accepted')
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
 
     .map(item => <DashboardList
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'EquipmentRequest'}
-    status={item.status}
-  />
-
-  )
-  const rejectedItems = data
-  .filter(item => item.status === 'rejected')
-  .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
-  .map(item =>
-    <DashboardList
       key={item.id}
       item={item}
       first={item.fullname}
@@ -90,7 +79,25 @@ export default function Equipment() {
       status={item.status}
     />
 
-  )
+    )
+  const rejectedItems = data
+    .filter(item => item.status === 'rejected')
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item =>
+      <DashboardList
+        key={item.id}
+        item={item}
+        first={item.fullname}
+        second={item.email}
+        third={item.phoneNumber}
+        fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+        seventh={item.status}
+        path={'EquipmentRequest'}
+        status={item.status}
+      />
+
+    )
 
   return (
     <>
@@ -122,7 +129,7 @@ export default function Equipment() {
         </Container>
 
         <DashboardNavigation setStatus={setStatus} status={status} />
-
+        <Filter setSearchQuery={setSearchQuery}/>
 
 
         {isLoading ? (

@@ -9,10 +9,12 @@ import EnrollDashList from './EnrollmentDashList'
 import EquipmentAllRequest from '../equipment/EquipmentAllRequest'
 import useRead from '../../hooks/useRead'
 import Loading from '../Loading'
+import Filter from '../Filter'
 export default function Enrollment() {
   const [status, setStatus] = useState('default')
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState([])
+  const [searchQuery, setSearchQuery] = useState("")
   useRead('EnrollmentRequest', setData)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,6 +26,7 @@ export default function Enrollment() {
 
   const items = data
     .filter(item => item.status === "request")
+    .filter(item => !searchQuery ||item.guardianInfo.guardianFirstName.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <EnrollDashList
       key={item.id}
@@ -38,6 +41,7 @@ export default function Enrollment() {
     />
     )
   const ongoingItems = data.filter(item => item.status === "ongoing")
+    .filter(item => !searchQuery || item.guardianInfo.guardianFirstName.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <EnrollDashList
       key={item.id}
@@ -52,6 +56,7 @@ export default function Enrollment() {
     />
     )
   const acceptedItems = data.filter(item => item.status === "accepted")
+    .filter(item => !searchQuery || item.guardianInfo.guardianFirstName.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <EnrollDashList
       key={item.id}
@@ -67,6 +72,7 @@ export default function Enrollment() {
     )
   const rejectedItems = data
     .filter(item => item.status === "rejected")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <EnrollDashList
       key={item.id}
@@ -111,6 +117,7 @@ export default function Enrollment() {
           </div>
         </Container>
         <EnrollmentDashNav setStatus={setStatus} status={status} />
+        <Filter setSearchQuery={setSearchQuery}/>
         {isLoading ? (
           <Loading />
 

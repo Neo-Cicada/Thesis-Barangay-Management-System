@@ -11,11 +11,12 @@ import DashboardList from '../DashboardList'
 import CertificateCrud from './CertificateCrud'
 import DashboardListCert from './DashboardListCert'
 import Loading from '../Loading'
+import Filter from '../Filter'
 export default function Certificate() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
   const [isLoading, setIsLoading] = useState(true);
-
+  const [searchQuery, setSearchQuery] = useState("")
   useRead('CertificateRequest', setData);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,6 +29,7 @@ export default function Certificate() {
   const AllItems =
     data
       .filter(item => item.status === "request")
+      .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
       .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
       .map(item => <DashboardListCert
         key={item.id}
@@ -42,6 +44,7 @@ export default function Certificate() {
       />)
   const ongoingItems = data
     .filter(item => item.status === "ongoing")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardListCert
     key={item.id}
@@ -56,6 +59,7 @@ export default function Certificate() {
   />)
   const acceptedItems = data
   .filter(item => item.status === "accepted")
+  .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
   .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
   .map(item => <DashboardListCert
     key={item.id}
@@ -70,6 +74,7 @@ export default function Certificate() {
   />)
   const rejectedItems = data
     .filter(item => item.status === "rejected")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardListCert
     key={item.id}
@@ -110,6 +115,7 @@ export default function Certificate() {
           </Box>
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
+        <Filter setSearchQuery={setSearchQuery}/>
         {isLoading ? (
           <Loading />
         ) : (
