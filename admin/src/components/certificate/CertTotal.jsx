@@ -93,10 +93,11 @@ export default function DashboardBox({ name, numbers, logo }) {
                     {Object.keys(nameTotal).map((name, index) => (
                         <div key={index} style={{
                             display: 'flex', gap: '1em',
-                            justifyContent: 'center', alignItems: 'center'
+                            justifyContent: 'center', alignItems: 'center',
+                            border:'1px solid black',
                         }}>
-                            <p>{name}</p>
-                            <p>Total Collection: <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>{nameTotal[name]}</span> Pesos</p>
+                            <p style={{width:'50%', display:'flex',alignItems:'center'}}>{name}</p>
+                            <p style={{textAlign:'center', width:'30%'}}> <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>{nameTotal[name]}</span> Pesos</p>
                         </div>
                     ))}
                     

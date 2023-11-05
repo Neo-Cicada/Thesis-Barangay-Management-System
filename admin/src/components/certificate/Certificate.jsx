@@ -96,7 +96,7 @@ export default function Certificate() {
           <div className='manageEquipment-title'>
             <h3 style={{ fontSize: '2rem', fontWeight: "bold", color: '#3B5998' }}>Manage Documents</h3>
           </div>
-          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent: 'space-around' }}>
+          <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent: 'space-around',}}>
             <DashboardBox
               name="Total"
               numbers={AllItems.length}

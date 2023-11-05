@@ -7,6 +7,7 @@ import { myGarbageContext } from './GarbageDialog'
 import Agreement from '../../../components/dialogs/Agreement';
 import GarbagSummary from './GarbagSummary';
 import useUpload from '../../../hooks/useUpload';
+import SnackBar from '../../SnackBar';
 function TermsAndCondition({ open, onClose }) {
     return (
         <Dialog open={open} onClose={onClose}>
@@ -43,6 +44,7 @@ export default function GarbageForm() {
     const [agreement, setAgreement] = useState(false)
     const [showSummary, setShowSummary] = useState(false)
     const [showAgreement, setShowAgreement] = useState(false)
+    const [openSnack, setOpenSnack] = useState(false)
 
 
     const handleSubmit = async (e) => {
@@ -56,6 +58,8 @@ export default function GarbageForm() {
             mop: 'Cash',
             status: 'request',
         })
+        setOpenSnack(true)
+
     }
     return (
         <>
@@ -161,6 +165,7 @@ export default function GarbageForm() {
                 </div>
 
             </form>
+            <SnackBar open={openSnack} handleClose={() => setOpenSnack(false)} />
             <TermsAndCondition open={showAgreement} onClose={() => setShowAgreement(false)} />
             <Summary open={showSummary} onClose={() => setShowSummary(false)} />
 
