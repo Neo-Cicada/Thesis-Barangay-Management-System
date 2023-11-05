@@ -12,6 +12,7 @@ import CertificateCrud from './CertificateCrud'
 import DashboardListCert from './DashboardListCert'
 import Loading from '../Loading'
 import Filter from '../Filter'
+import CertTotal from './CertTotal'
 export default function Certificate() {
   const [data, setData] = useState([])
   const [status, setStatus] = useState('default')
@@ -47,46 +48,46 @@ export default function Certificate() {
     .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardListCert
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'CertificateRequest'}
-    status={"ongoing"}
-  />)
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'CertificateRequest'}
+      status={"ongoing"}
+    />)
   const acceptedItems = data
-  .filter(item => item.status === "accepted")
-  .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
-  .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
-  .map(item => <DashboardListCert
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'CertificateRequest'}
-    status={"accepted"}
-  />)
+    .filter(item => item.status === "accepted")
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashboardListCert
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'CertificateRequest'}
+      status={"accepted"}
+    />)
   const rejectedItems = data
     .filter(item => item.status === "rejected")
     .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
     .map(item => <DashboardListCert
-    key={item.id}
-    item={item}
-    first={item.fullname}
-    second={item.email}
-    third={item.phoneNumber}
-    fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-    seventh={item.status}
-    path={'CertificateRequest'}
-    status={"rejected"}
-  />)
+      key={item.id}
+      item={item}
+      first={item.fullname}
+      second={item.email}
+      third={item.phoneNumber}
+      fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+      seventh={item.status}
+      path={'CertificateRequest'}
+      status={"rejected"}
+    />)
   // console.log(items)
   return (
     <>
@@ -112,10 +113,12 @@ export default function Certificate() {
               name="Rejected"
               numbers={rejectedItems.length}
               logo={<ChecklistIcon />} />
+            <CertTotal
+              logo={<ChecklistIcon />} />
           </Box>
         </Container>
         <DashboardNavigation setStatus={setStatus} status={status} />
-        <Filter setSearchQuery={setSearchQuery}/>
+        <Filter setSearchQuery={setSearchQuery} />
         {isLoading ? (
           <Loading />
         ) : (
