@@ -115,8 +115,8 @@ export default function GarbageForm() {
                         onChange={(e) => setDetails({ ...details, address: e.target.value })}
                         label="Address"
                     />
-                    <Box fullWidth>
-                        <Typography fontSize={20}>A monthly payment of 100 pesos will be collected monthly</Typography>
+                    <Box fullWidth style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Typography style={{ textAlign: 'center' }} fontSize={20}>A monthly payment of 100 pesos will be collected monthly</Typography>
                     </Box>
                     <FormControl>
                         <FormLabel sx={{ textAlign: 'center' }}>Mode of Payment</FormLabel>
@@ -151,9 +151,6 @@ export default function GarbageForm() {
                             </span>
                         }
                     />
-
-
-
                     <Button
                         style={{ backgroundColor: '#3B5998', color: 'white', fontWeight: 'bold' }}
                         fullWidth
