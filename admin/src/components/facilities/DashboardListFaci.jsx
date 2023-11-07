@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardConfirmation from '../DashboardConfirmation';
 import useStatusUpdate from '../../hooks/useStatusUpdate'
-import ConfirmationDialog from '../ConfirmationDialog';
 import GreenToast from '../GreenToast';
 import RedToast from '../RedToast'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FacilityViewInformation from './FacilityViewInformation';
 import sendEmailFunction from '../../functions/sendEmailFunction'
 import useUpdateTimeSlot from '../../hooks/useUpdateTimeSlot';
-import { connectStorageEmulator } from 'firebase/storage';
 export default function DashboardListFaci({
     first,
     second,

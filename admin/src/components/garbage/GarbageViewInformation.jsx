@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Dialog, DialogTitle, DialogContent,Box, Typography } from '@mui/material'
+import { Dialog, DialogTitle, DialogContent, Box, Typography } from '@mui/material'
 import SmsIcon from '@mui/icons-material/Sms';
 import EmailIcon from '@mui/icons-material/Email';
 import SendSms from '../SendSms';
 import SendEmail from '../SendEmail';
 import RedToast from '../RedToast';
-export default function MedicineViewInformation({ item, open, onClose, onConfirm, title, message }) {
+
+export default function GarbageViewInformation({ item, open, onClose, onConfirm, title, message }) {
     const [sms, setSms] = useState(false)
     const [messageInput, setMessageInput] = useState('');
     const [messages, setMessages] = useState([]);
@@ -30,33 +31,9 @@ export default function MedicineViewInformation({ item, open, onClose, onConfirm
         gap: '2em',
 
     }
-    const items = item.selectedMedicines.map(item => <Box
-        key={item.id}
-        style={styleP}> <p style={{ width: '50%', textAlign: 'center' }}>Name: {item.name}</p>
-        <hr />
-        <p style={{ width: '50%', textAlign: 'center' }}>Quantity: {item.count}</p>
-    </Box>)
-    const boxStyle = {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'start',
-        gap: '1em',
-        textTransform: 'capitalize',
-    }
-    const nameStyle = {
-        display: 'flex',
-        justifyContent: 'start',
-        fontWeight: 500,
-        fontSize: 18
-    }
-    const valueStyle = {
-        width: '60%',
-        display: 'flex',
-        justifyContent: 'start',
-    }
     return (
         <>
-            <Dialog open={open} onClose={onClose} fullWidth key={item.id}>
+            <Dialog>
                 <DialogTitle sx={{ textAlign: 'center' }}>
                     <h2 style={{
                         textTransform: 'capitalize',
@@ -86,33 +63,6 @@ export default function MedicineViewInformation({ item, open, onClose, onConfirm
                             onClick={() => setEmail(true)}
                             sx={smsStyle}><EmailIcon />Email</Box>
                     </Box>
-
-                    <Box sx={{ width: '100%' }}>
-
-                        <Box sx={{ textAlign: 'center' }}>Selected Items</Box>
-                        <Box style={{ width: '100%' }} key={item.id}>
-                            {items}
-                        </Box>
-                    </Box>
-                </DialogContent>
-            </Dialog>
-            <Dialog open={sms} onClose={() => setSms(false)}>
-                <DialogTitle sx={{
-                    textAlign: 'center',
-                    color: '#3B5998',
-                    fontSize: '2rem',
-                    fontWeight: 500
-                }}>Send Message</DialogTitle>
-                <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', }}>
-
-                    <Typography variant="subtitle1" sx={{ fontSize: '1.5rem' }} >To: {item.phoneNumber}</Typography>
-
-                    <SendSms
-                        setFail={setSmsFail}
-                        number={item.phoneNumber}
-                        setSms={setSms}
-                        setOpenSnack={setOpenSnack} />
-
                 </DialogContent>
             </Dialog>
             <RedToast
@@ -132,7 +82,7 @@ export default function MedicineViewInformation({ item, open, onClose, onConfirm
                 content="Email Sent!"
                 type="success"
             />
-             <RedToast
+            <RedToast
                 open={openSnack}
                 onClose={() => setOpenSnack(false)}
                 content="Message sent successfuly!"
