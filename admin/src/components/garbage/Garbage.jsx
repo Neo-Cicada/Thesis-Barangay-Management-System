@@ -7,6 +7,7 @@ import Filter from '../Filter';
 import Loading from '../Loading';
 import EquipmentAllRequest from '../equipment/EquipmentAllRequest';
 import useRecent from '../../hooks/useRecent'
+import useRead from '../../hooks/useRead'
 import DashboardListGarbage from './DashboardListGarbage';
 export default function Garbage() {
     const [data, setData] = useState([])
@@ -21,10 +22,11 @@ export default function Garbage() {
 
         return () => clearTimeout(timer);
     }, []);
+    console.log(data)
     const items = data.filter(item => item.status === "request")
         .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
         .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
-        .map((item) => <DashboardListGarbage
+        .map(item => <DashboardListGarbage
             key={item.id}
             item={item}
             first={item.fullname}
@@ -39,7 +41,7 @@ export default function Garbage() {
     const ongoingItems = data.filter(item => item.status === "ongoing")
         .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
         .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
-        .map((item) => <DashboardListGarbage
+        .map(item => <DashboardListGarbage
             key={item.id}
             item={item}
             first={item.fullname}
@@ -70,22 +72,22 @@ export default function Garbage() {
                     <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent: 'space-around' }}>
 
                         <DashboardBox
-                            name="Total"
-                            // numbers={allItems.length}
+                            name="Request"
+                            numbers={items.length}
                             logo={<ChecklistIcon />} />
                         <DashboardBox
                             name="Ongoing"
-                            // numbers={ongoingItems.length}
+                            numbers={ongoingItems.length}
                             logo={<ChecklistIcon />} />
                         <DashboardBox
                             name="Cancelled"
-                            // numbers={acceptedItems.length}
+                            numbers={cancelledItems.length}
                             logo={<ChecklistIcon />} />
 
                     </Box>
                 </Container>
                 <GarbageDashNav setStatus={setStatus} status={status} />
-                <Filter />
+                <Filter setSearchQuery={setSearchQuery} />
                 {isLoading ? (
                     <Loading />
 

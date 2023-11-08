@@ -8,7 +8,10 @@ const useRecent = (collectionPath, setData) => {
         const q = query(activitiesRef, orderBy('timestamp', 'desc'), limit(5));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const activityData = querySnapshot.docs.map((doc) => doc.data());
+            const activityData = querySnapshot.docs.map((doc) => ({
+                id: doc.id, // Include the document ID
+                ...doc.data() // Spread the rest of the document data
+            }));
             setData(activityData);
         });
 

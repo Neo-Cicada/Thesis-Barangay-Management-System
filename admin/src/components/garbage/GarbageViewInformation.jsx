@@ -5,6 +5,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import SendSms from '../SendSms';
 import SendEmail from '../SendEmail';
 import RedToast from '../RedToast';
+import GarbagePayment from './GarbagePayment';
 
 export default function GarbageViewInformation({ item, open, onClose, onConfirm, title, message }) {
     const [sms, setSms] = useState(false)
@@ -15,6 +16,7 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
     const [emailFail, setEmailFail] = useState(false)
     const [emailSuccess, setEmailSuccess] = useState(false)
     const [smsFail, setSmsFail] = useState(false)
+    const [showPayment, setShowPayment] = useState(false)
     const smsStyle = {
         display: 'flex',
         justifyContent: 'center',
@@ -24,16 +26,22 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
             color: '#3B5998',
         },
     };
-
-    const styleP = {
-        borderBottom: '1px solid grey',
+    const boxStyle = {
+        width: '100%',
         display: 'flex',
-        gap: '2em',
-
+        justifyContent: 'start',
+        gap: '1em',
+        textTransform: 'capitalize',
+    }
+    const nameStyle = {
+        display: 'flex',
+        justifyContent: 'start',
+        fontWeight: 500,
+        fontSize: 18
     }
     return (
         <>
-            <Dialog>
+            <Dialog open={open} onClose={onClose}>
                 <DialogTitle sx={{ textAlign: 'center' }}>
                     <h2 style={{
                         textTransform: 'capitalize',
@@ -53,7 +61,12 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
 
                     </Box>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Date — {item.timestamp.toDate().toLocaleString()} </p>
+                        <p style={nameStyle}>Address — {item.address} </p>
+                    </Box>
+                    <Box>
+                        <p onClick={()=>setShowPayment(true)} style={{ ...nameStyle, color: '#3B5998', cursor: 'pointer', }}>
+                            Click here to view manage payment history
+                        </p>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em' }}>
                         <Box
@@ -108,6 +121,7 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
                     <SendEmail to={item.email} setEmailFail={setEmailFail} setEmailSuccess={setEmailSuccess} />
                 </DialogContent>
             </Dialog>
+            <GarbagePayment open={showPayment} onClose={()=>setShowPayment(false)}/>
         </>
     )
 }

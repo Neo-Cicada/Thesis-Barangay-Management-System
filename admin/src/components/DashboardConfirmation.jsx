@@ -4,14 +4,14 @@ export default function DashboardConfirmation({ accept, reject, status, open, on
   return (
     <>
       <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Accept Request or Reject Request</DialogTitle>
-      <DialogContent>Choose on how you want to procced on this transaction</DialogContent>
+        <DialogTitle>Accept Request or Reject Request</DialogTitle>
+        <DialogContent>Choose on how you want to procced on this transaction</DialogContent>
         <DialogActions>
           {status === "ongoing" ?
-          <Button variant='contained' color='success' onClick={confirm}>Confirm Request</Button> :
-           <Button variant='contained' color='success' onClick={accept}>Accept Request</Button>}
+            <Button variant='contained' color='success' onClick={confirm}>Confirm Request</Button> :
+            <Button variant='contained' color='success' onClick={accept}>Accept Request</Button>}
 
-          <Button variant='contained' color='warning' onClick={reject}>{status === "ongoing" ? "Cancel Request": "Decline Request"}</Button>
+          <Button variant='contained' color='warning' onClick={reject}>{status === "ongoing" ? "Cancel Request" : "Decline Request"}</Button>
         </DialogActions>
       </Dialog>
       {/* <div
