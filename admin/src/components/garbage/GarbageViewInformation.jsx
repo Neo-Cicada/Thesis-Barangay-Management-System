@@ -46,7 +46,7 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
                     <h2 style={{
                         textTransform: 'capitalize',
                         color: '#3B5998',
-                        fontWeight: 500
+                        fontWeight: 500,
                     }}>  {item.fullname} Request Information </h2>
                 </DialogTitle>
                 <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
@@ -63,11 +63,14 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
                     <Box sx={boxStyle}>
                         <p style={nameStyle}>Address — {item.address} </p>
                     </Box>
-                    <Box>
-                        <p onClick={()=>setShowPayment(true)} style={{ ...nameStyle, color: '#3B5998', cursor: 'pointer', }}>
-                            Click here to view manage payment history
-                        </p>
+                    <Box sx={boxStyle}>
+                        <p style={nameStyle}>Payment Method — {item.mop} </p>
                     </Box>
+                    {item.status === "ongoing" && <Box>
+                        <p onClick={() => setShowPayment(true)} style={{ ...nameStyle, color: '#3B5998', cursor: 'pointer', }}>
+                            Click here to manage payment
+                        </p>
+                    </Box>}
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em' }}>
                         <Box
                             onClick={() => setSms(true)}
@@ -76,6 +79,7 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
                             onClick={() => setEmail(true)}
                             sx={smsStyle}><EmailIcon />Email</Box>
                     </Box>
+
                 </DialogContent>
             </Dialog>
             <RedToast
@@ -121,7 +125,7 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
                     <SendEmail to={item.email} setEmailFail={setEmailFail} setEmailSuccess={setEmailSuccess} />
                 </DialogContent>
             </Dialog>
-            <GarbagePayment open={showPayment} onClose={()=>setShowPayment(false)}/>
+            <GarbagePayment item={item} open={showPayment} onClose={() => setShowPayment(false)} />
         </>
     )
 }

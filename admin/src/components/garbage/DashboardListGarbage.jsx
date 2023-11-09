@@ -21,30 +21,26 @@ export default function DashboardListGarbage({
     const [isRedOpen, setIsRedOpen] = useState(false)
     const onAccept = async (e) => {
         e.stopPropagation();
-        setIsGreenOpen(true)
-        await useStatusUpdate(path, item.id, 'ongoing')
-            .then(async () => {
-                const success = await sendEmailFunction(item.email,
-                    ' Garbage Collection Status',
-                    'You are now subscribe to our barangay garbage collection');
-                const smsSuccess = await sendSmsFunction(item.phoneNumber,
-                    'You are now subscribe to our barangay garbage collection')
-                if (success || smsSuccess) {
-                    console.log('Email sent successfully');
-                } else {
-                    console.error('Email sending failed');
-                }
-            }).then(
-                async () => {
-                    setIsOpenProceed(false)
-                }
-            )
-            .catch((error) => {
-                console.error('Error updating status:', error);
-            })
+        setIsGreenOpen(true);
 
+        try {
+            await useStatusUpdate(path, item.id, 'ongoing');
 
-    }
+            const success = await sendEmailFunction(item.email, 'Garbage Collection Status', 'You are now subscribed to our barangay garbage collection');
+            const smsSuccess = await sendSmsFunction(item.phoneNumber, 'You are now subscribed to our barangay garbage collection');
+
+            if (success || smsSuccess) {
+                console.log('Email sent successfully');
+            } else {
+                console.error('Email sending failed');
+            }
+
+            setIsOpenProceed(false);
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    };
+
 
 
     const onDecline = async (e) => {

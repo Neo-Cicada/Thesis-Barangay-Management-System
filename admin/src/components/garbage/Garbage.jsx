@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Box } from '@mui/material'
+import { Container, Box, TextField } from '@mui/material'
 import DashboardBox from '../DashboardBox'
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import GarbageDashNav from './GarbageDashNav';
@@ -14,6 +14,8 @@ export default function Garbage() {
     const [status, setStatus] = useState('default')
     const [isLoading, setIsLoading] = useState(true)
     const [searchQuery, setSearchQuery] = useState("")
+    const [desiredMonthYear, setDesiredMonthYear] = useState("")
+    const [paymentStatus, setPaymentStatus] = useState("paid")
     useRecent('GarbageRequest', setData)
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -40,6 +42,17 @@ export default function Garbage() {
         />)
     const ongoingItems = data.filter(item => item.status === "ongoing")
         .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+        .filter(item => {
+            if (paymentStatus === "paid") {
+                return item.paymentDetails
+                    ? !desiredMonthYear || item.paymentDetails.some(paymentDetail => paymentDetail.month === desiredMonthYear)
+                    : false; // Exclude items without paymentDetails from "paid"
+            } else if (paymentStatus === "unpaid") {
+                return item.paymentDetails
+                    ? !desiredMonthYear || !item.paymentDetails.some(paymentDetail => paymentDetail.month === desiredMonthYear)
+                    : true; // Include items without paymentDetails in "unpaid"
+            }
+        })
         .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
         .map(item => <DashboardListGarbage
             key={item.id}
@@ -61,6 +74,28 @@ export default function Garbage() {
             seventh={item.status}
 
         />)
+
+    const normal = {
+        borderRadius: '1em',
+        padding: '0px 5px 0px 5px',
+        background: '#F5F5F5',
+        color: "black",
+        fontWeight: 500,
+        cursor: 'pointer',
+        width: '5em',
+        textAlign: 'center'
+
+    }
+    const active = {
+        borderRadius: '1em',
+        padding: '0px 5px 0px 5px',
+        background: '#DFE3EE',
+        color: "#3B5998",
+        fontWeight: 500,
+        cursor: 'pointer',
+        width: '5em',
+        textAlign: 'center'
+    }
 
     return (
         <>
@@ -87,7 +122,36 @@ export default function Garbage() {
                     </Box>
                 </Container>
                 <GarbageDashNav setStatus={setStatus} status={status} />
-                <Filter setSearchQuery={setSearchQuery} />
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Filter setSearchQuery={setSearchQuery} />
+                    {status === "second" && <>
+                        <TextField
+                            type='month'
+                            size='small'
+                            value={desiredMonthYear}
+                            onChange={(e) => setDesiredMonthYear(e.target.value)}
+                            sx={{ marginRight: '1em', width: '20em' }}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <Box sx={{
+                            display: 'flex', gap: '1em', paddingRight: '2em',
+                            justifyContent: 'center', alignItems: 'center'
+                        }}>
+                            <Box style={paymentStatus === "paid" ? active : normal}
+                                onClick={(e) => setPaymentStatus("paid")}
+                            >
+                                <p>Paid</p>
+                            </Box>
+                            <Box
+                                style={paymentStatus === "unpaid" ? active : normal}
+                                onClick={(e) => setPaymentStatus("unpaid")}
+                            >
+                                <p>Unpaid</p>
+                            </Box>
+                        </Box>
+                    </>}</Box>
                 {isLoading ? (
                     <Loading />
 
