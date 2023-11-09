@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Box } from '@mui/material'
 import useUpload from '../../hooks/useUpload'
-
+import ConfirmDialog from '../ConfirmationDialog'
 export default function CreateResolution({ open, handleClose }) {
     const [details, setDetails] = useState({
         complainants: "",
@@ -9,7 +9,7 @@ export default function CreateResolution({ open, handleClose }) {
         content: "",
         imagePath: ""
     })
-
+    const [confirm, setConfirm] = useState(false)
     const handleUpload = async (e) => {
         e.preventDefault();
         await useUpload("Resolutions", details)
@@ -19,6 +19,7 @@ export default function CreateResolution({ open, handleClose }) {
             content: "",
             imagePath: ""
         })
+        setConfirm(false)
     }
     return (
         <>
@@ -57,7 +58,7 @@ export default function CreateResolution({ open, handleClose }) {
                             color: '#FFFFFF',
                             fontWeight: 'bold'
                         }}
-                        onClick={handleUpload}
+                        onClick={() => setConfirm(true)}
                     >Submit</Button>
                 </DialogContent>
                 <DialogActions>
@@ -70,6 +71,13 @@ export default function CreateResolution({ open, handleClose }) {
                         onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
+            <ConfirmDialog
+                open={confirm}
+                onClose={() => setConfirm(false)}
+                title="Upload Created Resolution"
+                message="Do you want to upload the created resolution?"
+                onConfirm={handleUpload}
+            />
         </>
     )
 }

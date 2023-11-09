@@ -142,6 +142,7 @@ export default function CertForm() {
             <TextField
               fullWidth
               helperText="Required"
+              value={details.address}
               label="Delivery Address"
               onChange={(e) => setDetails({ ...details, address: e.target.value })}
             />}
@@ -161,11 +162,12 @@ export default function CertForm() {
               totalQuantity + "pesos"}
           </h3>
           {details.mop === "Gcash" &&
-            <TextField
-              fullWidth
-              onChange={(e) => setDetails({ ...details, reference: e.target.value })}
-              label="Gcash Reference" />
-
+            <><p>Send your Gcash payment here: 09084590726</p>
+              <TextField
+                fullWidth
+                onChange={(e) => setDetails({ ...details, reference: e.target.value })}
+                label="Gcash Reference" />
+            </>
           }
           <Box sx={{
             display: 'flex',

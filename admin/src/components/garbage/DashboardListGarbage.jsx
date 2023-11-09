@@ -102,6 +102,7 @@ export default function DashboardListGarbage({
                     </td> :
                     <td>
                         <VisibilityIcon
+                            color='info'
                             sx={{ cursor: 'pointer' }}
                             onClick={() => setShowInformation(true)} />
                     </td>

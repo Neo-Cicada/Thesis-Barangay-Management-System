@@ -27,20 +27,27 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
     const styleP = {
         borderBottom: '1px solid grey',
         display: 'flex',
+        flexDirection: 'column',
         gap: '2em',
         justifyContent: 'center', alignItems: 'center'
 
     }
     const items = item.selectedReport.map(item => <Box
         key={item.id}
-        style={styleP}>
+        style={styleP}
+
+    >
         <p style={{
-            width: '50%', textAlign: 'center',
+            width: '30%', textAlign: 'center',
             textTransform: 'capitalize', fontWeight: 500
         }}>Defendant Name: {item.person}</p>
-        {item.imagePath && <a href={item.imagePath} target='_'>Identification</a>}
+        {item.imagePath &&
+            <p style={{
+                width: '40%', textAlign: 'center',
+                textTransform: 'capitalize', fontWeight: 500
+            }}>Defendant Identification: <a href={item.imagePath} target='_'>Click here to view</a></p>}
         <p style={{
-            width: '40%', textAlign: 'center',
+            width: '30%', textAlign: 'center',
             textTransform: 'capitalize', fontWeight: 500
         }}>Violation: {item.name}</p>
     </Box>)

@@ -3,7 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, B
 import { storage, db } from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import useUpload from '../../hooks/useUpload';
-
+import ConfirmationDialog from '../ConfirmationDialog'
 const UploadResolution = ({ open, handleClose }) => {
     const [file, setFile] = useState()
     const [details, setDetails] = useState({
@@ -12,7 +12,7 @@ const UploadResolution = ({ open, handleClose }) => {
         content: "",
         imagePath: ""
     })
-
+    const [confirm, setConfirm] = useState(false)
     useEffect(() => {
         if (details.imagePath) {
             console.log(details)
@@ -50,17 +50,16 @@ const UploadResolution = ({ open, handleClose }) => {
                         <TextField
                             value={details.complainants}
                             label="Complainants Name"
-                            onChange={(e)=>setDetails({...details, complainants: e.target.value})}
-                            />
+                            onChange={(e) => setDetails({ ...details, complainants: e.target.value })}
+                        />
                         <TextField
                             value={details.defendants}
-                            onChange={(e)=>setDetails({...details, defendants: e.target.value})}
+                            onChange={(e) => setDetails({ ...details, defendants: e.target.value })}
                             label="Defendants Name" />
                     </Box>
                     <TextField
                         sx={{ marginTop: '1em', marginBottom: '1em', }}
                         fullWidth
-                        value={file}
                         rows={5}
                         type='file'
                         label="Upload Resolution"
@@ -73,7 +72,7 @@ const UploadResolution = ({ open, handleClose }) => {
                             color: '#FFFFFF',
                             fontWeight: 'bold'
                         }}
-                        onClick={() => handleFileUpload(file)}
+                        onClick={() => setConfirm(true)}
                         variant='contained'>Submit</Button>
                 </DialogContent>
                 <DialogActions>
@@ -87,6 +86,13 @@ const UploadResolution = ({ open, handleClose }) => {
                         onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
+            <ConfirmationDialog
+                open={confirm}
+                onClose={() => setConfirm(false)}
+                title="Upload Resolution"
+                message="Dp you want to upload your existing resolution?"
+                onConfirm={async() => {await handleFileUpload(file), setConfirm(false) }}
+            />
         </>
     )
 

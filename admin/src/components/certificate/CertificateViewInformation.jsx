@@ -81,7 +81,7 @@ export default function CertificateViewInformation({ item, open, onClose, onConf
                         <p style={nameStyle}>Phone Number — {item.phoneNumber} </p>
                     </Box>
                     <Box sx={boxStyle}>
-                        {/* <p style={nameStyle}>Date — {item.timestamp.toDate().toLocaleString()} </p> */}
+                        <p style={nameStyle}>Address — {item.address} </p>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em' }}>
                         <Box
@@ -92,9 +92,13 @@ export default function CertificateViewInformation({ item, open, onClose, onConf
                             sx={smsStyle}><EmailIcon />Email</Box>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                        <Box sx={{ textAlign: 'center' }}>Selected Items</Box>
+                        <Box sx={{ textAlign: 'center' }}>Selected Documents</Box>
                         <Box style={{ width: '100%' }} key={item.id}>
-                            {items}
+                            {item.mop} {item.mop === "Gcash" && item.reference} {item.mod}
+                            {item.selectedCertificates.map(item => <div>
+                                <p>{item.name}</p>
+                                <p>{item.quantity}</p>
+                            </div>)}
                         </Box>
                     </Box>
                 </DialogContent>

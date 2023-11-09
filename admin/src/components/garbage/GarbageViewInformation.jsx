@@ -125,6 +125,26 @@ export default function GarbageViewInformation({ item, open, onClose, onConfirm,
                     <SendEmail to={item.email} setEmailFail={setEmailFail} setEmailSuccess={setEmailSuccess} />
                 </DialogContent>
             </Dialog>
+            <Dialog open={sms} onClose={() => setSms(false)}>
+                <DialogTitle sx={{
+                    textAlign: 'center',
+                    color: '#3B5998',
+                    fontSize: '2rem',
+                    fontWeight: 500
+                }}>Send Message</DialogTitle>
+                <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', }}>
+
+                    <Typography variant="subtitle1" sx={{ fontSize: '1.5rem' }} >To: {item.phoneNumber}</Typography>
+
+                    <SendSms
+                        setFail={setSmsFail}
+                        number={item.phoneNumber}
+                        setSms={setSms}
+                        setOpenSnack={setOpenSnack} />
+
+                </DialogContent>
+
+            </Dialog>
             <GarbagePayment item={item} open={showPayment} onClose={() => setShowPayment(false)} />
         </>
     )

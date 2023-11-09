@@ -4,17 +4,23 @@ import {
   DialogActions, Button, TextField, Box, FormControl, Select, MenuItem, InputLabel
 } from '@mui/material'
 import useUpdatePayment from '../../hooks/useUpdatePayment'
+import useStatusUpdate from '../../hooks/useStatusUpdate'
+import ConfirmationDialog from '../ConfirmationDialog'
 export default function GarbagePayment({ open, onClose, item }) {
   const [paymentMethod, setPaymentMethod] = useState("Cash")
   const [month, setMonth] = useState(null)
   const [amount, setAmount] = useState(null)
   const [details, setDetails] = useState([])
+  const [confirmation, setConfirmation] = useState(false)
   const paymentDetails = [{
     paymentMethod: paymentMethod,
     month: month,
     amount: amount
   }]
-
+  const handleSubscription = async (e) =>{
+    e.preventDefault();
+    await useStatusUpdate("GarbageRequest", item.id, "rejected")
+  }
   const handleAddPayment = async (e) => {
     e.preventDefault();
     await useUpdatePayment("GarbageRequest", item.id, paymentDetails).then(
@@ -65,8 +71,10 @@ export default function GarbagePayment({ open, onClose, item }) {
 
                 </Select>
               </FormControl>
-              <Button variant='contained' size='small' onClick={handleAddPayment}>Submit</Button>
-
+              <Button
+                disabled={!month || !amount || !paymentMethod}
+                variant='contained' size='small' onClick={handleAddPayment}>Submit
+              </Button>
             </Box>
             <Box sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
               <p>{item.fullname} Payment History</p>
@@ -91,7 +99,7 @@ export default function GarbagePayment({ open, onClose, item }) {
               <Button
 
                 variant='contained'
-                onClick={() => console.log({ item, paymentDetails: paymentDetails })}>
+                onClick={() => setConfirmation(true)}>
                 Cancel Subscription</Button>
             </Box>
           </Box>
@@ -101,6 +109,13 @@ export default function GarbagePayment({ open, onClose, item }) {
           <Button variant='contained' onClick={onClose}>Close</Button>
         </DialogActions>
       </Dialog>
+      <ConfirmationDialog
+        open={confirmation}
+        onClose={() => setConfirmation(false)}
+        title={`Cancel Garbage Collection Subscription`}
+        onConfirm={handleSubscription}
+        message={`Do you want to cancel ${item.fullname} Garbage Collection Subscription? `}
+        />
     </>
   )
 }

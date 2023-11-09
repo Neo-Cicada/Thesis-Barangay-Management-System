@@ -16,6 +16,7 @@ export default function Garbage() {
     const [searchQuery, setSearchQuery] = useState("")
     const [desiredMonthYear, setDesiredMonthYear] = useState("")
     const [paymentStatus, setPaymentStatus] = useState("paid")
+    const [totalAmount, setTotalAmount] = useState()
     useRecent('GarbageRequest', setData)
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -25,6 +26,26 @@ export default function Garbage() {
         return () => clearTimeout(timer);
     }, []);
     console.log(data)
+
+    useEffect(() => {
+        if (Array.isArray(data)) {
+            let newTotalAmount = 0;
+            data.forEach((item) => {
+                if (item.paymentDetails && Array.isArray(item.paymentDetails)) {
+                    item.paymentDetails.forEach((payment) => {
+                        const amountAsNumber = parseFloat(payment.amount);
+
+                        if (!isNaN(amountAsNumber)) {
+                            newTotalAmount += amountAsNumber;
+                        }
+                    });
+                }
+            });
+
+            setTotalAmount(newTotalAmount);
+        }
+    }, [data]);
+    console.log(totalAmount)
     const items = data.filter(item => item.status === "request")
         .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
         .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
@@ -43,14 +64,18 @@ export default function Garbage() {
     const ongoingItems = data.filter(item => item.status === "ongoing")
         .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
         .filter(item => {
-            if (paymentStatus === "paid") {
-                return item.paymentDetails
-                    ? !desiredMonthYear || item.paymentDetails.some(paymentDetail => paymentDetail.month === desiredMonthYear)
-                    : false; // Exclude items without paymentDetails from "paid"
-            } else if (paymentStatus === "unpaid") {
-                return item.paymentDetails
-                    ? !desiredMonthYear || !item.paymentDetails.some(paymentDetail => paymentDetail.month === desiredMonthYear)
-                    : true; // Include items without paymentDetails in "unpaid"
+            if (desiredMonthYear) { // Check if desiredMonthYear has a value
+                if (paymentStatus === "paid") {
+                    return item.paymentDetails
+                        ? item.paymentDetails.some(paymentDetail => paymentDetail.month === desiredMonthYear)
+                        : false;
+                } else if (paymentStatus === "unpaid") {
+                    return item.paymentDetails
+                        ? !item.paymentDetails.some(paymentDetail => paymentDetail.month === desiredMonthYear)
+                        : true;
+                }
+            } else {
+                return true; // Include all items when desiredMonthYear is not specified
             }
         })
         .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
@@ -66,14 +91,20 @@ export default function Garbage() {
             status={"ongoing"}
         />)
     const cancelledItems = data.filter(item => item.status === "rejected")
-        .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
-        .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
-        .map((item) => <DashboardListGarbage
+    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+    .map(item => <DashboardListGarbage
+        key={item.id}
+        item={item}
+        first={item.fullname}
+        second={item.email}
+        third={item.phoneNumber}
+        fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+        seventh={item.status}
+        path={'GarbageRequest'}
+        status={"rejected"}
 
-            fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-            seventh={item.status}
-
-        />)
+    />)
 
     const normal = {
         borderRadius: '1em',
@@ -117,6 +148,10 @@ export default function Garbage() {
                         <DashboardBox
                             name="Cancelled"
                             numbers={cancelledItems.length}
+                            logo={<ChecklistIcon />} />
+                        <DashboardBox
+                            name="Total Income"
+                            numbers={totalAmount+" pesos"}
                             logo={<ChecklistIcon />} />
 
                     </Box>

@@ -64,7 +64,10 @@ export default function ReportSelect() {
         {selectedReport.map((report, index) => (
           <div style={{ textAlign: 'center', borderBottom: '1px solid black' }} key={index}>
             <p>{report.name}</p>
-            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+            <div style={{
+              display: 'flex', alignItems: 'center', flexDirection: 'column',
+              gap: '1em'
+            }}>
               <div>Who's the person you're reporting?
               </div>
               <TextField
@@ -72,6 +75,8 @@ export default function ReportSelect() {
                 value={report.person}
                 onChange={(e) => handleReport(report.name, e.target.value)}
                 type="text"
+                sx={{ width: "15em" }}
+
                 label="Enter name"
                 id={`report-input-${index}`}
                 aria-label="who"
@@ -81,7 +86,7 @@ export default function ReportSelect() {
               <TextField
                 type='file'
                 size='small'
-                sx={{ width: "50%" }}
+                sx={{ width: "15em" }}
                 label="Person Identification"
                 InputLabelProps={{
                   shrink: true,
