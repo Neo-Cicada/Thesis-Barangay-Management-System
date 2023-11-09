@@ -74,7 +74,7 @@ export default function FacilityViewInformation({ item, open, onClose, onConfirm
                         <p style={nameStyle}>Phone Number — {item.phoneNumber}</p>
                     </Box>
                     <Box sx={boxStyle}>
-                        <p style={nameStyle}>Date — {item.timestamp.toDate().toLocaleString()} </p>
+                        {/* <p style={nameStyle}>Date — {item.timestamp.toDate().toLocaleString()} </p> */}
 
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: '3em' }}>

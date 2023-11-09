@@ -93,16 +93,27 @@ export default function CertificateViewInformation({ item, open, onClose, onConf
                     </Box>
                     <Box sx={{ width: '100%' }}>
                         <Box sx={{ textAlign: 'center' }}>Selected Documents</Box>
-                        <Box style={{ width: '100%' }} key={item.id}>
-                            {item.mop} {item.mop === "Gcash" && item.reference} {item.mod}
-                            {item.selectedCertificates.map(item => <div>
-                                <p>{item.name}</p>
-                                <p>{item.quantity}</p>
-                            </div>)}
+                        <Box style={{
+                            width: '100%', display: 'flex',
+                            flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                            gap: '1em'
+                        }} key={item.id}>
+
+                            <p style={{ width: '15em', textAlign: 'center' }}>Order Type:  {item.mod}</p>
+                            <p style={{ width: '15em', textAlign: 'center' }}>Mode of Payment: {item.mop}</p>
+                            {item.mop === "Gcash" && <p style={{ width: '15em', textAlign: 'center' }}>Gcash Reference: {item.reference}</p>}
+
+                            {item.selectedCertificates.map(item => <div style={{ display: 'flex', borderBottom: '1px solid black' }}>
+                                <p style={{ width: '15em', textAlign: 'center' }}>Document name: {item.name}</p>
+                                <p style={{ width: '15em', textAlign: 'center' }}>Document price: {item.quantity}</p>
+                            </div>)
+                            }
+                            <p style={{ width: '15em', textAlign: 'center' }}>Total: {item.total}pesos</p>
+
                         </Box>
                     </Box>
                 </DialogContent>
-            </Dialog>
+            </Dialog >
             <Dialog open={sms} onClose={() => setSms(false)}>
                 <DialogTitle sx={{
                     textAlign: 'center',

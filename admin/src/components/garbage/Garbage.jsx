@@ -91,20 +91,20 @@ export default function Garbage() {
             status={"ongoing"}
         />)
     const cancelledItems = data.filter(item => item.status === "rejected")
-    .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
-    .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
-    .map(item => <DashboardListGarbage
-        key={item.id}
-        item={item}
-        first={item.fullname}
-        second={item.email}
-        third={item.phoneNumber}
-        fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
-        seventh={item.status}
-        path={'GarbageRequest'}
-        status={"rejected"}
+        .filter(item => !searchQuery || item.fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+        .sort((a, b) => (b.timestamp && a.timestamp ? b.timestamp.toDate() - a.timestamp.toDate() : 0))
+        .map(item => <DashboardListGarbage
+            key={item.id}
+            item={item}
+            first={item.fullname}
+            second={item.email}
+            third={item.phoneNumber}
+            fourth={item.timestamp ? item.timestamp.toDate().toLocaleString() : 'No timestamp'}
+            seventh={item.status}
+            path={'GarbageRequest'}
+            status={"rejected"}
 
-    />)
+        />)
 
     const normal = {
         borderRadius: '1em',
@@ -151,7 +151,7 @@ export default function Garbage() {
                             logo={<ChecklistIcon />} />
                         <DashboardBox
                             name="Total Income"
-                            numbers={totalAmount+" pesos"}
+                            numbers={totalAmount + " pesos"}
                             logo={<ChecklistIcon />} />
 
                     </Box>
@@ -166,6 +166,7 @@ export default function Garbage() {
                             value={desiredMonthYear}
                             onChange={(e) => setDesiredMonthYear(e.target.value)}
                             sx={{ marginRight: '1em', width: '20em' }}
+                            label="Filter by month"
                             InputLabelProps={{
                                 shrink: true,
                             }}

@@ -79,8 +79,11 @@ export default function Agreement() {
 
                     </p>
                     <p>
-                        10. Must be a 18 years old
-                        User should be a 18 years old adult to have a valid request, failure to do so may cause on cancellation of request.
+                        10. Age Requirement Agreement
+
+                        I acknowledge and agree that users must be at least 18 years old to make a valid request. Failure to meet this age requirement may result in the cancellation of the request.
+
+                        By proceeding with my request, I confirm that I am an adult, aged 18 years or older.
                     </p>
                     <p>
                         By using the Form, you indicate your understanding and acceptance of this Privacy Agreement.
