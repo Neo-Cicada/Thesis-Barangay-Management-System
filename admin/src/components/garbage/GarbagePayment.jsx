@@ -6,18 +6,20 @@ import {
 import useUpdatePayment from '../../hooks/useUpdatePayment'
 import useStatusUpdate from '../../hooks/useStatusUpdate'
 import ConfirmationDialog from '../ConfirmationDialog'
+import RedToast from '../RedToast'
 export default function GarbagePayment({ open, onClose, item }) {
   const [paymentMethod, setPaymentMethod] = useState("Cash")
   const [month, setMonth] = useState(null)
   const [amount, setAmount] = useState(null)
   const [details, setDetails] = useState([])
   const [confirmation, setConfirmation] = useState(false)
+  const [toast, setToast] = useState(false);
   const paymentDetails = [{
     paymentMethod: paymentMethod,
     month: month,
     amount: amount
   }]
-  const handleSubscription = async (e) =>{
+  const handleSubscription = async (e) => {
     e.preventDefault();
     await useStatusUpdate("GarbageRequest", item.id, "rejected")
   }
@@ -26,6 +28,10 @@ export default function GarbagePayment({ open, onClose, item }) {
     await useUpdatePayment("GarbageRequest", item.id, paymentDetails).then(
       console.log("Success updated Garbage")
     )
+    setAmount("")
+    setMonth("")
+    setPaymentMethod("Cash")
+    setToast(true)
   }
   return (
     <>
@@ -115,7 +121,9 @@ export default function GarbagePayment({ open, onClose, item }) {
         title={`Cancel Garbage Collection Subscription`}
         onConfirm={handleSubscription}
         message={`Do you want to cancel ${item.fullname} Garbage Collection Subscription? `}
-        />
+      />
+      <RedToast open={toast} onClose={()=>setToast(false)} content='payment successfuly added!' type='success' />
+
     </>
   )
 }
