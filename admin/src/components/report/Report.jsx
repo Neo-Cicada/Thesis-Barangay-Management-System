@@ -207,7 +207,7 @@ export default function Report() {
         </div>
         <div style={{ display: 'flex', gap: '1em', justifyContent: 'space-around' }}>
           <DashboardBox
-            name="Total"
+            name="Request"
             numbers={items.length}
             logo={<ChecklistIcon />} />
           <DashboardBox

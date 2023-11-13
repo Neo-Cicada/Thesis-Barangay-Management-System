@@ -98,7 +98,7 @@ export default function Certificate() {
           </div>
           <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent: 'space-around',}}>
             <DashboardBox
-              name="Total"
+              name="Request"
               numbers={AllItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox

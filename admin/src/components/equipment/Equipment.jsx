@@ -109,7 +109,7 @@ export default function Equipment() {
           </div>
           <Box className="equipmentDashboardBoxes" sx={{ display: 'flex', justifyContent: 'space-around' }}>
             <DashboardBox
-              name="Total"
+              name="Request"
               numbers={allItems.length}
               logo={<ChecklistIcon />} />
             <DashboardBox

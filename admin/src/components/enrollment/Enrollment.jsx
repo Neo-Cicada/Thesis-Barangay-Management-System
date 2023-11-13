@@ -98,7 +98,7 @@ export default function Enrollment() {
           </div>
           <div style={{ display: 'flex', gap: '1em', justifyContent: 'space-around' }}>
             <DashboardBox
-              name="Total Request"
+              name="Request"
               numbers={items.length}
               logo={<ChecklistIcon />} />
             <DashboardBox

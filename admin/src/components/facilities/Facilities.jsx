@@ -93,7 +93,7 @@ export default function Facilities() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <DashboardBox
-              name="Total"
+              name="Request"
               numbers={items.length}
               logo={<ChecklistIcon />} />
             <DashboardBox
