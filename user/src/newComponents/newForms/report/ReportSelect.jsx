@@ -42,6 +42,15 @@ export default function ReportSelect() {
     });
     setSelectReportDalog(updatedSelectedReport);
   };
+  const handleViolation = (reportName, badGuy) => {
+    const updatedSelectedReport = selectedReport.map((item) => {
+      if (item.name === reportName) {
+        return { ...item, violationDescription: badGuy };
+      }
+      return item;
+    });
+    setSelectReportDalog(updatedSelectedReport);
+  };
   const handleFileReport = (reportName, file) => {
     const updatedSelectedReport = selectedReport.map((item) => {
       if (item.name === reportName) {
@@ -76,7 +85,6 @@ export default function ReportSelect() {
                 onChange={(e) => handleReport(report.name, e.target.value)}
                 type="text"
                 sx={{ width: "15em" }}
-
                 label="Enter name"
                 id={`report-input-${index}`}
                 aria-label="who"
@@ -92,6 +100,14 @@ export default function ReportSelect() {
                   shrink: true,
                 }}
                 onChange={(e) => handleFileReport(report.name, e.target.files[0])}
+              />
+              <TextField
+                onChange={(e) => handleViolation(report.name, e.target.value)}
+                label="Violation description"
+                size='small'
+                sx={{ width: "15em" }}
+                multiline
+                rows={3}
               />
             </div>
           </div>

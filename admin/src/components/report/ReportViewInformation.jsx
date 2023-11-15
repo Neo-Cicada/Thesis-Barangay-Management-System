@@ -50,6 +50,12 @@ export default function ReportViewInformation({ item, open, onClose, onConfirm, 
             width: '30%', textAlign: 'center',
             textTransform: 'capitalize', fontWeight: 500
         }}>Violation: {item.name}</p>
+      { item.violationDescription && <p style={{
+            width: '30%', textAlign: 'center',
+            textTransform: 'capitalize', fontWeight: 500
+        }}>
+            Description: {item.violationDescription}
+        </p>}
     </Box>)
     const boxStyle = {
         // border:'1px solid red',
